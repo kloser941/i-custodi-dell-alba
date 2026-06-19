@@ -62,12 +62,22 @@
         .login-container { max-width: 400px; margin: 40px auto; background: #f2e6c4; border: 3px double #8a6d3b; padding: 25px; border-radius: 8px; text-align: center; }
         .login-container input, .login-container select { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #8a6d3b; background: #fffdf7; border-radius: 4px; }
 
-        /* LAYOUT PROFILO STRUTTURATO */
-        .profile-layout-container { display: flex; gap: 25px; height: calc(100vh - 120px); align-items: stroke; }
-        .char-sheet-column { width: 320px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
+        /* LAYOUT PROFILO STRUTTURATO A COLONNE LOGICHE */
+        .profile-layout-container { display: flex; gap: 15px; height: calc(100vh - 120px); align-items: stretch; }
+        
+        /* Colonna 1: Foto Ritratto Estesa e Info Vitali */
+        .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
+        
+        /* Colonna 2: Struttura centrale Equip + Stats + Abilità */
+        .col-middle { display: flex; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
+        .col-equip-dnd { width: 120px; display: flex; flex-direction: column; gap: 15px; }
+        .col-disciplines { width: 250px; display: flex; flex-direction: column; gap: 10px; }
 
-        /* Box Foto */
-        .avatar-wrapper { width: 100%; height: 280px; position: relative; background: #fffdec; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+        /* Colonna 3: Baule Inventario */
+        .col-inventory { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+
+        /* Avatar (Altezza notevolmente aumentata per riempire lo spazio) */
+        .avatar-wrapper { width: 100%; height: 440px; position: relative; background: #fffdec; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid #8a6d3b; }
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
@@ -83,19 +93,17 @@
         .frog-mini-slot { width: 60px; height: 60px; background: #fffdec; border: 1px dashed #7f8c8d; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
         .frog-mini-slot img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Griglia Equipaggiamento */
-        .equipment-block-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .gear-slot { height: 85px; background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        /* Slot Equipaggiamento Verticale */
+        .gear-slot { height: 60px; background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #8a6d3b;}
         .gear-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 1; }
         .gear-slot span { position: relative; z-index: 2; text-shadow: 1px 1px 2px white; }
         .gear-slot .avatar-overlay { opacity: 0; }
         .gear-slot:hover .avatar-overlay { opacity: 1; }
 
-        /* Contenitore Statistiche */
-        .stats-block-box { background: #fffdec; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        /* Contenitore Statistiche (HP, MP) */
+        .stats-block-box { background: #fffdec; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #8a6d3b;}
 
-        /* COLONNA DESTRA: INVENTARIO */
-        .inventory-column-right { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
+        /* INVENTARIO */
         .inventory-header-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; margin: 0; }
         .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; }
 
@@ -103,52 +111,36 @@
         .inv-item-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
         .inv-item-title-tag { position: absolute; bottom: 2px; left: 0; width: 100%; font-size: 8px; background: rgba(255,255,255,0.9); text-align: center; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; z-index: 3; }
 
-        /* FIX VISIVO: QUANDO PASSI SOPRA CON IL MOUSE lo slot attivo passa davanti a tutti */
-        .inv-item-slot:hover { 
-            transform: scale(1.04); 
-            background: #ebdca8; 
-            z-index: 99999; /* Forza la figurina attiva davanti a quelle delle righe sotto */
-        }
-
-        /* CSS DEL TOOLTIP RIGIDO RIPOSIZIONATO AVANTI A TUTTO */
+        .inv-item-slot:hover { transform: scale(1.04); background: #ebdca8; z-index: 99999; }
         .inv-item-slot::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            top: 85px; 
-            left: 50%;
-            transform: translateX(-50%);
-            background: #19093a; 
-            color: #ffd700; 
-            padding: 8px 12px;
-            border: 2px solid #be9b64;
-            border-radius: 6px;
-            font-size: 11px;
-            font-family: 'Georgia', serif;
-            text-align: center;
-            width: 180px;
-            white-space: normal;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.6);
-            z-index: 99999; 
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.15s ease-in-out;
+            content: attr(data-tooltip); position: absolute; top: 85px; left: 50%; transform: translateX(-50%);
+            background: #19093a; color: #ffd700; padding: 8px 12px; border: 2px solid #be9b64; border-radius: 6px;
+            font-size: 11px; font-family: 'Georgia', serif; text-align: center; width: 180px; white-space: normal;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6); z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.15s ease-in-out;
         }
-        .inv-item-slot:hover::after {
-            opacity: 1;
-        }
+        .inv-item-slot:hover::after { opacity: 1; }
 
         /* Barre HP/MP */
         .bar-container { width: 100%; background: #ccc; border-radius: 4px; position: relative; height: 15px; overflow: hidden; border: 1px solid #333; }
         .bar-fill { height: 100%; width: 100%; transition: width 0.2s; }
         .hp-fill { background: #c0392b; } .mp-fill { background: #2980b9; }
-        .bar-text { position: absolute; width: 100%; text-align: center; font-size: 10px; font-weight: bold; color: #fff; top: -1px; text-shadow: 1px 1px 1px #000; z-index: 2; }
         
         .mini-edit-row { display: flex; gap: 4px; align-items: center; font-size: 11px; margin-bottom: 2px; justify-content: space-between; }
         .mini-edit-row input { width: 45px; font-size: 10px; text-align: center; padding: 1px; border: 1px solid #8a6d3b; border-radius: 3px; }
 
-        .skills-inline-edit { font-size: 12px; width: 100%; border-collapse: collapse; margin-top: 5px; }
-        .skills-inline-edit td { padding: 3px 0; border-bottom: 1px dashed #ddd; }
-        .skills-inline-edit input { width: 35px; text-align: center; font-size: 11px; float: right; border: 1px solid #c4b587; border-radius: 3px; }
+        /* Colonna D&D CARATTERISTICHE */
+        .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
+        .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
+        .dnd-stat-box-vert input { width: 40px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; } /* Allargato a 40px per non tagliare i numeri */
+        .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
+
+        /* Tabella Discipline */
+        .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .skills-inline-edit th { font-size: 11px; text-align: left; border-bottom: 1px solid #8a6d3b; padding: 8px 6px; background: #ebdca8; }
+        .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
+        .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
+        .skill-gamble-note { font-size: 9px; color: #b45309; font-style: italic; display: block; margin-top: 1px; }
 
         /* Categorie Shop */
         .shop-category-section { margin-top: 20px; }
@@ -180,8 +172,6 @@
         #dice-trigger { position: absolute; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #8a6d3b; color: #faf1d6; border-radius: 50%; text-align: center; line-height: 50px; font-size: 20px; font-weight: bold; cursor: pointer; z-index: 120; border: 1px solid #5c4314; }
         #dice-popup { display: none; position: absolute; bottom: 80px; right: 20px; width: 260px; background: #fcf6e8; border: 2px solid #8a6d3b; border-radius: 8px; padding: 10px; z-index: 125; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         #dice-log { max-height: 110px; overflow-y: auto; background: #eee3be; font-size: 11px; padding: 4px; margin-top: 5px; border-radius: 4px; }
-
-        #map-display-frame { width: 100%; max-width: 700px; height: auto; min-height: 350px; object-fit: contain; border: 2px solid #8a6d3b; border-radius: 8px; background: #ebdca8; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -243,10 +233,9 @@
 
             <div class="profile-layout-container" id="profile-main-grid-wrapper">
                 
-                <div class="char-sheet-column" id="profile-left-sheet">
-                    
+                <div class="col-avatar" id="profile-col-avatar">
                     <div class="avatar-wrapper" onclick="triggerAvatarChange()">
-                        <img id="img-avatar" src="https://placehold.co/320x280?text=Caricamento..." alt="Mago">
+                        <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
                         <div class="avatar-overlay">🔮 CAMBIA FOTO</div>
                     </div>
 
@@ -258,19 +247,6 @@
                             <div class="frog-mini-slot" id="slot-frog-0" onclick="removeFrog(0)">Rana 1</div>
                             <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)">Rana 2</div>
                         </div>
-                    </div>
-
-                    <div class="equipment-block-grid">
-                        <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>⚡ Bacchetta</span></div>
-                        <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>🥋 Toga</span></div>
-                        <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>📖 Libro</span></div>
-                        
-                        <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()">
-                            <span>✨ Patronus</span>
-                            <div class="avatar-overlay" style="font-size:9px; opacity:1;">🔮 FOTO</div>
-                        </div>
-                        
-                        <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>🦉 Compagno</span></div>
                     </div>
 
                     <div class="stats-block-box">
@@ -290,23 +266,78 @@
                             <div id="prof-mp-bar" class="bar-fill mp-fill"></div>
                         </div>
 
-                        <div style="font-size:13px; font-weight:bold; margin-top:4px;">🛡️ Classe Armatura (CA): <span id="prof-ca">10</span></div>
-
-                        <table class="skills-inline-edit">
-                            <tr><td>⚔️ Difesa Arti Oscure (DCAO)</td><td><span id="label-tot-dcao" style="font-weight:bold;color:#7f1d1d;">+0</span> <input type="number" id="b-dcao"></td></tr>
-                            <tr><td>🪄 Incantesimi</td><td><span id="label-tot-incantesimi" style="font-weight:bold;color:#1e3a8a;">+0</span> <input type="number" id="b-incantesimi"></td></tr>
-                            <tr><td>🌱 Erbologia</td><td><span id="label-tot-erbologia" style="font-weight:bold;color:#14532d;">+0</span> <input type="number" id="b-erbologia"></td></tr>
-                            <tr><td>🐉 Cura Creature Magiche</td><td><span id="label-tot-creature" style="font-weight:bold;color:#b45309;">+0</span> <input type="number" id="b-creature"></td></tr>
-                            <tr><td>📚 Storia della Magia</td><td><span id="label-tot-storia" style="font-weight:bold;color:#4b5563;">+0</span> <input type="number" id="b-storia"></td></tr>
-                            <tr><td>👟 Furtività</td><td><span id="label-tot-furtivita" style="font-weight:bold;color:#4c1d95;">+0</span> <input type="number" id="b-furtivita"></td></tr>
-                            <tr><td>⚡ Rapidità (Iniziativa) <span id="malus-speed-text" style="color:red; font-size:9px; display:none;">(-2)</span></td><td><span id="label-tot-rapidita" style="font-weight:bold;color:#0d9488;">+0</span> <input type="number" id="b-rapidita"></td></tr>
-                        </table>
-                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:4px; margin-top:3px;" id="btn-sync-skills">Salva Modificatori Base</button>
+                        <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">🛡️ Classe Armatura: <span id="prof-ca">10</span></div>
+                        <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">🪄 Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
                     </div>
-
                 </div>
 
-                <div class="inventory-column-right" id="profile-right-inventory-box">
+                <div class="col-middle" id="profile-col-middle">
+                    
+                    <div class="col-equip-dnd">
+                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; text-align:center;">🎒 Equipaggiamento</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>⚡ Bacchetta</span></div>
+                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>🥋 Toga</span></div>
+                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>📖 Libro</span></div>
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()">
+                                <span>✨ Patronus</span>
+                                <div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div>
+                            </div>
+                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>🦉 Compagno</span></div>
+                        </div>
+
+                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-top:10px; text-align:center;">⚔️ Base D&D</div>
+                        <div class="dnd-stats-vertical">
+                            <div class="dnd-stat-box-vert">
+                                <label title="Forza">FOR</label>
+                                <input type="number" id="dnd-str" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-str">+0</span>
+                            </div>
+                            <div class="dnd-stat-box-vert">
+                                <label title="Destrezza">DES</label>
+                                <input type="number" id="dnd-dex" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-dex">+0</span>
+                            </div>
+                            <div class="dnd-stat-box-vert">
+                                <label title="Costituzione">COS</label>
+                                <input type="number" id="dnd-con" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-con">+0</span>
+                            </div>
+                            <div class="dnd-stat-box-vert">
+                                <label title="Intelligenza">INT</label>
+                                <input type="number" id="dnd-int" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-int">+0</span>
+                            </div>
+                            <div class="dnd-stat-box-vert">
+                                <label title="Saggezza">SAG</label>
+                                <input type="number" id="dnd-wis" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-wis">+0</span>
+                            </div>
+                            <div class="dnd-stat-box-vert">
+                                <label title="Carisma">CAR</label>
+                                <input type="number" id="dnd-cha" min="1" max="20" value="10">
+                                <span class="dnd-mod-label" id="mod-cha">+0</span>
+                            </div>
+                        </div>
+                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:4px;" id="btn-sync-core-stats">Salva Modificatori</button>
+                    </div>
+
+                    <div class="col-disciplines">
+                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px;">📖 Discipline Hogwarts</div>
+                        <table class="skills-inline-edit">
+                            <thead>
+                                <tr>
+                                    <th>Abilità</th>
+                                    <th style="text-align:right;">Comp/Tot</th>
+                                </tr>
+                            </thead>
+                            <tbody id="skills-tbody-list">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-inventory" id="profile-right-inventory-box">
                     <h2 class="inventory-header-title" id="baule-dynamic-title">Baule Scolastico</h2>
                     <div class="inventory-items-flow" id="profile-inventory"></div>
                 </div>
@@ -410,7 +441,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, setDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -431,6 +462,8 @@
     let isTraumaBlocked = false;
     let clinicInterval = null;
 
+    const PROFICIENCY_BONUS = 2; // Bonus fisso competenze per calcolo RPG scolastico
+
     const HOUSE_LOGOS = {
         grifondoro: "https://imgur.com/AeIu16S.png",
         serpeverde: "https://imgur.com/eX3RZ2G.png",
@@ -438,63 +471,88 @@
         tassorosso: "https://imgur.com/3cFFSnZ.png"
     };
 
+    // STRUTTURA DELLE 18 ABILITÀ DEL NUOVO SISTEMA DI GIOCO
+    const HOGWARTS_SKILLS_MAP = [
+        { id: "incantesimi", name: "🪄 Incantesimi", stat: "int" },
+        { id: "storia_magia", name: "📚 Storia della Magia", stat: "int" },
+        { id: "erbologia", name: "🌱 Erbologia", stat: "int" },
+        { id: "pozioni", name: "🧪 Pozioni & Alchimia", stat: "int" },
+        { id: "investigazione", name: "🔍 Investigazione", stat: "int" },
+        { id: "creature", name: "🐉 Cura Creature Magiche", stat: "wis" },
+        { id: "divinazione", name: "🔮 Divinazione", stat: "wis" },
+        { id: "dcao", name: "🛡️ Difesa Contro Arti Oscure", stat: "wis" },
+        { id: "percezione", name: "👁️ Percezione", stat: "wis" },
+        { id: "volo", name: "🧹 Volo & Orientamento", stat: "wis" },
+        { id: "furtivita", name: "👟 Furtività", stat: "dex" },
+        { id: "rapidita_mano", name: "🖐️ Rapidità di Mano", stat: "dex" },
+        { id: "acrobazia", name: "🤸 Acrobazia", stat: "dex" },
+        { id: "inganno", name: "🤥 Inganno", stat: "cha" },
+        { id: "persuasione", name: "🗣️ Persuasione", stat: "cha" },
+        { id: "intimidire", name: "😡 Intimidire", stat: "cha" },
+        { id: "intrattenere", name: "🎭 Intrattenere", stat: "cha" },
+        { id: "atletica", name: "🏆 Atletica (Quidditch)", stat: "str" }
+    ];
+
     const SHOP_CATALOG = [
-        { id: "w_ollivander", name: "Acquista Bacchetta su Misura", cost: 10, type: "bacchetta", val: 1, img: "https://placehold.co/100x100?text=Bacchetta", desc: "Bacchetta magica. +1 a Incantesimi.", skill: "incantesimi" },
-        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://placehold.co/100x100?text=Toga+Usata", desc: "Toga consunta. Imposta la tua CA a 10.", skill: "" },
-        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Toga standard. Imposta la tua CA a 11.", skill: "" },
-        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. Imposta la tua CA a 12.", skill: "" },
-        { id: "l_oscura", name: "Manuale di Difesa Avanzata", cost: 8, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro", desc: "Volume fitto di appunti. +1 a Difesa Arti Oscure.", skill: "dcao" },
-        { id: "l_storia", name: "Cronache di Hogwarts Usato", cost: 6, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro+Vecchio", desc: "Un vecchio testo scolastico. +1 a Storia della Magia.", skill: "storia" },
+        { id: "w_ollivander", name: "Acquista Bacchetta su Misura", cost: 10, type: "bacchetta", val: 1, img: "https://placehold.co/100x100?text=Bacchetta", desc: "Bacchetta magica. +1 ai tiri per colpire degli Incantesimi.", skill: "incantesimi" },
+        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://placehold.co/100x100?text=Toga+Usata", desc: "Toga consunta. CA = 10 + Mod. Destrezza.", skill: "" },
+        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Toga standard. CA = 11 + Mod. Destrezza.", skill: "" },
+        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
+        { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
+        { id: "l_pozioni", name: "Libro di Pozioni Nuovo", cost: 10, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro+Pozioni", desc: "Volume intonso. +1 fisso a Pozioni & Alchimia.", skill: "pozioni" },
+        { id: "l_dcao", name: "Libro di DCAO Usato", cost: 5, type: "libro", val: 0, img: "https://placehold.co/100x100?text=Libro+DCAO+Usato", desc: "Libro Usato. Abilitato all'azzardo: puoi tirare con Vantaggio, ma se fai 1 sul dado causi un Fiasco Magico.", skill: "dcao" },
         { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "https://placehold.co/100x100?text=Pet", desc: "Animale fedele da compagnia. (Puramente estetico)", skill: "" }
     ];
 
     const FROG_POOL = {
         bronzo: [
-            { name: "Merlino", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/68/Merlin-01-chocFrogCard.png/revision/latest?cb=20160606202336", skill: "incantesimi", desc: "Mago Supremo. Conferisce +1 a Incantesimi." },
-            { name: "Cornelius Agrippa", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/3a/Cornelius_Agrippa_Chocolate_Frog_Card.png/revision/latest?cb=20160606202201", skill: "storia", desc: "Celebre scrittore. Conferisce +1 a Storia della Magia." },
-            { name: "Grogan Stump", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/4d/Grogan_Stump-04-chocFrogCard.png/revision/latest?cb=20160606202258", skill: "creature", desc: "Ministro delle Creature. Conferisce +1 a Cura Creature Magiche." },
-            { name: "Gulliver Pokeby", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/55/Gulliver_Pokeby-05-chocFrogCard.png/revision/latest?cb=20160606202300", skill: "creature", desc: "Esperto di canti d'uccelli. Conferisce +1 a Cura Creature Magiche." },
-            { name: "Glanmore Peakes", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d7/Glanmore_Peakes-06-chocFrogCard.png/revision/latest?cb=20160606202243", skill: "dcao", desc: "Uccisore del Serpente Marino. Conferisce +1 a DCAO." },
-            { name: "Hesper Starkey", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/6c/Hesper_Starkey-07-chocFrogCard.png/revision/latest?cb=20160606202319", skill: "erbologia", desc: "Studiosa delle fasi lunari dei fiori. Conferisce +1 a Erbologia." },
-            { name: "Gunhilda di Gorsemoor", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e3/Gunhilda_De_Gorsemoor-09-chocFrogCard.png/revision/latest?cb=20160606202302", skill: "erbologia", desc: "Scopritrice della cura del vaiolo di drago. Conferisce +1 a Erbologia." },
-            { name: "Burdock Muldoon", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/15/Burdock_Muldoon-10-chocFrogCard.png/revision/latest?cb=20160606202148", skill: "storia", desc: "Presidente del consiglio dei maghi. Conferisce +1 a Storia della Magia." },
-            { name: "Merwyn il Malizioso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/2a/Merwyn_The_Malicious-12-chocFrogCard.png/revision/latest?cb=20160606202342", skill: "furtivita", desc: "Creatore di sortilegi spiacevoli. Conferisce +1 a Furtività." },
-            { name: "Uric the Oddball", img: "https://vignette.wikia.nocookie.net/harrypotter/images/a/a3/Uric_The_Oddball-18-chocFrogCard.png/revision/latest?cb=20160606202431", skill: "furtivita", desc: "Mago eccentrico. Conferisce +1 a Furtività." },
-            { name: "Newt Scamander", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/15/Newt_Scamander-19-chocFrogCard.png/revision/latest?cb=20160606202357", skill: "creature", desc: "Famoso magizoologo. Conferisce +1 a Cura Creature Magiche." },
-            { name: "Lord Stoddard Withers", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/55/Lord_Stoddard_Withers-21-chocFrogCard.png/revision/latest?cb=20160606202333", skill: "creature", desc: "Allevatore di cavalli alati. Conferisce +1 a Cura Creature Magiche." },
-            { name: "Adalbert Waffling", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/87/Adalbert_Waffling-24-chocFrogCard.png/revision/latest?cb=20160606202123", skill: "incantesimi", desc: "Teorico della magia. Conferisce +1 a Incantesimi." },
-            { name: "Perpetua Facourt", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/1b/Perpetua_Fancourt-25-chocFrogCard.png/revision/latest?cb=20160606202408", skill: "incantesimi", desc: "Inventrice del Lunoscopio. Conferisce +1 a Incantesimi." },
-            { name: "Almeric Sawbridge", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/19/Almeric_Sawbridge-26-chocFrogCard.png/revision/latest?cb=20160606202130", skill: "dcao", desc: "Sconfisse il Troll del fiume. Conferisce +1 a DCAO." },
-            { name: "Tilly Toke", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d6/Tilly_Toke-28-chocFrogCard.png/revision/latest?cb=20160606202429", skill: "rapidita", desc: "Salvò babbani a Ilfracombe. Conferisce +1 a Rapidità." },
-            { name: "Archibald Alderton", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/80/Archibald_Alderton-29-chocFrogCard.png/revision/latest?cb=20160606202134", skill: "incantesimi", desc: "Fece saltare in aria un villaggio. Conferisce +1 a Incantesimi." },
-            { name: "Balfour Blane", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/79/Balfour_Blane-31-chocFrogCard.png/revision/latest?cb=20160606202137", skill: "incantesimi", desc: "Istituì il comitato incanti sperimentali. Conferisce +1 a Incantesimi." }
+            { name: "Merlino", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/68/Merlin-01-chocFrogCard.png", skill: "incantesimi", desc: "Mago Supremo. Conferisce +1 a Incantesimi." },
+            { name: "Cornelius Agrippa", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/3a/Cornelius_Agrippa_Chocolate_Frog_Card.png", skill: "storia_magia", desc: "Celebre scrittore. Conferisce +1 a Storia della Magia." },
+            { name: "Grogan Stump", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/4d/Grogan_Stump-04-chocFrogCard.png", skill: "creature", desc: "Ministro delle Creature. Conferisce +1 a Cura Creature Magiche." },
+            { name: "Glanmore Peakes", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d7/Glanmore_Peakes-06-chocFrogCard.png", skill: "dcao", desc: "Uccisore del Serpente Marino. Conferisce +1 a DCAO." },
+            { name: "Hesper Starkey", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/6c/Hesper_Starkey-07-chocFrogCard.png", skill: "erbologia", desc: "Studiosa di piante. Conferisce +1 a Erbologia." }
         ],
         argento: [
-            { name: "Elfrida Clagg", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/71/Elfrida_Clagg-03-chocFrogCard.png/revision/latest?cb=20160606202226", skill: "creature", desc: "Protettrice del Golden Snidget. Conferisce +2 a Cura Creature Magiche." },
-            { name: "Derwent Shimpling", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e1/Derwent_Shimpling-08-chocFrogCard.png/revision/latest?cb=20160606202212", skill: "rapidita", desc: "Mangiò un intero Tentacula. Conferisce +2 a Rapidità." },
-            { name: "Andros l'invincibile", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/32/Andros_The_Invincible-13-chocFrogCard.png/revision/latest?cb=20160606202132", skill: "dcao", desc: "Evocò un Patronus gigante. Conferisce +2 a DCAO." },
-            { name: "Fulbert il pauroso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/41/Fulbert_The_Fearful-14-chocFrogCard.png/revision/latest?cb=20160606202234", skill: "furtivita", desc: "Non usciva mai di casa. Conferisce +2 a Furtività." },
-            { name: "Cliodna", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/95/Cliodne-16-chocFrogCard.png/revision/latest?cb=20160606202159", skill: "erbologia", desc: "Druida e animagus uccello. Conferisce +2 a Erbologia." },
-            { name: "Morgana", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/18/Morgan_Le_Fay-17-chocFrogCard.png/revision/latest?cb=20160606202350", skill: "dcao", desc: "Regina oscura e rivale di Merlino. Conferisce +2 a DCAO." },
-            { name: "Wendelin the weird", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e6/Wendelin_The_Weird-20-chocFrogCard.png/revision/latest?cb=20160606202432", skill: "storia", desc: "Amava farsi bruciare sul rogo. Conferisce +2 a Storia della Magia." },
-            { name: "Circe", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/79/Circe-22-chocFrogCard.png/revision/latest?cb=20160606202157", skill: "incantesimi", desc: "Esperta in trasfigurazioni greche. Conferisce +2 a Incantesimi." },
-            { name: "Glenda Chittock", img: "https://vignette.wikia.nocookie.net/harrypotter/images/c/cf/Glenda_Chittock-23-chocFrogCard.png/revision/latest?cb=20160606202244", skill: "rapidita", desc: "Conduttrice radiofonica della Rete Magica. Conferisce +2 a Rapidità." },
-            { name: "Mirabella Plunkett", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/38/Mirabella_Plunkett-27-chocFrogCard.png/revision/latest?cb=20160606202344", skill: "creature", desc: "Innamorata di un Tritone. Conferisce +2 a Cura Creature Magiche." },
-            { name: "Artemisia Lufkin", img: "https://vignette.wikia.nocookie.net/harrypotter/images/f/f1/Artemisia_Lufkin-30-chocFrogCard.png/revision/latest?cb=20160606202135", skill: "storia", desc: "Prima Ministra della Magia donna. Conferisce +2 a Storia della Magia." },
-            { name: "Donaghan Tremlett", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/ed/Donaghan_Tremlett-34-chocFrogCard.png/revision/latest?cb=20160606202215", skill: "rapidita", desc: "Bassista delle Sorelle Stravaganti. Conferisce +2 a Rapidità." },
-            { name: "Bowman Wright", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/9a/Bowman_Wright-35-chocFrogCard.png/revision/latest?cb=20160606202145", skill: "incantesimi", desc: "Fabbro che inventò il Boccino d'Oro. Conferisce +2 a Incantesimi." },
-            { name: "Joscelind Wadcock", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/8b/Joscelind_Wadcock-36-chocFrogCard.png/revision/latest?cb=20160606202326", skill: "rapidita", desc: "Cacciatrice record del Quidditch. Conferisce +2 a Rapidità." },
-            { name: "Chauncey Oldridge", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/5e/Chauncey_Oldridge-38-chocFrogCard.png/revision/latest?cb=20160606202155", skill: "dcao", desc: "Primo cacciatore di troll. Conferisce +2 a CDAO." },
-            { name: "Gwenog Jones", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0a/Gwenog_Jones-39-chocFrogCard.png/revision/latest?cb=20160606202303", skill: "rapidita", desc: "Capitana delle Holyhead Harpies. Conferisce +2 a Rapidità." }
+            { name: "Elfrida Clagg", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/71/Elfrida_Clagg-03-chocFrogCard.png", skill: "creature", desc: "Protettrice degli Snidget. Conferisce +2 a Cura Creature Magiche." },
+            { name: "Andros l'invincibile", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/32/Andros_The_Invincible-13-chocFrogCard.png", skill: "dcao", desc: "Evocò un Patronus gigante. Conferisce +2 a DCAO." },
+            { name: "Cliodna", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/95/Cliodne-16-chocFrogCard.png", skill: "erbologia", desc: "Druida antica. Conferisce +2 a Erbologia." },
+            { name: "Morgana", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/18/Morgan_Le_Fay-17-chocFrogCard.png", skill: "pozioni", desc: "Regina oscura ed esperta alchimista. Conferisce +2 a Pozioni & Alchimia." }
         ],
         oro: [
-            { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png/revision/latest?cb=20160606202248", skill: "dcao", desc: "Fondatore leggendario. Conferisce +3 a DCAO." },
-            { name: "Salazar Serpeverde", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/84/Salazar_Slytherin-48-chocFrogCard.png/revision/latest?cb=20160606202426", skill: "furtivita", desc: "Fondatore leggendario. Conferisce +3 a Furtività." },
-            { name: "Tosca Tassorosso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0d/Helga_Hufflepuff-72-chocFrogCard.png/revision/latest?cb=20160606202311", skill: "erbologia", desc: "Fondatrice leggendaria. Conferisce +3 a Erbologia." },
-            { name: "Corinna Corvonero", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/22/Rowena_Ravenclaw-82-chocFrogCard.png/revision/latest?cb=20160606202422", skill: "incantesimi", desc: "Fondatrice leggendaria. Conferisce +3 a Incantesimi." },
-            { name: "Albus Silente", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/dd/Albus_Dumbledore-101-chocFrogCard.png/revision/latest?cb=20160606202128", skill: "incantesimi", desc: "Il Preside più grande di sempre. Conferisce +3 a Incantesimi." }
+            { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "Fondatore leggendario. Conferisce +3 a Atletica." },
+            { name: "Salazar Serpeverde", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/84/Salazar_Slytherin-48-chocFrogCard.png", skill: "inganno", desc: "Fondatore leggendario. Conferisce +3 a Inganno." },
+            { name: "Tosca Tassorosso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0d/Helga_Hufflepuff-72-chocFrogCard.png", skill: "erbologia", desc: "Fondatrice leggendaria. Conferisce +3 a Erbologia." },
+            { name: "Corinna Corvonero", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/22/Rowena_Ravenclaw-82-chocFrogCard.png", skill: "incantesimi", desc: "Fondatrice leggendaria. Conferisce +3 a Incantesimi." },
+            { name: "Albus Silente", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/dd/Albus_Dumbledore-101-chocFrogCard.png", skill: "incantesimi", desc: "Il Preside più grande. Conferisce +3 a Incantesimi." }
         ]
     };
+
+    // FORMULA MATEMATICA D&D 5E PER MODIFICATORI
+    function getDndModifier(score) {
+        return Math.floor((parseInt(score || 10) - 10) / 2);
+    }
+
+    function formatMod(mod) {
+        return mod >= 0 ? `+${mod}` : `${mod}`;
+    }
+
+    // GENERAZIONE ELEMENTI TABELLA ABILITÀ NELLA UI
+    const tbody = document.getElementById('skills-tbody-list');
+    tbody.innerHTML = "";
+    HOGWARTS_SKILLS_MAP.forEach(sk => {
+        tbody.innerHTML += `
+            <tr>
+                <td>
+                    <b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${sk.stat.toUpperCase()})</span>
+                    <span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none;">⚠️ Azzardo Attivo</span>
+                </td>
+                <td>
+                    <span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span>
+                    <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}">
+                </td>
+            </tr>
+        `;
+    });
 
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
@@ -503,7 +561,6 @@
         }
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(screenId).classList.add('active');
-        sidebar.classList.remove('open');
     }
 
     window.triggerAvatarChange = async function() {
@@ -541,19 +598,30 @@
         await updateDoc(doc(db, "students", currentUser.uid), { mp: cur, maxMp: mx });
     });
 
-    document.getElementById('btn-sync-skills').addEventListener('click', async () => {
+    // SCRIVERE SUL DATABASE LE 6 STATISTICHE BASE DI D&D 5E
+    document.getElementById('btn-sync-core-stats').addEventListener('click', async () => {
         if(isTraumaBlocked) return alert("Bloccato!");
-        let sk = {
-            dcao: parseInt(document.getElementById('b-dcao').value) || 0,
-            incantesimi: parseInt(document.getElementById('b-incantesimi').value) || 0,
-            erbologia: parseInt(document.getElementById('b-erbologia').value) || 0,
-            creature: parseInt(document.getElementById('b-creature').value) || 0,
-            storia: parseInt(document.getElementById('b-storia').value) || 0,
-            furtivita: parseInt(document.getElementById('b-furtivita').value) || 0,
-            rapidita: parseInt(document.getElementById('b-rapidita').value) || 0
+        let core = {
+            str: parseInt(document.getElementById('dnd-str').value) || 10,
+            dex: parseInt(document.getElementById('dnd-dex').value) || 10,
+            con: parseInt(document.getElementById('dnd-con').value) || 10,
+            int: parseInt(document.getElementById('dnd-int').value) || 10,
+            wis: parseInt(document.getElementById('dnd-wis').value) || 10,
+            cha: parseInt(document.getElementById('dnd-cha').value) || 10
         };
-        await updateDoc(doc(db, "students", currentUser.uid), { skills: sk });
-        alert("Salvate!");
+        await updateDoc(doc(db, "students", currentUser.uid), { core_stats: core });
+        alert("Caratteristiche base aggiornate e sincronizzate!");
+    });
+
+    // GESTIONE CHECKBOX DELLE COMPETENZE DELLE DISCIPLINE
+    tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+        chk.addEventListener('change', async (e) => {
+            if(isTraumaBlocked) { e.preventDefault(); return alert("Bloccato!"); }
+            let skId = e.target.getAttribute('data-skill');
+            let currentProficiencies = userData.proficiencies || {};
+            currentProficiencies[skId] = e.target.checked;
+            await updateDoc(doc(db, "students", currentUser.uid), { proficiencies: currentProficiencies });
+        });
     });
 
     onAuthStateChanged(auth, (user) => {
@@ -570,7 +638,7 @@
 
         let houseKey = userData.house.toLowerCase().trim();
         document.getElementById('img-house-logo').src = HOUSE_LOGOS[houseKey] || "";
-        document.getElementById('img-avatar').src = userData.avatarUrl || "https://placehold.co/320x280?text=Clicca+qui+per+inserire+la+tua+Foto";
+        document.getElementById('img-avatar').src = userData.avatarUrl || "https://placehold.co/320x440?text=Clicca+qui+per+inserire+la+tua+Foto";
 
         document.getElementById('prof-hp-text').innerText = `${userData.hp}/${userData.maxHp}`;
         document.getElementById('prof-hp-bar').style.width = Math.max(0, Math.min(100, (userData.hp / userData.maxHp)*100)) + "%";
@@ -582,59 +650,96 @@
         if(document.activeElement !== document.getElementById('edit-curr-mp')) document.getElementById('edit-curr-mp').value = userData.mp;
         if(document.activeElement !== document.getElementById('edit-max-mp')) document.getElementById('edit-max-mp').value = userData.maxMp;
 
+        // 1. CARICAMENTO DELLE 6 STATISTICHE BASE & DEI CALCOLI AUTOMATICI DEI MODIFICATORI D&D
+        let core = userData.core_stats || { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
+        let mods = {};
+        for(let statKey in core) {
+            let val = core[statKey] || 10;
+            mods[statKey] = getDndModifier(val);
+            let inputEl = document.getElementById('dnd-' + statKey);
+            if(inputEl && document.activeElement !== inputEl) inputEl.value = val;
+            document.getElementById('mod-' + statKey).innerText = formatMod(mods[statKey]);
+        }
+
         const hpRatio = userData.hp / userData.maxHp;
         const statusBadge = document.getElementById('inf-health-status');
         const alertBanner = document.getElementById('profile-trauma-alert');
-        const malusText = document.getElementById('malus-speed-text');
         
-        let extraSkills = { dcao: 0, incantesimi: 0, erbologia: 0, creature: 0, storia: 0, furtivita: 0, rapidita: 0 };
-
-        if (userData.equipment) {
-            for (let slot in userData.equipment) {
-                let item = userData.equipment[slot];
-                if (item && item.skill && extraSkills[item.skill] !== undefined) {
-                    extraSkills[item.skill] += item.val;
-                }
-            }
-        }
-        
-        let eqFrogs = userData.equippedFrogs || [];
-        eqFrogs.forEach(f => { 
-            let targetSkill = f.skill || f.bonus_type;
-            if(f && targetSkill && extraSkills[targetSkill] !== undefined) {
-                extraSkills[targetSkill] += f.val; 
-            }
-        });
-
         isTraumaBlocked = false;
-        alertBanner.style.display = "none"; malusText.style.display = "none";
-        document.getElementById('profile-left-sheet').classList.remove('trauma-disabled-mask');
+        alertBanner.style.display = "none";
+        document.getElementById('profile-col-avatar').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-col-middle').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true;
             statusBadge.innerText = "🚨 Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b";
             alertBanner.style.display = "block";
-            document.getElementById('profile-left-sheet').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask');
             document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
         } else if (hpRatio < 0.30) {
-            statusBadge.innerText = "🟠 Ferito Grave (Malus Velocità)"; statusBadge.style.background = "#e67e22";
-            malusText.style.display = "inline";
-            extraSkills.rapidita -= 2;
+            statusBadge.innerText = "🟠 Ferito Grave (Malus Ferita)"; statusBadge.style.background = "#e67e22";
         } else if (hpRatio < 0.50) {
             statusBadge.innerText = "🟡 Ferito Lieve"; statusBadge.style.background = "#f1c40f";
         } else {
             statusBadge.innerText = "🟢 In Perfetta Salute"; statusBadge.style.background = "green";
         }
 
-        for(let key in userData.skills) {
-            let baseVal = userData.skills[key] || 0;
-            let totalVal = baseVal + (extraSkills[key] || 0);
-            document.getElementById('label-tot-' + key).innerText = (totalVal >= 0 ? "+" : "") + totalVal;
-            let el = document.getElementById('b-' + key);
-            if(el && document.activeElement !== el) el.value = baseVal;
-        }
+        // 2. LOGICA OGGETTI E BONUS DA EQUIPAGGIAMENTO
+        let bonusOggettiAbilita = {};
+        HOGWARTS_SKILLS_MAP.forEach(sk => { 
+            bonusOggettiAbilita[sk.id] = 0; 
+            document.getElementById(`gamble-${sk.id}`).style.display = "none";
+        });
 
+        let atkMagicoBonus = 0;
+
+        if (userData.equipment) {
+            for (let slot in userData.equipment) {
+                let item = userData.equipment[slot];
+                if (item) {
+                    if (item.type === 'bacchetta') atkMagicoBonus += parseInt(item.val || 1);
+                    if (item.type === 'libro' && item.skill) {
+                        if (item.name.toLowerCase().includes('usato') || item.desc.toLowerCase().includes('azzardo')) {
+                            document.getElementById(`gamble-${item.skill}`).style.display = "block";
+                        } else {
+                            bonusOggettiAbilita[item.skill] += parseInt(item.val || 1);
+                        }
+                    }
+                }
+            }
+        }
+        
+        let eqFrogs = userData.equippedFrogs || [];
+        eqFrogs.forEach(f => { 
+            if(f && f.skill && bonusOggettiAbilita[f.skill] !== undefined) {
+                bonusOggettiAbilita[f.skill] += parseInt(f.val || 1); 
+            }
+        });
+
+        document.getElementById('prof-atk-magico').innerText = formatMod(atkMagicoBonus);
+
+        // CALCOLO DINAMICO CLASSE ARMATURA (CA = Base_Toga + Mod. Destrezza)
+        let baseCa = 10; 
+        if (userData.equipment && userData.equipment.toga) baseCa = parseInt(userData.equipment.toga.val || 10);
+        let finalCa = baseCa + mods.dex;
+        document.getElementById('prof-ca').innerText = finalCa;
+
+        // CALCOLO PUNTEGGIO DELLE 18 ABILITÀ
+        let userProficiencies = userData.proficiencies || {};
+        HOGWARTS_SKILLS_MAP.forEach(sk => {
+            let modBase = mods[sk.stat] || 0;
+            let haComp = userProficiencies[sk.id] || false;
+            let bonusComp = haComp ? PROFICIENCY_BONUS : 0;
+            let extraBonus = bonusOggettiAbilita[sk.id] || 0;
+
+            document.getElementById('label-tot-' + sk.id).innerText = formatMod(modBase + bonusComp + extraBonus);
+            let checkEl = document.getElementById('chk-' + sk.id);
+            if(checkEl) checkEl.checked = haComp;
+        });
+
+        // TIMING INFERMERIA
         clearInterval(clinicInterval);
         if (userData.healCompleteTime && userData.healCompleteTime > Date.now() && userData.hp < userData.maxHp) {
             document.getElementById('btn-heal').disabled = true;
@@ -647,16 +752,13 @@
                 } else {
                     let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                     let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById('inf-timer-display').innerText = `Madama Chips ti sta curando... Sblocco in: ${minutes}m ${seconds}s`;
+                    document.getElementById('inf-timer-display').innerText = `Cure in corso... Sblocco in: ${minutes}m ${seconds}s`;
                 }
             }, 1000);
         } else {
             document.getElementById('btn-heal').disabled = false;
             document.getElementById('inf-timer-display').style.display = "none";
         }
-
-        let finalCa = (userData.equipment && userData.equipment.toga) ? userData.equipment.toga.val : 10;
-        document.getElementById('prof-ca').innerText = finalCa;
 
         renderEquipSlot('slot-bacchetta', userData.equipment?.bacchetta, "Bacchetta");
         renderEquipSlot('slot-libro', userData.equipment?.libro, "Libro");
@@ -665,9 +767,9 @@
 
         const patSlot = document.getElementById('slot-patronus');
         if(userData.equipment?.patronus && userData.equipment.patronus.img) {
-            patSlot.innerHTML = `<img src="${userData.equipment.patronus.img}"><div class="inv-item-title-tag">Patronus</div><div class="avatar-overlay" style="font-size:9px; opacity:1;">🔮 FOTO</div>`;
+            patSlot.innerHTML = `<img src="${userData.equipment.patronus.img}"><div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div>`;
         } else {
-            patSlot.innerHTML = `<span>✨ Patronus</span><div class="avatar-overlay" style="font-size:9px; opacity:1;">🔮 FOTO</div>`;
+            patSlot.innerHTML = `<span>✨ Patronus</span><div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div>`;
         }
 
         for(let i=0; i<2; i++) {
@@ -678,7 +780,6 @@
 
         const invContainer = document.getElementById('profile-inventory'); 
         invContainer.innerHTML = "";
-        
         let currentInvList = userData.inventory || [];
         if (currentInvList.length === 0) {
             invContainer.innerHTML = "<p style='font-size:11px; margin:auto; opacity:0.5;'>Baule scolastico vuoto.</p>";
@@ -687,13 +788,8 @@
                 if (item && item.name) {
                     const div = document.createElement('div'); 
                     div.className = "inv-item-slot";
-                    
-                    let stringaDescrizione = item.desc || "Oggetto magico senza effetti particolari.";
-                    div.setAttribute('data-tooltip', stringaDescrizione);
-                    
-                    let visualImg = item.img ? item.img : "https://placehold.co/80x80?text=Oggetto";
-                    
-                    div.innerHTML = `<img src="${visualImg}"><div class="inv-item-title-tag">${item.name}</div>`;
+                    div.setAttribute('data-tooltip', item.desc || "Oggetto magico senza effetti particolari.");
+                    div.innerHTML = `<img src="${item.img ? item.img : 'https://placehold.co/80x80?text=Oggetto'}"><div class="inv-item-title-tag">${item.name}</div>`;
                     div.addEventListener('click', () => equipItem(index));
                     invContainer.appendChild(div);
                 }
@@ -804,16 +900,9 @@
             let selectedRarity = "bronzo";
             let bonusValue = 1;
 
-            if (rng < 5) { 
-                selectedRarity = "oro";
-                bonusValue = 3;
-            } else if (rng < 20) { 
-                selectedRarity = "argento";
-                bonusValue = 2;
-            } else { 
-                selectedRarity = "bronzo";
-                bonusValue = 1;
-            }
+            if (rng < 5) { selectedRarity = "oro"; bonusValue = 3; } 
+            else if (rng < 20) { selectedRarity = "argento"; bonusValue = 2; } 
+            else { selectedRarity = "bronzo"; bonusValue = 1; }
 
             let pool = FROG_POOL[selectedRarity];
             let card = pool[Math.floor(Math.random() * pool.length)];
@@ -824,20 +913,13 @@
 
             let currentInv = userData.inventory ? [...userData.inventory] : [];
             currentInv.push({ 
-                name: `${card.name} (${selectedRarity})`, 
-                type: "cioccorana", 
-                img: card.img, 
-                skill: card.skill,
-                bonus_type: card.skill, 
-                val: bonusValue,
-                desc: card.desc 
+                name: `${card.name} (${selectedRarity})`, type: "cioccorana", img: card.img, skill: card.skill, val: bonusValue, desc: card.desc 
             });
 
             await updateDoc(doc(db, "students", currentUser.uid), { gold: userData.gold - 3, inventory: currentInv });
         }, 800);
     });
 
-    // TIRO DADI
     const dt = document.getElementById('dice-trigger'); const dp = document.getElementById('dice-popup');
     dt.addEventListener('click', () => dp.style.display = dp.style.display === 'block' ? 'none' : 'block');
     document.getElementById('btn-roll-dice').addEventListener('click', async () => {
@@ -858,7 +940,8 @@
             await setDoc(doc(db, "students", credential.user.uid), {
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
                 gold: 15, hp: 40, maxHp: 40, mp: 20, maxMp: 20, healCompleteTime: null,
-                skills: { dcao: 0, incantesimi: 0, erbologia: 0, creature: 0, storia: 0, furtivita: 0, rapidita: 0 },
+                core_stats: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 },
+                proficiencies: {},
                 equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: []
             });
         } catch (e) { alert(e.message); }
@@ -868,11 +951,8 @@
         const mailField = document.getElementById('login-email').value.trim();
         const passField = document.getElementById('login-password').value;
         if(!mailField || !passField) return alert("Inserisci email e password!");
-        try { 
-            await signInWithEmailAndPassword(auth, mailField, passField); 
-        } catch(e) { 
-            alert("Login fallito: credenziali non corrette."); 
-        }
+        try { await signInWithEmailAndPassword(auth, mailField, passField); } 
+        catch(e) { alert("Login fallito: credenziali errate."); }
     });
 
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
@@ -880,12 +960,10 @@
             let dataCoppa = snapshot.data();
             let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"];
             let tettoMassimoPunti = 300; 
-
             caseList.forEach(h => {
                 let puntiCasata = dataCoppa[h] || 0;
                 document.getElementById(`pts-${h}`).innerText = puntiCasata + " Punti";
-                let altezzaPercentuale = (puntiCasata / tettoMassimoPunti) * 100;
-                let altezzaGarantita = Math.max(0, Math.min(100, altezzaPercentuale));
+                let altezzaGarantita = Math.max(0, Math.min(100, (puntiCasata / tettoMassimoPunti) * 100));
                 document.getElementById(`gem-fill-${h}`).style.height = altezzaGarantita + "%";
             });
         }
