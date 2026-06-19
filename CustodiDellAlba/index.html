@@ -72,12 +72,11 @@
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
 
-        /* Blocco disattivazione visiva per Trauma */
         .trauma-disabled-mask { opacity: 0.5; pointer-events: none; cursor: not-allowed !important; }
 
         /* Riga Loghi */
         .identity-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
-        .house-logo-box { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
+        .house-logo-box { width: 75px; height: 75px; display: flex; align-items: center; justify-content: center; }
         .house-logo-box img { width: 100%; height: 100%; object-fit: contain; }
 
         .frog-slots-mini { display: flex; gap: 8px; }
@@ -124,11 +123,22 @@
         .shop-container { display: flex; flex-direction: column; gap: 8px; max-width: 600px; }
         .shop-item { background: #fffdec; border: 1px solid #8a6d3b; padding: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        /* Altro */
+        /* CLESSIDRE VERTICALI */
+        .clessidre-wrapper { display: flex; justify-content: space-around; align-items: flex-end; background: #fffdec; border: 3px double #8a6d3b; border-radius: 12px; padding: 30px 10px; margin-top: 20px; min-height: 440px; }
+        .clessidra-container { display: flex; flex-direction: column; align-items: center; width: 22%; }
+        .clessidra-shield-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 15px; }
+        .clessidra-glass { width: 70px; height: 240px; background: rgba(255, 255, 255, 0.2); border: 3px solid #8a6d3b; border-radius: 35px / 20px; position: relative; box-shadow: inset 0 0 15px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.15); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+        .clessidra-glass::before { content: ''; position: absolute; top: 50%; left: -3px; right: -3px; height: 6px; background: #8a6d3b; z-index: 10; }
+        .gems-liquid-reservoir { width: 100%; height: 0%; transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1); position: relative; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
+        .clessidra-glass::after { content: ''; position: absolute; top: 5%; left: 10%; width: 15%; height: 90%; background: rgba(255,255,255,0.4); border-radius: 10px; z-index: 12; pointer-events: none; }
+        .clessidra-score { margin-top: 12px; font-size: 16px; font-weight: bold; background: #ebdca8; border: 1px solid #8a6d3b; padding: 3px 8px; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
+
+        .gems-Grifondoro { background-color: #a11d1d; background-image: linear-gradient(135deg, #c92a2a 25%, transparent 25%), linear-gradient(225deg, #c92a2a 25%, transparent 25%); background-size: 8px 8px; }
+        .gems-Serpeverde { background-color: #16a34a; background-image: linear-gradient(135deg, #1ea952 25%, transparent 25%), linear-gradient(225deg, #1ea952 25%, transparent 25%); background-size: 8px 8px; }
+        .gems-Corvonero { background-color: #1d4ed8; background-image: linear-gradient(135deg, #2563eb 25%, transparent 25%), linear-gradient(225deg, #2563eb 25%, transparent 25%); background-size: 8px 8px; }
+        .gems-Tassorosso { background-color: #eab308; background-image: linear-gradient(135deg, #facc15 25%, transparent 25%), linear-gradient(225deg, #facc15 25%, transparent 25%); background-size: 8px 8px; }
+
         .health-status-badge { display: inline-block; padding: 5px 10px; font-weight: bold; border-radius: 4px; color: white; font-size: 14px; margin-top: 5px; }
-        .house-row { margin: 15px 0; }
-        .house-bar-outer { width: 100%; background: #ddd; height: 20px; border-radius: 4px; overflow: hidden; border: 1px solid #aaa; }
-        .house-bar-inner { height: 100%; width: 0%; transition: width 0.5s; }
         .gacha-box { text-align: center; background: #311b57; color: #ffd700; padding: 20px; border-radius: 8px; }
         .card-anim { width: 100px; height: 140px; background: #ffd700; color: #311b57; margin: 10px auto; line-height: 140px; font-weight: bold; display: none; }
 
@@ -136,24 +146,7 @@
         #dice-popup { display: none; position: absolute; bottom: 80px; right: 20px; width: 260px; background: #fcf6e8; border: 2px solid #8a6d3b; border-radius: 8px; padding: 10px; z-index: 125; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         #dice-log { max-height: 110px; overflow-y: auto; background: #eee3be; font-size: 11px; padding: 4px; margin-top: 5px; border-radius: 4px; }
 
-        /* STRUTTURA TABS DM RIFATTA DA ZERO */
-        .dm-tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; }
-        .dm-tab-btn { background: #ebdca8; border: 1px solid #8a6d3b; padding: 6px 12px; cursor: pointer; font-family: serif; font-weight: bold; border-radius: 4px 4px 0 0; }
-        .dm-tab-btn.active { background: #8a6d3b; color: white; }
-        .dm-tab-content { display: none; background: #fffdec; border: 1px solid #8a6d3b; padding: 15px; border-radius: 0 0 6px 6px; }
-        .dm-tab-content.active { display: block; }
-        .dm-form-group { margin-bottom: 10px; }
-        .dm-form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 2px; }
-        .dm-form-group input, .dm-form-group select { width: 100%; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; }
-
         #map-display-frame { width: 100%; max-width: 700px; height: auto; min-height: 350px; object-fit: contain; border: 2px solid #8a6d3b; border-radius: 8px; background: #ebdca8; margin-top: 15px; }
-
-        @media (max-width: 900px) {
-            #sidebar-menu { position: absolute; left: 0; top: 0; transform: translateX(-100%); }
-            #sidebar-menu.open { transform: translateX(0); }
-            .profile-layout-container { flex-direction: column; height: auto; overflow-y: auto; }
-            .char-sheet-column { width: 100%; }
-        }
     </style>
 </head>
 <body>
@@ -170,7 +163,6 @@
         <button class="btn-menu" onclick="changeScreen('screen-coppa')">🏆 Coppa delle Case</button>
         <button class="btn-menu" onclick="changeScreen('screen-infermeria')">🏥 Infermeria</button>
         <button class="btn-menu" onclick="changeScreen('screen-ciccorane')">🐸 Emporio Cioccorane</button>
-        <button class="btn-menu" style="margin-top: auto; background: #d9c193;" onclick="window.openDMAuth()">🔑 Pannello Master (DM)</button>
     </div>
 
     <div id="main-content">
@@ -313,12 +305,30 @@
         </div>
 
         <div id="screen-coppa" class="screen">
-            <h2>🏆 Classifica delle Clessidre</h2>
-            <div id="coppa-container" style="background:#fffdec; border:1px solid #8a6d3b; padding:15px; border-radius:6px;">
-                <div class="house-row"><div>🦁 Grifondoro: <span id="pts-Grifondoro">0</span></div><div class="house-bar-outer"><div id="bar-Grifondoro" class="house-bar-inner" style="background:#7f1d1d;"></div></div></div>
-                <div class="house-row"><div>🐍 Serpeverde: <span id="pts-Serpeverde">0</span></div><div class="house-bar-outer"><div id="bar-Serpeverde" class="house-bar-inner" style="background:#14532d;"></div></div></div>
-                <div class="house-row"><div>🦅 Corvonero: <span id="pts-Corvonero">0</span></div><div class="house-bar-outer"><div id="bar-Corvonero" class="house-bar-inner" style="background:#1e3a8a;"></div></div></div>
-                <div class="house-row"><div>🦡 Tassorosso: <span id="pts-Tassorosso">0</span></div><div class="house-bar-outer"><div id="bar-Tassorosso" class="house-bar-inner" style="background:#b45309;"></div></div></div>
+            <h2>🏆 Le Clessidre della Coppa delle Case</h2>
+            <p>I punteggi delle casate in tempo reale basati sulla console Firebase.</p>
+            
+            <div class="clessidre-wrapper">
+                <div class="clessidra-container">
+                    <img class="clessidra-shield-img" src="https://imgur.com/AeIu16S.png" alt="Grifondoro">
+                    <div class="clessidra-glass"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div>
+                    <div id="pts-Grifondoro" class="clessidra-score">0 Punti</div>
+                </div>
+                <div class="clessidra-container">
+                    <img class="clessidra-shield-img" src="https://imgur.com/eX3RZ2G.png" alt="Serpeverde">
+                    <div class="clessidra-glass"><div id="gem-fill-Serpeverde" class="gems-liquid-reservoir gems-Serpeverde"></div></div>
+                    <div id="pts-Serpeverde" class="clessidra-score">0 Punti</div>
+                </div>
+                <div class="clessidra-container">
+                    <img class="clessidra-shield-img" src="https://imgur.com/hedsChE.png" alt="Corvonero">
+                    <div class="clessidra-glass"><div id="gem-fill-Corvonero" class="gems-liquid-reservoir gems-Corvonero"></div></div>
+                    <div id="pts-Corvonero" class="clessidra-score">0 Punti</div>
+                </div>
+                <div class="clessidra-container">
+                    <img class="clessidra-shield-img" src="https://imgur.com/3cFFSnZ.png" alt="Tassorosso">
+                    <div class="clessidra-glass"><div id="gem-fill-Tassorosso" class="gems-liquid-reservoir gems-Tassorosso"></div></div>
+                    <div id="pts-Tassorosso" class="clessidra-score">0 Punti</div>
+                </div>
             </div>
         </div>
 
@@ -343,49 +353,6 @@
             </div>
         </div>
 
-        <div id="screen-dm" class="screen">
-            <h2>🛠️ Interfaccia Avanzata Dungeon Master</h2>
-            <div class="dm-tabs">
-                <button id="tab-btn-players" class="dm-tab-btn active" onclick="window.switchDmTab('tab-dm-players')">🧙‍♂️ Gestione Studenti</button>
-                <button id="tab-btn-house" class="dm-tab-btn" onclick="window.switchDmTab('tab-dm-house')">🏆 Punti Case</button>
-                <button id="tab-btn-world" class="dm-tab-btn" onclick="window.switchDmTab('tab-dm-world')">🌍 Configura Mappa</button>
-            </div>
-
-            <div id="tab-dm-players" class="dm-tab-content active">
-                <div class="dm-form-group">
-                    <label>Seleziona Giocatore:</label>
-                    <select id="dm-player-selector" onchange="window.loadPlayerToDmPanel()">
-                        <option value="">-- Seleziona --</option>
-                    </select>
-                </div>
-                <hr>
-                <div id="dm-player-fields" style="display:none;">
-                    <div class="dm-form-group"><label>Galeoni Oro:</label><input type="number" id="dm-edit-gold"></div>
-                    <div style="display:flex; gap:10px;">
-                        <div class="dm-form-group" style="flex:1;"><label>HP Attuali:</label><input type="number" id="dm-edit-hp"></div>
-                        <div class="dm-form-group" style="flex:1;"><label>HP Max:</label><input type="number" id="dm-edit-max-hp"></div>
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <div class="dm-form-group" style="flex:1;"><label>MP Attuali:</label><input type="number" id="dm-edit-mp"></div>
-                        <div class="dm-form-group" style="flex:1;"><label>MP Max:</label><input type="number" id="dm-edit-max-mp"></div>
-                    </div>
-                    <button class="btn-vintage" style="background:red; color:white; margin-bottom:10px; width:100%;" onclick="window.resetDmPlayerTimer()">Sblocca / Annulla Cooldown Infermeria</button>
-                    <button class="btn-vintage" style="width:100%; background:#8a6d3b; color:white; padding:10px;" onclick="window.saveDmPlayerChanges()">SALVA SCHEDA STUDENTE</button>
-                </div>
-            </div>
-
-            <div id="tab-dm-house" class="dm-tab-content">
-                <div class="dm-form-group"><label>Casata:</label><select id="dm-house-select"><option value="Grifondoro">Grifondoro</option><option value="Serpeverde">Serpeverde</option><option value="Corvonero">Corvonero</option><option value="Tassorosso">Tassorosso</option></select></div>
-                <div class="dm-form-group"><label>Variazione Punti (es: 20 per dare, -10 per togliere):</label><input type="number" id="dm-house-points" value="10"></div>
-                <button class="btn-vintage" style="width:100%;" onclick="window.addDmHousePoints()">Modifica Punteggio Clessidra</button>
-            </div>
-
-            <div id="tab-dm-world" class="dm-tab-content">
-                <div class="dm-form-group"><label>URL Nuova Mappa Online:</label><input type="text" id="dm-map-url-input" placeholder="https://link-immagine-mappa.png"></div>
-                <button class="btn-vintage" style="width:100%; background: #27ae60; color:white;" onclick="window.updateGlobalMap()">AGGIORNA MAPPA GLOBALE</button>
-            </div>
-        </div>
-
     </div>
 
     <div id="dice-trigger">🎲</div>
@@ -403,7 +370,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, addDoc, runTransaction, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCZcpJJXtPRFxi_Lebe-m0YM-BVi4FdsN0",
@@ -422,13 +389,12 @@
     let userData = null;
     let isTraumaBlocked = false;
     let clinicInterval = null;
-    let dmAllPlayersCache = {};
 
     const HOUSE_LOGOS = {
-        grifondoro: "https://placehold.co/100x100?text=Grifondoro",
-        serpeverde: "https://placehold.co/100x100?text=Serpeverde",
-        corvonero: "https://placehold.co/100x100?text=Corvonero",
-        tassorosso: "https://placehold.co/100x100?text=Tassorosso"
+        grifondoro: "https://imgur.com/AeIu16S.png",
+        serpeverde: "https://imgur.com/eX3RZ2G.png",
+        corvonero: "https://imgur.com/hedsChE.png",
+        tassorosso: "https://imgur.com/3cFFSnZ.png"
     };
 
     const SHOP_CATALOG = [
@@ -446,6 +412,10 @@
         { name: "Godric Grifondoro", rarity: "Epica", bonus: "dcao", img: "https://placehold.co/100x100?text=Godric" },
         { name: "Salazar Serpeverde", rarity: "Epica", bonus: "furtivita", img: "https://placehold.co/100x100?text=Salazar" }
     ];
+
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar-menu');
+    toggleBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
 
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
@@ -620,19 +590,16 @@
         const invContainer = document.getElementById('profile-inventory'); 
         invContainer.innerHTML = "";
         let currentInvList = userData.inventory || [];
-        if(currentInvList.length === 0) {
-            invContainer.innerHTML = "<p style='font-size:11px; margin:auto; opacity:0.5;'>Baule vuoto.</p>";
-        } else {
-            currentInvList.forEach((item, index) => {
-                if(item) {
-                    const div = document.createElement('div'); div.className = "inv-item-slot";
-                    let visualImg = item.img ? item.img : "https://placehold.co/70x70?text=Oggetto";
-                    div.innerHTML = `<img src="${visualImg}"><div class="inv-item-title-tag">${item.name}</div>`;
-                    div.addEventListener('click', () => equipItem(index));
-                    invContainer.appendChild(div);
-                }
-            });
-        }
+        currentInvList.forEach((item, index) => {
+            if(item) {
+                const div = document.createElement('div'); div.className = "inv-item-slot";
+                let visualImg = item.img ? item.img : "https://placehold.co/70x70?text=Oggetto";
+                if(item.type === 'cioccorana' && item.img === '') visualImg = "https://placehold.co/70x70?text=🐸";
+                div.innerHTML = `<img src="${visualImg}"><div class="inv-item-title-tag">${item.name}</div>`;
+                div.addEventListener('click', () => equipItem(index));
+                invContainer.appendChild(div);
+            }
+        });
     }
 
     function renderEquipSlot(elementId, item, txt) {
@@ -740,7 +707,7 @@
         await updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: Date.now() + (1000*60*60) });
     });
 
-    // SISTEMA DADI
+    // POPUP DADI
     const dt = document.getElementById('dice-trigger'); const dp = document.getElementById('dice-popup');
     dt.addEventListener('click', () => dp.style.display = dp.style.display === 'block' ? 'none' : 'block');
     document.getElementById('btn-roll-dice').addEventListener('click', async () => {
@@ -772,11 +739,19 @@
     });
     document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
-    onSnapshot(doc(db, "system", "coppa"), (s) => {
-        if (s.exists()) {
-            let sc = s.data(); ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"].forEach(h => {
-                let p = sc[h] || 0; document.getElementById(`pts-${h}`).innerText = p;
-                document.getElementById(`bar-${h}`).style.width = Math.min(100, Math.max(0, p)) + "%";
+    // ASCOLTO REATTIVO CLOUD DELLE CLESSIDRE (ZEROBug - APERTO DIRETTAMENTE SUI CAMBIAMENTI DI FIREBASE)
+    onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
+        if (snapshot.exists()) {
+            let dataCoppa = snapshot.data();
+            let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"];
+            let tettoMassimoPunti = 300; 
+
+            caseList.forEach(h => {
+                let puntiCasata = dataCoppa[h] || 0;
+                document.getElementById(`pts-${h}`).innerText = puntiCasata + " Punti";
+                let altezzaPercentuale = (puntiCasata / tettoMassimoPunti) * 100;
+                let altezzaGarantita = Math.max(0, Math.min(100, altezzaPercentuale));
+                document.getElementById(`gem-fill-${h}`).style.height = altezzaGarantita + "%";
             });
         }
     });
@@ -785,133 +760,6 @@
         if(s.exists() && s.data().url) document.getElementById('map-display-frame').src = s.data().url;
         else document.getElementById('map-display-frame').src = "https://images.unsplash.com/photo-1547756536-cde3673fa2e5?q=80&w=1000";
     });
-
-
-    // ==========================================
-    //  BLOCCO STRUTTURATO DIRETTAMENTE PER IL DM 
-    // ==========================================
-    
-    window.openDMAuth = function() {
-        const passwordIncoraggiata = prompt("Password Segreta del Master:");
-        if (passwordIncoraggiata === "0000") {
-            // Sblocca lo schermo e forza il caricamento dei dati
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen-dm').classList.add('active');
-            window.loadAllPlayersToDmDropdown();
-        } else if (passwordIncoraggiata !== null) {
-            alert("Parola d'ordine errata!");
-        }
-    }
-
-    window.switchDmTab = function(tabId) {
-        // Rimuove gli stati attivi precedenti
-        document.getElementById('tab-btn-players').classList.remove('active');
-        document.getElementById('tab-btn-house').classList.remove('active');
-        document.getElementById('tab-btn-world').classList.remove('active');
-        
-        document.getElementById('tab-dm-players').classList.remove('active');
-        document.getElementById('tab-dm-house').classList.remove('active');
-        document.getElementById('tab-dm-world').classList.remove('active');
-
-        // Attiva la tab cliccata
-        if(tabId === 'tab-dm-players') document.getElementById('tab-btn-players').classList.add('active');
-        if(tabId === 'tab-dm-house') document.getElementById('tab-btn-house').classList.add('active');
-        if(tabId === 'tab-dm-world') document.getElementById('tab-btn-world').classList.add('active');
-        
-        document.getElementById(tabId).classList.add('active');
-    }
-
-    window.loadAllPlayersToDmDropdown = async function() {
-        const selector = document.getElementById('dm-player-selector');
-        selector.innerHTML = '<option value="">-- Seleziona Giocatore --</option>';
-        dmAllPlayersCache = {};
-        
-        try {
-            const querySnapshot = await getDocs(collection(db, "students"));
-            querySnapshot.forEach((docSnap) => {
-                let data = docSnap.data();
-                dmAllPlayersCache[docSnap.id] = data;
-                selector.innerHTML += `<option value="${docSnap.id}">${data.name} [${data.house}]</option>`;
-            });
-        } catch (e) {
-            alert("Errore scaricamento studenti: " + e.message);
-        }
-    }
-
-    window.loadPlayerToDmPanel = function() {
-        let uid = document.getElementById('dm-player-selector').value;
-        if(!uid) {
-            document.getElementById('dm-player-fields').style.display = "none";
-            return;
-        }
-        let p = dmAllPlayersCache[uid];
-        document.getElementById('dm-player-fields').style.display = "block";
-        document.getElementById('dm-edit-gold').value = p.gold || 0;
-        document.getElementById('dm-edit-hp').value = p.hp || 0;
-        document.getElementById('dm-edit-max-hp').value = p.maxHp || 40;
-        document.getElementById('dm-edit-mp').value = p.mp || 0;
-        document.getElementById('dm-edit-max-mp').value = p.maxMp || 20;
-    }
-
-    window.resetDmPlayerTimer = function() {
-        document.getElementById('dm-edit-hp').value = document.getElementById('dm-edit-max-hp').value;
-        alert("HP portati al massimo. Clicca sul tasto verde 'SALVA SCHEDA STUDENTE' in basso per eliminare il blocco trauma e il timer cloud!");
-    }
-
-    window.saveDmPlayerChanges = async function() {
-        let uid = document.getElementById('dm-player-selector').value;
-        if(!uid) return;
-
-        let goldVal = parseInt(document.getElementById('dm-edit-gold').value) || 0;
-        let hpVal = parseInt(document.getElementById('dm-edit-hp').value) || 0;
-        let maxHpVal = parseInt(document.getElementById('dm-edit-max-hp').value) || 0;
-        let mpVal = parseInt(document.getElementById('dm-edit-mp').value) || 0;
-        let maxMpVal = parseInt(document.getElementById('dm-edit-max-mp').value) || 0;
-
-        try {
-            await updateDoc(doc(db, "students", uid), {
-                gold: goldVal,
-                hp: hpVal,
-                maxHp: maxHpVal,
-                mp: mpVal,
-                maxMp: maxMpVal,
-                healCompleteTime: null // Annulla forzatamente qualsiasi countdown attivo nell'infermeria
-            });
-            alert("Database modificato con successo per questo studente!");
-            window.loadAllPlayersToDmDropdown();
-        } catch(e) {
-            alert("Errore nel salvataggio: " + e.message);
-        }
-    }
-
-    window.addDmHousePoints = async function() {
-        let houseSelected = document.getElementById('dm-house-select').value;
-        let pointsOffset = parseInt(document.getElementById('dm-house-points').value) || 0;
-        let coppaRef = doc(db, "system", "coppa");
-        
-        try {
-            await runTransaction(db, async (transaction) => {
-                let s = await transaction.get(coppaRef);
-                let currentPoints = s.exists() ? (s.data()[houseSelected] || 0) : 0;
-                transaction.set(coppaRef, { [houseSelected]: currentPoints + pointsOffset }, { merge: true });
-            });
-            alert(`Punteggio aggiornato! Cambiate le clessidre di ${houseSelected}.`);
-        } catch(e) {
-            alert("Errore transazione coppa: " + e.message);
-        }
-    }
-
-    window.updateGlobalMap = async function() {
-        let urlValue = document.getElementById('dm-map-url-input').value.trim();
-        if(!urlValue) return alert("Inserisci un link valido!");
-        
-        try {
-            await setDoc(doc(db, "system", "mappa"), { url: urlValue }, { merge: true });
-            alert("Mappa aggiornata in tempo reale per tutti i maghi!");
-        } catch (e) {
-            alert("Errore aggiornamento mappa: " + e.message);
-        }
-    }
 </script>
 </body>
 </html>
