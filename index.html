@@ -66,7 +66,7 @@
         .profile-layout-container { display: flex; gap: 25px; height: calc(100vh - 120px); align-items: stroke; }
         .char-sheet-column { width: 320px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
 
-        /* Grande Box Foto */
+        /* Box Foto */
         .avatar-wrapper { width: 100%; height: 280px; position: relative; background: #fffdec; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
@@ -97,12 +97,45 @@
         /* COLONNA DESTRA: INVENTARIO */
         .inventory-column-right { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
         .inventory-header-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; margin: 0; }
-        .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; }
+        .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; }
 
         .inv-item-slot { width: 80px; height: 80px; background: #fffdec; border-radius: 6px; position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: transform 0.15s; }
-        .inv-item-slot:hover { transform: scale(1.04); background: #ebdca8; }
         .inv-item-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
         .inv-item-title-tag { position: absolute; bottom: 2px; left: 0; width: 100%; font-size: 8px; background: rgba(255,255,255,0.9); text-align: center; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; z-index: 3; }
+
+        /* FIX VISIVO: QUANDO PASSI SOPRA CON IL MOUSE lo slot attivo passa davanti a tutti */
+        .inv-item-slot:hover { 
+            transform: scale(1.04); 
+            background: #ebdca8; 
+            z-index: 99999; /* Forza la figurina attiva davanti a quelle delle righe sotto */
+        }
+
+        /* CSS DEL TOOLTIP RIGIDO RIPOSIZIONATO AVANTI A TUTTO */
+        .inv-item-slot::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 85px; 
+            left: 50%;
+            transform: translateX(-50%);
+            background: #19093a; 
+            color: #ffd700; 
+            padding: 8px 12px;
+            border: 2px solid #be9b64;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            width: 180px;
+            white-space: normal;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+            z-index: 99999; 
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease-in-out;
+        }
+        .inv-item-slot:hover::after {
+            opacity: 1;
+        }
 
         /* Barre HP/MP */
         .bar-container { width: 100%; background: #ccc; border-radius: 4px; position: relative; height: 15px; overflow: hidden; border: 1px solid #333; }
@@ -117,7 +150,7 @@
         .skills-inline-edit td { padding: 3px 0; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input { width: 35px; text-align: center; font-size: 11px; float: right; border: 1px solid #c4b587; border-radius: 3px; }
 
-        /* Estetica Categorie Shop */
+        /* Categorie Shop */
         .shop-category-section { margin-top: 20px; }
         .shop-category-title { font-size: 18px; font-weight: bold; border-left: 4px solid #8a6d3b; padding-left: 8px; color: #5c4314; margin-bottom: 8px; }
         .shop-container { display: flex; flex-direction: column; gap: 8px; max-width: 600px; }
@@ -138,9 +171,11 @@
         .gems-Corvonero { background-color: #1d4ed8; background-image: linear-gradient(135deg, #2563eb 25%, transparent 25%), linear-gradient(225deg, #2563eb 25%, transparent 25%); background-size: 8px 8px; }
         .gems-Tassorosso { background-color: #eab308; background-image: linear-gradient(135deg, #facc15 25%, transparent 25%), linear-gradient(225deg, #facc15 25%, transparent 25%); background-size: 8px 8px; }
 
-        .health-status-badge { display: inline-block; padding: 5px 10px; font-weight: bold; border-radius: 4px; color: white; font-size: 14px; margin-top: 5px; }
-        .gacha-box { text-align: center; background: #311b57; color: #ffd700; padding: 20px; border-radius: 8px; }
-        .card-anim { width: 100px; height: 140px; background: #ffd700; color: #311b57; margin: 10px auto; line-height: 140px; font-weight: bold; display: none; }
+        /* LAYOUT EMPORIO CIOCCORANE */
+        .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .gacha-box { text-align: center; background: #2c1654; color: #ffd700; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
+        .card-anim { width: 180px; height: 180px; margin: 20px auto; display: none; background: #1e0b3d; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); overflow: hidden; }
+        .card-anim img { width: 100%; height: 100%; object-fit: contain; }
 
         #dice-trigger { position: absolute; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #8a6d3b; color: #faf1d6; border-radius: 50%; text-align: center; line-height: 50px; font-size: 20px; font-weight: bold; cursor: pointer; z-index: 120; border: 1px solid #5c4314; }
         #dice-popup { display: none; position: absolute; bottom: 80px; right: 20px; width: 260px; background: #fcf6e8; border: 2px solid #8a6d3b; border-radius: 8px; padding: 10px; z-index: 125; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -345,11 +380,17 @@
         </div>
 
         <div id="screen-ciccorane" class="screen">
-            <h2>🐸 Emporio delle Cioccorane</h2>
+            <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150');"></div>
+            
             <div class="gacha-box">
-                <button id="btn-buy-gacha" class="btn-vintage" style="background:#ffd700; color:#311b57;">APRI PACCHETTO (2 Galeoni) 🐸</button>
-                <div id="gacha-card" class="card-anim">?</div>
-                <div id="gacha-result-text" style="font-weight:bold; margin-top:10px;"></div>
+                <h2 style="margin-top:0; color:#ffd700; font-family:'Georgia', serif;">Apri Cioccorana</h2>
+                <p style="color:#e0d4f7;">Trova i maghi e le streghe più famosi della storia della magia e potenzia il tuo personaggio!</p>
+                
+                <button id="btn-buy-gacha" class="btn-vintage" style="background:#ffd700; color:#2c1654; font-size:16px; padding:12px 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">APRI PACCHETTO (3 Galeoni) 🐸</button>
+                
+                <div id="gacha-card" class="card-anim"></div>
+                <div id="gacha-result-text" style="font-weight:bold; margin-top:15px; font-size:18px;"></div>
+                <div id="gacha-desc-text" style="margin-top:5px; font-size:13px; color:#ebdca8; font-style:italic;"></div>
             </div>
         </div>
 
@@ -398,24 +439,62 @@
     };
 
     const SHOP_CATALOG = [
-        { id: "w_ollivander", name: "Acquista Bacchetta su Misura", cost: 10, type: "bacchetta", val: 1, img: "https://placehold.co/100x100?text=Bacchetta", desc: "+1 all'abilità Incantesimi.", skill: "incantesimi" },
-        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://placehold.co/100x100?text=Toga+Usata", desc: "Modifica la tua CA a 10." },
-        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Modifica la tua CA a 11." },
-        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Modifica la tua CA a 12." },
-        { id: "l_oscura", name: "Manuale di Difesa Avanzata", cost: 8, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro", desc: "+1 a Difesa Arti Oscure.", skill: "dcao" },
-        { id: "l_storia", name: "Cronache di Hogwarts Usato", cost: 6, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro+Vecchio", desc: "+1 a Storia della Magia.", skill: "storia" },
-        { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "https://placehold.co/100x100?text=Pet", desc: "Animale da compagnia (Estetico - Nessun bonus).", skill: "" }
+        { id: "w_ollivander", name: "Acquista Bacchetta su Misura", cost: 10, type: "bacchetta", val: 1, img: "https://placehold.co/100x100?text=Bacchetta", desc: "Bacchetta magica. +1 a Incantesimi.", skill: "incantesimi" },
+        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://placehold.co/100x100?text=Toga+Usata", desc: "Toga consunta. Imposta la tua CA a 10.", skill: "" },
+        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Toga standard. Imposta la tua CA a 11.", skill: "" },
+        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. Imposta la tua CA a 12.", skill: "" },
+        { id: "l_oscura", name: "Manuale di Difesa Avanzata", cost: 8, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro", desc: "Volume fitto di appunti. +1 a Difesa Arti Oscure.", skill: "dcao" },
+        { id: "l_storia", name: "Cronache di Hogwarts Usato", cost: 6, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro+Vecchio", desc: "Un vecchio testo scolastico. +1 a Storia della Magia.", skill: "storia" },
+        { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "https://placehold.co/100x100?text=Pet", desc: "Animale fedele da compagnia. (Puramente estetico)", skill: "" }
     ];
 
-    const FROG_POOL = [
-        { name: "Albus Silente", rarity: "Epica", bonus: "incantesimi", img: "https://placehold.co/100x100?text=Silente" },
-        { name: "Godric Grifondoro", rarity: "Epica", bonus: "dcao", img: "https://placehold.co/100x100?text=Godric" },
-        { name: "Salazar Serpeverde", rarity: "Epica", bonus: "furtivita", img: "https://placehold.co/100x100?text=Salazar" }
-    ];
-
-    const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar-menu');
-    toggleBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
+    const FROG_POOL = {
+        bronzo: [
+            { name: "Merlino", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/68/Merlin-01-chocFrogCard.png/revision/latest?cb=20160606202336", skill: "incantesimi", desc: "Mago Supremo. Conferisce +1 a Incantesimi." },
+            { name: "Cornelius Agrippa", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/3a/Cornelius_Agrippa_Chocolate_Frog_Card.png/revision/latest?cb=20160606202201", skill: "storia", desc: "Celebre scrittore. Conferisce +1 a Storia della Magia." },
+            { name: "Grogan Stump", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/4d/Grogan_Stump-04-chocFrogCard.png/revision/latest?cb=20160606202258", skill: "creature", desc: "Ministro delle Creature. Conferisce +1 a Cura Creature Magiche." },
+            { name: "Gulliver Pokeby", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/55/Gulliver_Pokeby-05-chocFrogCard.png/revision/latest?cb=20160606202300", skill: "creature", desc: "Esperto di canti d'uccelli. Conferisce +1 a Cura Creature Magiche." },
+            { name: "Glanmore Peakes", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d7/Glanmore_Peakes-06-chocFrogCard.png/revision/latest?cb=20160606202243", skill: "dcao", desc: "Uccisore del Serpente Marino. Conferisce +1 a DCAO." },
+            { name: "Hesper Starkey", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/6c/Hesper_Starkey-07-chocFrogCard.png/revision/latest?cb=20160606202319", skill: "erbologia", desc: "Studiosa delle fasi lunari dei fiori. Conferisce +1 a Erbologia." },
+            { name: "Gunhilda di Gorsemoor", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e3/Gunhilda_De_Gorsemoor-09-chocFrogCard.png/revision/latest?cb=20160606202302", skill: "erbologia", desc: "Scopritrice della cura del vaiolo di drago. Conferisce +1 a Erbologia." },
+            { name: "Burdock Muldoon", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/15/Burdock_Muldoon-10-chocFrogCard.png/revision/latest?cb=20160606202148", skill: "storia", desc: "Presidente del consiglio dei maghi. Conferisce +1 a Storia della Magia." },
+            { name: "Merwyn il Malizioso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/2a/Merwyn_The_Malicious-12-chocFrogCard.png/revision/latest?cb=20160606202342", skill: "furtivita", desc: "Creatore di sortilegi spiacevoli. Conferisce +1 a Furtività." },
+            { name: "Uric the Oddball", img: "https://vignette.wikia.nocookie.net/harrypotter/images/a/a3/Uric_The_Oddball-18-chocFrogCard.png/revision/latest?cb=20160606202431", skill: "furtivita", desc: "Mago eccentrico. Conferisce +1 a Furtività." },
+            { name: "Newt Scamander", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/15/Newt_Scamander-19-chocFrogCard.png/revision/latest?cb=20160606202357", skill: "creature", desc: "Famoso magizoologo. Conferisce +1 a Cura Creature Magiche." },
+            { name: "Lord Stoddard Withers", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/55/Lord_Stoddard_Withers-21-chocFrogCard.png/revision/latest?cb=20160606202333", skill: "creature", desc: "Allevatore di cavalli alati. Conferisce +1 a Cura Creature Magiche." },
+            { name: "Adalbert Waffling", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/87/Adalbert_Waffling-24-chocFrogCard.png/revision/latest?cb=20160606202123", skill: "incantesimi", desc: "Teorico della magia. Conferisce +1 a Incantesimi." },
+            { name: "Perpetua Facourt", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/1b/Perpetua_Fancourt-25-chocFrogCard.png/revision/latest?cb=20160606202408", skill: "incantesimi", desc: "Inventrice del Lunoscopio. Conferisce +1 a Incantesimi." },
+            { name: "Almeric Sawbridge", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/19/Almeric_Sawbridge-26-chocFrogCard.png/revision/latest?cb=20160606202130", skill: "dcao", desc: "Sconfisse il Troll del fiume. Conferisce +1 a DCAO." },
+            { name: "Tilly Toke", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d6/Tilly_Toke-28-chocFrogCard.png/revision/latest?cb=20160606202429", skill: "rapidita", desc: "Salvò babbani a Ilfracombe. Conferisce +1 a Rapidità." },
+            { name: "Archibald Alderton", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/80/Archibald_Alderton-29-chocFrogCard.png/revision/latest?cb=20160606202134", skill: "incantesimi", desc: "Fece saltare in aria un villaggio. Conferisce +1 a Incantesimi." },
+            { name: "Balfour Blane", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/79/Balfour_Blane-31-chocFrogCard.png/revision/latest?cb=20160606202137", skill: "incantesimi", desc: "Istituì il comitato incanti sperimentali. Conferisce +1 a Incantesimi." }
+        ],
+        argento: [
+            { name: "Elfrida Clagg", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/71/Elfrida_Clagg-03-chocFrogCard.png/revision/latest?cb=20160606202226", skill: "creature", desc: "Protettrice del Golden Snidget. Conferisce +2 a Cura Creature Magiche." },
+            { name: "Derwent Shimpling", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e1/Derwent_Shimpling-08-chocFrogCard.png/revision/latest?cb=20160606202212", skill: "rapidita", desc: "Mangiò un intero Tentacula. Conferisce +2 a Rapidità." },
+            { name: "Andros l'invincibile", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/32/Andros_The_Invincible-13-chocFrogCard.png/revision/latest?cb=20160606202132", skill: "dcao", desc: "Evocò un Patronus gigante. Conferisce +2 a DCAO." },
+            { name: "Fulbert il pauroso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/41/Fulbert_The_Fearful-14-chocFrogCard.png/revision/latest?cb=20160606202234", skill: "furtivita", desc: "Non usciva mai di casa. Conferisce +2 a Furtività." },
+            { name: "Cliodna", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/95/Cliodne-16-chocFrogCard.png/revision/latest?cb=20160606202159", skill: "erbologia", desc: "Druida e animagus uccello. Conferisce +2 a Erbologia." },
+            { name: "Morgana", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/18/Morgan_Le_Fay-17-chocFrogCard.png/revision/latest?cb=20160606202350", skill: "dcao", desc: "Regina oscura e rivale di Merlino. Conferisce +2 a DCAO." },
+            { name: "Wendelin the weird", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/e6/Wendelin_The_Weird-20-chocFrogCard.png/revision/latest?cb=20160606202432", skill: "storia", desc: "Amava farsi bruciare sul rogo. Conferisce +2 a Storia della Magia." },
+            { name: "Circe", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/79/Circe-22-chocFrogCard.png/revision/latest?cb=20160606202157", skill: "incantesimi", desc: "Esperta in trasfigurazioni greche. Conferisce +2 a Incantesimi." },
+            { name: "Glenda Chittock", img: "https://vignette.wikia.nocookie.net/harrypotter/images/c/cf/Glenda_Chittock-23-chocFrogCard.png/revision/latest?cb=20160606202244", skill: "rapidita", desc: "Conduttrice radiofonica della Rete Magica. Conferisce +2 a Rapidità." },
+            { name: "Mirabella Plunkett", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/38/Mirabella_Plunkett-27-chocFrogCard.png/revision/latest?cb=20160606202344", skill: "creature", desc: "Innamorata di un Tritone. Conferisce +2 a Cura Creature Magiche." },
+            { name: "Artemisia Lufkin", img: "https://vignette.wikia.nocookie.net/harrypotter/images/f/f1/Artemisia_Lufkin-30-chocFrogCard.png/revision/latest?cb=20160606202135", skill: "storia", desc: "Prima Ministra della Magia donna. Conferisce +2 a Storia della Magia." },
+            { name: "Donaghan Tremlett", img: "https://vignette.wikia.nocookie.net/harrypotter/images/e/ed/Donaghan_Tremlett-34-chocFrogCard.png/revision/latest?cb=20160606202215", skill: "rapidita", desc: "Bassista delle Sorelle Stravaganti. Conferisce +2 a Rapidità." },
+            { name: "Bowman Wright", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/9a/Bowman_Wright-35-chocFrogCard.png/revision/latest?cb=20160606202145", skill: "incantesimi", desc: "Fabbro che inventò il Boccino d'Oro. Conferisce +2 a Incantesimi." },
+            { name: "Joscelind Wadcock", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/8b/Joscelind_Wadcock-36-chocFrogCard.png/revision/latest?cb=20160606202326", skill: "rapidita", desc: "Cacciatrice record del Quidditch. Conferisce +2 a Rapidità." },
+            { name: "Chauncey Oldridge", img: "https://vignette.wikia.nocookie.net/harrypotter/images/5/5e/Chauncey_Oldridge-38-chocFrogCard.png/revision/latest?cb=20160606202155", skill: "dcao", desc: "Primo cacciatore di troll. Conferisce +2 a CDAO." },
+            { name: "Gwenog Jones", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0a/Gwenog_Jones-39-chocFrogCard.png/revision/latest?cb=20160606202303", skill: "rapidita", desc: "Capitana delle Holyhead Harpies. Conferisce +2 a Rapidità." }
+        ],
+        oro: [
+            { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png/revision/latest?cb=20160606202248", skill: "dcao", desc: "Fondatore leggendario. Conferisce +3 a DCAO." },
+            { name: "Salazar Serpeverde", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/84/Salazar_Slytherin-48-chocFrogCard.png/revision/latest?cb=20160606202426", skill: "furtivita", desc: "Fondatore leggendario. Conferisce +3 a Furtività." },
+            { name: "Tosca Tassorosso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0d/Helga_Hufflepuff-72-chocFrogCard.png/revision/latest?cb=20160606202311", skill: "erbologia", desc: "Fondatrice leggendaria. Conferisce +3 a Erbologia." },
+            { name: "Corinna Corvonero", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/22/Rowena_Ravenclaw-82-chocFrogCard.png/revision/latest?cb=20160606202422", skill: "incantesimi", desc: "Fondatrice leggendaria. Conferisce +3 a Incantesimi." },
+            { name: "Albus Silente", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/dd/Albus_Dumbledore-101-chocFrogCard.png/revision/latest?cb=20160606202128", skill: "incantesimi", desc: "Il Preside più grande di sempre. Conferisce +3 a Incantesimi." }
+        ]
+    };
 
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
@@ -441,7 +520,7 @@
                 await removeEquip('patronus'); return;
             }
         }
-        const newUrl = prompt("Incolla l'URL dell'immagine online per il tuo Patronus:");
+        const newUrl = prompt("Incolla l'URL della nuova immagine per il tuo Patronus:");
         if (newUrl !== null) {
             let patronusItem = { name: userData.patronus || "Patronus", type: "patronus", val: 0, img: newUrl };
             currentEquip.patronus = patronusItem;
@@ -510,12 +589,22 @@
         
         let extraSkills = { dcao: 0, incantesimi: 0, erbologia: 0, creature: 0, storia: 0, furtivita: 0, rapidita: 0 };
 
-        for (let slot in userData.equipment) {
-            let item = userData.equipment[slot];
-            if (item && item.skill && extraSkills[item.skill] !== undefined) extraSkills[item.skill] += item.val;
+        if (userData.equipment) {
+            for (let slot in userData.equipment) {
+                let item = userData.equipment[slot];
+                if (item && item.skill && extraSkills[item.skill] !== undefined) {
+                    extraSkills[item.skill] += item.val;
+                }
+            }
         }
+        
         let eqFrogs = userData.equippedFrogs || [];
-        eqFrogs.forEach(f => { if(f && f.bonus && extraSkills[f.bonus] !== undefined) extraSkills[f.bonus] += 1; });
+        eqFrogs.forEach(f => { 
+            let targetSkill = f.skill || f.bonus_type;
+            if(f && targetSkill && extraSkills[targetSkill] !== undefined) {
+                extraSkills[targetSkill] += f.val; 
+            }
+        });
 
         isTraumaBlocked = false;
         alertBanner.style.display = "none"; malusText.style.display = "none";
@@ -589,17 +678,27 @@
 
         const invContainer = document.getElementById('profile-inventory'); 
         invContainer.innerHTML = "";
+        
         let currentInvList = userData.inventory || [];
-        currentInvList.forEach((item, index) => {
-            if(item) {
-                const div = document.createElement('div'); div.className = "inv-item-slot";
-                let visualImg = item.img ? item.img : "https://placehold.co/70x70?text=Oggetto";
-                if(item.type === 'cioccorana' && item.img === '') visualImg = "https://placehold.co/70x70?text=🐸";
-                div.innerHTML = `<img src="${visualImg}"><div class="inv-item-title-tag">${item.name}</div>`;
-                div.addEventListener('click', () => equipItem(index));
-                invContainer.appendChild(div);
-            }
-        });
+        if (currentInvList.length === 0) {
+            invContainer.innerHTML = "<p style='font-size:11px; margin:auto; opacity:0.5;'>Baule scolastico vuoto.</p>";
+        } else {
+            currentInvList.forEach((item, index) => {
+                if (item && item.name) {
+                    const div = document.createElement('div'); 
+                    div.className = "inv-item-slot";
+                    
+                    let stringaDescrizione = item.desc || "Oggetto magico senza effetti particolari.";
+                    div.setAttribute('data-tooltip', stringaDescrizione);
+                    
+                    let visualImg = item.img ? item.img : "https://placehold.co/80x80?text=Oggetto";
+                    
+                    div.innerHTML = `<img src="${visualImg}"><div class="inv-item-title-tag">${item.name}</div>`;
+                    div.addEventListener('click', () => equipItem(index));
+                    invContainer.appendChild(div);
+                }
+            });
+        }
     }
 
     function renderEquipSlot(elementId, item, txt) {
@@ -618,7 +717,7 @@
         currentInv.splice(index, 1);
 
         if(item.type === 'cioccorana') {
-            if(currentEqFrogs.length >= 2) return alert("Massimo 2 rane attive!");
+            if(currentEqFrogs.length >= 2) return alert("Massimo 2 rane attive contemporaneamente!");
             currentEqFrogs.push(item);
             await updateDoc(doc(db, "students", currentUser.uid), { inventory: currentInv, equippedFrogs: currentEqFrogs });
             return;
@@ -691,23 +790,54 @@
     }
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
-        if(isTraumaBlocked || userData.gold < 2) return;
-        const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerText = "⏳";
+        if(isTraumaBlocked) return alert("Sei bloccato!");
+        if(userData.gold < 3) return alert("Non hai abbastanza galeoni!");
+
+        const c = document.getElementById('gacha-card'); 
+        c.style.display = "block"; 
+        c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>⏳ Aprendo...</div>";
+        document.getElementById('gacha-result-text').innerText = "";
+        document.getElementById('gacha-desc-text').innerText = "";
+
         setTimeout(async () => {
-            let f = FROG_POOL[Math.floor(Math.random() * FROG_POOL.length)]; c.innerText = "🐸";
-            document.getElementById('gacha-result-text').innerText = `Trovato: ${f.name}`;
+            let rng = Math.random() * 100;
+            let selectedRarity = "bronzo";
+            let bonusValue = 1;
+
+            if (rng < 5) { 
+                selectedRarity = "oro";
+                bonusValue = 3;
+            } else if (rng < 20) { 
+                selectedRarity = "argento";
+                bonusValue = 2;
+            } else { 
+                selectedRarity = "bronzo";
+                bonusValue = 1;
+            }
+
+            let pool = FROG_POOL[selectedRarity];
+            let card = pool[Math.floor(Math.random() * pool.length)];
+
+            c.innerHTML = `<img src="${card.img}">`;
+            document.getElementById('gacha-result-text').innerHTML = `Trovato: <span style="text-transform: uppercase; color: ${selectedRarity==='oro'?'#ffd700':selectedRarity==='argento'?'#cbd5e1':'#cd7f32'}">${card.name} (${selectedRarity})</span>`;
+            document.getElementById('gacha-desc-text').innerText = card.desc;
+
             let currentInv = userData.inventory ? [...userData.inventory] : [];
-            currentInv.push({ name: f.name, type: "cioccorana", img: f.img, bonus: f.bonus });
-            await updateDoc(doc(db, "students", currentUser.uid), { gold: userData.gold - 2, inventory: currentInv });
-        }, 500);
+            currentInv.push({ 
+                name: `${card.name} (${selectedRarity})`, 
+                type: "cioccorana", 
+                img: card.img, 
+                skill: card.skill,
+                bonus_type: card.skill, 
+                val: bonusValue,
+                desc: card.desc 
+            });
+
+            await updateDoc(doc(db, "students", currentUser.uid), { gold: userData.gold - 3, inventory: currentInv });
+        }, 800);
     });
 
-    document.getElementById('btn-heal').addEventListener('click', async () => {
-        if (userData.hp === userData.maxHp) return alert("Hai già tutti gli HP!");
-        await updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: Date.now() + (1000*60*60) });
-    });
-
-    // POPUP DADI
+    // TIRO DADI
     const dt = document.getElementById('dice-trigger'); const dp = document.getElementById('dice-popup');
     dt.addEventListener('click', () => dp.style.display = dp.style.display === 'block' ? 'none' : 'block');
     document.getElementById('btn-roll-dice').addEventListener('click', async () => {
@@ -735,11 +865,16 @@
     });
 
     document.getElementById('btn-login').addEventListener('click', async () => {
-        try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-password').value); } catch(e) { alert("Errore Account"); }
+        const mailField = document.getElementById('login-email').value.trim();
+        const passField = document.getElementById('login-password').value;
+        if(!mailField || !passField) return alert("Inserisci email e password!");
+        try { 
+            await signInWithEmailAndPassword(auth, mailField, passField); 
+        } catch(e) { 
+            alert("Login fallito: credenziali non corrette."); 
+        }
     });
-    document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
-    // ASCOLTO REATTIVO CLOUD DELLE CLESSIDRE (ZEROBug - APERTO DIRETTAMENTE SUI CAMBIAMENTI DI FIREBASE)
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
             let dataCoppa = snapshot.data();
