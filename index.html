@@ -8,25 +8,64 @@
         /* STILE GENERALE */
         *, *::before, *::after { box-sizing: border-box; }
         body { margin: 0; padding: 0; font-family: 'Georgia', serif; background-color: #faf1d6; background-image: radial-gradient(rgba(0,0,0,0.03) 15%, transparent 15%); background-size: 4px 4px; color: #3a2e1d; height: 100vh; overflow: hidden; user-select: none; }
+        
         #game-wrapper { display: flex; width: 100%; height: 100vh; position: relative; }
-        #menu-toggle { position: absolute; top: 12px; left: 12px; z-index: 110; background: #8a6d3b; color: #faf1d6; border: 2px solid #5c4314; border-radius: 4px; padding: 5px 10px; font-size: 18px; cursor: pointer; }
-        #sidebar-menu { width: 260px; height: 100%; background: #f2e6c4; border-right: 4px double #8a6d3b; padding: 60px 15px 20px 15px; display: flex; flex-direction: column; gap: 10px; z-index: 100; transition: transform 0.3s ease; overflow-y: auto; }
         #main-content { flex-grow: 1; height: 100%; position: relative; background: #fcf6e8; overflow: hidden; }
+        
         .screen { display: none; width: 100%; height: 100%; padding: 65px 20px 20px 20px; overflow-y: auto; position: absolute; top: 0; left: 0; }
         .screen.active { display: block; }
-        .top-status-bar { position: absolute; top: 0; left: 0; width: 100%; height: 50px; background: #8a6d3b; color: #faf1d6; display: flex; align-items: center; justify-content: flex-end; padding-right: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 90; }
-        .btn-menu { background: #ebdca8; color: #3a2e1d; border: 2px solid #8a6d3b; padding: 12px; font-family: 'Georgia', serif; font-weight: bold; cursor: pointer; border-radius: 6px; text-align: left; font-size: 14px; }
-        .btn-menu:hover { background: #8a6d3b; color: #faf1d6; }
+        
+        .top-status-bar { position: absolute; top: 0; left: 0; width: 100%; height: 50px; background: #8a6d3b; color: #faf1d6; display: none; align-items: center; justify-content: flex-end; padding-right: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 90; }
+        
+        /* TASTO PER TORNARE ALLA MAPPA */
+        .btn-back-map { position: absolute; top: 10px; left: 15px; z-index: 100; background: #5c4314; color: #faf1d6; border: 2px solid #8a6d3b; padding: 6px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: 'Georgia', serif; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .btn-back-map:hover { background: #8a6d3b; }
+
         .btn-vintage { background: #be9b64; color: #3a2e1d; border: 2px solid #5c4314; padding: 6px 12px; font-family: 'Georgia', serif; font-weight: bold; cursor: pointer; border-radius: 4px; }
         .btn-vintage:hover:not(:disabled) { background: #d4b37d; }
         .btn-vintage:disabled { background: #999; border-color: #666; color: #ddd; cursor: not-allowed; }
 
+        /* =========================================
+           SCREENS DELLA MAPPA DEL MALANDRINO E LOGIN
+           ========================================= */
+        
+        /* Sfondo adattivo e tematico per Login e Mappa Chiusa */
+        #screen-login, #screen-landing {
+            background-color: #faf1d6;
+            background-image: url('https://i.imgur.com/O0PbLEw.png'), radial-gradient(rgba(0,0,0,0.03) 15%, transparent 15%);
+            background-size: contain, 4px 4px;
+            background-position: center, 0 0;
+            background-repeat: no-repeat, repeat;
+        }
+
+        #screen-landing { padding: 0; cursor: pointer; display: none; }
+        
+        /* Animazione Testo Giuramento */
+        #landing-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: #ffd700; display: flex; align-items: center; justify-content: center; font-size: 32px; font-family: 'Georgia', serif; text-align: center; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; z-index: 150; padding: 20px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+
+        /* Mappa Aperta (Nuovo Menù Navigazione) */
+        #screen-map-nav { padding: 0; background-color: #2a2015; display: none; align-items: center; justify-content: center; }
+        .marauders-map-container { position: relative; width: 100%; max-width: 1400px; aspect-ratio: 16 / 9; background-image: url('https://i.imgur.com/yauwhNq.jpeg'); background-size: cover; background-position: center; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        
+        /* Zone cliccabili invisibili (Senza Hover) */
+        .map-click-zone { position: absolute; cursor: pointer; }
+
+        /* Coordinate Mappa */
+        .zone-grifondoro { top: 10%; left: 8%; width: 12%; height: 25%; }
+        .zone-corvonero { top: 10%; right: 8%; width: 12%; height: 25%; }
+        .zone-infermeria { top: 38%; left: 3%; width: 15%; height: 25%; }
+        .zone-salagrande { top: 25%; left: 35%; width: 30%; height: 40%; }
+        .zone-cioccorane { top: 38%; right: 3%; width: 15%; height: 25%; }
+        .zone-serpeverde { bottom: 10%; left: 8%; width: 15%; height: 25%; }
+        .zone-tassorosso { bottom: 10%; right: 8%; width: 15%; height: 25%; }
+        .zone-diagon { bottom: 0; left: 40%; width: 20%; height: 20%; }
+
         /* SCHERMATA LOGIN */
-        .login-container { max-width: 400px; margin: 40px auto; background: #f2e6c4; border: 3px double #8a6d3b; padding: 25px; border-radius: 8px; text-align: center; }
+        .login-container { max-width: 400px; margin: 40px auto; background: #f2e6c4; border: 3px double #8a6d3b; padding: 25px; border-radius: 8px; text-align: center; position: relative; z-index: 10;}
         .login-container input, .login-container select { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #8a6d3b; background: #fffdf7; border-radius: 4px; }
 
-        /* LAYOUT PROFILO STRUTTURATO A COLONNE LOGICHE */
-        .profile-layout-container { display: flex; gap: 15px; height: calc(100vh - 120px); align-items: stretch; }
+        /* LAYOUT PROFILO */
+        .profile-layout-container { display: flex; gap: 15px; height: calc(100vh - 120px); align-items: stretch; margin-top: 20px;}
         .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
         .col-middle { display: flex; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
         .col-equip-dnd { width: 120px; display: flex; flex-direction: column; gap: 15px; }
@@ -37,22 +76,22 @@
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
-
         .trauma-disabled-mask { opacity: 0.5; pointer-events: none; cursor: not-allowed !important; }
+
         .identity-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
         .house-logo-box { width: 75px; height: 75px; display: flex; align-items: center; justify-content: center; }
         .house-logo-box img { width: 100%; height: 100%; object-fit: contain; }
         .frog-slots-mini { display: flex; gap: 8px; }
         .frog-mini-slot { width: 60px; height: 60px; background: #fffdec; border: 1px dashed #7f8c8d; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
         .frog-mini-slot img { width: 100%; height: 100%; object-fit: cover; }
-
         .gear-slot { height: 60px; background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #8a6d3b;}
         .gear-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 1; }
         .gear-slot span { position: relative; z-index: 2; text-shadow: 1px 1px 2px white; }
         .gear-slot .avatar-overlay { opacity: 0; }
         .gear-slot:hover .avatar-overlay { opacity: 1; }
-
         .stats-block-box { background: #fffdec; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #8a6d3b;}
+
+        /* INVENTARIO */
         .inventory-header-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; margin: 0; }
         .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; }
         .inv-item-slot { width: 80px; height: 80px; background: #fffdec; border-radius: 6px; position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: transform 0.15s; }
@@ -61,7 +100,6 @@
         .inv-item-slot:hover { transform: scale(1.04); background: #ebdca8; z-index: 99999; }
         .inv-item-slot::after { content: attr(data-tooltip); position: absolute; top: 85px; left: 50%; transform: translateX(-50%); background: #19093a; color: #ffd700; padding: 8px 12px; border: 2px solid #be9b64; border-radius: 6px; font-size: 11px; font-family: 'Georgia', serif; text-align: center; width: 180px; white-space: normal; box-shadow: 0 6px 16px rgba(0,0,0,0.6); z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.15s ease-in-out; }
         .inv-item-slot:hover::after { opacity: 1; }
-
         .bar-container { width: 100%; background: #ccc; border-radius: 4px; position: relative; height: 15px; overflow: hidden; border: 1px solid #333; }
         .bar-fill { height: 100%; width: 100%; transition: width 0.2s; }
         .hp-fill { background: #c0392b; } .mp-fill { background: #2980b9; }
@@ -73,35 +111,32 @@
         .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
         .dnd-stat-box-vert input { width: 40px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; }
         .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
-
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .skills-inline-edit th { font-size: 11px; text-align: left; border-bottom: 1px solid #8a6d3b; padding: 8px 6px; background: #ebdca8; }
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
-        .skill-gamble-note { font-size: 9px; color: #b45309; font-style: italic; display: block; margin-top: 1px; }
 
-        /* STRUTTURA NEGOZI DIAGON ALLEY FULLSCREEN (COME I CUSTODI DELL'ALBA) */
-        .diagon-street-container {
-            width: 100%; height: 100%; 
+        /* NEGOZI DIAGON ALLEY (AGGIORNATO FULL SCREEN) */
+        .diagon-street-container { 
+            position: relative; 
+            width: 100%; 
+            height: 100%; /* Ripristinato il Full Screen per intero */
             background-image: url('https://i.imgur.com/vaxStnF.jpeg'); 
-            background-size: cover; background-position: center; 
-            display: flex;
+            background-size: cover; 
+            background-position: center; 
+            display: flex; 
+            overflow: hidden; 
         }
-        .shop-click-zone { flex: 1; height: 100%; cursor: pointer; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.15); }
+        .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
-        /* Effetto luce al passaggio del mouse sui negozi */
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
-
-        /* VISTA INTERNO NEGOZIO (Mantiene il padding classico) */
-        .store-interior { display: none; background: #fcf6e8; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         
-        .btn-back-street { background: #5c4314; color: #faf1d6; border: 2px solid #8a6d3b; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 20px; font-family: 'Georgia', serif; font-size: 14px; }
-        .btn-back-street:hover { background: #8a6d3b; }
+        .store-interior { display: none; background: #fcf6e8; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-container { display: flex; flex-direction: column; gap: 10px; max-width: 700px; }
         .shop-item { background: #fffdec; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         /* CLESSIDRE VERTICALI */
-        .clessidre-wrapper { display: flex; justify-content: space-around; align-items: flex-end; background: #fffdec; border: 3px double #8a6d3b; border-radius: 12px; padding: 30px 10px; margin-top: 20px; min-height: 440px; }
+        .clessidre-wrapper { display: flex; justify-content: space-around; align-items: flex-end; background: #fffdec; border: 3px double #8a6d3b; border-radius: 12px; padding: 30px 10px; margin-top: 35px; min-height: 440px; }
         .clessidra-container { display: flex; flex-direction: column; align-items: center; width: 22%; }
         .clessidra-shield-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 15px; }
         .clessidra-glass { width: 70px; height: 240px; background: rgba(255, 255, 255, 0.2); border: 3px solid #8a6d3b; border-radius: 35px / 20px; position: relative; box-shadow: inset 0 0 15px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.15); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
@@ -115,7 +150,7 @@
         .gems-Tassorosso { background-color: #eab308; background-image: linear-gradient(135deg, #facc15 25%, transparent 25%), linear-gradient(225deg, #facc15 25%, transparent 25%); background-size: 8px 8px; }
 
         /* EMPORIO CIOCCORANE */
-        .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 25px; }
         .gacha-box { text-align: center; background: #2c1654; color: #ffd700; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .card-anim { width: 180px; height: 180px; margin: 20px auto; display: none; background: #1e0b3d; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); overflow: hidden; }
         .card-anim img { width: 100%; height: 100%; object-fit: contain; }
@@ -128,43 +163,54 @@
 <body>
 
 <div id="game-wrapper">
-    <button id="menu-toggle">☰ Menu</button>
-    <div id="sidebar-menu">
-        <h3 style="text-align: center; margin: 0 0 10px 0; font-size: 15px; border-bottom: 2px solid #8a6d3b;">I Custodi dell'Alba</h3>
-        <button class="btn-menu" onclick="changeScreen('screen-map')">✨ I Custodi dell'Alba</button>
-        <button class="btn-menu" onclick="changeScreen('screen-profile')">🧙‍♂️ Scheda Personaggio</button>
-        <button class="btn-menu" onclick="changeScreen('screen-shop')">⚖️ Diagon Alley - Shop</button>
-        <button class="btn-menu" onclick="changeScreen('screen-coppa')">🏆 Coppa delle Case</button>
-        <button class="btn-menu" onclick="changeScreen('screen-infermeria')">🏥 Infermeria</button>
-        <button class="btn-menu" onclick="changeScreen('screen-ciccorane')">🐸 Emporio Cioccorane</button>
-    </div>
 
     <div id="main-content">
-        <div class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">💰 0 Galeoni</span></div>
+        
+        <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">💰 0 Galeoni</span></div>
 
-        <div id="screen-login" class="screen active" style="z-index:200; background:#faf1d6;">
-            <h1 style="text-align:center;">I Custodi dell'Alba RPG</h1>
-            <div class="login-container">
-                <h3>Accedi</h3>
-                <input type="email" id="login-email" placeholder="Tua Email">
-                <input type="password" id="login-password" placeholder="Password">
-                <button id="btn-login" class="btn-vintage" style="width:100%;">ENTRA A SCUOLA</button>
-            </div>
-            <div class="login-container">
-                <h3>Smistamento Nuovo Studente</h3>
-                <input type="text" id="reg-name" placeholder="Nome Personaggio">
-                <select id="reg-house"><option value="Grifondoro">Grifondoro</option><option value="Serpeverde">Serpeverde</option><option value="Corvonero">Corvonero</option><option value="Tassorosso">Tassorosso</option></select>
-                <input type="text" id="reg-patronus" placeholder="Forma del Patronus">
-                <input type="email" id="reg-email" placeholder="Email">
-                <input type="password" id="reg-password" placeholder="Password">
-                <button id="btn-register" class="btn-vintage" style="width:100%; background:#8a6d3b; color:white;">REGISTRATI & INIZIA</button>
+        <div id="screen-login" class="screen active" style="z-index:200;">
+            <div style="background: rgba(250, 241, 214, 0.9); padding: 20px; max-width: 450px; margin: 20px auto; border-radius: 10px; border: 3px double #8a6d3b; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+                <h1 style="text-align:center;">I Custodi dell'Alba RPG</h1>
+                <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
+                    <h3>Accedi</h3>
+                    <input type="email" id="login-email" placeholder="Tua Email">
+                    <input type="password" id="login-password" placeholder="Password">
+                    <button id="btn-login" class="btn-vintage" style="width:100%;">ENTRA A SCUOLA</button>
+                </div>
+                <hr style="border: 1px dashed #8a6d3b; margin: 15px 0;">
+                <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
+                    <h3>Smistamento Nuovo Studente</h3>
+                    <input type="text" id="reg-name" placeholder="Nome Personaggio">
+                    <select id="reg-house"><option value="Grifondoro">Grifondoro</option><option value="Serpeverde">Serpeverde</option><option value="Corvonero">Corvonero</option><option value="Tassorosso">Tassorosso</option></select>
+                    <input type="text" id="reg-patronus" placeholder="Forma del Patronus">
+                    <input type="email" id="reg-email" placeholder="Email">
+                    <input type="password" id="reg-password" placeholder="Password">
+                    <button id="btn-register" class="btn-vintage" style="width:100%; background:#8a6d3b; color:white;">REGISTRATI & INIZIA</button>
+                </div>
             </div>
         </div>
 
-        <div id="screen-map" class="screen" style="padding:0; background-image: url('https://i.imgur.com/bEtGgn8.jpeg'); background-size: cover; background-position: center;"></div>
+        <div id="screen-landing" class="screen" onclick="openMarauderMap()">
+            <div id="landing-overlay">Giuro solennemente di non avere buone intenzioni...</div>
+        </div>
+
+        <div id="screen-map-nav" class="screen">
+            <div class="marauders-map-container">
+                <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
+                <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
+                <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
+                <div class="map-click-zone zone-salagrande" onclick="changeScreen('screen-coppa')"></div>
+                <div class="map-click-zone zone-cioccorane" onclick="changeScreen('screen-ciccorane')"></div>
+                <div class="map-click-zone zone-serpeverde" onclick="tryEnterDorm('Serpeverde')"></div>
+                <div class="map-click-zone zone-tassorosso" onclick="tryEnterDorm('Tassorosso')"></div>
+                <div class="map-click-zone zone-diagon" onclick="changeScreen('screen-shop')"></div>
+            </div>
+        </div>
 
         <div id="screen-profile" class="screen">
-            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px;">⚠️ PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">⚠️ PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
+            
             <div class="profile-layout-container" id="profile-main-grid-wrapper">
                 <div class="col-avatar" id="profile-col-avatar">
                     <div class="avatar-wrapper" onclick="triggerAvatarChange()">
@@ -227,6 +273,7 @@
         </div>
 
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
+            <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">🔙 Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
                 <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
                 <div class="shop-click-zone" onclick="openStore('toga')"></div>
@@ -235,7 +282,7 @@
             </div>
             
             <div id="store-interior" class="store-interior">
-                <button class="btn-back-street" onclick="closeStore()">🔙 Torna in Strada a Diagon Alley</button>
+                <button class="btn-vintage" onclick="closeStore()" style="margin-bottom: 20px;">🚪 Torna in Strada a Diagon Alley</button>
                 <h2 id="store-title" style="margin-top:0; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; color:#5c4314;">Negozio</h2>
                 <div id="cat-bacchetta" class="shop-container" style="display:none;"></div>
                 <div id="cat-toga" class="shop-container" style="display:none;"></div>
@@ -245,7 +292,8 @@
         </div>
 
         <div id="screen-coppa" class="screen">
-            <h2>🏆 Le Clessidre della Coppa delle Case</h2>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <h2 style="margin-top:25px;">🏆 Le Clessidre della Coppa delle Case</h2>
             <div class="clessidre-wrapper">
                 <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/AeIu16S.png" alt="Grifondoro"><div class="clessidra-glass"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div><div id="pts-Grifondoro" class="clessidra-score">0 Punti</div></div>
                 <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/eX3RZ2G.png" alt="Serpeverde"><div class="clessidra-glass"><div id="gem-fill-Serpeverde" class="gems-liquid-reservoir gems-Serpeverde"></div></div><div id="pts-Serpeverde" class="clessidra-score">0 Punti</div></div>
@@ -255,13 +303,15 @@
         </div>
 
         <div id="screen-infermeria" class="screen">
-            <h2>🏥 Infermeria di Hogwarts</h2>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <h2 style="margin-top:25px;">🏥 Infermeria di Hogwarts</h2>
             <div style="background:#fffdec; border:1px solid #8a6d3b; padding:20px; border-radius:6px; text-align:center; margin-bottom: 15px;"><p>Stato Medico Attuale:</p><div id="inf-health-status" class="health-status-badge" style="background:green;">In Perfetta Salute</div></div>
             <div style="background:#fffdec; border:1px solid #8a6d3b; padding:20px; border-radius:6px; text-align:center;"><button id="btn-heal" class="btn-vintage" style="background:#b22222; color:white; padding:15px; width:100%; font-size:14px;">CHIEDI CURE MAGICHE</button><h3 id="inf-timer-display" style="color:#c0392b; margin-top:15px; display:none;">Tempo rimanente: --:--</h3></div>
         </div>
 
         <div id="screen-ciccorane" class="screen">
-            <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150');"></div>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150'); margin-top: 25px;"></div>
             <div class="gacha-box">
                 <h2 style="margin-top:0; color:#ffd700; font-family:'Georgia', serif;">Apri Cioccorana</h2>
                 <button id="btn-buy-gacha" class="btn-vintage" style="background:#ffd700; color:#2c1654; font-size:16px; padding:12px 24px;">APRI PACCHETTO (3 Galeoni) 🐸</button>
@@ -269,6 +319,17 @@
                 <div id="gacha-result-text" style="font-weight:bold; margin-top:15px; font-size:18px;"></div>
                 <div id="gacha-desc-text" style="margin-top:5px; font-size:13px; color:#ebdca8; font-style:italic;"></div>
             </div>
+        </div>
+    </div>
+
+    <div id="dorm-password-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 300; align-items:center; justify-content:center;">
+        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 350px; position: relative;">
+            <button onclick="document.getElementById('dorm-password-modal').style.display='none'" style="position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:18px; cursor:pointer;">✖</button>
+            <img id="dorm-guard-img" src="" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 2px solid #5c4314; margin-bottom: 15px;">
+            <h3 style="margin-top:0; color:#3a2e1d; font-family:'Georgia', serif;">La porta è sorvegliata</h3>
+            <p style="font-size: 13px; color:#5c4314;">Inserisci la parola d'ordine di <span id="dorm-house-name" style="font-weight:bold;"></span>:</p>
+            <input type="password" id="dorm-password-input" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+            <button id="btn-dorm-enter" class="btn-vintage" style="width:100%;">TENTA L'ACCESSO</button>
         </div>
     </div>
 
@@ -306,6 +367,22 @@
     const PROFICIENCY_BONUS = 2;
 
     const HOUSE_LOGOS = { grifondoro: "https://imgur.com/AeIu16S.png", serpeverde: "https://imgur.com/eX3RZ2G.png", corvonero: "https://imgur.com/hedsChE.png", tassorosso: "https://imgur.com/3cFFSnZ.png" };
+    
+    // FOTO DEI GUARDIANI DEI DORMITORI
+    const DORM_GUARDS = {
+        "grifondoro": "https://i.imgur.com/jLLcIQV.png",
+        "serpeverde": "https://i.imgur.com/FzNtkQO.png",
+        "corvonero": "https://i.imgur.com/msOmFwM.png",
+        "tassorosso": "https://i.imgur.com/NBSZrcl.jpeg"
+    };
+
+    // PAROLE D'ORDINE DELLE CASATE
+    const DORM_PASSWORDS = {
+        "grifondoro": "caput draconis",
+        "serpeverde": "purosangue",
+        "corvonero": "diadema",
+        "tassorosso": "tasso"
+    };
 
     const HOGWARTS_SKILLS_MAP = [
         { id: "incantesimi", name: "🪄 Incantesimi", stat: "int" }, { id: "storia_magia", name: "📚 Storia della Magia", stat: "int" },
@@ -331,30 +408,106 @@
     ];
 
     const FROG_POOL = {
-        bronzo: [
-            { name: "Merlino", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/68/Merlin-01-chocFrogCard.png", skill: "incantesimi", desc: "+1 a Incantesimi." },
-            { name: "Cornelius Agrippa", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/3a/Cornelius_Agrippa_Chocolate_Frog_Card.png", skill: "storia_magia", desc: "+1 a Storia della Magia." },
-            { name: "Grogan Stump", img: "https://vignette.wikia.nocookie.net/harrypotter/images/4/4d/Grogan_Stump-04-chocFrogCard.png", skill: "creature", desc: "+1 a Cura Creature Magiche." },
-            { name: "Glanmore Peakes", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/d7/Glanmore_Peakes-06-chocFrogCard.png", skill: "dcao", desc: "+1 a DCAO." },
-            { name: "Hesper Starkey", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/6c/Hesper_Starkey-07-chocFrogCard.png", skill: "erbologia", desc: "+1 a Erbologia." }
-        ],
-        argento: [
-            { name: "Elfrida Clagg", img: "https://vignette.wikia.nocookie.net/harrypotter/images/7/71/Elfrida_Clagg-03-chocFrogCard.png", skill: "creature", desc: "+2 a Cura Creature Magiche." },
-            { name: "Andros l'invincibile", img: "https://vignette.wikia.nocookie.net/harrypotter/images/3/32/Andros_The_Invincible-13-chocFrogCard.png", skill: "dcao", desc: "+2 a DCAO." },
-            { name: "Cliodna", img: "https://vignette.wikia.nocookie.net/harrypotter/images/9/95/Cliodne-16-chocFrogCard.png", skill: "erbologia", desc: "+2 a Erbologia." },
-            { name: "Morgana", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/18/Morgan_Le_Fay-17-chocFrogCard.png", skill: "pozioni", desc: "+2 a Pozioni & Alchimia." }
-        ],
-        oro: [
-            { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." },
-            { name: "Salazar Serpeverde", img: "https://vignette.wikia.nocookie.net/harrypotter/images/8/84/Salazar_Slytherin-48-chocFrogCard.png", skill: "inganno", desc: "+3 a Inganno." },
-            { name: "Tosca Tassorosso", img: "https://vignette.wikia.nocookie.net/harrypotter/images/0/0d/Helga_Hufflepuff-72-chocFrogCard.png", skill: "erbologia", desc: "+3 a Erbologia." },
-            { name: "Corinna Corvonero", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/22/Rowena_Ravenclaw-82-chocFrogCard.png", skill: "incantesimi", desc: "+3 a Incantesimi." },
-            { name: "Albus Silente", img: "https://vignette.wikia.nocookie.net/harrypotter/images/d/dd/Albus_Dumbledore-101-chocFrogCard.png", skill: "incantesimi", desc: "+3 a Incantesimi." }
-        ]
+        bronzo: [ { name: "Merlino", img: "https://vignette.wikia.nocookie.net/harrypotter/images/6/68/Merlin-01-chocFrogCard.png", skill: "incantesimi", desc: "+1 a Incantesimi." } ],
+        argento: [ { name: "Morgana", img: "https://vignette.wikia.nocookie.net/harrypotter/images/1/18/Morgan_Le_Fay-17-chocFrogCard.png", skill: "pozioni", desc: "+2 a Pozioni." } ],
+        oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
+
+    // MOTORE CENTRALE DI CAMBIO SCHERMATE (Gestisce e pulisce gli inline styles)
+    window.changeScreen = function(screenId) {
+        if (!currentUser && screenId !== 'screen-login') return;
+        if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+            alert("Sei in Trauma Critico! Vai in Infermeria."); return; 
+        }
+        
+        // Pulizia forzata di tutti gli stili inline che causavano l'accavallamento
+        document.querySelectorAll('.screen').forEach(s => {
+            s.classList.remove('active');
+            s.style.display = 'none'; 
+        });
+        
+        // Attivazione schermata bersaglio
+        let target = document.getElementById(screenId);
+        target.classList.add('active');
+        
+        if(screenId === 'screen-map-nav') { 
+            target.style.display = 'flex'; 
+            document.getElementById('top-bar-gold').style.display = 'flex';
+        } else if (screenId === 'screen-landing' || screenId === 'screen-login') {
+            target.style.display = 'block'; 
+            document.getElementById('top-bar-gold').style.display = 'none';
+        } else {
+            target.style.display = 'block';
+            document.getElementById('top-bar-gold').style.display = 'flex';
+        }
+
+        if (screenId === 'screen-shop') closeStore();
+    }
+
+    // FUNZIONE DI APERTURA MAPPA DEL MALANDRINO (Dalla Landing alla Mappa Aperta)
+    window.openMarauderMap = function() {
+        let overlay = document.getElementById('landing-overlay');
+        overlay.style.opacity = 1;
+        
+        setTimeout(() => {
+            changeScreen('screen-map-nav');
+            overlay.style.opacity = 0;
+        }, 2000);
+    };
+
+    // FUNZIONE DI ACCESSO AI DORMITORI (CON PAROLA D'ORDINE E MEMORIA DI 6 ORE)
+    let currentTargetDorm = "";
+    window.tryEnterDorm = function(targetHouse) {
+        if (isTraumaBlocked) return alert("Sei in Trauma Critico! Vai in Infermeria.");
+        
+        let userHouse = userData.house.toLowerCase().trim();
+        let requestedHouse = targetHouse.toLowerCase().trim();
+
+        if (userHouse !== requestedHouse) {
+            return alert("Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
+        }
+        
+        // Controlla se la password è già stata inserita con successo nelle ultime 6 ore
+        let authKey = "dorm_auth_" + currentUser.uid;
+        let lastAuthTime = localStorage.getItem(authKey);
+        
+        if (lastAuthTime) {
+            let timePassed = Date.now() - parseInt(lastAuthTime);
+            let sixHours = 6 * 60 * 60 * 1000;
+            if (timePassed < sixHours) {
+                // Il tempo non è scaduto, passa direttamente al profilo
+                changeScreen('screen-profile');
+                return;
+            } else {
+                // Sono passate 6 ore, cancella la vecchia memoria
+                localStorage.removeItem(authKey);
+            }
+        }
+
+        // Se non c'è memoria valida, mostra il quadro magico
+        currentTargetDorm = targetHouse;
+        document.getElementById('dorm-house-name').innerText = targetHouse;
+        document.getElementById('dorm-guard-img').src = DORM_GUARDS[requestedHouse];
+        document.getElementById('dorm-password-input').value = "";
+        document.getElementById('dorm-password-modal').style.display = 'flex';
+    };
+
+    // Validazione Password
+    document.getElementById('btn-dorm-enter').addEventListener('click', () => {
+        let pwd = document.getElementById('dorm-password-input').value;
+        if (pwd && pwd.toLowerCase().trim() === DORM_PASSWORDS[currentTargetDorm.toLowerCase().trim()]) {
+            document.getElementById('dorm-password-modal').style.display = 'none';
+            // Salva il momento di questo accesso corretto
+            localStorage.setItem("dorm_auth_" + currentUser.uid, Date.now());
+            changeScreen('screen-profile');
+        } else {
+            alert("Parola d'ordine errata! L'accesso è negato.");
+        }
+    });
 
     window.openStore = function(type) {
         document.getElementById('diagon-alley-street').style.display = 'none';
+        document.getElementById('btn-back-map-shop').style.display = 'none';
         document.getElementById('store-interior').style.display = 'block';
         document.getElementById('cat-bacchetta').style.display = 'none';
         document.getElementById('cat-toga').style.display = 'none';
@@ -372,6 +525,7 @@
     window.closeStore = function() {
         document.getElementById('store-interior').style.display = 'none';
         document.getElementById('diagon-alley-street').style.display = 'flex';
+        document.getElementById('btn-back-map-shop').style.display = 'block';
     };
 
     function getDndModifier(score) { return Math.floor((parseInt(score || 10) - 10) / 2); }
@@ -382,14 +536,6 @@
     HOGWARTS_SKILLS_MAP.forEach(sk => {
         tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${sk.stat.toUpperCase()})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none;">⚠️ Azzardo Attivo</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
     });
-
-    window.changeScreen = function(screenId) {
-        if (!currentUser && screenId !== 'screen-login') return;
-        if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login'].includes(screenId)) { alert("Sei in Trauma Critico! Vai in Infermeria."); return; }
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(screenId).classList.add('active');
-        if (screenId === 'screen-shop') closeStore();
-    }
 
     window.triggerAvatarChange = async function() {
         if(isTraumaBlocked) return alert("Sei bloccato!");
@@ -438,7 +584,10 @@
         if (user) {
             currentUser = user;
             onSnapshot(doc(db, "students", user.uid), (snap) => { if (snap.exists()) { userData = snap.data(); renderUI(); } });
-            changeScreen('screen-map');
+            
+            // Appena loggato, manda SEMPRE alla mappa chiusa (Landing)
+            changeScreen('screen-landing');
+
         } else { currentUser = null; userData = null; changeScreen('screen-login'); }
     });
 
