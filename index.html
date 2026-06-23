@@ -116,42 +116,83 @@
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
 
-        /* NEGOZI DIAGON ALLEY (AGGIORNATO FULL SCREEN) */
-        .diagon-street-container { 
-            position: relative; 
-            width: 100%; 
-            height: 100%; /* Ripristinato il Full Screen per intero */
-            background-image: url('https://i.imgur.com/vaxStnF.jpeg'); 
-            background-size: cover; 
-            background-position: center; 
-            display: flex; 
-            overflow: hidden; 
-        }
+        /* NEGOZI DIAGON ALLEY */
+        .diagon-street-container { position: relative; width: 100%; height: 100%; background-image: url('https://i.imgur.com/vaxStnF.jpeg'); background-size: cover; background-position: center; display: flex; overflow: hidden; }
         .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
-        
         .store-interior { display: none; background: #fcf6e8; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-container { display: flex; flex-direction: column; gap: 10px; max-width: 700px; }
         .shop-item { background: #fffdec; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        /* CLESSIDRE VERTICALI */
-        .clessidre-wrapper { display: flex; justify-content: space-around; align-items: flex-end; background: #fffdec; border: 3px double #8a6d3b; border-radius: 12px; padding: 30px 10px; margin-top: 35px; min-height: 440px; }
-        .clessidra-container { display: flex; flex-direction: column; align-items: center; width: 22%; }
-        .clessidra-shield-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 15px; }
-        .clessidra-glass { width: 70px; height: 240px; background: rgba(255, 255, 255, 0.2); border: 3px solid #8a6d3b; border-radius: 35px / 20px; position: relative; box-shadow: inset 0 0 15px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.15); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
-        .clessidra-glass::before { content: ''; position: absolute; top: 50%; left: -3px; right: -3px; height: 6px; background: #8a6d3b; z-index: 10; }
-        .gems-liquid-reservoir { width: 100%; height: 0%; transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1); position: relative; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
-        .clessidra-glass::after { content: ''; position: absolute; top: 5%; left: 10%; width: 15%; height: 90%; background: rgba(255,255,255,0.4); border-radius: 10px; z-index: 12; pointer-events: none; }
-        .clessidra-score { margin-top: 12px; font-size: 16px; font-weight: bold; background: #ebdca8; border: 1px solid #8a6d3b; padding: 3px 8px; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
-        .gems-Grifondoro { background-color: #a11d1d; background-image: linear-gradient(135deg, #c92a2a 25%, transparent 25%), linear-gradient(225deg, #c92a2a 25%, transparent 25%); background-size: 8px 8px; }
-        .gems-Serpeverde { background-color: #16a34a; background-image: linear-gradient(135deg, #1ea952 25%, transparent 25%), linear-gradient(225deg, #1ea952 25%, transparent 25%); background-size: 8px 8px; }
-        .gems-Corvonero { background-color: #1d4ed8; background-image: linear-gradient(135deg, #2563eb 25%, transparent 25%), linear-gradient(225deg, #2563eb 25%, transparent 25%); background-size: 8px 8px; }
-        .gems-Tassorosso { background-color: #eab308; background-image: linear-gradient(135deg, #facc15 25%, transparent 25%), linear-gradient(225deg, #facc15 25%, transparent 25%); background-size: 8px 8px; }
+        /* =========================================
+           SCHERMATA COPPA DELLE CASE (IL TUO CSS ESATTO)
+           ========================================= */
+        #screen-coppa { padding: 0; display: none; overflow: hidden; background-color: #0b0805; }
+        
+        .great-hall-container {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100vw; height: 56.25vw; 
+            min-height: 100vh; min-width: 177.77vh; 
+            background-color: #0b0805; overflow: hidden;
+        }
 
-        /* EMPORIO CIOCCORANE */
+        .great-hall-foreground {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: fill; z-index: 2; pointer-events: none;
+        }
+
+        /* Contenitori dei liquidi dietro il vetro (Altezza estesa per riempire la clessidra) */
+        .glass-container {
+            position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
+            width: 8.5%; 
+            height: 100%; /* Portato al 34% per coprire l'intera ampolla inferiore */
+            bottom: 45%;    /* Spostato verso l'alto al collo della clessidra */
+        }
+        
+        /* Coordinate X calcolate col calibro sull'immagine PNG */
+        .pos-grif { left: 16.8%; }
+        .pos-tass { left: 36%; }
+        .pos-corv { left: 55.7%; }
+        .pos-serp { left: 75.8%; }
+
+        /* Il liquido che si riempie in altezza */
+        .gems-liquid-reservoir {
+            width: 100%; height: 0%; /* Sovrascritto dal Javascript */
+            transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        /* Texture a "Cristalli Magici" (Gradienti sovrapposti) */
+        .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
+        .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
+        .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
+        .gems-Serpeverde { background: linear-gradient(135deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(225deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(315deg, #15803d 25%, transparent 25%), linear-gradient(45deg, #15803d 25%, transparent 25%); background-size: 10px 10px; background-color: #14532d; }
+
+        /* Le etichette dei punteggi posizionate CENTRATE sulle targhette in basso (Livello 3) */
+        .score-label {
+            position: absolute; z-index: 3; 
+            top: 65.5%; /* Abbassato al centro della targhetta in pietra */
+            height: 4%; width: 10%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Georgia', serif; 
+            font-size: clamp(14px, 2.2vw, 30px); /* Testo molto più grande e scalabile */
+            font-weight: 900; 
+            color: #3a2e1d; 
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+        
+        .lbl-grif { left: 15.8%; }
+        .lbl-tass { left: 35.5%; }
+        .lbl-corv { left: 55.2%; }
+        .lbl-serp { left: 75%; }
+
+        /* EMPORIO CIOCCORANE E INFERMERIA */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 25px; }
-        .gacha-box { text-align: center; background: #2c1654; color: #ffd700; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
+        .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
+        .gacha-box { background: #2c1654; color: #ffd700; }
+        .hospital-box { background: #fffdec; }
         .card-anim { width: 180px; height: 180px; margin: 20px auto; display: none; background: #1e0b3d; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); overflow: hidden; }
         .card-anim img { width: 100%; height: 100%; object-fit: contain; }
 
@@ -166,8 +207,10 @@
 
     <div id="main-content">
         
+        <!-- Barra dei soldi -->
         <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">💰 0 Galeoni</span></div>
 
+        <!-- SCHERMATA DI LOGIN -->
         <div id="screen-login" class="screen active" style="z-index:200;">
             <div style="background: rgba(250, 241, 214, 0.9); padding: 20px; max-width: 450px; margin: 20px auto; border-radius: 10px; border: 3px double #8a6d3b; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
                 <h1 style="text-align:center;">I Custodi dell'Alba RPG</h1>
@@ -190,12 +233,15 @@
             </div>
         </div>
 
+        <!-- SCHERMATA MAPPA CHIUSA (LANDING PAGE) -->
         <div id="screen-landing" class="screen" onclick="openMarauderMap()">
             <div id="landing-overlay">Giuro solennemente di non avere buone intenzioni...</div>
         </div>
 
+        <!-- SCHERMATA MAPPA APERTA (MENU PRINCIPALE) -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
+                <!-- ZONE CLICCABILI INVISIBILI -->
                 <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -207,6 +253,7 @@
             </div>
         </div>
 
+        <!-- SCHERMATA PROFILO (DORMITORIO) -->
         <div id="screen-profile" class="screen">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">⚠️ PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
@@ -272,6 +319,7 @@
             </div>
         </div>
 
+        <!-- SCHERMATA SHOP DIAGON ALLEY -->
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
             <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">🔙 Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
@@ -291,24 +339,50 @@
             </div>
         </div>
 
+        <!-- SCHERMATA COPPA DELLE CASE -->
         <div id="screen-coppa" class="screen">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
-            <h2 style="margin-top:25px;">🏆 Le Clessidre della Coppa delle Case</h2>
-            <div class="clessidre-wrapper">
-                <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/AeIu16S.png" alt="Grifondoro"><div class="clessidra-glass"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div><div id="pts-Grifondoro" class="clessidra-score">0 Punti</div></div>
-                <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/eX3RZ2G.png" alt="Serpeverde"><div class="clessidra-glass"><div id="gem-fill-Serpeverde" class="gems-liquid-reservoir gems-Serpeverde"></div></div><div id="pts-Serpeverde" class="clessidra-score">0 Punti</div></div>
-                <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/hedsChE.png" alt="Corvonero"><div class="clessidra-glass"><div id="gem-fill-Corvonero" class="gems-liquid-reservoir gems-Corvonero"></div></div><div id="pts-Corvonero" class="clessidra-score">0 Punti</div></div>
-                <div class="clessidra-container"><img class="clessidra-shield-img" src="https://imgur.com/3cFFSnZ.png" alt="Tassorosso"><div class="clessidra-glass"><div id="gem-fill-Tassorosso" class="gems-liquid-reservoir gems-Tassorosso"></div></div><div id="pts-Tassorosso" class="clessidra-score">0 Punti</div></div>
+            
+            <div class="great-hall-container">
+                
+                <!-- LIVELLO 1: I liquidi che si riempiono da sotto (dietro l'immagine) -->
+                <div class="glass-container pos-grif"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div>
+                <div class="glass-container pos-tass"><div id="gem-fill-Tassorosso" class="gems-liquid-reservoir gems-Tassorosso"></div></div>
+                <div class="glass-container pos-corv"><div id="gem-fill-Corvonero" class="gems-liquid-reservoir gems-Corvonero"></div></div>
+                <div class="glass-container pos-serp"><div id="gem-fill-Serpeverde" class="gems-liquid-reservoir gems-Serpeverde"></div></div>
+
+                <!-- LIVELLO 2: L'immagine PNG della Sala Grande con le clessidre bucate -->
+                <img src="https://i.imgur.com/nR5WMtM.png" class="great-hall-foreground" alt="Sala Grande Coppa">
+
+                <!-- LIVELLO 3: Targhette dei punteggi -->
+                <div class="score-label lbl-grif" id="pts-Grifondoro">0</div>
+                <div class="score-label lbl-tass" id="pts-Tassorosso">0</div>
+                <div class="score-label lbl-corv" id="pts-Corvonero">0</div>
+                <div class="score-label lbl-serp" id="pts-Serpeverde">0</div>
+
             </div>
         </div>
 
+        <!-- SCHERMATA INFERMERIA -->
         <div id="screen-infermeria" class="screen">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
-            <h2 style="margin-top:25px;">🏥 Infermeria di Hogwarts</h2>
-            <div style="background:#fffdec; border:1px solid #8a6d3b; padding:20px; border-radius:6px; text-align:center; margin-bottom: 15px;"><p>Stato Medico Attuale:</p><div id="inf-health-status" class="health-status-badge" style="background:green;">In Perfetta Salute</div></div>
-            <div style="background:#fffdec; border:1px solid #8a6d3b; padding:20px; border-radius:6px; text-align:center;"><button id="btn-heal" class="btn-vintage" style="background:#b22222; color:white; padding:15px; width:100%; font-size:14px;">CHIEDI CURE MAGICHE</button><h3 id="inf-timer-display" style="color:#c0392b; margin-top:15px; display:none;">Tempo rimanente: --:--</h3></div>
+            <div class="gacha-header-banner" style="background-image: url('https://www.potterpedia.it/imagewatermark/immagini/5398-p1au7q0pv579ghqofr91jjm1e31r.jpg');"></div>
+            
+            <div class="hospital-box">
+                <h2 style="margin-top:0; color:#b22222; font-family:'Georgia', serif;">🏥 Infermeria di Hogwarts</h2>
+                <p style="font-size:14px; margin-bottom: 20px;">Affidati alle cure di Madama Chips per rimetterti in sesto dopo i duelli o gli incidenti in volo.</p>
+                
+                <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
+                    <p style="margin: 0 0 10px 0; font-weight: bold;">Stato Medico Attuale:</p>
+                    <div id="inf-health-status" class="health-status-badge" style="background:green; color:white; padding:8px 15px; border-radius:4px; display:inline-block; font-weight:bold; letter-spacing: 0.5px;">In Perfetta Salute</div>
+                </div>
+                
+                <button id="btn-heal" class="btn-vintage" style="background:#b22222; color:white; padding:15px; width:100%; font-size:16px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">CHIEDI CURE MAGICHE</button>
+                <h3 id="inf-timer-display" style="color:#c0392b; margin-top:15px; display:none;">Tempo rimanente: --:--</h3>
+            </div>
         </div>
 
+        <!-- SCHERMATA CIOCCORANE -->
         <div id="screen-ciccorane" class="screen">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
             <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150'); margin-top: 25px;"></div>
@@ -322,6 +396,7 @@
         </div>
     </div>
 
+    <!-- MODAL POPUP PER LA PAROLA D'ORDINE DEL DORMITORIO -->
     <div id="dorm-password-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 300; align-items:center; justify-content:center;">
         <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 350px; position: relative;">
             <button onclick="document.getElementById('dorm-password-modal').style.display='none'" style="position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:18px; cursor:pointer;">✖</button>
@@ -333,6 +408,20 @@
         </div>
     </div>
 
+    <!-- MODAL GENERICO DI SISTEMA (SOSTITUISCE GLI ALERT E PROMPT DEL BROWSER) -->
+    <div id="rpg-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 9999; align-items:center; justify-content:center;">
+        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8);">
+            <h3 id="rpg-modal-title" style="margin-top:0; color:#5c4314; font-family:'Georgia', serif; border-bottom: 1px solid #8a6d3b; padding-bottom: 10px;">Titolo</h3>
+            <p id="rpg-modal-message" style="font-size: 14px; color:#3a2e1d; margin-bottom: 20px;"></p>
+            <input type="text" id="rpg-modal-input" style="display:none; width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button id="btn-rpg-modal-cancel" class="btn-vintage" style="display:none; background:#999; color:white; border-color:#666;">ANNULLA</button>
+                <button id="btn-rpg-modal-ok" class="btn-vintage" style="background:#8a6d3b; color:white; width:100px;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DADI -->
     <div id="dice-trigger">🎲</div>
     <div id="dice-popup">
         <h4>Tiro Dadi D&D</h4>
@@ -413,78 +502,113 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    // MOTORE CENTRALE DI CAMBIO SCHERMATE (Gestisce e pulisce gli inline styles)
+    // ==========================================
+    // MOTORE FINESTRE DI DIALOGO CUSTOM (ROLEPLAY)
+    // ==========================================
+    window.rpgDialog = function(type, title, message, defaultValue = "") {
+        return new Promise((resolve) => {
+            const overlay = document.getElementById('rpg-modal-overlay');
+            const titleEl = document.getElementById('rpg-modal-title');
+            const msgEl = document.getElementById('rpg-modal-message');
+            const inputEl = document.getElementById('rpg-modal-input');
+            const btnOk = document.getElementById('btn-rpg-modal-ok');
+            const btnCancel = document.getElementById('btn-rpg-modal-cancel');
+
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+            
+            inputEl.style.display = (type === 'prompt') ? 'block' : 'none';
+            inputEl.value = defaultValue;
+            
+            btnCancel.style.display = (type === 'alert') ? 'none' : 'block';
+            
+            overlay.style.display = 'flex';
+
+            if(type === 'prompt') inputEl.focus();
+
+            const cleanup = () => {
+                overlay.style.display = 'none';
+                btnOk.onclick = null;
+                btnCancel.onclick = null;
+            };
+
+            btnOk.onclick = () => {
+                cleanup();
+                if(type === 'prompt') resolve(inputEl.value);
+                else if(type === 'confirm') resolve(true);
+                else resolve(true);
+            };
+
+            btnCancel.onclick = () => {
+                cleanup();
+                if(type === 'prompt') resolve(null);
+                else if(type === 'confirm') resolve(false);
+            };
+        });
+    };
+    
+    // Helper Roleplay Rapidi
+    window.rpgAlert = (title, msg) => rpgDialog('alert', title, msg);
+    window.rpgConfirm = (title, msg) => rpgDialog('confirm', title, msg);
+    window.rpgPrompt = (title, msg, def) => rpgDialog('prompt', title, msg, def);
+
+    function getShopOwner(type) {
+        if (type === 'bacchetta') return "🪄 Garrick Ollivander";
+        if (type === 'toga') return "🪡 Madame Malkin";
+        if (type === 'libro') return "📚 Direttore del Ghirigoro";
+        if (type === 'pet') return "🦉 Proprietaria del Serraglio";
+        return "⚖️ Negoziante";
+    }
+
+    // MOTORE CENTRALE DI CAMBIO SCHERMATE
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-            alert("Sei in Trauma Critico! Vai in Infermeria."); return; 
+            rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+            return; 
         }
         
-        // Pulizia forzata di tutti gli stili inline che causavano l'accavallamento
-        document.querySelectorAll('.screen').forEach(s => {
-            s.classList.remove('active');
-            s.style.display = 'none'; 
-        });
+        document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
         
-        // Attivazione schermata bersaglio
         let target = document.getElementById(screenId);
         target.classList.add('active');
         
         if(screenId === 'screen-map-nav') { 
-            target.style.display = 'flex'; 
-            document.getElementById('top-bar-gold').style.display = 'flex';
+            target.style.display = 'flex'; document.getElementById('top-bar-gold').style.display = 'flex';
         } else if (screenId === 'screen-landing' || screenId === 'screen-login') {
-            target.style.display = 'block'; 
-            document.getElementById('top-bar-gold').style.display = 'none';
+            target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'none';
+        } else if (screenId === 'screen-coppa' || screenId === 'screen-shop') {
+            target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'flex';
         } else {
-            target.style.display = 'block';
-            document.getElementById('top-bar-gold').style.display = 'flex';
+            target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'flex';
         }
 
         if (screenId === 'screen-shop') closeStore();
     }
 
-    // FUNZIONE DI APERTURA MAPPA DEL MALANDRINO (Dalla Landing alla Mappa Aperta)
+    // FUNZIONE DI APERTURA MAPPA DEL MALANDRINO
     window.openMarauderMap = function() {
         let overlay = document.getElementById('landing-overlay');
         overlay.style.opacity = 1;
-        
-        setTimeout(() => {
-            changeScreen('screen-map-nav');
-            overlay.style.opacity = 0;
-        }, 2000);
+        setTimeout(() => { changeScreen('screen-map-nav'); overlay.style.opacity = 0; }, 2000);
     };
 
-    // FUNZIONE DI ACCESSO AI DORMITORI (CON PAROLA D'ORDINE E MEMORIA DI 6 ORE)
+    // FUNZIONE DI ACCESSO AI DORMITORI
     let currentTargetDorm = "";
     window.tryEnterDorm = function(targetHouse) {
-        if (isTraumaBlocked) return alert("Sei in Trauma Critico! Vai in Infermeria.");
-        
-        let userHouse = userData.house.toLowerCase().trim();
-        let requestedHouse = targetHouse.toLowerCase().trim();
+        if (isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+        let userHouse = userData.house.toLowerCase().trim(); let requestedHouse = targetHouse.toLowerCase().trim();
 
-        if (userHouse !== requestedHouse) {
-            return alert("Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
-        }
+        if (userHouse !== requestedHouse) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
         
-        // Controlla se la password è già stata inserita con successo nelle ultime 6 ore
-        let authKey = "dorm_auth_" + currentUser.uid;
-        let lastAuthTime = localStorage.getItem(authKey);
+        let authKey = "dorm_auth_" + currentUser.uid; let lastAuthTime = localStorage.getItem(authKey);
         
         if (lastAuthTime) {
-            let timePassed = Date.now() - parseInt(lastAuthTime);
-            let sixHours = 6 * 60 * 60 * 1000;
-            if (timePassed < sixHours) {
-                // Il tempo non è scaduto, passa direttamente al profilo
-                changeScreen('screen-profile');
-                return;
-            } else {
-                // Sono passate 6 ore, cancella la vecchia memoria
-                localStorage.removeItem(authKey);
-            }
+            let timePassed = Date.now() - parseInt(lastAuthTime); let sixHours = 6 * 60 * 60 * 1000;
+            if (timePassed < sixHours) { changeScreen('screen-profile'); return; } 
+            else { localStorage.removeItem(authKey); }
         }
 
-        // Se non c'è memoria valida, mostra il quadro magico
         currentTargetDorm = targetHouse;
         document.getElementById('dorm-house-name').innerText = targetHouse;
         document.getElementById('dorm-guard-img').src = DORM_GUARDS[requestedHouse];
@@ -492,17 +616,12 @@
         document.getElementById('dorm-password-modal').style.display = 'flex';
     };
 
-    // Validazione Password
     document.getElementById('btn-dorm-enter').addEventListener('click', () => {
         let pwd = document.getElementById('dorm-password-input').value;
         if (pwd && pwd.toLowerCase().trim() === DORM_PASSWORDS[currentTargetDorm.toLowerCase().trim()]) {
             document.getElementById('dorm-password-modal').style.display = 'none';
-            // Salva il momento di questo accesso corretto
-            localStorage.setItem("dorm_auth_" + currentUser.uid, Date.now());
-            changeScreen('screen-profile');
-        } else {
-            alert("Parola d'ordine errata! L'accesso è negato.");
-        }
+            localStorage.setItem("dorm_auth_" + currentUser.uid, Date.now()); changeScreen('screen-profile');
+        } else { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Parola d'ordine errata! L'accesso è negato."); }
     });
 
     window.openStore = function(type) {
@@ -538,16 +657,19 @@
     });
 
     window.triggerAvatarChange = async function() {
-        if(isTraumaBlocked) return alert("Sei bloccato!");
-        const newUrl = prompt("URL Foto:", userData.avatarUrl || "");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        const newUrl = await rpgPrompt("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Inserisci l'URL per aggiornare la tua Foto:", userData.avatarUrl || "");
         if (newUrl !== null) await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: newUrl });
     }
 
     window.triggerPatronusImgChange = async function() {
-        if(isTraumaBlocked) return alert("Sei bloccato!");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         let currentEquip = userData.equipment || {};
-        if (currentEquip.patronus) { if(confirm("Rimuovere Patronus?")) { await removeEquip('patronus'); return; } }
-        const newUrl = prompt("URL Immagine Patronus:");
+        if (currentEquip.patronus) { 
+            let ans = await rpgConfirm("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Vuoi disequipaggiare il tuo Patronus attuale?");
+            if(ans) { await removeEquip('patronus'); return; } 
+        }
+        const newUrl = await rpgPrompt("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Inserisci l'URL dell'Immagine del tuo Patronus:");
         if (newUrl !== null) {
             currentEquip.patronus = { name: userData.patronus || "Patronus", type: "patronus", val: 0, img: newUrl };
             await updateDoc(doc(db, "students", currentUser.uid), { equipment: currentEquip });
@@ -555,24 +677,25 @@
     }
 
     document.getElementById('btn-sync-hp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return alert("Bloccato!");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { hp: parseInt(document.getElementById('edit-curr-hp').value)||0, maxHp: parseInt(document.getElementById('edit-max-hp').value)||0 });
     });
     document.getElementById('btn-sync-mp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return alert("Bloccato!");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { mp: parseInt(document.getElementById('edit-curr-mp').value)||0, maxMp: parseInt(document.getElementById('edit-max-mp').value)||0 });
     });
 
     document.getElementById('btn-sync-core-stats').addEventListener('click', async () => {
-        if(isTraumaBlocked) return alert("Bloccato!");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { 
             core_stats: { str: parseInt(document.getElementById('dnd-str').value)||10, dex: parseInt(document.getElementById('dnd-dex').value)||10, con: parseInt(document.getElementById('dnd-con').value)||10, int: parseInt(document.getElementById('dnd-int').value)||10, wis: parseInt(document.getElementById('dnd-wis').value)||10, cha: parseInt(document.getElementById('dnd-cha').value)||10 } 
-        }); alert("Statistiche salvate!");
+        }); 
+        rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Le tue Statistiche sono state salvate nel registro di Hogwarts.");
     });
 
     tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
         chk.addEventListener('change', async (e) => {
-            if(isTraumaBlocked) { e.preventDefault(); return alert("Bloccato!"); }
+            if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
             let skId = e.target.getAttribute('data-skill');
             let currentProficiencies = userData.proficiencies || {};
             currentProficiencies[skId] = e.target.checked;
@@ -584,10 +707,7 @@
         if (user) {
             currentUser = user;
             onSnapshot(doc(db, "students", user.uid), (snap) => { if (snap.exists()) { userData = snap.data(); renderUI(); } });
-            
-            // Appena loggato, manda SEMPRE alla mappa chiusa (Landing)
             changeScreen('screen-landing');
-
         } else { currentUser = null; userData = null; changeScreen('screen-login'); }
     });
 
@@ -708,13 +828,13 @@
     }
 
     async function equipItem(index) {
-        if(isTraumaBlocked) return alert("Sei bloccato!");
+        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         let item = userData.inventory[index]; let currentInv = [...userData.inventory];
         let currentEquip = userData.equipment || {}; let currentEqFrogs = userData.equippedFrogs || [];
         currentInv.splice(index, 1);
 
         if(item.type === 'cioccorana') {
-            if(currentEqFrogs.length >= 2) return alert("Massimo 2 rane attive contemporaneamente!");
+            if(currentEqFrogs.length >= 2) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Puoi avere al massimo 2 rane equipaggiate attivamente!");
             currentEqFrogs.push(item); await updateDoc(doc(db, "students", currentUser.uid), { inventory: currentInv, equippedFrogs: currentEqFrogs }); return;
         }
         let oldItem = currentEquip[item.type]; if(oldItem) currentInv.push(oldItem);
@@ -743,25 +863,35 @@
     window.buy = async function(id) {
         if(isTraumaBlocked) return;
         let p = { ...SHOP_CATALOG.find(x => x.id === id) };
-        if(userData.gold < p.cost) return alert("Mancano Galeoni!");
+        let shopOwner = getShopOwner(p.type);
 
-        if (p.type === 'bacchetta') { let customName = prompt("Inserisci nome/materiali Bacchetta:"); if (!customName) return alert("Annullato!"); p.name = customName; }
+        if(userData.gold < p.cost) return rpgAlert(shopOwner, "Mi dispiace, ma ti mancano i Galeoni per questo articolo!");
+
+        if (p.type === 'bacchetta') { 
+            let customName = await rpgPrompt(shopOwner, "La bacchetta sceglie il mago... dimmi, di che materiale è fatta la tua?"); 
+            if (!customName) return rpgAlert(shopOwner, "Acquisto annullato. Torna quando sarai pronto."); 
+            p.name = customName; 
+        }
         if (p.type === 'pet') {
-            let rigaCreatura = prompt("Che animale è?"); let nomeCreatura = prompt("Nome:"); let fotoCreatura = prompt("URL foto:");
-            if(!rigaCreatura || !nomeCreatura) return alert("Annullato!");
+            let rigaCreatura = await rpgPrompt(shopOwner, "Che creatura magica desideri acquistare?"); 
+            if(!rigaCreatura) return rpgAlert(shopOwner, "Acquisto annullato.");
+            let nomeCreatura = await rpgPrompt(shopOwner, "Come intendi chiamare il tuo nuovo compagno?"); 
+            if(!nomeCreatura) return rpgAlert(shopOwner, "Acquisto annullato.");
+            let fotoCreatura = await rpgPrompt(shopOwner, "Inserisci il link dell'immagine per questo animale (oppure lascia vuoto):");
             p.name = `${nomeCreatura} (${rigaCreatura})`; if (fotoCreatura) p.img = fotoCreatura;
         }
 
         let currentInv = userData.inventory ? [...userData.inventory] : []; currentInv.push(p);
         await updateDoc(doc(db, "students", currentUser.uid), { gold: userData.gold - p.cost, inventory: currentInv });
-        alert(`Acquistato!`);
+        rpgAlert(shopOwner, `L'acquisto di ${p.name} è completato con successo. Buona giornata!`);
     }
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
-        if(isTraumaBlocked) return alert("Sei bloccato!");
-        if(userData.gold < 3) return alert("Mancano galeoni!");
+        let shopOwner = "🐸 Cassiera dell'Emporio";
+        if(isTraumaBlocked) return rpgAlert(shopOwner, "Vai a farti curare prima di mangiare dolci!");
+        if(userData.gold < 3) return rpgAlert(shopOwner, "Non hai abbastanza Galeoni per una Cioccorana, mi spiace.");
 
-        const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>⏳ Aprendo...</div>";
+        const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>⏳ Scartando la confezione...</div>";
         document.getElementById('gacha-result-text').innerText = ""; document.getElementById('gacha-desc-text').innerText = "";
 
         setTimeout(async () => {
@@ -802,20 +932,23 @@
                 core_stats: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }, proficiencies: {},
                 equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: []
             });
-        } catch (e) { alert(e.message); }
+        } catch (e) { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
     });
 
     document.getElementById('btn-login').addEventListener('click', async () => {
         const mailField = document.getElementById('login-email').value.trim(); const passField = document.getElementById('login-password').value;
-        if(!mailField || !passField) return alert("Inserisci email e password!");
-        try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { alert("Login fallito: credenziali errate."); }
+        if(!mailField || !passField) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Devi inserire la tua e-mail e password per accedere ai dormitori!");
+        try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
+    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
-            let dataCoppa = snapshot.data(); let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; let tettoMassimoPunti = 300; 
+            let dataCoppa = snapshot.data(); let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; 
+            let tettoMassimoPunti = 1000; 
             caseList.forEach(h => {
-                let pt = dataCoppa[h] || 0; document.getElementById(`pts-${h}`).innerText = pt + " Punti";
+                let pt = dataCoppa[h] || 0; 
+                document.getElementById(`pts-${h}`).innerText = pt;
                 document.getElementById(`gem-fill-${h}`).style.height = Math.max(0, Math.min(100, (pt / tettoMassimoPunti) * 100)) + "%";
             });
         }
