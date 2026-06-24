@@ -116,17 +116,20 @@
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
 
-        /* NEGOZI DIAGON ALLEY */
+        /* NEGOZI DIAGON ALLEY (STRADA) */
         .diagon-street-container { position: relative; width: 100%; height: 100%; background-image: url('https://i.imgur.com/vaxStnF.jpeg'); background-size: cover; background-position: center; display: flex; overflow: hidden; }
         .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
-        .store-interior { display: none; background: #fcf6e8; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
-        .shop-container { display: flex; flex-direction: column; gap: 10px; max-width: 700px; }
-        .shop-item { background: #fffdec; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* INTERNO DEI NEGOZI (NUOVO LAYOUT) */
+        .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
+        .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
+        .shop-container { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin-top: 15px; }
+        .shop-item { background: #fcf6e8; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         /* =========================================
-           SCHERMATA COPPA DELLE CASE (IL TUO CSS ESATTO)
+           SCHERMATA COPPA DELLE CASE
            ========================================= */
         #screen-coppa { padding: 0; display: none; overflow: hidden; background-color: #0b0805; }
         
@@ -146,8 +149,8 @@
         .glass-container {
             position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
             width: 8.5%; 
-            height: 100%; /* Portato al 34% per coprire l'intera ampolla inferiore */
-            bottom: 45%;    /* Spostato verso l'alto al collo della clessidra */
+            height: 34%; 
+            bottom: 45%;    
         }
         
         /* Coordinate X calcolate col calibro sull'immagine PNG */
@@ -158,13 +161,13 @@
 
         /* Il liquido che si riempie in altezza */
         .gems-liquid-reservoir {
-            width: 100%; height: 0%; /* Sovrascritto dal Javascript */
+            width: 100%; height: 0%; 
             transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
 
-        /* Texture a "Cristalli Magici" (Gradienti sovrapposti) */
+        /* Texture a "Cristalli Magici" */
         .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
         .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
         .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
@@ -173,11 +176,11 @@
         /* Le etichette dei punteggi posizionate CENTRATE sulle targhette in basso (Livello 3) */
         .score-label {
             position: absolute; z-index: 3; 
-            top: 65.5%; /* Abbassato al centro della targhetta in pietra */
+            top: 65.5%; 
             height: 4%; width: 10%;
             display: flex; align-items: center; justify-content: center;
             font-family: 'Georgia', serif; 
-            font-size: clamp(14px, 2.2vw, 30px); /* Testo molto più grande e scalabile */
+            font-size: clamp(14px, 2.2vw, 30px); 
             font-weight: 900; 
             color: #3a2e1d; 
             text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
@@ -188,15 +191,15 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA */
-        .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 25px; }
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
+        .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
         .hospital-box { background: #fffdec; }
         .card-anim { width: 180px; height: 180px; margin: 20px auto; display: none; background: #1e0b3d; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); overflow: hidden; }
         .card-anim img { width: 100%; height: 100%; object-fit: contain; }
 
-        #dice-trigger { position: absolute; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #8a6d3b; color: #faf1d6; border-radius: 50%; text-align: center; line-height: 50px; font-size: 20px; font-weight: bold; cursor: pointer; z-index: 120; border: 1px solid #5c4314; }
+        #dice-trigger { position: absolute; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #8a6d3b; color: #faf1d6; border-radius: 50%; text-align: center; line-height: 50px; font-size: 24px; font-weight: bold; cursor: pointer; z-index: 120; border: 1px solid #5c4314; }
         #dice-popup { display: none; position: absolute; bottom: 80px; right: 20px; width: 260px; background: #fcf6e8; border: 2px solid #8a6d3b; border-radius: 8px; padding: 10px; z-index: 125; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         #dice-log { max-height: 110px; overflow-y: auto; background: #eee3be; font-size: 11px; padding: 4px; margin-top: 5px; border-radius: 4px; }
     </style>
@@ -208,7 +211,7 @@
     <div id="main-content">
         
         <!-- Barra dei soldi -->
-        <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">💰 0 Galeoni</span></div>
+        <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">0 Galeoni</span></div>
 
         <!-- SCHERMATA DI LOGIN -->
         <div id="screen-login" class="screen active" style="z-index:200;">
@@ -255,14 +258,14 @@
 
         <!-- SCHERMATA PROFILO (DORMITORIO) -->
         <div id="screen-profile" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
-            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">⚠️ PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
             
             <div class="profile-layout-container" id="profile-main-grid-wrapper">
                 <div class="col-avatar" id="profile-col-avatar">
                     <div class="avatar-wrapper" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
-                        <div class="avatar-overlay">🔮 CAMBIA FOTO</div>
+                        <div class="avatar-overlay">CAMBIA FOTO</div>
                     </div>
                     <div class="identity-row">
                         <div class="house-logo-box" id="slot-house-logo"><img id="img-house-logo" src="" alt="Stemma"></div>
@@ -276,23 +279,21 @@
                         <div class="bar-container" style="margin-bottom: 5px;"><div id="prof-hp-bar" class="bar-fill hp-fill"></div></div>
                         <div class="mini-edit-row"><span><b>MP Mana:</b> <span id="prof-mp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-mp"> M:<input type="number" id="edit-max-mp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button></div></div>
                         <div class="bar-container"><div id="prof-mp-bar" class="bar-fill mp-fill"></div></div>
-                        <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">🛡️ Classe Armatura: <span id="prof-ca">10</span></div>
-                        <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">🪄 Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
+                        <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">Classe Armatura: <span id="prof-ca">10</span></div>
+                        <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
                     </div>
                 </div>
 
                 <div class="col-middle" id="profile-col-middle">
                     <div class="col-equip-dnd">
-                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; text-align:center;">🎒 Equipaggiamento</div>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>⚡ Bacchetta</span></div>
-                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>🥋 Toga</span></div>
-                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>📖 Libro</span></div>
-                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()"><span>✨ Patronus</span><div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div></div>
-                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>🦉 Compagno</span></div>
+                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>Bacchetta</span></div>
+                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>Toga</span></div>
+                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>Libro</span></div>
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()"><span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div></div>
+                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
-                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-top:10px; text-align:center;">⚔️ Base D&D</div>
-                        <div class="dnd-stats-vertical">
+                        <div class="dnd-stats-vertical" style="margin-top: 10px;">
                             <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><input type="number" id="dnd-str" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-str">+0</span></div>
                             <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><input type="number" id="dnd-dex" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-dex">+0</span></div>
                             <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><input type="number" id="dnd-con" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-con">+0</span></div>
@@ -300,11 +301,10 @@
                             <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><input type="number" id="dnd-wis" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-wis">+0</span></div>
                             <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><input type="number" id="dnd-cha" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                         </div>
-                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:4px;" id="btn-sync-core-stats">Salva Modificatori</button>
+                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:4px; margin-top: 10px;" id="btn-sync-core-stats">Salva Modificatori</button>
                     </div>
 
                     <div class="col-disciplines">
-                        <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px;">📖 Discipline Hogwarts</div>
                         <table class="skills-inline-edit">
                             <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
                             <tbody id="skills-tbody-list"></tbody>
@@ -321,7 +321,7 @@
 
         <!-- SCHERMATA SHOP DIAGON ALLEY -->
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
-            <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">🔙 Torna alla Mappa</button>
+            <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
                 <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
                 <div class="shop-click-zone" onclick="openStore('toga')"></div>
@@ -330,18 +330,28 @@
             </div>
             
             <div id="store-interior" class="store-interior">
-                <button class="btn-vintage" onclick="closeStore()" style="margin-bottom: 20px;">🚪 Torna in Strada a Diagon Alley</button>
-                <h2 id="store-title" style="margin-top:0; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; color:#5c4314;">Negozio</h2>
-                <div id="cat-bacchetta" class="shop-container" style="display:none;"></div>
-                <div id="cat-toga" class="shop-container" style="display:none;"></div>
-                <div id="cat-libro" class="shop-container" style="display:none;"></div>
-                <div id="cat-pet" class="shop-container" style="display:none;"></div>
+                <div id="shop-dynamic-banner" class="gacha-header-banner" style="margin-top: 0;"></div>
+                <div class="shop-window-box">
+                    <button class="btn-vintage" onclick="closeStore()" style="margin-bottom: 20px; width: 100%;">Torna in Strada a Diagon Alley</button>
+                    <h2 id="store-title" style="margin-top:0; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; color:#5c4314;">Negozio</h2>
+                    <div id="cat-bacchetta" class="shop-container" style="display:none;"></div>
+                    <div id="cat-toga" class="shop-container" style="display:none;"></div>
+                    
+                    <div id="cat-libro" class="shop-container" style="display:none;">
+                        <h3 style="color:#5c4314; border-bottom: 1px dashed #8a6d3b; padding-bottom: 5px; margin-top: 10px; margin-bottom: 5px;">Reparto Nuovi Arrivi</h3>
+                        <div id="cat-libro-nuovi" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                        <h3 style="color:#5c4314; border-bottom: 1px dashed #8a6d3b; padding-bottom: 5px; margin-top: 25px; margin-bottom: 5px;">Reparto Usato (Offerte speciali)</h3>
+                        <div id="cat-libro-usati" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    </div>
+
+                    <div id="cat-pet" class="shop-container" style="display:none;"></div>
+                </div>
             </div>
         </div>
 
         <!-- SCHERMATA COPPA DELLE CASE -->
         <div id="screen-coppa" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             
             <div class="great-hall-container">
                 
@@ -354,7 +364,7 @@
                 <!-- LIVELLO 2: L'immagine PNG della Sala Grande con le clessidre bucate -->
                 <img src="https://i.imgur.com/nR5WMtM.png" class="great-hall-foreground" alt="Sala Grande Coppa">
 
-                <!-- LIVELLO 3: Targhette dei punteggi -->
+                <!-- LIVELLO 3: Targhette dei punteggi (SOLO NUMERO E CENTRATO) -->
                 <div class="score-label lbl-grif" id="pts-Grifondoro">0</div>
                 <div class="score-label lbl-tass" id="pts-Tassorosso">0</div>
                 <div class="score-label lbl-corv" id="pts-Corvonero">0</div>
@@ -365,11 +375,11 @@
 
         <!-- SCHERMATA INFERMERIA -->
         <div id="screen-infermeria" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
-            <div class="gacha-header-banner" style="background-image: url('https://www.potterpedia.it/imagewatermark/immagini/5398-p1au7q0pv579ghqofr91jjm1e31r.jpg');"></div>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <div class="gacha-header-banner" style="background-image: url('https://www.potterpedia.it/imagewatermark/immagini/5398-p1au7q0pv579ghqofr91jjm1e31r.jpg'); margin-top: 25px;"></div>
             
             <div class="hospital-box">
-                <h2 style="margin-top:0; color:#b22222; font-family:'Georgia', serif;">🏥 Infermeria di Hogwarts</h2>
+                <h2 style="margin-top:0; color:#b22222; font-family:'Georgia', serif;">Infermeria di Hogwarts</h2>
                 <p style="font-size:14px; margin-bottom: 20px;">Affidati alle cure di Madama Chips per rimetterti in sesto dopo i duelli o gli incidenti in volo.</p>
                 
                 <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
@@ -384,11 +394,11 @@
 
         <!-- SCHERMATA CIOCCORANE -->
         <div id="screen-ciccorane" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">🔙 Torna alla Mappa</button>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150'); margin-top: 25px;"></div>
             <div class="gacha-box">
                 <h2 style="margin-top:0; color:#ffd700; font-family:'Georgia', serif;">Apri Cioccorana</h2>
-                <button id="btn-buy-gacha" class="btn-vintage" style="background:#ffd700; color:#2c1654; font-size:16px; padding:12px 24px;">APRI PACCHETTO (3 Galeoni) 🐸</button>
+                <button id="btn-buy-gacha" class="btn-vintage" style="background:#ffd700; color:#2c1654; font-size:16px; padding:12px 24px;">APRI PACCHETTO (3 Galeoni)</button>
                 <div id="gacha-card" class="card-anim"></div>
                 <div id="gacha-result-text" style="font-weight:bold; margin-top:15px; font-size:18px;"></div>
                 <div id="gacha-desc-text" style="margin-top:5px; font-size:13px; color:#ebdca8; font-style:italic;"></div>
@@ -399,7 +409,7 @@
     <!-- MODAL POPUP PER LA PAROLA D'ORDINE DEL DORMITORIO -->
     <div id="dorm-password-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 300; align-items:center; justify-content:center;">
         <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 350px; position: relative;">
-            <button onclick="document.getElementById('dorm-password-modal').style.display='none'" style="position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:18px; cursor:pointer;">✖</button>
+            <button onclick="document.getElementById('dorm-password-modal').style.display='none'" style="position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:18px; cursor:pointer;">X</button>
             <img id="dorm-guard-img" src="" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 2px solid #5c4314; margin-bottom: 15px;">
             <h3 style="margin-top:0; color:#3a2e1d; font-family:'Georgia', serif;">La porta è sorvegliata</h3>
             <p style="font-size: 13px; color:#5c4314;">Inserisci la parola d'ordine di <span id="dorm-house-name" style="font-weight:bold;"></span>:</p>
@@ -472,17 +482,35 @@
         "corvonero": "diadema",
         "tassorosso": "tasso"
     };
+    
+    // IMMAGINI DEI BANNER DEI NEGOZI
+    const SHOP_BANNERS = {
+        'bacchetta': "https://cdnb.artstation.com/p/assets/images/images/035/894/217/large/rasmus-bagner-ollivanders12.jpg?1616173610",
+        'toga': "https://orlandoinformer.com/wp-content/uploads/photo-gallery/imported_from_media_libray/20231024-IMG_0947.jpg?bwg=1698675841",
+        'libro': "https://static.wikia.nocookie.net/harrypotter/images/7/7b/Ghirigoro.jpg/revision/latest?cb=20210809132121&path-prefix=it",
+        'pet': "https://static.wikia.nocookie.net/harrypotter/images/d/d8/Magical_Menagerie.jpeg/revision/latest/scale-to-width-down/1200?cb=20250407065014"
+    };
 
     const HOGWARTS_SKILLS_MAP = [
-        { id: "incantesimi", name: "🪄 Incantesimi", stat: "int" }, { id: "storia_magia", name: "📚 Storia della Magia", stat: "int" },
-        { id: "erbologia", name: "🌱 Erbologia", stat: "int" }, { id: "pozioni", name: "🧪 Pozioni & Alchimia", stat: "int" },
-        { id: "investigazione", name: "🔍 Investigazione", stat: "int" }, { id: "creature", name: "🐉 Cura Creature Magiche", stat: "wis" },
-        { id: "divinazione", name: "🔮 Divinazione", stat: "wis" }, { id: "dcao", name: "🛡️ Difesa Contro Arti Oscure", stat: "wis" },
-        { id: "percezione", name: "👁️ Percezione", stat: "wis" }, { id: "volo", name: "🧹 Volo & Orientamento", stat: "wis" },
-        { id: "furtivita", name: "👟 Furtività", stat: "dex" }, { id: "rapidita_mano", name: "🖐️ Rapidità di Mano", stat: "dex" },
-        { id: "acrobazia", name: "🤸 Acrobazia", stat: "dex" }, { id: "inganno", name: "🤥 Inganno", stat: "cha" },
-        { id: "persuasione", name: "🗣️ Persuasione", stat: "cha" }, { id: "intimidire", name: "😡 Intimidire", stat: "cha" },
-        { id: "intrattenere", name: "🎭 Intrattenere", stat: "cha" }, { id: "atletica", name: "🏆 Atletica (Quidditch)", stat: "str" }
+        { id: "incantesimi", name: "Incantesimi", stat: "int" }, 
+        { id: "trasfigurazione", name: "Trasfigurazione", stat: "int" },
+        { id: "storia_magia", name: "Storia della Magia", stat: "int" },
+        { id: "erbologia", name: "Erbologia", stat: "int" }, 
+        { id: "pozioni", name: "Pozioni & Alchimia", stat: "int" },
+        { id: "investigazione", name: "Investigazione", stat: "int" }, 
+        { id: "creature", name: "Cura Creature Magiche", stat: "wis" },
+        { id: "divinazione", name: "Divinazione", stat: "wis" }, 
+        { id: "dcao", name: "Difesa Contro le Arti Oscure", stat: "wis" },
+        { id: "percezione", name: "Percezione", stat: "wis" }, 
+        { id: "volo", name: "Volo & Orientamento", stat: "wis" },
+        { id: "furtivita", name: "Furtività", stat: "dex" }, 
+        { id: "rapidita_mano", name: "Rapidità di Mano", stat: "dex" },
+        { id: "acrobazia", name: "Acrobazia", stat: "dex" }, 
+        { id: "inganno", name: "Inganno", stat: "cha" },
+        { id: "persuasione", name: "Persuasione", stat: "cha" }, 
+        { id: "intimidire", name: "Intimidire", stat: "cha" },
+        { id: "intrattenere", name: "Intrattenere", stat: "cha" }, 
+        { id: "atletica", name: "Atletica (Quidditch)", stat: "str" }
     ];
 
     const SHOP_CATALOG = [
@@ -491,8 +519,23 @@
         { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Toga standard. CA = 11 + Mod. Destrezza.", skill: "" },
         { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
         { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
-        { id: "l_pozioni", name: "Libro di Pozioni Nuovo", cost: 10, type: "libro", val: 1, img: "https://placehold.co/100x100?text=Libro+Pozioni", desc: "Volume intonso. +1 fisso a Pozioni & Alchimia.", skill: "pozioni" },
-        { id: "l_dcao", name: "Libro di DCAO Usato", cost: 5, type: "libro", val: 0, img: "https://placehold.co/100x100?text=Libro+DCAO+Usato", desc: "Libro Usato. Azzardo: tiri con Vantaggio, se fai 1 causi un Fiasco.", skill: "dcao" },
+        
+        // NUOVI LIBRI (15 Galeoni)
+        { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Libro+Incantesimi", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
+        { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Trasfigurazione", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
+        { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Erbologia", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
+        { id: "l_poz_nuovo", name: "Infusi e Pozioni Magiche - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Pozioni", desc: "Libro nuovo di testo. Aggiunge +1 a Pozioni & Alchimia.", skill: "pozioni" },
+        { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=DCAO", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
+        { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Storia+Magia", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
+        
+        // USATI LIBRI (5 Galeoni)
+        { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Libro+Incantesimi+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
+        { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Trasfigurazione+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
+        { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Erbologia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
+        { id: "l_poz_usato", name: "Infusi e Pozioni Magiche - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Pozioni+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "pozioni" },
+        { id: "l_dcao_usato", name: "Le Forze Oscure: Guida alla Protezione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=DCAO+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "dcao" },
+        { id: "l_sto_usato", name: "Storia della Magia - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Storia+Magia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "storia_magia" },
+        
         { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "https://placehold.co/100x100?text=Pet", desc: "Animale fedele da compagnia.", skill: "" }
     ];
 
@@ -553,18 +596,18 @@
     window.rpgPrompt = (title, msg, def) => rpgDialog('prompt', title, msg, def);
 
     function getShopOwner(type) {
-        if (type === 'bacchetta') return "🪄 Garrick Ollivander";
-        if (type === 'toga') return "🪡 Madame Malkin";
-        if (type === 'libro') return "📚 Direttore del Ghirigoro";
-        if (type === 'pet') return "🦉 Proprietaria del Serraglio";
-        return "⚖️ Negoziante";
+        if (type === 'bacchetta') return "Garrick Ollivander";
+        if (type === 'toga') return "Madame Malkin";
+        if (type === 'libro') return "Direttore del Ghirigoro";
+        if (type === 'pet') return "Proprietaria del Serraglio";
+        return "Negoziante";
     }
 
     // MOTORE CENTRALE DI CAMBIO SCHERMATE
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-            rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
             return; 
         }
         
@@ -596,10 +639,10 @@
     // FUNZIONE DI ACCESSO AI DORMITORI
     let currentTargetDorm = "";
     window.tryEnterDorm = function(targetHouse) {
-        if (isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
         let userHouse = userData.house.toLowerCase().trim(); let requestedHouse = targetHouse.toLowerCase().trim();
 
-        if (userHouse !== requestedHouse) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
+        if (userHouse !== requestedHouse) return rpgAlert("Prof.ssa Minerva McGranitt", "Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
         
         let authKey = "dorm_auth_" + currentUser.uid; let lastAuthTime = localStorage.getItem(authKey);
         
@@ -621,7 +664,7 @@
         if (pwd && pwd.toLowerCase().trim() === DORM_PASSWORDS[currentTargetDorm.toLowerCase().trim()]) {
             document.getElementById('dorm-password-modal').style.display = 'none';
             localStorage.setItem("dorm_auth_" + currentUser.uid, Date.now()); changeScreen('screen-profile');
-        } else { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Parola d'ordine errata! L'accesso è negato."); }
+        } else { rpgAlert("Prof.ssa Minerva McGranitt", "Parola d'ordine errata! L'accesso è negato."); }
     });
 
     window.openStore = function(type) {
@@ -634,11 +677,12 @@
         document.getElementById('cat-pet').style.display = 'none';
         document.getElementById('cat-' + type).style.display = 'flex';
         let title = "Negozio";
-        if (type === 'bacchetta') title = "🪄 Ollivander - Fabbrica di Bacchette";
-        if (type === 'toga') title = "🥋 Madame Malkin - Abiti per tutte le occasioni";
-        if (type === 'libro') title = "📖 Il Ghirigoro - Libreria Magica";
-        if (type === 'pet') title = "🦉 Il Serraglio Stregato - Animali Magici";
+        if (type === 'bacchetta') title = "Garrick Ollivander - Fabbrica di Bacchette";
+        if (type === 'toga') title = "Madame Malkin - Abiti per tutte le occasioni";
+        if (type === 'libro') title = "Il Ghirigoro - Libreria Magica";
+        if (type === 'pet') title = "Il Serraglio Stregato - Animali Magici";
         document.getElementById('store-title').innerText = title;
+        document.getElementById('shop-dynamic-banner').style.backgroundImage = `url('${SHOP_BANNERS[type]}')`;
     };
 
     window.closeStore = function() {
@@ -653,23 +697,23 @@
     const tbody = document.getElementById('skills-tbody-list');
     tbody.innerHTML = "";
     HOGWARTS_SKILLS_MAP.forEach(sk => {
-        tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${sk.stat.toUpperCase()})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none;">⚠️ Azzardo Attivo</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
+        tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${sk.stat.toUpperCase()})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
     });
 
     window.triggerAvatarChange = async function() {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
-        const newUrl = await rpgPrompt("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Inserisci l'URL per aggiornare la tua Foto:", userData.avatarUrl || "");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        const newUrl = await rpgPrompt("Prof.ssa Minerva McGranitt", "Inserisci l'URL per aggiornare la tua Foto:", userData.avatarUrl || "");
         if (newUrl !== null) await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: newUrl });
     }
 
     window.triggerPatronusImgChange = async function() {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         let currentEquip = userData.equipment || {};
         if (currentEquip.patronus) { 
-            let ans = await rpgConfirm("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Vuoi disequipaggiare il tuo Patronus attuale?");
+            let ans = await rpgConfirm("Prof.ssa Minerva McGranitt", "Vuoi disequipaggiare il tuo Patronus attuale?");
             if(ans) { await removeEquip('patronus'); return; } 
         }
-        const newUrl = await rpgPrompt("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Inserisci l'URL dell'Immagine del tuo Patronus:");
+        const newUrl = await rpgPrompt("Prof.ssa Minerva McGranitt", "Inserisci l'URL dell'Immagine del tuo Patronus:");
         if (newUrl !== null) {
             currentEquip.patronus = { name: userData.patronus || "Patronus", type: "patronus", val: 0, img: newUrl };
             await updateDoc(doc(db, "students", currentUser.uid), { equipment: currentEquip });
@@ -677,25 +721,25 @@
     }
 
     document.getElementById('btn-sync-hp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { hp: parseInt(document.getElementById('edit-curr-hp').value)||0, maxHp: parseInt(document.getElementById('edit-max-hp').value)||0 });
     });
     document.getElementById('btn-sync-mp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { mp: parseInt(document.getElementById('edit-curr-mp').value)||0, maxMp: parseInt(document.getElementById('edit-max-mp').value)||0 });
     });
 
     document.getElementById('btn-sync-core-stats').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         await updateDoc(doc(db, "students", currentUser.uid), { 
             core_stats: { str: parseInt(document.getElementById('dnd-str').value)||10, dex: parseInt(document.getElementById('dnd-dex').value)||10, con: parseInt(document.getElementById('dnd-con').value)||10, int: parseInt(document.getElementById('dnd-int').value)||10, wis: parseInt(document.getElementById('dnd-wis').value)||10, cha: parseInt(document.getElementById('dnd-cha').value)||10 } 
         }); 
-        rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Le tue Statistiche sono state salvate nel registro di Hogwarts.");
+        rpgAlert("Prof.ssa Minerva McGranitt", "Le tue Statistiche sono state salvate nel registro di Hogwarts.");
     });
 
     tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
         chk.addEventListener('change', async (e) => {
-            if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
+            if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
             let skId = e.target.getAttribute('data-skill');
             let currentProficiencies = userData.proficiencies || {};
             currentProficiencies[skId] = e.target.checked;
@@ -712,7 +756,7 @@
     });
 
     function renderUI() {
-        document.getElementById('header-galeoni').innerText = "💰 " + userData.gold + " Galeoni";
+        document.getElementById('header-galeoni').innerText = userData.gold + " Galeoni";
         document.getElementById('baule-dynamic-title').innerText = `Baule di ${userData.name}`;
         document.getElementById('img-house-logo').src = HOUSE_LOGOS[userData.house.toLowerCase().trim()] || "";
         document.getElementById('img-avatar').src = userData.avatarUrl || "https://placehold.co/320x440?text=Foto";
@@ -746,14 +790,18 @@
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
-            isTraumaBlocked = true; statusBadge.innerText = "🚨 Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
+            isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
             document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask'); document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask'); document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
-        } else if (hpRatio < 0.30) { statusBadge.innerText = "🟠 Ferito Grave"; statusBadge.style.background = "#e67e22";
-        } else if (hpRatio < 0.50) { statusBadge.innerText = "🟡 Ferito Lieve"; statusBadge.style.background = "#f1c40f";
-        } else { statusBadge.innerText = "🟢 In Perfetta Salute"; statusBadge.style.background = "green"; }
+        } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
+        } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
+        } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
 
         let bonusOggettiAbilita = {};
-        HOGWARTS_SKILLS_MAP.forEach(sk => { bonusOggettiAbilita[sk.id] = 0; document.getElementById(`gamble-${sk.id}`).style.display = "none"; });
+        HOGWARTS_SKILLS_MAP.forEach(sk => { 
+            bonusOggettiAbilita[sk.id] = 0; 
+            let gEl = document.getElementById(`gamble-${sk.id}`);
+            if (gEl) gEl.style.display = "none";
+        });
 
         let atkMagicoBonus = 0;
         if (userData.equipment) {
@@ -762,8 +810,12 @@
                 if (item) {
                     if (item.type === 'bacchetta') atkMagicoBonus += parseInt(item.val || 1);
                     if (item.type === 'libro' && item.skill) {
-                        if (item.name.toLowerCase().includes('usato') || item.desc.toLowerCase().includes('azzardo')) { document.getElementById(`gamble-${item.skill}`).style.display = "block"; } 
-                        else { bonusOggettiAbilita[item.skill] += parseInt(item.val || 1); }
+                        if (item.is_used === true || item.name.toLowerCase().includes('usato')) { 
+                            let gEl = document.getElementById(`gamble-${item.skill}`);
+                            if (gEl) gEl.style.display = "block";
+                        } else { 
+                            bonusOggettiAbilita[item.skill] += parseInt(item.val || 1); 
+                        }
                     }
                 }
             }
@@ -800,8 +852,8 @@
         renderEquipSlot('slot-toga', userData.equipment?.toga, "Toga"); renderEquipSlot('slot-pet', userData.equipment?.pet, "Compagno");
 
         const patSlot = document.getElementById('slot-patronus');
-        if(userData.equipment?.patronus && userData.equipment.patronus.img) { patSlot.innerHTML = `<img src="${userData.equipment.patronus.img}"><div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div>`; } 
-        else { patSlot.innerHTML = `<span>✨ Patronus</span><div class="avatar-overlay" style="font-size:9px;">🔮 FOTO</div>`; }
+        if(userData.equipment?.patronus && userData.equipment.patronus.img) { patSlot.innerHTML = `<img src="${userData.equipment.patronus.img}"><div class="avatar-overlay" style="font-size:9px;">FOTO</div>`; } 
+        else { patSlot.innerHTML = `<span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div>`; }
 
         for(let i=0; i<2; i++) {
             let slot = document.getElementById('slot-frog-' + i);
@@ -828,13 +880,13 @@
     }
 
     async function equipItem(index) {
-        if(isTraumaBlocked) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         let item = userData.inventory[index]; let currentInv = [...userData.inventory];
         let currentEquip = userData.equipment || {}; let currentEqFrogs = userData.equippedFrogs || [];
         currentInv.splice(index, 1);
 
         if(item.type === 'cioccorana') {
-            if(currentEqFrogs.length >= 2) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Puoi avere al massimo 2 rane equipaggiate attivamente!");
+            if(currentEqFrogs.length >= 2) return rpgAlert("Prof.ssa Minerva McGranitt", "Puoi avere al massimo 2 rane equipaggiate attivamente!");
             currentEqFrogs.push(item); await updateDoc(doc(db, "students", currentUser.uid), { inventory: currentInv, equippedFrogs: currentEqFrogs }); return;
         }
         let oldItem = currentEquip[item.type]; if(oldItem) currentInv.push(oldItem);
@@ -856,8 +908,15 @@
     }
 
     SHOP_CATALOG.forEach(p => {
-        const catContainer = document.getElementById('cat-' + p.type);
-        if(catContainer) catContainer.innerHTML += `<div class="shop-item"><div><b>${p.name}</b><br><span style="font-size:10px;color:#555;">${p.desc}</span></div><button class="btn-vintage" onclick="buy('${p.id}')">${p.cost} G</button></div>`;
+        let catContainer;
+        if (p.type === 'libro') {
+            catContainer = document.getElementById(p.is_used ? 'cat-libro-usati' : 'cat-libro-nuovi');
+        } else {
+            catContainer = document.getElementById('cat-' + p.type);
+        }
+        if(catContainer) {
+            catContainer.innerHTML += `<div class="shop-item"><div><b>${p.name}</b><br><span style="font-size:10px;color:#555;">${p.desc}</span></div><button class="btn-vintage" onclick="buy('${p.id}')">${p.cost} G</button></div>`;
+        }
     });
 
     window.buy = async function(id) {
@@ -887,11 +946,11 @@
     }
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
-        let shopOwner = "🐸 Cassiera dell'Emporio";
+        let shopOwner = "Cassiera dell'Emporio";
         if(isTraumaBlocked) return rpgAlert(shopOwner, "Vai a farti curare prima di mangiare dolci!");
         if(userData.gold < 3) return rpgAlert(shopOwner, "Non hai abbastanza Galeoni per una Cioccorana, mi spiace.");
 
-        const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>⏳ Scartando la confezione...</div>";
+        const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>Scartando la confezione...</div>";
         document.getElementById('gacha-result-text').innerText = ""; document.getElementById('gacha-desc-text').innerText = "";
 
         setTimeout(async () => {
@@ -920,7 +979,7 @@
 
     onSnapshot(query(collection(db, "dice_logs"), orderBy("timestamp", "desc"), limit(10)), (s) => {
         let b = document.getElementById('dice-log'); b.innerHTML = "";
-        s.forEach(d => { let r=d.data(); b.innerHTML += `<div><b>${r.player}</b>: ${r.formula} ➔ <span style="color:red;font-weight:bold;">${r.result}</span></div>`; });
+        s.forEach(d => { let r=d.data(); b.innerHTML += `<div><b>${r.player}</b>: ${r.formula} -> <span style="color:red;font-weight:bold;">${r.result}</span></div>`; });
     });
 
     document.getElementById('btn-register').addEventListener('click', async () => {
@@ -932,16 +991,16 @@
                 core_stats: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }, proficiencies: {},
                 equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: []
             });
-        } catch (e) { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
+        } catch (e) { rpgAlert("Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
     });
 
     document.getElementById('btn-login').addEventListener('click', async () => {
         const mailField = document.getElementById('login-email').value.trim(); const passField = document.getElementById('login-password').value;
-        if(!mailField || !passField) return rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Devi inserire la tua e-mail e password per accedere ai dormitori!");
-        try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("🧙🏻‍♀️ Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
+        if(!mailField || !passField) return rpgAlert("Prof.ssa Minerva McGranitt", "Devi inserire la tua e-mail e password per accedere ai dormitori!");
+        try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
-    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN
+    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN (Limite alzato a 1000)
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
             let dataCoppa = snapshot.data(); let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; 
