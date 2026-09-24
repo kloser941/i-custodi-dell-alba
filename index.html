@@ -68,7 +68,8 @@
         .profile-layout-container { display: flex; gap: 15px; align-items: stretch; margin-top: 20px;}
         .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; padding-right: 5px; }
         .col-middle { display: flex; gap: 15px; flex-shrink: 0; padding-right: 5px; }
-        .col-equip-dnd { width: 160px; display: flex; flex-direction: column; gap: 15px; } 
+        /* col-equip-dnd ora usa space-between per allineare il blocco D&D al fondo */
+        .col-equip-dnd { width: 160px; display: flex; flex-direction: column; justify-content: space-between; } 
         .col-disciplines { width: 250px; display: flex; flex-direction: column; gap: 10px; }
         .col-inventory { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
 
@@ -84,11 +85,14 @@
         .frog-slots-mini { display: flex; gap: 8px; }
         .frog-mini-slot { width: 60px; height: 60px; background: #fffdec; border: 1px dashed #7f8c8d; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
         .frog-mini-slot img { width: 100%; height: 100%; object-fit: cover; }
-        .gear-slot { height: 60px; background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #8a6d3b;}
+        
+        /* Box Equipaggiamento Quadrati Perfetti */
+        .gear-slot { width: 85px; height: 85px; aspect-ratio: 1/1; background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #8a6d3b;}
         .gear-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 1; }
         .gear-slot span { position: relative; z-index: 2; text-shadow: 1px 1px 2px white; }
         .gear-slot .avatar-overlay { opacity: 0; }
         .gear-slot:hover .avatar-overlay { opacity: 1; }
+        
         .stats-block-box { background: #fffdec; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #8a6d3b;}
 
         /* INVENTARIO */
@@ -185,7 +189,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
+        /* EMPORIO E INFERMERIA E HEADER */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -394,7 +398,9 @@
 
                 <div class="col-middle" id="profile-col-middle">
                     <div class="col-equip-dnd">
-                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                        
+                        <!-- Contenitore Equipaggiamento Allineato all'Avatar -->
+                        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 440px;">
                             <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>Bacchetta</span></div>
                             <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>Toga</span></div>
                             <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>Libro</span></div>
@@ -406,16 +412,20 @@
 
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
-                        <div class="dnd-stats-vertical" style="margin-top: 10px;">
-                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('int')">-</button><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('int')">+</button></div><span class="dnd-mod-label" id="mod-int">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
+
+                        <!-- Contenitore D&D Allineato al box HP/MP -->
+                        <div style="display: flex; flex-direction: column;">
+                            <div class="dnd-stats-vertical">
+                                <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
+                                <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
+                                <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
+                                <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('int')">-</button><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('int')">+</button></div><span class="dnd-mod-label" id="mod-int">+0</span></div>
+                                <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
+                                <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
+                            </div>
+                            <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
+                            <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA E SALVA</button>
                         </div>
-                        <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
-                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA E SALVA</button>
                     </div>
 
                     <div class="col-disciplines">
