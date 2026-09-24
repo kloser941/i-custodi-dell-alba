@@ -423,7 +423,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-str">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-str" title="Competenza Tiro Salvezza Forza" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-str" title="Competenza Tiro Salvezza Forza" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-str" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -437,7 +437,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-dex">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-dex" title="Competenza Tiro Salvezza Destrezza" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-dex" title="Competenza Tiro Salvezza Destrezza" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-dex" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -451,7 +451,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-con">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-con" title="Competenza Tiro Salvezza Costituzione" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-con" title="Competenza Tiro Salvezza Costituzione" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-con" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -465,7 +465,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-int">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-int" title="Competenza Tiro Salvezza Intelligenza" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-int" title="Competenza Tiro Salvezza Intelligenza" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-int" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -479,7 +479,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-wis">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-wis" title="Competenza Tiro Salvezza Saggezza" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-wis" title="Competenza Tiro Salvezza Saggezza" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-wis" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -493,7 +493,7 @@
                                         </div>
                                         <span class="dnd-mod-label" id="mod-cha">+0</span>
                                         <div style="display:flex; align-items:center; border-left:1px dashed #be9b64; padding-left:4px; margin-left:2px;">
-                                            <input type="checkbox" id="save-cha" title="Competenza Tiro Salvezza Carisma" style="width:12px; margin:0 4px 0 0;">
+                                            <input type="checkbox" id="save-cha" title="Competenza Tiro Salvezza Carisma" style="width:12px; margin:0 4px 0 0;" disabled>
                                             <span id="save-val-cha" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
@@ -1576,22 +1576,23 @@
             }
         }
 
-        // Tiri Salvezza Caratteristiche
-        let st = userData.savingThrows || {};
+        // Tiri Salvezza Caratteristiche (Automatizzati per Casata)
+        let houseST = (userData.house || "").toLowerCase().trim();
+        let autoSavingThrows = { str: false, dex: false, con: false, int: false, wis: false, cha: false };
+        
+        if (houseST === "grifondoro") { autoSavingThrows.str = true; autoSavingThrows.cha = true; }
+        else if (houseST === "serpeverde") { autoSavingThrows.dex = true; autoSavingThrows.cha = true; }
+        else if (houseST === "corvonero") { autoSavingThrows.int = true; autoSavingThrows.wis = true; }
+        else if (houseST === "tassorosso") { autoSavingThrows.con = true; autoSavingThrows.wis = true; }
+
         ['str', 'dex', 'con', 'int', 'wis', 'cha'].forEach(stat => {
             let modBase = draftMods[stat] || 0;
-            let isProficient = !!st[stat];
+            let isProficient = autoSavingThrows[stat];
             let saveVal = modBase + (isProficient ? profBonus : 0);
 
             let chk = document.getElementById('save-' + stat);
             if(chk) {
                 chk.checked = isProficient;
-                chk.onchange = async (e) => {
-                    if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!"); }
-                    let currentSt = userData.savingThrows || {};
-                    currentSt[stat] = e.target.checked;
-                    await updateDoc(doc(db, "students", currentUser.uid), { savingThrows: currentSt });
-                };
             }
             let saveValEl = document.getElementById('save-val-' + stat);
             if(saveValEl) saveValEl.innerText = formatMod(saveVal);
