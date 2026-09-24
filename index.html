@@ -185,7 +185,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO E INFERMERIA E HEADER */
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -357,7 +357,6 @@
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
                         <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
                     </div>
-                    <!-- INPUT NASCOSTO PER CLOUDINARY AVATAR -->
                     <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
                     
                     <div class="identity-row">
@@ -403,7 +402,6 @@
                             <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()">
                                 <span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div>
                             </div>
-                            <!-- INPUT NASCOSTO PER CLOUDINARY PATRONUS -->
                             <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
 
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
@@ -577,7 +575,7 @@
     
     <!-- MODAL ADOZIONE PET -->
     <div id="pet-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 10000; align-items:center; justify-content:center;">
-        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8);">
+        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8); max-height: 90vh; overflow-y: auto;">
             <h3 style="margin-top:0; color:#5c4314; font-family:'Georgia', serif; border-bottom: 1px solid #8a6d3b; padding-bottom: 10px;">Adozione Animale (12 Galeoni)</h3>
             
             <input type="text" id="pet-type-input" placeholder="Che creatura magica è? (es. Gufo)" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
@@ -598,6 +596,121 @@
             <div style="display:flex; gap:10px; justify-content:center;">
                 <button class="btn-vintage" style="background:#c0392b; color:white; border-color:#800000;" onclick="cancelPetPurchase()">ANNULLA ACQUISTO</button>
                 <button class="btn-vintage" id="btn-confirm-pet" style="background:#27ae60; color:white; border-color:#1e8449;" onclick="confirmPetPurchase()" disabled>CONFERMA ACQUISTO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ACQUISTO BACCHETTA -->
+    <div id="wand-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 10000; align-items:center; justify-content:center;">
+        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8); max-height: 90vh; overflow-y: auto;">
+            <h3 style="margin-top:0; color:#5c4314; font-family:'Georgia', serif; border-bottom: 1px solid #8a6d3b; padding-bottom: 10px;">Fabbricazione Bacchetta (10 Galeoni)</h3>
+            
+            <select id="wand-wood-input" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+                <option value="">Seleziona Legno...</option>
+                <option value="Aspen (Pioppo bianco)">Aspen (Pioppo bianco)</option>
+                <option value="Sycamore (Sicomoro)">Sycamore (Sicomoro)</option>
+                <option value="Fir (Abete)">Fir (Abete)</option>
+                <option value="Hawthorn (Biancospino)">Hawthorn (Biancospino)</option>
+                <option value="Hornbeam (Carpino)">Hornbeam (Carpino)</option>
+                <option value="Larch (Larice)">Larch (Larice)</option>
+                <option value="Maple (Acero)">Maple (Acero)</option>
+                <option value="Pine (Pino)">Pine (Pino)</option>
+                <option value="Poplar (Pioppo)">Poplar (Pioppo)</option>
+                <option value="Spruce (Peccio)">Spruce (Peccio)</option>
+                <option value="Willow (Salice)">Willow (Salice)</option>
+                <option value="Alder (Ontano)">Alder (Ontano)</option>
+                <option value="Acacia">Acacia</option>
+                <option value="Apple (Melo)">Apple (Melo)</option>
+                <option value="Ash (Frassino)">Ash (Frassino)</option>
+                <option value="Beech (Faggio)">Beech (Faggio)</option>
+                <option value="Blackthorn (Prugnolo)">Blackthorn (Prugnolo)</option>
+                <option value="Chestnut (Castagno)">Chestnut (Castagno)</option>
+                <option value="Cypress (Cipresso)">Cypress (Cipresso)</option>
+                <option value="Dogwood (Corniolo)">Dogwood (Corniolo)</option>
+                <option value="English Oak (Quercia)">English Oak (Quercia)</option>
+                <option value="Hazel (Nocciolo)">Hazel (Nocciolo)</option>
+                <option value="Holly (Agrifoglio)">Holly (Agrifoglio)</option>
+                <option value="Laurel (Alloro)">Laurel (Alloro)</option>
+                <option value="Rowan (Sorbo)">Rowan (Sorbo)</option>
+                <option value="Silver Lime (Tiglio argentato)">Silver Lime (Tiglio argentato)</option>
+                <option value="Vine (Vite)">Vine (Vite)</option>
+                <option value="Yew (Tasso)">Yew (Tasso)</option>
+                <option value="Cedar (Cedro)">Cedar (Cedro)</option>
+                <option value="Cherry (Ciliegio)">Cherry (Ciliegio)</option>
+                <option value="Pear (Pero)">Pear (Pero)</option>
+                <option value="Red Oak (Quercia rossa)">Red Oak (Quercia rossa)</option>
+                <option value="Redwood (Sequoia)">Redwood (Sequoia)</option>
+                <option value="Black Walnut (Noce nero)">Black Walnut (Noce nero)</option>
+                <option value="Elm (Olmo)">Elm (Olmo)</option>
+                <option value="Walnut (Noce)">Walnut (Noce)</option>
+                <option value="Ebony (Ebano)">Ebony (Ebano)</option>
+                <option value="Elder (Sambuco)">Elder (Sambuco)</option>
+            </select>
+            
+            <select id="wand-core-input" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+                <option value="">Seleziona Nucleo...</option>
+                <option value="Crine di Unicorno">Crine di Unicorno (Unicorn hair)</option>
+                <option value="Corda del Cuore di Drago">Corda del Cuore di Drago (Dragon heartstring)</option>
+                <option value="Piuma di Fenice">Piuma di Fenice (Phoenix feather)</option>
+            </select>
+
+            <select id="wand-length-input" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+                <option value="">Seleziona Lunghezza...</option>
+                <option value="9 1/2 pollici">9 1/2" (9,5 pollici)</option>
+                <option value="9 3/4 pollici">9 3/4" (9,75 pollici)</option>
+                <option value="10 pollici">10"</option>
+                <option value="10 1/4 pollici">10 1/4"</option>
+                <option value="10 1/2 pollici">10 1/2"</option>
+                <option value="10 3/4 pollici">10 3/4"</option>
+                <option value="11 pollici">11"</option>
+                <option value="11 1/4 pollici">11 1/4"</option>
+                <option value="11 1/2 pollici">11 1/2"</option>
+                <option value="11 3/4 pollici">11 3/4"</option>
+                <option value="12 pollici">12"</option>
+                <option value="12 1/4 pollici">12 1/4"</option>
+                <option value="12 1/2 pollici">12 1/2"</option>
+                <option value="12 3/4 pollici">12 3/4"</option>
+                <option value="13 pollici">13"</option>
+                <option value="13 1/4 pollici">13 1/4"</option>
+                <option value="13 1/2 pollici">13 1/2"</option>
+                <option value="13 3/4 pollici">13 3/4"</option>
+                <option value="14 pollici">14"</option>
+                <option value="14 1/4 pollici">14 1/4"</option>
+                <option value="14 1/2 pollici">14 1/2"</option>
+            </select>
+
+            <select id="wand-flex-input" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+                <option value="">Seleziona Flessibilità...</option>
+                <option value="Sorprendentemente sibilante">Sorprendentemente sibilante</option>
+                <option value="Duttile">Duttile</option>
+                <option value="Flessibile">Flessibile</option>
+                <option value="Ragionevolmente flessibile">Ragionevolmente flessibile</option>
+                <option value="Abbastanza flessibile">Abbastanza flessibile</option>
+                <option value="Leggermente flessibile">Leggermente flessibile</option>
+                <option value="Leggermente elastica">Leggermente elastica</option>
+                <option value="Indeformabile">Indeformabile</option>
+                <option value="Non flessibile">Non flessibile</option>
+                <option value="Fragile">Fragile</option>
+                <option value="Rigida">Rigida</option>
+                <option value="Solida">Solida</option>
+                <option value="Dura">Dura</option>
+            </select>
+            
+            <div style="margin-bottom: 15px;">
+                <label class="btn-vintage" style="cursor:pointer; display:inline-block; padding: 8px 12px; background:#ebdca8;">
+                    Carica Foto Bacchetta
+                    <input type="file" id="wand-file-input" accept="image/*" style="display:none;">
+                </label>
+            </div>
+            
+            <div id="wand-preview-container" style="display:none; margin-bottom: 15px; border: 1px dashed #8a6d3b; padding: 10px; border-radius: 6px;">
+                <p id="wand-loading-text" style="display:none; font-size:12px; font-style:italic; margin:0;">Caricamento foto in corso... ⏳</p>
+                <img id="wand-preview-img" src="" alt="Anteprima Bacchetta" style="max-width:150px; max-height:150px; border:2px solid #8a6d3b; border-radius:6px; display:none; margin:auto;">
+            </div>
+            
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn-vintage" style="background:#c0392b; color:white; border-color:#800000;" onclick="cancelWandPurchase()">ANNULLA ACQUISTO</button>
+                <button class="btn-vintage" id="btn-confirm-wand" style="background:#27ae60; color:white; border-color:#1e8449;" onclick="confirmWandPurchase()" disabled>CONFERMA ACQUISTO</button>
             </div>
         </div>
     </div>
@@ -655,11 +768,16 @@
     let currentHousePointsData = { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 };
     const PROFICIENCY_BONUS = 2;
     
-    // VARIABILI PER IL DRAFTING STATISTICHE
+    // VARIABILI PER IL DRAFTING STATISTICHE E MODALI SHOP
     let draftingActive = false;
     let baseStats = {};
     let draftStats = {};
     let availablePoints = 0;
+    
+    let tempPetData = null;
+    let tempPetUrl = null;
+    let tempWandData = null;
+    let tempWandUrl = null;
 
     const HOUSE_LOGOS = { grifondoro: "https://imgur.com/AeIu16S.png", serpeverde: "https://imgur.com/eX3RZ2G.png", corvonero: "https://imgur.com/hedsChE.png", tassorosso: "https://imgur.com/3cFFSnZ.png" };
     
@@ -1509,11 +1627,8 @@
     });
 
     // ==========================================
-    // LOGICA DI ACQUISTO E ADOZIONE PET
+    // LOGICA DI ACQUISTO PET E BACCHETTA
     // ==========================================
-    let tempPetData = null;
-    let tempPetUrl = null;
-
     window.buy = async function(id) {
         if(isTraumaBlocked) return;
         let p = { ...SHOP_CATALOG.find(x => x.id === id) };
@@ -1528,9 +1643,9 @@
         }
 
         if (p.type === 'bacchetta') { 
-            let customName = await rpgPrompt(shopOwner, "La bacchetta sceglie il mago... dimmi, di che materiale è fatta la tua?"); 
-            if (!customName) return rpgAlert(shopOwner, "Acquisto annullato. Torna quando sarai pronto."); 
-            p.name = customName; 
+            tempWandData = p;
+            document.getElementById('wand-modal-overlay').style.display = 'flex';
+            return; 
         }
 
         let currentInv = userData.inventory ? [...userData.inventory] : []; currentInv.push(p);
@@ -1538,6 +1653,7 @@
         rpgAlert(shopOwner, `L'acquisto di ${p.name} è completato con successo. Buona giornata!`);
     }
 
+    // PET EVENT LISTENERS
     document.getElementById('pet-file-input').addEventListener('change', async function(e) {
         let file = e.target.files[0];
         if(!file) return;
@@ -1558,7 +1674,6 @@
         } else {
             rpgAlert("Errore", "Upload fallito.");
         }
-        
         e.target.value = '';
     });
 
@@ -1602,6 +1717,79 @@
 
         cancelPetPurchase();
         rpgAlert(shopOwner, `L'adozione di ${p.name} è completata con successo. Trattalo con cura!`);
+    };
+
+    // WAND EVENT LISTENERS
+    document.getElementById('wand-file-input').addEventListener('change', async function(e) {
+        let file = e.target.files[0];
+        if(!file) return;
+
+        document.getElementById('wand-preview-container').style.display = 'block';
+        document.getElementById('wand-loading-text').style.display = 'block';
+        document.getElementById('wand-preview-img').style.display = 'none';
+        document.getElementById('btn-confirm-wand').disabled = true;
+
+        let url = await uploadToCloudinary(file);
+        
+        document.getElementById('wand-loading-text').style.display = 'none';
+        if(url) {
+            tempWandUrl = url;
+            document.getElementById('wand-preview-img').src = url;
+            document.getElementById('wand-preview-img').style.display = 'inline-block';
+            document.getElementById('btn-confirm-wand').disabled = false;
+        } else {
+            rpgAlert("Errore", "Upload fallito.");
+        }
+        e.target.value = '';
+    });
+
+    window.cancelWandPurchase = function() {
+        document.getElementById('wand-modal-overlay').style.display = 'none';
+        document.getElementById('wand-wood-input').value = "";
+        document.getElementById('wand-core-input').value = "";
+        document.getElementById('wand-length-input').value = "";
+        document.getElementById('wand-flex-input').value = "";
+        document.getElementById('wand-file-input').value = "";
+        document.getElementById('wand-preview-container').style.display = 'none';
+        document.getElementById('wand-preview-img').src = "";
+        document.getElementById('btn-confirm-wand').disabled = true;
+        tempWandData = null;
+        tempWandUrl = null;
+    };
+
+    window.confirmWandPurchase = async function() {
+        let wood = document.getElementById('wand-wood-input').value;
+        let core = document.getElementById('wand-core-input').value;
+        let length = document.getElementById('wand-length-input').value;
+        let flex = document.getElementById('wand-flex-input').value;
+        let shopOwner = getShopOwner('bacchetta');
+        
+        if(!wood || !core || !length || !flex || !tempWandUrl) {
+            return rpgAlert(shopOwner, "Devi completare tutte le specifiche e caricare una foto della bacchetta!");
+        }
+
+        if(userData.gold < tempWandData.cost) {
+            cancelWandPurchase();
+            return rpgAlert(shopOwner, "Mi dispiace, ma ti mancano i Galeoni per questo articolo!");
+        }
+
+        let p = { ...tempWandData };
+        p.name = "Bacchetta su Misura";
+        p.desc = `Bacchetta in ${wood}, ${length}, nucleo di ${core}. Flessibilità: ${flex}. +1 a Incantesimi.`;
+        p.img = tempWandUrl;
+        
+        p.details = { wood, core, length, flex };
+
+        let currentInv = userData.inventory ? [...userData.inventory] : []; 
+        currentInv.push(p);
+        
+        await updateDoc(doc(db, "students", currentUser.uid), { 
+            gold: userData.gold - p.cost, 
+            inventory: currentInv 
+        });
+
+        cancelWandPurchase();
+        rpgAlert(shopOwner, `La bacchetta sceglie il mago, ricorda! L'acquisto è completato con successo.`);
     };
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
