@@ -213,25 +213,62 @@
         <!-- Barra dei soldi -->
         <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">0 Galeoni</span></div>
 
-        <!-- SCHERMATA DI LOGIN -->
+        <!-- SCHERMATA DI LOGIN / REGISTRAZIONE -->
         <div id="screen-login" class="screen active" style="z-index:200;">
             <div style="background: rgba(250, 241, 214, 0.9); padding: 20px; max-width: 450px; margin: 20px auto; border-radius: 10px; border: 3px double #8a6d3b; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
                 <h1 style="text-align:center;">I Custodi dell'Alba RPG</h1>
+                
                 <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
                     <h3>Accedi</h3>
                     <input type="email" id="login-email" placeholder="Tua Email">
                     <input type="password" id="login-password" placeholder="Password">
                     <button id="btn-login" class="btn-vintage" style="width:100%;">ENTRA A SCUOLA</button>
                 </div>
+                
                 <hr style="border: 1px dashed #8a6d3b; margin: 15px 0;">
+                
                 <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
                     <h3>Smistamento Nuovo Studente</h3>
                     <input type="text" id="reg-name" placeholder="Nome Personaggio">
-                    <select id="reg-house"><option value="Grifondoro">Grifondoro</option><option value="Serpeverde">Serpeverde</option><option value="Corvonero">Corvonero</option><option value="Tassorosso">Tassorosso</option></select>
                     <input type="text" id="reg-patronus" placeholder="Forma del Patronus">
+                    
+                    <select id="reg-house">
+                        <option value="Grifondoro">Grifondoro</option>
+                        <option value="Serpeverde">Serpeverde</option>
+                        <option value="Corvonero">Corvonero</option>
+                        <option value="Tassorosso">Tassorosso</option>
+                    </select>
+
+                    <select id="reg-discendenza" onchange="updateRegStatsUI()">
+                        <option value="umano">Umano Standard (+1 a due stat)</option>
+                        <option value="veela">Discendente di Veela (+2 CAR, +1 DES)</option>
+                        <option value="gigante">Discendente di Gigante (+2 COS, +1 FOR)</option>
+                        <option value="metamorfomago">Metamorfomago (+2 CAR, +1 a scelta)</option>
+                        <option value="rettilofono">Rettilofono (+2 INT, +1 CAR)</option>
+                    </select>
+                    
+                    <div id="dynamic-stats-box" style="display:flex; gap:5px; margin: 6px 0;">
+                        <select id="reg-stat-1" style="flex:1;">
+                            <option value="str">Forza</option>
+                            <option value="dex">Destrezza</option>
+                            <option value="con">Costituzione</option>
+                            <option value="int">Intelligenza</option>
+                            <option value="wis">Saggezza</option>
+                            <option value="cha">Carisma</option>
+                        </select>
+                        <select id="reg-stat-2" style="flex:1;">
+                            <option value="str">Forza</option>
+                            <option value="dex" selected>Destrezza</option>
+                            <option value="con">Costituzione</option>
+                            <option value="int">Intelligenza</option>
+                            <option value="wis">Saggezza</option>
+                            <option value="cha">Carisma</option>
+                        </select>
+                    </div>
+
                     <input type="email" id="reg-email" placeholder="Email">
                     <input type="password" id="reg-password" placeholder="Password">
-                    <button id="btn-register" class="btn-vintage" style="width:100%; background:#8a6d3b; color:white;">REGISTRATI & INIZIA</button>
+                    <button id="btn-register" class="btn-vintage" style="width:100%; background:#8a6d3b; color:white; margin-top:10px;">REGISTRATI E INIZIA</button>
                 </div>
             </div>
         </div>
@@ -322,7 +359,7 @@
             <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
                 
                 <div id="profile-spells-box" style="flex: 2; min-width: 400px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">incantesimi & trucchetti</h3>
+                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
                     <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px;">
                         <!-- JS riempie le righe qui -->
                     </div>
@@ -334,7 +371,7 @@
 
                 <div id="profile-notes-box" style="flex: 1; min-width: 250px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
-                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
+                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti e consulta i tuoi tratti speciali..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
                     <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px;" onclick="syncNotes()">Salva Appunti</button>
                 </div>
 
@@ -441,7 +478,7 @@
         </div>
     </div>
 
-    <!-- MODAL GENERICO DI SISTEMA (SOSTITUISCE GLI ALERT E PROMPT DEL BROWSER) -->
+    <!-- MODAL GENERICO DI SISTEMA -->
     <div id="rpg-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 9999; align-items:center; justify-content:center;">
         <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8);">
             <h3 id="rpg-modal-title" style="margin-top:0; color:#5c4314; font-family:'Georgia', serif; border-bottom: 1px solid #8a6d3b; padding-bottom: 10px;">Titolo</h3>
@@ -543,7 +580,6 @@
         { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
         { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
         
-        // NUOVI LIBRI (15 Galeoni)
         { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Libro+Incantesimi", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
         { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Trasfigurazione", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
         { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Erbologia", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
@@ -551,7 +587,6 @@
         { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=DCAO", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
         { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Storia+Magia", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
         
-        // USATI LIBRI (5 Galeoni)
         { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Libro+Incantesimi+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
         { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Trasfigurazione+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
         { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Erbologia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
@@ -568,9 +603,25 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    // ==========================================
-    // MOTORE FINESTRE DI DIALOGO CUSTOM (ROLEPLAY)
-    // ==========================================
+    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO PER LA REGISTRAZIONE
+    window.updateRegStatsUI = function() {
+        let val = document.getElementById('reg-discendenza').value;
+        let box = document.getElementById('dynamic-stats-box');
+        let s1 = document.getElementById('reg-stat-1');
+        let s2 = document.getElementById('reg-stat-2');
+
+        if(val === 'umano') {
+            box.style.display = 'flex'; s1.style.display = 'block'; s2.style.display = 'block';
+        } else if(val === 'metamorfomago') {
+            box.style.display = 'flex'; s1.style.display = 'block'; s2.style.display = 'none';
+        } else {
+            box.style.display = 'none';
+        }
+    };
+    
+    // Inizializza interfaccia extra al caricamento
+    setTimeout(() => { if(window.updateRegStatsUI) window.updateRegStatsUI(); }, 500);
+
     window.rpgDialog = function(type, title, message, defaultValue = "") {
         return new Promise((resolve) => {
             const overlay = document.getElementById('rpg-modal-overlay');
@@ -613,7 +664,6 @@
         });
     };
     
-    // Helper Roleplay Rapidi
     window.rpgAlert = (title, msg) => rpgDialog('alert', title, msg);
     window.rpgConfirm = (title, msg) => rpgDialog('confirm', title, msg);
     window.rpgPrompt = (title, msg, def) => rpgDialog('prompt', title, msg, def);
@@ -626,7 +676,6 @@
         return "Negoziante";
     }
 
-    // MOTORE CENTRALE DI CAMBIO SCHERMATE
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
@@ -652,14 +701,12 @@
         if (screenId === 'screen-shop') closeStore();
     }
 
-    // FUNZIONE DI APERTURA MAPPA DEL MALANDRINO
     window.openMarauderMap = function() {
         let overlay = document.getElementById('landing-overlay');
         overlay.style.opacity = 1;
         setTimeout(() => { changeScreen('screen-map-nav'); overlay.style.opacity = 0; }, 2000);
     };
 
-    // FUNZIONE DI ACCESSO AI DORMITORI
     let currentTargetDorm = "";
     window.tryEnterDorm = function(targetHouse) {
         if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
@@ -770,7 +817,6 @@
         });
     });
 
-    // FUNZIONI AGGIUNTIVE PER INCANTESIMI E APPUNTI
     window.addSpellRow = async function() {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
         let newSpells = [];
@@ -917,12 +963,10 @@
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
 
-        // Appunti Render
         if(document.activeElement !== document.getElementById('profile-notes')) {
             document.getElementById('profile-notes').value = userData.notes || "";
         }
 
-        // Spells Render
         const spellsContainer = document.getElementById('spells-list');
         if (!spellsContainer.contains(document.activeElement)) {
             spellsContainer.innerHTML = "";
@@ -1085,14 +1129,75 @@
         s.forEach(d => { let r=d.data(); b.innerHTML += `<div><b>${r.player}</b>: ${r.formula} -> <span style="color:red;font-weight:bold;">${r.result}</span></div>`; });
     });
 
+    // SISTEMA DI REGISTRAZIONE AGGIORNATO (Logica Razze e Classi D&D)
     document.getElementById('btn-register').addEventListener('click', async () => {
         try {
             const credential = await createUserWithEmailAndPassword(auth, document.getElementById('reg-email').value, document.getElementById('reg-password').value);
+            
+            let house = document.getElementById('reg-house').value;
+            let discendenza = document.getElementById('reg-discendenza').value;
+            let choice1 = document.getElementById('reg-stat-1').value;
+            let choice2 = document.getElementById('reg-stat-2').value;
+
+            // 1. Calcolo Statistiche Base + Razza
+            let stats = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
+            let traits = [];
+            let startProfs = {};
+
+            if (discendenza === "umano") {
+                stats[choice1] += 1;
+                stats[choice2] += 1; // Se sceglie due uguali prende +2
+                traits.push("Tratto Umano: Competenza extra in 1 abilità a scelta.");
+            } else if (discendenza === "veela") {
+                stats.cha += 2; stats.dex += 1;
+                traits.push("Tratto Veela - Fascino Magnetico: Vantaggio a Persuasione e Inganno contro umani.");
+            } else if (discendenza === "gigante") {
+                stats.con += 2; stats.str += 1;
+                traits.push("Tratto Mezzo-Gigante - Resistenza Fisica: 1 volta per riposo riduci il danno di 1d12 + Mod. CON.");
+            } else if (discendenza === "metamorfomago") {
+                stats.cha += 2; stats[choice1] += 1;
+                traits.push("Tratto Metamorfomago - Mutaforma: Può cambiare tratti somatici. Vantaggio a Furtività tra la folla.");
+            } else if (discendenza === "rettilofono") {
+                stats.int += 2; stats.cha += 1;
+                startProfs['intimidire'] = true;
+                traits.push("Tratto Rettilofono: Linguaggio dei Serpenti.");
+            }
+
+            let conMod = getDndModifier(stats.con);
+            let maxHp = 0;
+            let maxMp = 0;
+
+            // 2. Calcolo Casata (Classe D&D)
+            if (house === "Grifondoro") {
+                maxHp = 8 + conMod; maxMp = 6;
+                startProfs['intrattenere'] = true; startProfs['persuasione'] = true; startProfs['atletica'] = true;
+                traits.push("Tratto Grifondoro: Ispirazione dell'Audace (d6).");
+            } else if (house === "Serpeverde") {
+                maxHp = 6 + conMod; maxMp = 8;
+                startProfs['inganno'] = true; startProfs['intimidire'] = true;
+                traits.push("Tratto Serpeverde: Metamagia: Può potenziare la portata o la velocità degli incantesimi.");
+            } else if (house === "Corvonero") {
+                maxHp = 6 + conMod; maxMp = 8;
+                startProfs['incantesimi'] = true; startProfs['trasfigurazione'] = true; startProfs['investigazione'] = true;
+                traits.push("Tratto Corvonero: Recupero Arcano: Recupera 2 PM dopo un riposo breve.");
+            } else if (house === "Tassorosso") {
+                maxHp = 8 + conMod; maxMp = 6;
+                startProfs['erbologia'] = true; startProfs['pozioni'] = true; startProfs['creature'] = true;
+                traits.push("Tratto Tassorosso: Tocco Curativo / Protezione della Natura.");
+            }
+
+            // Bonus finale HP Gigante
+            if (discendenza === "gigante") maxHp += 1;
+            if (maxHp < 1) maxHp = 1; // Previene HP zero in caso di penalità estreme
+
+            // Iniezione automatica Tratti negli appunti
+            let initialNotes = "== TRATTI INIZIALI ==\n" + traits.join("\n") + "\n\n== APPUNTI ==\n";
+
             await setDoc(doc(db, "students", credential.user.uid), {
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
-                gold: 15, hp: 40, maxHp: 40, mp: 20, maxMp: 20, healCompleteTime: null,
-                core_stats: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }, proficiencies: {},
-                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: [], notes: ""
+                gold: 15, hp: maxHp, maxHp: maxHp, mp: maxMp, maxMp: maxMp, healCompleteTime: null,
+                core_stats: stats, proficiencies: startProfs,
+                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: [], notes: initialNotes
             });
         } catch (e) { rpgAlert("Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
     });
