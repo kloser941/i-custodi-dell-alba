@@ -151,8 +151,10 @@
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
         .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
-        .shop-container { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin-top: 15px; }
-        .shop-item { background: #fcf6e8; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* Modifiche CSS Layout Griglia Negozi */
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; width: 100%; margin-top: 15px; }
+        .shop-item { background: #fcf6e8; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         /* =========================================
            SCHERMATA COPPA DELLE CASE
@@ -644,9 +646,9 @@
                     
                     <div id="cat-libro" class="shop-container" style="display:none;">
                         <h3 style="color:#5c4314; border-bottom: 1px dashed #8a6d3b; padding-bottom: 5px; margin-top: 10px; margin-bottom: 5px;">Reparto Nuovi Arrivi</h3>
-                        <div id="cat-libro-nuovi" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                        <div id="cat-libro-nuovi" class="shop-grid"></div>
                         <h3 style="color:#5c4314; border-bottom: 1px dashed #8a6d3b; padding-bottom: 5px; margin-top: 25px; margin-bottom: 5px;">Reparto Usato (Offerte speciali)</h3>
-                        <div id="cat-libro-usati" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                        <div id="cat-libro-usati" class="shop-grid"></div>
                     </div>
 
                     <div id="cat-pet" class="shop-container" style="display:none;"></div>
@@ -983,24 +985,28 @@
 
     const SHOP_CATALOG = [
         { id: "w_ollivander", name: "Acquista Bacchetta su Misura", cost: 10, type: "bacchetta", val: 1, img: "https://placehold.co/100x100?text=Bacchetta", desc: "Bacchetta magica. +1 a Incantesimi.", skill: "incantesimi" },
-        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://placehold.co/100x100?text=Toga+Usata", desc: "Toga consunta. CA = 10 + Mod. Destrezza.", skill: "" },
-        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://placehold.co/100x100?text=Toga+Nuova", desc: "Toga standard. CA = 11 + Mod. Destrezza.", skill: "" },
-        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
-        { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
         
-        { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Libro+Incantesimi", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
-        { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Trasfigurazione", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
-        { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Erbologia", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
-        { id: "l_poz_nuovo", name: "Infusi e Pozioni Magiche - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Pozioni", desc: "Libro nuovo di testo. Aggiunge +1 a Pozioni & Alchimia.", skill: "pozioni" },
-        { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=DCAO", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
-        { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Storia+Magia", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
+        // TOGHE
+        { id: "t_usata", name: "Toga di Seconda Mano", cost: 5, type: "toga", val: 10, img: "https://i.imgur.com/TPhbhzT.png", desc: "Toga consunta. CA = 10 + Mod. Destrezza.", skill: "" },
+        { id: "t_nuova", name: "Toga Nuova di Pacca", cost: 15, type: "toga", val: 11, img: "https://i.imgur.com/cOLPK6n.png", desc: "Toga standard. CA = 11 + Mod. Destrezza.", skill: "" },
+        { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://i.imgur.com/XtGz54c.png", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
+        { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://i.imgur.com/RM0XIg9.png", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
         
-        { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Libro+Incantesimi+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
-        { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Trasfigurazione+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
-        { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Erbologia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
-        { id: "l_poz_usato", name: "Infusi e Pozioni Magiche - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Pozioni+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "pozioni" },
-        { id: "l_dcao_usato", name: "Le Forze Oscure: Guida alla Protezione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=DCAO+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "dcao" },
-        { id: "l_sto_usato", name: "Storia della Magia - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Storia+Magia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "storia_magia" },
+        // LIBRI NUOVI
+        { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/o8Kmaaw.png", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
+        { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/mRcB8eQ.png", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
+        { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/z9zr99q.png", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
+        { id: "l_poz_nuovo", name: "Infusi e Pozioni Magiche - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/6escqFr.png", desc: "Libro nuovo di testo. Aggiunge +1 a Pozioni & Alchimia.", skill: "pozioni" },
+        { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/WFnpvPA.png", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
+        { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://i.imgur.com/kxxHlAt.png", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
+        
+        // LIBRI USATI
+        { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/DzXs3Tv.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
+        { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/k4XUQzH.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
+        { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/hqsWRtI.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
+        { id: "l_poz_usato", name: "Infusi e Pozioni Magiche - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/FkFm5eO.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "pozioni" },
+        { id: "l_dcao_usato", name: "Le Forze Oscure: Guida alla Protezione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/J1Fxgmn.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "dcao" },
+        { id: "l_sto_usato", name: "Storia della Magia - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://i.imgur.com/dbLe2Vw.png", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "storia_magia" },
         
         { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "", desc: "Animale fedele da compagnia.", skill: "" }
     ];
@@ -1166,7 +1172,10 @@
         document.getElementById('cat-toga').style.display = 'none';
         document.getElementById('cat-libro').style.display = 'none';
         document.getElementById('cat-pet').style.display = 'none';
-        document.getElementById('cat-' + type).style.display = 'flex';
+        
+        let target = document.getElementById('cat-' + type);
+        target.style.display = (type === 'libro') ? 'flex' : 'grid';
+        
         let title = "Negozio";
         if (type === 'bacchetta') title = "Garrick Ollivander - Fabbrica di Bacchette";
         if (type === 'toga') title = "Madame Malkin - Abiti per tutte le occasioni";
@@ -1852,7 +1861,17 @@
             catContainer = document.getElementById('cat-' + p.type);
         }
         if(catContainer) {
-            catContainer.innerHTML += `<div class="shop-item"><div><b>${p.name}</b><br><span style="font-size:10px;color:#555;">${p.desc}</span></div><button class="btn-vintage" onclick="buy('${p.id}')">${p.cost} G</button></div>`;
+            let imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100px; height:100px; object-fit:contain; margin-bottom:10px; border-radius:6px; background:#fffdec; padding:5px; border:1px solid #e0d0a0;">` : `<div style="width:100px; height:100px; margin-bottom:10px; border: 1px dashed #8a6d3b; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px;">Foto<br>Mancante</div>`;
+            
+            catContainer.innerHTML += `
+            <div class="shop-item">
+                ${imgHtml}
+                <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:flex-start; margin-bottom: 10px;">
+                    <b style="color:#5c4314; font-size:14px; margin-bottom:5px;">${p.name}</b>
+                    <span style="font-size:11px; color:#3a2e1d;">${p.desc}</span>
+                </div>
+                <button class="btn-vintage" style="width:100%;" onclick="buy('${p.id}')">Acquista (${p.cost} G)</button>
+            </div>`;
         }
     });
 
