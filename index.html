@@ -109,20 +109,20 @@
         .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
         .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
-        .dnd-stat-box-vert input { width: 40px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; }
+        /* Input stat disabilitati in manuale, si alzano solo coi punti */
+        .dnd-stat-box-vert input { width: 30px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; }
         .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
+        
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .skills-inline-edit th { font-size: 11px; text-align: left; border-bottom: 1px solid #8a6d3b; padding: 8px 6px; background: #ebdca8; }
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
 
-        /* NEGOZI DIAGON ALLEY (STRADA) */
+        /* NEGOZI DIAGON ALLEY */
         .diagon-street-container { position: relative; width: 100%; height: 100%; background-image: url('https://i.imgur.com/vaxStnF.jpeg'); background-size: cover; background-position: center; display: flex; overflow: hidden; }
         .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
-        
-        /* INTERNO DEI NEGOZI (NUOVO LAYOUT) */
         .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
         .shop-container { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin-top: 15px; }
@@ -145,7 +145,6 @@
             object-fit: fill; z-index: 2; pointer-events: none;
         }
 
-        /* Contenitori dei liquidi dietro il vetro */
         .glass-container {
             position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
             width: 8.5%; 
@@ -153,13 +152,11 @@
             bottom: 45%;    
         }
         
-        /* Coordinate X calcolate col calibro sull'immagine PNG */
         .pos-grif { left: 16.8%; }
         .pos-tass { left: 36%; }
         .pos-corv { left: 55.7%; }
         .pos-serp { left: 75.8%; }
 
-        /* Il liquido che si riempie in altezza */
         .gems-liquid-reservoir {
             width: 100%; height: 0%; 
             transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -167,13 +164,11 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
 
-        /* Texture a "Cristalli Magici" */
         .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
         .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
         .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
         .gems-Serpeverde { background: linear-gradient(135deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(225deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(315deg, #15803d 25%, transparent 25%), linear-gradient(45deg, #15803d 25%, transparent 25%); background-size: 10px 10px; background-color: #14532d; }
 
-        /* Le etichette dei punteggi posizionate CENTRATE sulle targhette in basso (Livello 3) */
         .score-label {
             position: absolute; z-index: 3; 
             top: 65.5%; 
@@ -191,7 +186,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -303,7 +298,8 @@
                         </select>
                     </div>
                     
-                    <button class="btn-vintage" style="width:100%; background:#b22222; color:white; padding:12px;" onclick="submitExam()">REGISTRA E FAI LIVELLARE</button>
+                    <button class="btn-vintage" style="width:100%; background:#b22222; color:white; padding:12px; margin-bottom: 10px;" onclick="submitExam()">REGISTRA E FAI LIVELLARE</button>
+                    <button class="btn-vintage" style="width:100%; background:#27ae60; color:white; padding:8px;" onclick="grantStatPoint()">REGALA +1 PUNTO STAT</button>
                 </div>
 
                 <div style="background:#fcf6e8; border:1px solid #be9b64; padding:15px; border-radius:8px;">
@@ -331,15 +327,14 @@
             </div>
         </div>
 
-        <!-- SCHERMATA MAPPA CHIUSA (LANDING PAGE) -->
+        <!-- SCHERMATA MAPPA CHIUSA -->
         <div id="screen-landing" class="screen" onclick="openMarauderMap()">
             <div id="landing-overlay">Giuro solennemente di non avere buone intenzioni...</div>
         </div>
 
-        <!-- SCHERMATA MAPPA APERTA (MENU PRINCIPALE) -->
+        <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <!-- ZONE CLICCABILI INVISIBILI -->
                 <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -389,14 +384,14 @@
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
                         <div class="dnd-stats-vertical" style="margin-top: 10px;">
-                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><input type="number" id="dnd-str" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-str">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><input type="number" id="dnd-dex" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-dex">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><input type="number" id="dnd-con" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-con">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><input type="number" id="dnd-int" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-int">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><input type="number" id="dnd-wis" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-wis">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><input type="number" id="dnd-cha" min="1" max="20" value="10"><span class="dnd-mod-label" id="mod-cha">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('str')">+</button><span class="dnd-mod-label" id="mod-str">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('dex')">+</button><span class="dnd-mod-label" id="mod-dex">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('con')">+</button><span class="dnd-mod-label" id="mod-con">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('int')">+</button><span class="dnd-mod-label" id="mod-int">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('wis')">+</button><span class="dnd-mod-label" id="mod-wis">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('cha')">+</button><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                         </div>
-                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:4px; margin-top: 10px;" id="btn-sync-core-stats">Salva Modificatori</button>
+                        <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
                     </div>
 
                     <div class="col-disciplines">
@@ -405,7 +400,7 @@
                             <tbody id="skills-tbody-list"></tbody>
                         </table>
                         
-                        <!-- Box dei Tratti e Talenti Razziali/Di Classe -->
+                        <!-- Box dei Tratti e Talenti -->
                         <div style="margin-top: 15px; border-top: 1px dashed #8a6d3b; padding-top: 10px;">
                             <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-bottom:5px; color:#5c4314;">Tratti & Talenti</div>
                             <div id="prof-traits-list" style="font-size:11px; color:#3a2e1d; white-space: pre-wrap;">Nessun tratto speciale.</div>
@@ -419,13 +414,12 @@
                 </div>
             </div>
 
-            <!-- NUOVE SEZIONI: INCANTESIMI, APPUNTI E LIBRETTO ESAMI -->
+            <!-- NUOVE SEZIONI -->
             <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
                 
                 <div id="profile-spells-box" style="flex: 2; min-width: 350px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
                     <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px;">
-                        <!-- JS riempie le righe qui -->
                     </div>
                     <div style="display: flex; gap: 10px; margin-top: 15px;">
                         <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Aggiungi Riga</button>
@@ -442,9 +436,7 @@
                 <div id="profile-exams-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto & Progressi</h3>
                     <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
-                    <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
                     <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; font-size:12px; overflow-y:auto; flex-grow:1;">
-                        <!-- JS riempie i voti qui -->
                     </div>
                 </div>
 
@@ -594,7 +586,6 @@
 
     const HOUSE_LOGOS = { grifondoro: "https://imgur.com/AeIu16S.png", serpeverde: "https://imgur.com/eX3RZ2G.png", corvonero: "https://imgur.com/hedsChE.png", tassorosso: "https://imgur.com/3cFFSnZ.png" };
     
-    // FOTO DEI GUARDIANI DEI DORMITORI
     const DORM_GUARDS = {
         "grifondoro": "https://i.imgur.com/jLLcIQV.png",
         "serpeverde": "https://i.imgur.com/FzNtkQO.png",
@@ -602,7 +593,6 @@
         "tassorosso": "https://i.imgur.com/NBSZrcl.jpeg"
     };
 
-    // PAROLE D'ORDINE DELLE CASATE
     const DORM_PASSWORDS = {
         "grifondoro": "caput draconis",
         "serpeverde": "purosangue",
@@ -610,7 +600,6 @@
         "tassorosso": "tasso"
     };
     
-    // IMMAGINI DEI BANNER DEI NEGOZI
     const SHOP_BANNERS = {
         'bacchetta': "https://cdnb.artstation.com/p/assets/images/images/035/894/217/large/rasmus-bagner-ollivanders12.jpg?1616173610",
         'toga': "https://orlandoinformer.com/wp-content/uploads/photo-gallery/imported_from_media_libray/20231024-IMG_0947.jpg?bwg=1698675841",
@@ -647,7 +636,6 @@
         { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
         { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
         
-        // NUOVI LIBRI (15 Galeoni)
         { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Libro+Incantesimi", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
         { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Trasfigurazione", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
         { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Erbologia", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
@@ -655,7 +643,6 @@
         { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=DCAO", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
         { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Storia+Magia", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
         
-        // USATI LIBRI (5 Galeoni)
         { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Libro+Incantesimi+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
         { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Trasfigurazione+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
         { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Erbologia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
@@ -672,7 +659,6 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO PER LA REGISTRAZIONE
     window.updateRegStatsUI = function() {
         let val = document.getElementById('reg-discendenza').value;
         let box = document.getElementById('dynamic-stats-box');
@@ -744,7 +730,6 @@
         return "Negoziante";
     }
 
-    // CARICAMENTO STUDENTI PER IL PANNELLO MASTER
     window.loadStudentsForDM = async function() {
         let select = document.getElementById('dm-student-select');
         select.innerHTML = '<option value="">-- Seleziona Studente --</option>';
@@ -759,7 +744,6 @@
         }
     };
 
-    // MOTORE CENTRALE DI CAMBIO SCHERMATE
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
@@ -884,13 +868,19 @@
         await updateDoc(doc(db, "students", currentUser.uid), { mp: parseInt(document.getElementById('edit-curr-mp').value)||0, maxMp: parseInt(document.getElementById('edit-max-mp').value)||0 });
     });
 
-    document.getElementById('btn-sync-core-stats').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
-        await updateDoc(doc(db, "students", currentUser.uid), { 
-            core_stats: { str: parseInt(document.getElementById('dnd-str').value)||10, dex: parseInt(document.getElementById('dnd-dex').value)||10, con: parseInt(document.getElementById('dnd-con').value)||10, int: parseInt(document.getElementById('dnd-int').value)||10, wis: parseInt(document.getElementById('dnd-wis').value)||10, cha: parseInt(document.getElementById('dnd-cha').value)||10 } 
-        }); 
-        rpgAlert("Prof.ssa Minerva McGranitt", "Le tue Statistiche sono state salvate nel registro di Hogwarts.");
-    });
+    window.increaseStat = async function(statKey) {
+        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let pts = userData.stat_points || 0;
+        if (pts <= 0) return;
+        
+        let newStats = { ...userData.core_stats };
+        newStats[statKey] = (newStats[statKey] || 10) + 1;
+        
+        await updateDoc(doc(db, "students", currentUser.uid), {
+            core_stats: newStats,
+            stat_points: pts - 1
+        });
+    };
 
     tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
         chk.addEventListener('change', async (e) => {
@@ -951,7 +941,6 @@
         rpgAlert("Prof.ssa Minerva McGranitt", "Appunti salvati nel registro.");
     };
 
-    // FUNZIONE LEVEL UP DAL PANNELLO MASTER (MODIFICATA PER "MOTIVAZIONE")
     window.submitExam = async function() {
         let targetUid = document.getElementById('dm-student-select').value;
         let motivation = document.getElementById('dm-motivation-input').value.trim();
@@ -970,11 +959,10 @@
             let newMaxHp = data.maxHp || 10;
             let newMaxMp = data.maxMp || 10;
             let exams = data.exams || [];
+            let newStatPoints = data.stat_points || 0;
             
-            // Aggiungi l'evento allo storico
             exams.push({ subject: motivation, grade: grade });
 
-            // Controlla se è Promosso (O, E, A)
             if(["O", "E", "A"].includes(grade)) {
                 newLevel += 1;
                 
@@ -988,24 +976,47 @@
 
                 newMaxHp += hpGain;
                 newMaxMp += 2;
+                
+                if ([4, 8, 12, 16].includes(newLevel)) {
+                    newStatPoints += 2;
+                }
             }
 
             await updateDoc(studentRef, {
                 level: newLevel,
                 maxHp: newMaxHp,
                 maxMp: newMaxMp,
-                exams: exams
+                exams: exams,
+                stat_points: newStatPoints
             });
 
             rpgAlert("Pannello Master", "Progresso registrato con successo nel libretto dello studente!");
-            document.getElementById('dm-motivation-input').value = ""; // Svuota il campo
+            document.getElementById('dm-motivation-input').value = ""; 
 
         } catch(e) {
             rpgAlert("Errore", "Si è verificato un errore: " + e.message);
         }
     };
 
-    // FUNZIONE COPPA DELLE CASE DAL PANNELLO MASTER
+    window.grantStatPoint = async function() {
+        let targetUid = document.getElementById('dm-student-select').value;
+        if(!targetUid) return rpgAlert("Sistema", "Devi selezionare uno studente.");
+        
+        try {
+            const studentRef = doc(db, "students", targetUid);
+            const snap = await getDoc(studentRef);
+            if(!snap.exists()) return rpgAlert("Sistema", "Studente non trovato nel database.");
+
+            let data = snap.data();
+            let currentPoints = data.stat_points || 0;
+            
+            await updateDoc(studentRef, { stat_points: currentPoints + 1 });
+            rpgAlert("Pannello Master", "Hai regalato +1 Punto Statistica allo studente!");
+        } catch(e) {
+            rpgAlert("Errore", "Si è verificato un errore: " + e.message);
+        }
+    };
+
     window.updateHousePoints = async function() {
         let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"];
         let updates = {};
@@ -1018,7 +1029,7 @@
                 let current = currentHousePointsData[h] || 0;
                 updates[h] = current + val;
                 changed = true;
-                inputEl.value = ""; // Svuota il campo
+                inputEl.value = ""; 
             }
         });
 
@@ -1039,7 +1050,6 @@
         if (user) {
             currentUser = user;
             
-            // Mostra il pulsante Master solo se l'email corrisponde
             if (user.email.toLowerCase() === "ciropicozzi@gmail.com") {
                 document.getElementById('btn-master-panel').style.display = "block";
             } else {
@@ -1073,11 +1083,32 @@
 
         let core = userData.core_stats || { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
         let mods = {};
+        
+        let statPoints = userData.stat_points || 0;
+        let pointsContainer = document.getElementById('prof-stat-points-container');
+        let pointsSpan = document.getElementById('prof-stat-points');
+        
+        pointsSpan.innerText = statPoints;
+        if (statPoints > 0) {
+            pointsContainer.style.background = "#fadbd8";
+            pointsContainer.style.color = "#c0392b";
+            pointsContainer.style.border = "1px dashed #c0392b";
+        } else {
+            pointsContainer.style.background = "transparent";
+            pointsContainer.style.color = "#5c4314";
+            pointsContainer.style.border = "none";
+        }
+        
         for(let statKey in core) {
             mods[statKey] = getDndModifier(core[statKey] || 10);
             let inputEl = document.getElementById('dnd-' + statKey);
             if(inputEl && document.activeElement !== inputEl) inputEl.value = core[statKey];
             document.getElementById('mod-' + statKey).innerText = formatMod(mods[statKey]);
+            
+            let plusBtn = document.getElementById('btn-plus-' + statKey);
+            if (plusBtn) {
+                plusBtn.style.display = statPoints > 0 ? "inline-block" : "none";
+            }
         }
 
         const hpRatio = userData.hp / userData.maxHp;
@@ -1088,18 +1119,12 @@
         document.getElementById('profile-col-avatar').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-col-middle').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
-        document.getElementById('profile-spells-box').classList.remove('trauma-disabled-mask');
-        document.getElementById('profile-notes-box').classList.remove('trauma-disabled-mask');
-        document.getElementById('profile-exams-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
             document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask'); 
             document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask'); 
             document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
-            document.getElementById('profile-spells-box').classList.add('trauma-disabled-mask');
-            document.getElementById('profile-notes-box').classList.add('trauma-disabled-mask');
-            document.getElementById('profile-exams-box').classList.add('trauma-disabled-mask');
         } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
         } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
         } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
@@ -1146,15 +1171,12 @@
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
 
-        // Appunti Render
         if(document.activeElement !== document.getElementById('profile-notes')) {
             document.getElementById('profile-notes').value = userData.notes || "";
         }
         
-        // Render Tratti e Talenti
         document.getElementById('prof-traits-list').innerText = userData.traits || "Nessun tratto speciale.";
 
-        // Render Spells
         const spellsContainer = document.getElementById('spells-list');
         if (!spellsContainer.contains(document.activeElement)) {
             spellsContainer.innerHTML = "";
@@ -1173,16 +1195,8 @@
             });
         }
         
-        // Render Exams & Level
         let lvl = userData.level || 1;
         document.getElementById('prof-magical-level').innerText = lvl;
-        
-        let alertEl = document.getElementById('prof-level-alert');
-        if ([4, 8, 12, 16].includes(lvl)) {
-            alertEl.style.display = "block";
-        } else {
-            alertEl.style.display = "none";
-        }
         
         const examsContainer = document.getElementById('exams-list');
         examsContainer.innerHTML = "";
@@ -1399,7 +1413,7 @@
             await setDoc(doc(db, "students", credential.user.uid), {
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
                 gold: 15, hp: maxHp, maxHp: maxHp, mp: maxMp, maxMp: maxMp, healCompleteTime: null,
-                level: 1, exams: [],
+                level: 1, exams: [], stat_points: 0,
                 core_stats: stats, proficiencies: startProfs, traits: traits.join('\n'), notes: "",
                 equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: []
             });
@@ -1412,7 +1426,6 @@
         try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
-    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN (Limite alzato a 1000) E SUL DM PANEL
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
             let dataCoppa = snapshot.data(); 
