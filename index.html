@@ -210,9 +210,9 @@
 
     <div id="main-content">
         
-        <!-- Barra dei soldi e Tasto Master -->
+        <!-- Barra dei soldi e Tasto Pannello Master -->
         <div id="top-bar-gold" class="top-status-bar">
-            <button id="btn-master-panel" class="btn-vintage" style="display:none; margin-right:15px;" onclick="changeScreen('screen-master')">Pannello Master</button>
+            <button id="btn-master-panel" class="btn-vintage" style="display:none; margin-right:15px; font-size:10px; padding:4px 8px;" onclick="changeScreen('screen-master')">PANNELLO MASTER</button>
             <span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">0 Galeoni</span>
         </div>
 
@@ -231,14 +231,14 @@
                     <h3>Smistamento Nuovo Studente</h3>
                     <input type="text" id="reg-name" placeholder="Nome Personaggio">
                     <input type="text" id="reg-patronus" placeholder="Forma del Patronus">
+                    
                     <select id="reg-house">
                         <option value="Grifondoro">Grifondoro</option>
                         <option value="Serpeverde">Serpeverde</option>
                         <option value="Corvonero">Corvonero</option>
                         <option value="Tassorosso">Tassorosso</option>
                     </select>
-                    
-                    <!-- Nuovo Selettore Discendenza -->
+
                     <select id="reg-discendenza" onchange="updateRegStatsUI()">
                         <option value="umano">Umano Standard (+1 a due stat)</option>
                         <option value="veela">Discendente di Veela (+2 CAR, +1 DES)</option>
@@ -279,49 +279,55 @@
             <div class="hospital-box" style="max-width: 600px; margin-top: 50px;">
                 <h2 style="color:#5c4314; font-family:'Georgia', serif; margin-top:0;">Pannello Master</h2>
                 
-                <div style="text-align:left; margin-bottom:10px;">
-                    <label style="font-weight:bold; font-size:12px;">Studente:</label>
-                    <select id="dm-student-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;"></select>
+                <div style="background:#fcf6e8; border:1px solid #be9b64; padding:15px; border-radius:8px; margin-bottom:20px;">
+                    <h3 style="margin-top:0; border-bottom:1px dashed #8a6d3b; padding-bottom:5px; color:#5c4314;">Registra Progresso / Livellamento</h3>
+                    <div style="text-align:left; margin-bottom:10px;">
+                        <label style="font-weight:bold; font-size:12px;">Studente:</label>
+                        <select id="dm-student-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;"></select>
+                    </div>
+                    
+                    <div style="text-align:left; margin-bottom:10px;">
+                        <label style="font-weight:bold; font-size:12px;">Motivazione / Evento:</label>
+                        <input type="text" id="dm-motivation-input" placeholder="Es. Esami del 1° Trimestre, Vittoria al Torneo..." style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
+                    </div>
+                    
+                    <div style="text-align:left; margin-bottom:20px;">
+                        <label style="font-weight:bold; font-size:12px;">Esito / Voto:</label>
+                        <select id="dm-grade-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
+                            <option value="O">O (Oltre le Aspettative) -> LEVEL UP</option>
+                            <option value="E">E (Eccellente) -> LEVEL UP</option>
+                            <option value="A">A (Accettabile) -> LEVEL UP</option>
+                            <option value="P">P (Scarso)</option>
+                            <option value="D">D (Desolante)</option>
+                            <option value="T">T (Troll)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn-vintage" style="width:100%; background:#b22222; color:white; padding:12px;" onclick="submitExam()">REGISTRA E FAI LIVELLARE</button>
                 </div>
-                
-                <div style="text-align:left; margin-bottom:10px;">
-                    <label style="font-weight:bold; font-size:12px;">Materia d'Esame:</label>
-                    <select id="dm-subject-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
-                        <option value="Incantesimi">Incantesimi</option>
-                        <option value="Trasfigurazione">Trasfigurazione</option>
-                        <option value="Storia della Magia">Storia della Magia</option>
-                        <option value="Erbologia">Erbologia</option>
-                        <option value="Pozioni & Alchimia">Pozioni & Alchimia</option>
-                        <option value="Investigazione">Investigazione</option>
-                        <option value="Cura Creature Magiche">Cura Creature Magiche</option>
-                        <option value="Divinazione">Divinazione</option>
-                        <option value="Difesa Contro le Arti Oscure">Difesa Contro le Arti Oscure</option>
-                        <option value="Percezione">Percezione</option>
-                        <option value="Volo & Orientamento">Volo & Orientamento</option>
-                        <option value="Furtività">Furtività</option>
-                        <option value="Rapidità di Mano">Rapidità di Mano</option>
-                        <option value="Acrobazia">Acrobazia</option>
-                        <option value="Inganno">Inganno</option>
-                        <option value="Persuasione">Persuasione</option>
-                        <option value="Intimidire">Intimidire</option>
-                        <option value="Intrattenere">Intrattenere</option>
-                        <option value="Atletica (Quidditch)">Atletica (Quidditch)</option>
-                    </select>
+
+                <div style="background:#fcf6e8; border:1px solid #be9b64; padding:15px; border-radius:8px;">
+                    <h3 style="margin-top:0; border-bottom:1px dashed #8a6d3b; padding-bottom:5px; color:#5c4314;">Assegna Punti Casa</h3>
+                    <div style="display:flex; flex-direction:column; gap:10px; text-align:left;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:bold; color:#7f1d1d;">Grifondoro (<span id="dm-pts-Grifondoro">0</span>)</span>
+                            <input type="number" id="dm-add-Grifondoro" placeholder="+/- Punti" style="width:80px; padding:4px;">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:bold; color:#14532d;">Serpeverde (<span id="dm-pts-Serpeverde">0</span>)</span>
+                            <input type="number" id="dm-add-Serpeverde" placeholder="+/- Punti" style="width:80px; padding:4px;">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:bold; color:#1e3a8a;">Corvonero (<span id="dm-pts-Corvonero">0</span>)</span>
+                            <input type="number" id="dm-add-Corvonero" placeholder="+/- Punti" style="width:80px; padding:4px;">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:bold; color:#a16207;">Tassorosso (<span id="dm-pts-Tassorosso">0</span>)</span>
+                            <input type="number" id="dm-add-Tassorosso" placeholder="+/- Punti" style="width:80px; padding:4px;">
+                        </div>
+                        <button class="btn-vintage" style="width:100%; margin-top:10px;" onclick="updateHousePoints()">AGGIORNA PUNTEGGI</button>
+                    </div>
                 </div>
-                
-                <div style="text-align:left; margin-bottom:20px;">
-                    <label style="font-weight:bold; font-size:12px;">Voto:</label>
-                    <select id="dm-grade-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
-                        <option value="O">O (Oltre le Aspettative)</option>
-                        <option value="E">E (Eccellente)</option>
-                        <option value="A">A (Accettabile)</option>
-                        <option value="P">P (Scarso)</option>
-                        <option value="D">D (Desolante)</option>
-                        <option value="T">T (Troll)</option>
-                    </select>
-                </div>
-                
-                <button class="btn-vintage" style="width:100%; background:#b22222; color:white; padding:12px;" onclick="submitExam()">REGISTRA VOTO E FAI LIVELLARE</button>
             </div>
         </div>
 
@@ -333,6 +339,7 @@
         <!-- SCHERMATA MAPPA APERTA (MENU PRINCIPALE) -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
+                <!-- ZONE CLICCABILI INVISIBILI -->
                 <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -428,12 +435,12 @@
 
                 <div id="profile-notes-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
-                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
+                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti liberi..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
                     <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px;" onclick="syncNotes()">Salva Appunti</button>
                 </div>
                 
                 <div id="profile-exams-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto degli Esami</h3>
+                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto & Progressi</h3>
                     <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
                     <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
                     <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; font-size:12px; overflow-y:auto; flex-grow:1;">
@@ -582,6 +589,7 @@
     const db = getFirestore(app);
 
     let currentUser = null; let userData = null; let isTraumaBlocked = false; let clinicInterval = null;
+    let currentHousePointsData = { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 };
     const PROFICIENCY_BONUS = 2;
 
     const HOUSE_LOGOS = { grifondoro: "https://imgur.com/AeIu16S.png", serpeverde: "https://imgur.com/eX3RZ2G.png", corvonero: "https://imgur.com/hedsChE.png", tassorosso: "https://imgur.com/3cFFSnZ.png" };
@@ -639,6 +647,7 @@
         { id: "t_sarto", name: "Toga su Misura di Lusso", cost: 30, type: "toga", val: 12, img: "https://placehold.co/100x100?text=Toga+Lusso", desc: "Toga pregiata. CA = 12 + Mod. Destrezza.", skill: "" },
         { id: "t_drago", name: "Toga in Pelle di Drago", cost: 50, type: "toga", val: 13, img: "https://placehold.co/100x100?text=Toga+Drago", desc: "Armatura eccellente. CA = 13 + Mod. Destrezza.", skill: "" },
         
+        // NUOVI LIBRI (15 Galeoni)
         { id: "l_inc_nuovo", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Libro+Incantesimi", desc: "Libro nuovo di testo. Aggiunge +1 a Incantesimi.", skill: "incantesimi" },
         { id: "l_tra_nuovo", name: "Guida pratica alla Trasfigurazione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Trasfigurazione", desc: "Libro nuovo di testo. Aggiunge +1 a Trasfigurazione.", skill: "trasfigurazione" },
         { id: "l_erb_nuovo", name: "Mille Erbe e Funghi Magici - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Erbologia", desc: "Libro nuovo di testo. Aggiunge +1 a Erbologia.", skill: "erbologia" },
@@ -646,6 +655,7 @@
         { id: "l_dcao_nuovo", name: "Le Forze Oscure: Guida alla Protezione - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=DCAO", desc: "Libro nuovo di testo. Aggiunge +1 a Difesa Contro le Arti Oscure.", skill: "dcao" },
         { id: "l_sto_nuovo", name: "Storia della Magia - Nuovo", cost: 15, type: "libro", val: 1, is_used: false, img: "https://placehold.co/100x100?text=Storia+Magia", desc: "Libro nuovo di testo. Aggiunge +1 a Storia della Magia.", skill: "storia_magia" },
         
+        // USATI LIBRI (5 Galeoni)
         { id: "l_inc_usato", name: "Il Libro Standard degli Incantesimi (Vol. 1) - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Libro+Incantesimi+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "incantesimi" },
         { id: "l_tra_usato", name: "Guida pratica alla Trasfigurazione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Trasfigurazione+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "trasfigurazione" },
         { id: "l_erb_usato", name: "Mille Erbe e Funghi Magici - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Erbologia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "erbologia" },
@@ -662,9 +672,7 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    // ==========================================
-    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO
-    // ==========================================
+    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO PER LA REGISTRAZIONE
     window.updateRegStatsUI = function() {
         let val = document.getElementById('reg-discendenza').value;
         let box = document.getElementById('dynamic-stats-box');
@@ -943,13 +951,14 @@
         rpgAlert("Prof.ssa Minerva McGranitt", "Appunti salvati nel registro.");
     };
 
-    // FUNZIONE LEVEL UP DAL PANNELLO MASTER
+    // FUNZIONE LEVEL UP DAL PANNELLO MASTER (MODIFICATA PER "MOTIVAZIONE")
     window.submitExam = async function() {
         let targetUid = document.getElementById('dm-student-select').value;
-        let subject = document.getElementById('dm-subject-select').value;
+        let motivation = document.getElementById('dm-motivation-input').value.trim();
         let grade = document.getElementById('dm-grade-select').value;
         
         if(!targetUid) return rpgAlert("Sistema", "Devi selezionare uno studente.");
+        if(!motivation) return rpgAlert("Sistema", "Devi inserire una motivazione o un evento.");
 
         try {
             const studentRef = doc(db, "students", targetUid);
@@ -962,8 +971,8 @@
             let newMaxMp = data.maxMp || 10;
             let exams = data.exams || [];
             
-            // Aggiungi l'esame allo storico
-            exams.push({ subject: subject, grade: grade });
+            // Aggiungi l'evento allo storico
+            exams.push({ subject: motivation, grade: grade });
 
             // Controlla se è Promosso (O, E, A)
             if(["O", "E", "A"].includes(grade)) {
@@ -988,10 +997,41 @@
                 exams: exams
             });
 
-            rpgAlert("Pannello Master", "Esame registrato con successo nel libretto dello studente!");
+            rpgAlert("Pannello Master", "Progresso registrato con successo nel libretto dello studente!");
+            document.getElementById('dm-motivation-input').value = ""; // Svuota il campo
 
         } catch(e) {
             rpgAlert("Errore", "Si è verificato un errore: " + e.message);
+        }
+    };
+
+    // FUNZIONE COPPA DELLE CASE DAL PANNELLO MASTER
+    window.updateHousePoints = async function() {
+        let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"];
+        let updates = {};
+        let changed = false;
+
+        caseList.forEach(h => {
+            let inputEl = document.getElementById(`dm-add-${h}`);
+            let val = parseInt(inputEl.value);
+            if(!isNaN(val) && val !== 0) {
+                let current = currentHousePointsData[h] || 0;
+                updates[h] = current + val;
+                changed = true;
+                inputEl.value = ""; // Svuota il campo
+            }
+        });
+
+        if(changed) {
+            try {
+                await updateDoc(doc(db, "system", "coppa"), updates);
+                rpgAlert("Pannello Master", "Punteggi della Coppa delle Case aggiornati!");
+            } catch(e) {
+                await setDoc(doc(db, "system", "coppa"), { ...currentHousePointsData, ...updates });
+                rpgAlert("Pannello Master", "Punteggi della Coppa delle Case inizializzati e aggiornati!");
+            }
+        } else {
+            rpgAlert("Sistema", "Nessun valore inserito per aggiornare i punteggi.");
         }
     };
 
@@ -1050,6 +1090,7 @@
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-spells-box').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-notes-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-exams-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
@@ -1058,6 +1099,7 @@
             document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
             document.getElementById('profile-spells-box').classList.add('trauma-disabled-mask');
             document.getElementById('profile-notes-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-exams-box').classList.add('trauma-disabled-mask');
         } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
         } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
         } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
@@ -1146,10 +1188,10 @@
         examsContainer.innerHTML = "";
         let currentExams = userData.exams || [];
         if (currentExams.length === 0) {
-            examsContainer.innerHTML = "<p style='color:#666; font-style:italic;'>Nessun esame sostenuto finora.</p>";
+            examsContainer.innerHTML = "<p style='color:#666; font-style:italic;'>Nessun evento sostenuto finora.</p>";
         } else {
             currentExams.forEach(ex => {
-                examsContainer.innerHTML += `<div style="padding:4px; background:#fffdf7; border:1px solid #be9b64; border-radius:4px;"><b>${ex.subject}</b>: Voto ${ex.grade}</div>`;
+                examsContainer.innerHTML += `<div style="padding:4px; background:#fffdf7; border:1px solid #be9b64; border-radius:4px;"><b>${ex.subject}</b>: Esito ${ex.grade}</div>`;
             });
         }
 
@@ -1370,16 +1412,23 @@
         try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
-    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN
+    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN (Limite alzato a 1000) E SUL DM PANEL
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
-            let dataCoppa = snapshot.data(); let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; 
+            let dataCoppa = snapshot.data(); 
+            currentHousePointsData = dataCoppa;
+            let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; 
             let tettoMassimoPunti = 1000; 
             caseList.forEach(h => {
                 let pt = dataCoppa[h] || 0; 
                 document.getElementById(`pts-${h}`).innerText = pt;
                 document.getElementById(`gem-fill-${h}`).style.height = Math.max(0, Math.min(100, (pt / tettoMassimoPunti) * 100)) + "%";
+                
+                let dmLabel = document.getElementById(`dm-pts-${h}`);
+                if(dmLabel) dmLabel.innerText = pt;
             });
+        } else {
+            setDoc(doc(db, "system", "coppa"), { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 });
         }
     });
 </script>
