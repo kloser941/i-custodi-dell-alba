@@ -47,7 +47,7 @@
         #screen-map-nav { padding: 0; background-color: #2a2015; display: none; align-items: center; justify-content: center; }
         .marauders-map-container { position: relative; width: 100%; max-width: 1400px; aspect-ratio: 16 / 9; background-image: url('https://i.imgur.com/yauwhNq.jpeg'); background-size: cover; background-position: center; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
         
-        /* Zone cliccabili invisibili (Senza Hover) */
+        /* Zone cliccabili invisibili */
         .map-click-zone { position: absolute; cursor: pointer; }
 
         /* Coordinate Mappa */
@@ -109,7 +109,6 @@
         .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
         .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
-        /* Box Statistiche Adattato e Centrato */
         .dnd-stat-box-vert input { width: 50px; min-width: 50px; text-align: center; font-size: 13px; font-weight: bold; padding: 2px 4px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; pointer-events: none; }
         .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
         
@@ -186,7 +185,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
+        /* EMPORIO E INFERMERIA E HEADER */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -353,10 +352,12 @@
             
             <div class="profile-layout-container" id="profile-main-grid-wrapper">
                 <div class="col-avatar" id="profile-col-avatar">
+                    
                     <div class="avatar-wrapper" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
                         <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
                     </div>
+                    <!-- INPUT NASCOSTO PER CLOUDINARY AVATAR -->
                     <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
                     
                     <div class="identity-row">
@@ -398,7 +399,13 @@
                             <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>Bacchetta</span></div>
                             <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>Toga</span></div>
                             <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>Libro</span></div>
-                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()"><span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div></div>
+                            
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()">
+                                <span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div>
+                            </div>
+                            <!-- INPUT NASCOSTO PER CLOUDINARY PATRONUS -->
+                            <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
+
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
                         <div class="dnd-stats-vertical" style="margin-top: 10px;">
@@ -419,7 +426,6 @@
                             <tbody id="skills-tbody-list"></tbody>
                         </table>
                         
-                        <!-- Box dei Tratti e Talenti -->
                         <div style="margin-top: 15px; border-top: 1px dashed #8a6d3b; padding-top: 10px;">
                             <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-bottom:5px; color:#5c4314;">Tratti & Talenti</div>
                             <div id="prof-traits-list" style="font-size:11px; color:#3a2e1d; white-space: pre-wrap;">Nessun tratto speciale.</div>
@@ -568,6 +574,33 @@
             </div>
         </div>
     </div>
+    
+    <!-- MODAL ADOZIONE PET -->
+    <div id="pet-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 10000; align-items:center; justify-content:center;">
+        <div style="background:#f2e6c4; border: 4px double #8a6d3b; border-radius: 8px; padding: 20px; text-align: center; max-width: 400px; width: 90%; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.8);">
+            <h3 style="margin-top:0; color:#5c4314; font-family:'Georgia', serif; border-bottom: 1px solid #8a6d3b; padding-bottom: 10px;">Adozione Animale (12 Galeoni)</h3>
+            
+            <input type="text" id="pet-type-input" placeholder="Che creatura magica è? (es. Gufo)" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+            <input type="text" id="pet-name-input" placeholder="Nome del Pet..." style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #8a6d3b; border-radius: 4px; background: #fffdf7;">
+            
+            <div style="margin-bottom: 15px;">
+                <label class="btn-vintage" style="cursor:pointer; display:inline-block; padding: 8px 12px; background:#ebdca8;">
+                    Scegli Foto del Pet
+                    <input type="file" id="pet-file-input" accept="image/*" style="display:none;">
+                </label>
+            </div>
+            
+            <div id="pet-preview-container" style="display:none; margin-bottom: 15px; border: 1px dashed #8a6d3b; padding: 10px; border-radius: 6px;">
+                <p id="pet-loading-text" style="display:none; font-size:12px; font-style:italic; margin:0;">Caricamento foto in corso... ⏳</p>
+                <img id="pet-preview-img" src="" alt="Anteprima Pet" style="max-width:150px; max-height:150px; border:2px solid #8a6d3b; border-radius:6px; display:none; margin:auto;">
+            </div>
+            
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn-vintage" style="background:#c0392b; color:white; border-color:#800000;" onclick="cancelPetPurchase()">ANNULLA ACQUISTO</button>
+                <button class="btn-vintage" id="btn-confirm-pet" style="background:#27ae60; color:white; border-color:#1e8449;" onclick="confirmPetPurchase()" disabled>CONFERMA ACQUISTO</button>
+            </div>
+        </div>
+    </div>
 
     <!-- DADI -->
     <div id="dice-trigger">🎲</div>
@@ -599,6 +632,24 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    
+    // CLOUDINARY LOGIC
+    async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'lbcyeapf');
+        try {
+            let res = await fetch('https://api.cloudinary.com/v1_1/msic1lpw/image/upload', {
+                method: 'POST',
+                body: formData
+            });
+            let data = await res.json();
+            return data.secure_url;
+        } catch(e) {
+            console.error(e);
+            return null;
+        }
+    }
 
     let currentUser = null; let userData = null; let isTraumaBlocked = false; let clinicInterval = null;
     let currentHousePointsData = { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 };
@@ -678,7 +729,7 @@
         { id: "l_dcao_usato", name: "Le Forze Oscure: Guida alla Protezione - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=DCAO+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "dcao" },
         { id: "l_sto_usato", name: "Storia della Magia - Usato", cost: 5, type: "libro", val: 0, is_used: true, img: "https://placehold.co/100x100?text=Storia+Magia+Usato", desc: "Libro usato. Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico.", skill: "storia_magia" },
         
-        { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "https://placehold.co/100x100?text=Pet", desc: "Animale fedele da compagnia.", skill: "" }
+        { id: "p_custom", name: "Compra un Animale Domestico", cost: 12, type: "pet", val: 0, img: "", desc: "Animale fedele da compagnia.", skill: "" }
     ];
 
     const FROG_POOL = {
@@ -861,6 +912,9 @@
     function getDndModifier(score) { return Math.floor((parseInt(score || 10) - 10) / 2); }
     function formatMod(mod) { return mod >= 0 ? `+${mod}` : `${mod}`; }
 
+    // ==========================================
+    // UPLOAD CLOUDINARY AVATAR E PATRONUS
+    // ==========================================
     window.triggerAvatarChange = function() {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         document.getElementById('avatar-upload-input').click();
@@ -875,30 +929,17 @@
         overlay.innerText = "CARICAMENTO IN CORSO...";
         overlay.style.opacity = 1;
 
-        try {
-            let formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', 'lbcyeapf');
-
-            let res = await fetch('https://api.cloudinary.com/v1_1/msic1lpw/image/upload', {
-                method: 'POST',
-                body: formData
-            });
-            let data = await res.json();
-            
-            if (data.secure_url) {
-                await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: data.secure_url });
-                rpgAlert("Sistema", "Foto profilo aggiornata con successo!");
-            } else {
-                rpgAlert("Errore", "Impossibile caricare l'immagine.");
-            }
-        } catch(err) {
-            rpgAlert("Errore", "Errore di connessione durante il caricamento.");
-        } finally {
-            overlay.innerText = oldText;
-            overlay.style.opacity = "";
-            e.target.value = ''; 
+        let url = await uploadToCloudinary(file);
+        if(url) {
+            await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: url });
+            rpgAlert("Sistema", "Foto profilo aggiornata con successo!");
+        } else {
+            rpgAlert("Errore", "Upload fallito.");
         }
+        
+        overlay.innerText = oldText;
+        overlay.style.opacity = "";
+        e.target.value = ''; 
     });
 
     window.triggerPatronusImgChange = async function() {
@@ -907,13 +948,32 @@
         if (currentEquip.patronus) { 
             let ans = await rpgConfirm("Prof.ssa Minerva McGranitt", "Vuoi disequipaggiare il tuo Patronus attuale?");
             if(ans) { await removeEquip('patronus'); return; } 
+            else return; 
         }
-        const newUrl = await rpgPrompt("Prof.ssa Minerva McGranitt", "Inserisci l'URL dell'Immagine del tuo Patronus:");
-        if (newUrl !== null) {
-            currentEquip.patronus = { name: userData.patronus || "Patronus", type: "patronus", val: 0, img: newUrl };
-            await updateDoc(doc(db, "students", currentUser.uid), { equipment: currentEquip });
-        }
+        document.getElementById('patronus-upload-input').click();
     }
+
+    document.getElementById('patronus-upload-input').addEventListener('change', async function(e) {
+        let file = e.target.files[0];
+        if (!file) return;
+
+        let slot = document.getElementById('slot-patronus');
+        let originalContent = slot.innerHTML;
+        slot.innerHTML = `<div style="font-size:8px; text-align:center;">Caricamento<br>foto in corso...</div>`;
+
+        let url = await uploadToCloudinary(file);
+        if(url) {
+            let currentEquip = userData.equipment || {};
+            currentEquip.patronus = { name: userData.patronus || "Patronus", type: "patronus", val: 0, img: url };
+            await updateDoc(doc(db, "students", currentUser.uid), { equipment: currentEquip });
+            rpgAlert("Sistema", "Foto Patronus aggiornata con successo!");
+        } else {
+            slot.innerHTML = originalContent;
+            rpgAlert("Errore", "Upload fallito.");
+        }
+        
+        e.target.value = '';
+    });
 
     document.getElementById('btn-sync-hp').addEventListener('click', async () => {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
@@ -1258,18 +1318,11 @@
 
         let bonusOggettiAbilita = {};
         
-        // Prima nascondiamo i badge per resettarli
-        HOGWARTS_SKILLS_MAP.forEach(sk => { 
-            bonusOggettiAbilita[sk.id] = 0; 
-            let gEl = document.getElementById(`gamble-${sk.id}`);
-            if (gEl) gEl.style.display = "none";
-        });
-
-        // Check sulle checkbox delle abilità e disabilita se bloccato
         const tbodySkills = document.getElementById('skills-tbody-list');
         if (tbodySkills) {
             tbodySkills.innerHTML = "";
             HOGWARTS_SKILLS_MAP.forEach(sk => {
+                bonusOggettiAbilita[sk.id] = 0; 
                 tbodySkills.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${STAT_LABELS_IT[sk.stat]})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
             });
             
@@ -1455,6 +1508,12 @@
         }
     });
 
+    // ==========================================
+    // LOGICA DI ACQUISTO E ADOZIONE PET
+    // ==========================================
+    let tempPetData = null;
+    let tempPetUrl = null;
+
     window.buy = async function(id) {
         if(isTraumaBlocked) return;
         let p = { ...SHOP_CATALOG.find(x => x.id === id) };
@@ -1462,24 +1521,88 @@
 
         if(userData.gold < p.cost) return rpgAlert(shopOwner, "Mi dispiace, ma ti mancano i Galeoni per questo articolo!");
 
+        if (p.type === 'pet') { 
+            tempPetData = p;
+            document.getElementById('pet-modal-overlay').style.display = 'flex';
+            return; 
+        }
+
         if (p.type === 'bacchetta') { 
             let customName = await rpgPrompt(shopOwner, "La bacchetta sceglie il mago... dimmi, di che materiale è fatta la tua?"); 
             if (!customName) return rpgAlert(shopOwner, "Acquisto annullato. Torna quando sarai pronto."); 
             p.name = customName; 
-        }
-        if (p.type === 'pet') {
-            let rigaCreatura = await rpgPrompt(shopOwner, "Che creatura magica desideri acquistare?"); 
-            if(!rigaCreatura) return rpgAlert(shopOwner, "Acquisto annullato.");
-            let nomeCreatura = await rpgPrompt(shopOwner, "Come intendi chiamare il tuo nuovo compagno?"); 
-            if(!nomeCreatura) return rpgAlert(shopOwner, "Acquisto annullato.");
-            let fotoCreatura = await rpgPrompt(shopOwner, "Inserisci il link dell'immagine per questo animale (oppure lascia vuoto):");
-            p.name = `${nomeCreatura} (${rigaCreatura})`; if (fotoCreatura) p.img = fotoCreatura;
         }
 
         let currentInv = userData.inventory ? [...userData.inventory] : []; currentInv.push(p);
         await updateDoc(doc(db, "students", currentUser.uid), { gold: userData.gold - p.cost, inventory: currentInv });
         rpgAlert(shopOwner, `L'acquisto di ${p.name} è completato con successo. Buona giornata!`);
     }
+
+    document.getElementById('pet-file-input').addEventListener('change', async function(e) {
+        let file = e.target.files[0];
+        if(!file) return;
+
+        document.getElementById('pet-preview-container').style.display = 'block';
+        document.getElementById('pet-loading-text').style.display = 'block';
+        document.getElementById('pet-preview-img').style.display = 'none';
+        document.getElementById('btn-confirm-pet').disabled = true;
+
+        let url = await uploadToCloudinary(file);
+        
+        document.getElementById('pet-loading-text').style.display = 'none';
+        if(url) {
+            tempPetUrl = url;
+            document.getElementById('pet-preview-img').src = url;
+            document.getElementById('pet-preview-img').style.display = 'inline-block';
+            document.getElementById('btn-confirm-pet').disabled = false;
+        } else {
+            rpgAlert("Errore", "Upload fallito.");
+        }
+        
+        e.target.value = '';
+    });
+
+    window.cancelPetPurchase = function() {
+        document.getElementById('pet-modal-overlay').style.display = 'none';
+        document.getElementById('pet-type-input').value = "";
+        document.getElementById('pet-name-input').value = "";
+        document.getElementById('pet-file-input').value = "";
+        document.getElementById('pet-preview-container').style.display = 'none';
+        document.getElementById('pet-preview-img').src = "";
+        document.getElementById('btn-confirm-pet').disabled = true;
+        tempPetData = null;
+        tempPetUrl = null;
+    };
+
+    window.confirmPetPurchase = async function() {
+        let typeInput = document.getElementById('pet-type-input').value.trim();
+        let nameInput = document.getElementById('pet-name-input').value.trim();
+        let shopOwner = getShopOwner('pet');
+        
+        if(!typeInput || !nameInput || !tempPetUrl) {
+            return rpgAlert("Serraglio", "Devi inserire il tipo, il nome e caricare una foto prima di confermare!");
+        }
+
+        if(userData.gold < tempPetData.cost) {
+            cancelPetPurchase();
+            return rpgAlert("Serraglio", "Mi dispiace, ma ti mancano i Galeoni per questo articolo!");
+        }
+
+        let p = { ...tempPetData };
+        p.name = `${nameInput} (${typeInput})`;
+        p.img = tempPetUrl;
+
+        let currentInv = userData.inventory ? [...userData.inventory] : []; 
+        currentInv.push(p);
+        
+        await updateDoc(doc(db, "students", currentUser.uid), { 
+            gold: userData.gold - p.cost, 
+            inventory: currentInv 
+        });
+
+        cancelPetPurchase();
+        rpgAlert(shopOwner, `L'adozione di ${p.name} è completata con successo. Trattalo con cura!`);
+    };
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
         let shopOwner = "Cassiera dell'Emporio";
