@@ -354,67 +354,75 @@
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
             
-            <div class="profile-layout-container" id="profile-main-grid-wrapper">
-                <div class="col-avatar" id="profile-col-avatar">
+            <div class="profile-layout-container" id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:stretch; margin-top:20px; flex-wrap:nowrap;">
+                
+                <!-- PANNELLO SINISTRO (Avatar, Equipaggiamento, Risorse, 6 Statistiche) -->
+                <div class="left-panel" id="profile-col-avatar" style="display:flex; flex-direction:column; gap:15px; width:400px; flex-shrink:0;">
                     
-                    <div class="avatar-wrapper" onclick="triggerAvatarChange()">
-                        <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
-                        <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
-                    </div>
-                    <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
-                    
-                    <div class="identity-row">
-                        <div class="house-logo-box" id="slot-house-logo"><img id="img-house-logo" src="" alt="Stemma"></div>
-                        <div class="frog-slots-mini">
-                            <div class="frog-mini-slot" id="slot-frog-0" onclick="removeFrog(0)">Rana 1</div>
-                            <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)">Rana 2</div>
-                        </div>
-                    </div>
-                    <div class="stats-block-box">
-                        <div class="mini-edit-row">
-                            <span><b>HP (COS):</b> <span id="prof-hp-text">0/0</span></span>
-                            <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
-                                C:<input type="number" id="edit-curr-hp"> 
-                                M:<input type="number" id="edit-max-hp"> 
-                                <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button>
+                    <!-- Riga 1: Avatar + Slot Equip -->
+                    <div style="display:flex; gap:15px;">
+                        <!-- Avatar, Stemma ingrandito, Rane ingrandite -->
+                        <div style="width:280px; display:flex; flex-direction:column; gap:15px;">
+                            <div class="avatar-wrapper" onclick="triggerAvatarChange()">
+                                <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
+                                <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
                             </div>
-                        </div>
-                        <div class="bar-container" style="margin-bottom: 5px;"><div id="prof-hp-bar" class="bar-fill hp-fill"></div></div>
-                        
-                        <div class="mini-edit-row">
-                            <span><b>MP <span id="prof-mp-stat-label"></span>:</b> <span id="prof-mp-text">0/0</span></span>
-                            <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
-                                C:<input type="number" id="edit-curr-mp"> 
-                                M:<input type="number" id="edit-max-mp"> 
-                                <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button>
-                            </div>
-                        </div>
-                        <div class="bar-container"><div id="prof-mp-bar" class="bar-fill mp-fill"></div></div>
-                        
-                        <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">Classe Armatura: <span id="prof-ca">10</span></div>
-                        <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
-                    </div>
-                </div>
-
-                <div class="col-middle" id="profile-col-middle">
-                    <div class="col-equip-dnd">
-                        
-                        <!-- Contenitore Equipaggiamento Allineato all'Avatar -->
-                        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 440px;">
-                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')"><span>Bacchetta</span></div>
-                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')"><span>Toga</span></div>
-                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')"><span>Libro</span></div>
+                            <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
                             
-                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()">
+                            <div class="identity-row">
+                                <div class="house-logo-box" id="slot-house-logo" style="width:90px; height:90px;"><img id="img-house-logo" src="" alt="Stemma"></div>
+                                <div class="frog-slots-mini" style="gap:10px;">
+                                    <div class="frog-mini-slot" id="slot-frog-0" onclick="removeFrog(0)" style="width:75px; height:75px; font-size:10px;">Rana 1</div>
+                                    <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)" style="width:75px; height:75px; font-size:10px;">Rana 2</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slot Equipaggiamento (Non si sovrappongono più) -->
+                        <div class="col-equip-dnd" id="profile-col-middle" style="width:90px; display:flex; flex-direction:column; justify-content:space-between; height:440px;">
+                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:90px; height:90px;"><span>Bacchetta</span></div>
+                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:90px; height:90px;"><span>Toga</span></div>
+                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:90px; height:90px;"><span>Libro</span></div>
+                            
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:90px; height:90px;">
                                 <span>Patronus</span><div class="avatar-overlay" style="font-size:9px;">FOTO</div>
                             </div>
                             <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
 
-                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
+                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:90px; height:90px;"><span>Compagno</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Riga 2: Risorse (HP/MP) & 6 Statistiche Base -->
+                    <div style="display:flex; gap:15px; align-items:flex-end; flex-grow:1;">
+                        <!-- Blocco HP, MP, CA -->
+                        <div class="stats-block-box" style="flex:1;">
+                            <div class="mini-edit-row">
+                                <span><b>HP (COS):</b> <span id="prof-hp-text">0/0</span></span>
+                                <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
+                                    C:<input type="number" id="edit-curr-hp"> 
+                                    M:<input type="number" id="edit-max-hp"> 
+                                    <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button>
+                                </div>
+                            </div>
+                            <div class="bar-container" style="margin-bottom: 5px;"><div id="prof-hp-bar" class="bar-fill hp-fill"></div></div>
+                            
+                            <div class="mini-edit-row">
+                                <span><b>MP <span id="prof-mp-stat-label"></span>:</b> <span id="prof-mp-text">0/0</span></span>
+                                <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
+                                    C:<input type="number" id="edit-curr-mp"> 
+                                    M:<input type="number" id="edit-max-mp"> 
+                                    <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button>
+                                </div>
+                            </div>
+                            <div class="bar-container"><div id="prof-mp-bar" class="bar-fill mp-fill"></div></div>
+                            
+                            <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">Classe Armatura: <span id="prof-ca">10</span></div>
+                            <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">Bonus Att. Magico: <span id="prof-atk-magico">+0</span></div>
                         </div>
 
-                        <!-- Contenitore D&D Allineato al box HP/MP -->
-                        <div style="display: flex; flex-direction: column;">
+                        <!-- Blocco 6 Statistiche -->
+                        <div style="flex:1; display:flex; flex-direction:column;">
                             <div class="dnd-stats-vertical">
                                 <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
                                 <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
@@ -423,59 +431,71 @@
                                 <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
                                 <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                             </div>
-                            <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
-                            <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA E SALVA</button>
+                            <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:6px; border-radius:4px; color:#5c4314; display:flex; align-items:center; justify-content:center; height:32px;">Punti disp: <span id="prof-stat-points" style="font-weight:bold; margin-left:4px;">0</span></div>
+                            <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top:5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-disciplines">
-                        <table class="skills-inline-edit">
-                            <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
-                            <tbody id="skills-tbody-list"></tbody>
-                        </table>
+                <!-- PANNELLO DESTRO (Abilità, Incantesimi, Appunti, Baule ridotto, Libretto) -->
+                <div class="right-panel" style="flex:1; display:flex; flex-direction:column; gap:15px; min-width:0;">
+                    
+                    <!-- RIGA SUPERIORE: Abilità & Tratti (Sinistra) + Incantesimi (Destra) -->
+                    <div style="display:flex; gap:15px; align-items:stretch;">
                         
-                        <div style="margin-top: 15px; border-top: 1px dashed #8a6d3b; padding-top: 10px;">
-                            <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-bottom:5px; color:#5c4314;">Tratti & Talenti</div>
-                            <div id="prof-traits-list" style="font-size:11px; color:#3a2e1d; white-space: pre-wrap;">Nessun tratto speciale.</div>
+                        <!-- 18 Abilità + Tratti -->
+                        <div class="col-disciplines" style="width:280px; flex-shrink:0;">
+                            <table class="skills-inline-edit">
+                                <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
+                                <tbody id="skills-tbody-list"></tbody>
+                            </table>
+                            
+                            <div style="margin-top: 15px; border-top: 1px dashed #8a6d3b; padding-top: 10px;">
+                                <div style="font-size:14px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-bottom:10px; color:#5c4314;">Tratti & Talenti</div>
+                                <ul id="prof-traits-list" style="margin:0; padding-left:20px; font-size:12px; color:#3a2e1d; line-height:1.6; font-family:'Georgia', serif;">
+                                    <!-- Gestito via JS -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Incantesimi & Trucchetti -->
+                        <div id="profile-spells-box" class="trauma-disabled-mask-target" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
+                            <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px; flex-grow:1; overflow-y:auto; padding-right:5px;"></div>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Aggiungi Riga</button>
+                                <button class="btn-vintage" style="font-size:11px; padding:6px 12px;" onclick="syncSpells()">Salva Incantesimi</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-inventory" id="profile-right-inventory-box">
-                    <h2 class="inventory-header-title" id="baule-dynamic-title">Baule Scolastico</h2>
-                    <div class="inventory-items-flow" id="profile-inventory"></div>
+                    <!-- RIGA INFERIORE: Appunti (Grandi) + Baule (Ridotto) + Libretto -->
+                    <div style="display:flex; gap:15px; align-items:stretch;">
+                        
+                        <!-- Appunti -->
+                        <div id="profile-notes-box" class="trauma-disabled-mask-target" style="flex:2.2; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
+                            <textarea id="profile-notes" placeholder="Scrivi qui ricette di pozioni, indizi, appunti sulle lezioni..." style="flex-grow:1; width:100%; resize:vertical; min-height: 150px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none; box-sizing:border-box;"></textarea>
+                            <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px; align-self:flex-start;" onclick="syncNotes()">Salva Appunti</button>
+                        </div>
+
+                        <!-- Baule (Più compatto) -->
+                        <div class="col-inventory trauma-disabled-mask-target" id="profile-right-inventory-box" style="flex:1.2; min-width:180px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                            <h2 class="inventory-header-title" id="baule-dynamic-title" style="font-size:16px; color:#5c4314; border-bottom:2px solid #8a6d3b; margin-top:0;">Baule</h2>
+                            <div class="inventory-items-flow" id="profile-inventory" style="background: rgba(0,0,0,0.03); border-radius: 4px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; min-height: 100px; align-content:flex-start;"></div>
+                        </div>
+
+                        <!-- Libretto Voti -->
+                        <div id="profile-exams-box" class="trauma-disabled-mask-target" style="flex:1.2; min-width:180px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto Voti</h3>
+                            <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
+                            <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
+                            <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y:auto; flex-grow:1; padding-right:5px;"></div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
-            <!-- NUOVE SEZIONI -->
-            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
-                
-                <div id="profile-spells-box" style="flex: 2; min-width: 350px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
-                    <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px;">
-                    </div>
-                    <div style="display: flex; gap: 10px; margin-top: 15px;">
-                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Aggiungi Riga</button>
-                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px;" onclick="syncSpells()">Salva Incantesimi</button>
-                    </div>
-                </div>
-
-                <div id="profile-notes-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
-                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti liberi..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
-                    <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px;" onclick="syncNotes()">Salva Appunti</button>
-                </div>
-                
-                <div id="profile-exams-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto & Progressi</h3>
-                    <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
-                    <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
-                    <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y:auto; flex-grow:1;">
-                    </div>
-                </div>
-
-            </div>
-
         </div>
 
         <!-- SCHERMATA SHOP DIAGON ALLEY -->
@@ -1504,7 +1524,33 @@
             document.getElementById('profile-notes').value = userData.notes || "";
         }
         
-        document.getElementById('prof-traits-list').innerText = userData.traits || "Nessun tratto speciale.";
+        let traitsText = userData.traits || "Nessun tratto speciale.";
+        let traitsHtml = "";
+        
+        if (traitsText === "Nessun tratto speciale.") {
+            traitsHtml = `<li>${traitsText}</li>`;
+        } else {
+            let lines = traitsText.split('\n');
+            lines.forEach(line => {
+                if(line.trim() !== "") {
+                    let colonIdx = line.indexOf(':');
+                    let dashIdx = line.indexOf('-');
+                    
+                    if (colonIdx > -1) {
+                        let title = line.substring(0, colonIdx);
+                        let desc = line.substring(colonIdx + 1);
+                        traitsHtml += `<li style="margin-bottom:8px;"><strong style="color:#8a6d3b;">${title}:</strong>${desc}</li>`;
+                    } else if (dashIdx > -1 && line.toLowerCase().startsWith("tratto")) {
+                        let title = line.substring(0, dashIdx);
+                        let desc = line.substring(dashIdx + 1);
+                        traitsHtml += `<li style="margin-bottom:8px;"><strong style="color:#8a6d3b;">${title}-</strong>${desc}</li>`;
+                    } else {
+                        traitsHtml += `<li style="margin-bottom:8px;">${line}</li>`;
+                    }
+                }
+            });
+        }
+        document.getElementById('prof-traits-list').innerHTML = traitsHtml;
 
         const spellsContainer = document.getElementById('spells-list');
         if (!spellsContainer.contains(document.activeElement)) {
