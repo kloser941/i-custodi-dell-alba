@@ -355,8 +355,10 @@
                 <div class="col-avatar" id="profile-col-avatar">
                     <div class="avatar-wrapper" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago">
-                        <div class="avatar-overlay">CAMBIA FOTO</div>
+                        <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
                     </div>
+                    <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
+                    
                     <div class="identity-row">
                         <div class="house-logo-box" id="slot-house-logo"><img id="img-house-logo" src="" alt="Stemma"></div>
                         <div class="frog-slots-mini">
@@ -859,17 +861,45 @@
     function getDndModifier(score) { return Math.floor((parseInt(score || 10) - 10) / 2); }
     function formatMod(mod) { return mod >= 0 ? `+${mod}` : `${mod}`; }
 
-    const tbody = document.getElementById('skills-tbody-list');
-    tbody.innerHTML = "";
-    HOGWARTS_SKILLS_MAP.forEach(sk => {
-        tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${STAT_LABELS_IT[sk.stat]})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
-    });
-
-    window.triggerAvatarChange = async function() {
+    window.triggerAvatarChange = function() {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
-        const newUrl = await rpgPrompt("Prof.ssa Minerva McGranitt", "Inserisci l'URL per aggiornare la tua Foto:", userData.avatarUrl || "");
-        if (newUrl !== null) await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: newUrl });
-    }
+        document.getElementById('avatar-upload-input').click();
+    };
+
+    document.getElementById('avatar-upload-input').addEventListener('change', async function(e) {
+        let file = e.target.files[0];
+        if (!file) return;
+
+        let overlay = document.getElementById('avatar-overlay-text');
+        let oldText = overlay.innerText;
+        overlay.innerText = "CARICAMENTO IN CORSO...";
+        overlay.style.opacity = 1;
+
+        try {
+            let formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'lbcyeapf');
+
+            let res = await fetch('https://api.cloudinary.com/v1_1/msic1lpw/image/upload', {
+                method: 'POST',
+                body: formData
+            });
+            let data = await res.json();
+            
+            if (data.secure_url) {
+                await updateDoc(doc(db, "students", currentUser.uid), { avatarUrl: data.secure_url });
+                rpgAlert("Sistema", "Foto profilo aggiornata con successo!");
+            } else {
+                rpgAlert("Errore", "Impossibile caricare l'immagine.");
+            }
+        } catch(err) {
+            rpgAlert("Errore", "Errore di connessione durante il caricamento.");
+        } finally {
+            overlay.innerText = oldText;
+            overlay.style.opacity = "";
+            e.target.value = ''; 
+        }
+    });
 
     window.triggerPatronusImgChange = async function() {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
@@ -956,16 +986,6 @@
         });
         rpgAlert("Sistema", "Statistiche confermate! I tuoi progressi sono stati registrati e le tue risorse ricalcolate retroattivamente.");
     };
-
-    tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-        chk.addEventListener('change', async (e) => {
-            if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
-            let skId = e.target.getAttribute('data-skill');
-            let currentProficiencies = userData.proficiencies || {};
-            currentProficiencies[skId] = e.target.checked;
-            await updateDoc(doc(db, "students", currentUser.uid), { proficiencies: currentProficiencies });
-        });
-    });
 
     window.addSpellRow = async function() {
         if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
@@ -1237,11 +1257,32 @@
         } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
 
         let bonusOggettiAbilita = {};
+        
+        // Prima nascondiamo i badge per resettarli
         HOGWARTS_SKILLS_MAP.forEach(sk => { 
             bonusOggettiAbilita[sk.id] = 0; 
             let gEl = document.getElementById(`gamble-${sk.id}`);
             if (gEl) gEl.style.display = "none";
         });
+
+        // Check sulle checkbox delle abilità e disabilita se bloccato
+        const tbodySkills = document.getElementById('skills-tbody-list');
+        if (tbodySkills) {
+            tbodySkills.innerHTML = "";
+            HOGWARTS_SKILLS_MAP.forEach(sk => {
+                tbodySkills.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${STAT_LABELS_IT[sk.stat]})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
+            });
+            
+            tbodySkills.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+                chk.addEventListener('change', async (e) => {
+                    if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
+                    let skId = e.target.getAttribute('data-skill');
+                    let currentProficiencies = userData.proficiencies || {};
+                    currentProficiencies[skId] = e.target.checked;
+                    await updateDoc(doc(db, "students", currentUser.uid), { proficiencies: currentProficiencies });
+                });
+            });
+        }
 
         let atkMagicoBonus = 0;
         if (userData.equipment) {
