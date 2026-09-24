@@ -103,8 +103,8 @@
         .bar-container { width: 100%; background: #ccc; border-radius: 4px; position: relative; height: 15px; overflow: hidden; border: 1px solid #333; }
         .bar-fill { height: 100%; width: 100%; transition: width 0.2s; }
         .hp-fill { background: #c0392b; } .mp-fill { background: #2980b9; }
-        .mini-edit-row { display: flex; gap: 4px; align-items: center; font-size: 11px; margin-bottom: 2px; justify-content: space-between; }
-        .mini-edit-row input { width: 45px; font-size: 10px; text-align: center; padding: 1px; border: 1px solid #8a6d3b; border-radius: 3px; }
+        .mini-edit-row { display: flex; gap: 4px; align-items: center; font-size: 11px; margin-bottom: 2px; justify-content: space-between; flex-wrap: nowrap; white-space: nowrap; }
+        .mini-edit-row input { width: 36px; font-size: 10px; text-align: center; padding: 1px; border: 1px solid #8a6d3b; border-radius: 3px; }
 
         .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
         .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
@@ -186,7 +186,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI */
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -365,10 +365,26 @@
                         </div>
                     </div>
                     <div class="stats-block-box">
-                        <div class="mini-edit-row"><span><b>HP Vita (COS):</b> <span id="prof-hp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-hp"> M:<input type="number" id="edit-max-hp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button></div></div>
+                        <div class="mini-edit-row">
+                            <span><b>HP (COS):</b> <span id="prof-hp-text">0/0</span></span>
+                            <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
+                                C:<input type="number" id="edit-curr-hp"> 
+                                M:<input type="number" id="edit-max-hp"> 
+                                <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button>
+                            </div>
+                        </div>
                         <div class="bar-container" style="margin-bottom: 5px;"><div id="prof-hp-bar" class="bar-fill hp-fill"></div></div>
-                        <div class="mini-edit-row"><span><b>MP Mana <span id="prof-mp-stat-label"></span>:</b> <span id="prof-mp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-mp"> M:<input type="number" id="edit-max-mp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button></div></div>
+                        
+                        <div class="mini-edit-row">
+                            <span><b>MP <span id="prof-mp-stat-label"></span>:</b> <span id="prof-mp-text">0/0</span></span>
+                            <div style="display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;">
+                                C:<input type="number" id="edit-curr-mp"> 
+                                M:<input type="number" id="edit-max-mp"> 
+                                <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button>
+                            </div>
+                        </div>
                         <div class="bar-container"><div id="prof-mp-bar" class="bar-fill mp-fill"></div></div>
+                        
                         <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">Classe Armatura: <span id="prof-ca">10</span></div>
                         <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
                     </div>
@@ -392,7 +408,7 @@
                             <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                         </div>
                         <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
-                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA & SALVA</button>
+                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA E SALVA</button>
                     </div>
 
                     <div class="col-disciplines">
@@ -437,7 +453,8 @@
                 <div id="profile-exams-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto & Progressi</h3>
                     <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
-                    <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; font-size:12px; overflow-y:auto; flex-grow:1;">
+                    <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
+                    <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y:auto; flex-grow:1;">
                     </div>
                 </div>
 
@@ -1016,12 +1033,12 @@
             let newLevel = data.level || 1;
             let newMaxHp = data.maxHp || 10;
             let newMaxMp = data.maxMp || 10;
-            let exams = data.exams || [];
+            let storico = data.storicoProgressi || data.exams || [];
             let newStatPoints = data.stat_points || 0;
             
-            exams.push({ subject: motivation, grade: grade });
+            let passed = ["O", "E", "A"].includes(grade);
 
-            if(["O", "E", "A"].includes(grade)) {
+            if(passed) {
                 newLevel += 1;
                 
                 let conMod = getDndModifier(data.core_stats?.con || 10);
@@ -1039,12 +1056,19 @@
                     newStatPoints += 2;
                 }
             }
+            
+            storico.push({ 
+                subject: motivation, 
+                grade: grade, 
+                level: newLevel,
+                date: Date.now() 
+            });
 
             await updateDoc(studentRef, {
                 level: newLevel,
                 maxHp: newMaxHp,
                 maxMp: newMaxMp,
-                exams: exams,
+                storicoProgressi: storico,
                 stat_points: newStatPoints
             });
 
@@ -1290,12 +1314,22 @@
         
         const examsContainer = document.getElementById('exams-list');
         examsContainer.innerHTML = "";
-        let currentExams = userData.exams || [];
+        let currentExams = userData.storicoProgressi || userData.exams || [];
         if (currentExams.length === 0) {
             examsContainer.innerHTML = "<p style='color:#666; font-style:italic;'>Nessun evento sostenuto finora.</p>";
         } else {
             currentExams.forEach(ex => {
-                examsContainer.innerHTML += `<div style="padding:4px; background:#fffdf7; border:1px solid #be9b64; border-radius:4px;"><b>${ex.subject}</b>: Esito ${ex.grade}</div>`;
+                let d = ex.date ? new Date(ex.date).toLocaleString('it-IT') : "Data sconosciuta";
+                let lvlInfo = ex.level ? `Livello ${ex.level}` : `Livello -`;
+                examsContainer.innerHTML += `
+                <div style="padding:6px; background:#fffdf7; border:1px solid #be9b64; border-radius:4px; font-size:11px;">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:#5c4314;">
+                        <span>${lvlInfo}</span>
+                        <span>Voto: ${ex.grade}</span>
+                    </div>
+                    <div style="margin:4px 0;">${ex.subject}</div>
+                    <div style="font-size:9px; color:#888;">${d}</div>
+                </div>`;
             });
         }
 
@@ -1503,7 +1537,7 @@
             await setDoc(doc(db, "students", credential.user.uid), {
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
                 gold: 15, hp: maxHp, maxHp: maxHp, mp: maxMp, maxMp: maxMp, healCompleteTime: null,
-                level: 1, exams: [], stat_points: 0,
+                level: 1, storicoProgressi: [], stat_points: 0,
                 core_stats: stats, proficiencies: startProfs, traits: traits.join('\n'), notes: "",
                 equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: []
             });
