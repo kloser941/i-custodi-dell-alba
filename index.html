@@ -68,7 +68,7 @@
         .profile-layout-container { display: flex; gap: 15px; align-items: stretch; margin-top: 20px;}
         .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; padding-right: 5px; }
         .col-middle { display: flex; gap: 15px; flex-shrink: 0; padding-right: 5px; }
-        .col-equip-dnd { width: 160px; display: flex; flex-direction: column; gap: 15px; } /* Allargato a 160px per contenere i bottoni */
+        .col-equip-dnd { width: 160px; display: flex; flex-direction: column; gap: 15px; } 
         .col-disciplines { width: 250px; display: flex; flex-direction: column; gap: 10px; }
         .col-inventory { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
 
@@ -109,7 +109,8 @@
         .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
         .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
-        .dnd-stat-box-vert input { width: 24px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; pointer-events: none; }
+        /* Box Statistiche Adattato e Centrato */
+        .dnd-stat-box-vert input { width: 50px; min-width: 50px; text-align: center; font-size: 13px; font-weight: bold; padding: 2px 4px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; pointer-events: none; }
         .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
         
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -117,13 +118,11 @@
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
 
-        /* NEGOZI DIAGON ALLEY (STRADA) */
+        /* NEGOZI DIAGON ALLEY */
         .diagon-street-container { position: relative; width: 100%; height: 100%; background-image: url('https://i.imgur.com/vaxStnF.jpeg'); background-size: cover; background-position: center; display: flex; overflow: hidden; }
         .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
-        
-        /* INTERNO DEI NEGOZI (NUOVO LAYOUT) */
         .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
         .shop-container { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin-top: 15px; }
@@ -146,7 +145,6 @@
             object-fit: fill; z-index: 2; pointer-events: none;
         }
 
-        /* Contenitori dei liquidi dietro il vetro */
         .glass-container {
             position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
             width: 8.5%; 
@@ -154,13 +152,11 @@
             bottom: 45%;    
         }
         
-        /* Coordinate X calcolate col calibro sull'immagine PNG */
         .pos-grif { left: 16.8%; }
         .pos-tass { left: 36%; }
         .pos-corv { left: 55.7%; }
         .pos-serp { left: 75.8%; }
 
-        /* Il liquido che si riempie in altezza */
         .gems-liquid-reservoir {
             width: 100%; height: 0%; 
             transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -168,13 +164,11 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
 
-        /* Texture a "Cristalli Magici" */
         .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
         .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
         .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
         .gems-Serpeverde { background: linear-gradient(135deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(225deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(315deg, #15803d 25%, transparent 25%), linear-gradient(45deg, #15803d 25%, transparent 25%); background-size: 10px 10px; background-color: #14532d; }
 
-        /* Le etichette dei punteggi posizionate CENTRATE sulle targhette in basso (Livello 3) */
         .score-label {
             position: absolute; z-index: 3; 
             top: 65.5%; 
@@ -192,7 +186,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -371,9 +365,9 @@
                         </div>
                     </div>
                     <div class="stats-block-box">
-                        <div class="mini-edit-row"><span><b>HP Vita:</b> <span id="prof-hp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-hp"> M:<input type="number" id="edit-max-hp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button></div></div>
+                        <div class="mini-edit-row"><span><b>HP Vita (COS):</b> <span id="prof-hp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-hp"> M:<input type="number" id="edit-max-hp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-hp">OK</button></div></div>
                         <div class="bar-container" style="margin-bottom: 5px;"><div id="prof-hp-bar" class="bar-fill hp-fill"></div></div>
-                        <div class="mini-edit-row"><span><b>MP Mana:</b> <span id="prof-mp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-mp"> M:<input type="number" id="edit-max-mp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button></div></div>
+                        <div class="mini-edit-row"><span><b>MP Mana <span id="prof-mp-stat-label"></span>:</b> <span id="prof-mp-text">0/0</span></span><div>C:<input type="number" id="edit-curr-mp"> M:<input type="number" id="edit-max-mp"> <button class="btn-vintage" style="padding:1px 3px; font-size:9px;" id="btn-sync-mp">OK</button></div></div>
                         <div class="bar-container"><div id="prof-mp-bar" class="bar-fill mp-fill"></div></div>
                         <div style="font-size:13px; font-weight:bold; margin-top:6px; padding-top:4px; border-top:1px dashed #8a6d3b;">Classe Armatura: <span id="prof-ca">10</span></div>
                         <div style="font-size:11px; font-weight:bold; color: #1e3a8a;">Bonus Attacco Magico: <span id="prof-atk-magico">+0</span></div>
@@ -390,12 +384,12 @@
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
                         <div class="dnd-stats-vertical" style="margin-top: 10px;">
-                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><div style="display:flex;align-items:center;"><button id="btn-minus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('int')">-</button><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('int')">+</button></div><span class="dnd-mod-label" id="mod-int">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('int')">-</button><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('int')">+</button></div><span class="dnd-mod-label" id="mod-int">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                         </div>
                         <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
                         <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA & SALVA</button>
@@ -619,6 +613,8 @@
         'libro': "https://static.wikia.nocookie.net/harrypotter/images/7/7b/Ghirigoro.jpg/revision/latest?cb=20210809132121&path-prefix=it",
         'pet': "https://static.wikia.nocookie.net/harrypotter/images/d/d8/Magical_Menagerie.jpeg/revision/latest/scale-to-width-down/1200?cb=20250407065014"
     };
+
+    const STAT_LABELS_IT = { str: "FOR", dex: "DES", con: "COS", int: "INT", wis: "SAG", cha: "CAR" };
 
     const HOGWARTS_SKILLS_MAP = [
         { id: "incantesimi", name: "Incantesimi", stat: "int" }, 
@@ -849,7 +845,7 @@
     const tbody = document.getElementById('skills-tbody-list');
     tbody.innerHTML = "";
     HOGWARTS_SKILLS_MAP.forEach(sk => {
-        tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${sk.stat.toUpperCase()})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
+        tbody.innerHTML += `<tr><td><b>${sk.name}</b> <span style="font-size:8px; color:#666;">(${STAT_LABELS_IT[sk.stat]})</span><span id="gamble-${sk.id}" class="skill-gamble-note" style="display:none; font-size:9px; color:#b45309; font-style:italic; margin-top:2px;">Appunti confusi: dà Vantaggio. Se il tiro minore è tra 1 e 5 compresi, scatta un Fiasco Magico</span></td><td><span id="label-tot-${sk.id}" style="font-weight:bold; color:#16a34a;">+0</span> <input type="checkbox" id="chk-${sk.id}" data-skill="${sk.id}"></td></tr>`;
     });
 
     window.triggerAvatarChange = async function() {
@@ -882,7 +878,7 @@
     });
 
     // ==========================================
-    // SISTEMA ASI (AUMENTO CARATTERISTICHE BOZZA)
+    // SISTEMA ASI E RETROATTIVITÀ (HP E MP)
     // ==========================================
     window.increaseDraftStat = function(statKey) {
         if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
@@ -913,8 +909,23 @@
         let newConMod = getDndModifier(draftStats.con);
         let diffMod = newConMod - oldConMod;
         
-        let newMaxHp = userData.maxHp + (diffMod * (userData.level || 1));
-        let newHp = userData.hp + (diffMod * (userData.level || 1));
+        let h = (userData.house || "").toLowerCase().trim();
+        let magicStat = "int"; // fallback
+        if(h === "corvonero") magicStat = "int";
+        else if(h === "serpeverde" || h === "grifondoro") magicStat = "cha";
+        else if(h === "tassorosso") magicStat = "wis";
+
+        let oldMagicMod = getDndModifier(baseStats[magicStat]);
+        let newMagicMod = getDndModifier(draftStats[magicStat]);
+        let diffMagicMod = newMagicMod - oldMagicMod;
+
+        let lvl = userData.level || 1;
+
+        let newMaxHp = userData.maxHp + (diffMod * lvl);
+        let newHp = userData.hp + (diffMod * lvl);
+        
+        let newMaxMp = userData.maxMp + (diffMagicMod * lvl);
+        let newMp = userData.mp + (diffMagicMod * lvl);
         
         draftingActive = false; 
         
@@ -922,9 +933,11 @@
             core_stats: draftStats,
             stat_points: availablePoints,
             maxHp: newMaxHp,
-            hp: newHp
+            hp: newHp,
+            maxMp: newMaxMp,
+            mp: newMp
         });
-        rpgAlert("Sistema", "Statistiche confermate! I tuoi progressi sono stati registrati.");
+        rpgAlert("Sistema", "Statistiche confermate! I tuoi progressi sono stati registrati e le tue risorse ricalcolate retroattivamente.");
     };
 
     tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
@@ -1131,6 +1144,16 @@
         document.getElementById('prof-mp-bar').style.width = Math.max(0, Math.min(100, (userData.mp / userData.maxMp)*100)) + "%";
         if(document.activeElement !== document.getElementById('edit-curr-mp')) document.getElementById('edit-curr-mp').value = userData.mp;
         if(document.activeElement !== document.getElementById('edit-max-mp')) document.getElementById('edit-max-mp').value = userData.maxMp;
+
+        // Dicitura Statistica per MP
+        let h = (userData.house || "").toLowerCase().trim();
+        let mpStatLabel = "";
+        if(h === "corvonero") mpStatLabel = "(INT)";
+        else if(h === "serpeverde" || h === "grifondoro") mpStatLabel = "(CAR)";
+        else if(h === "tassorosso") mpStatLabel = "(SAG)";
+        
+        let mpLabelEl = document.getElementById('prof-mp-stat-label');
+        if (mpLabelEl) mpLabelEl.innerText = mpStatLabel;
 
         let draftMods = {};
         
