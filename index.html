@@ -210,35 +210,35 @@
 
     <div id="main-content">
         
-        <!-- Barra dei soldi -->
-        <div id="top-bar-gold" class="top-status-bar"><span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">0 Galeoni</span></div>
+        <!-- Barra dei soldi e Tasto Master -->
+        <div id="top-bar-gold" class="top-status-bar">
+            <button id="btn-master-panel" class="btn-vintage" style="display:none; margin-right:15px;" onclick="changeScreen('screen-master')">Pannello Master</button>
+            <span id="header-galeoni" style="font-weight:bold; font-size:14px; color:#ffd700;">0 Galeoni</span>
+        </div>
 
-        <!-- SCHERMATA DI LOGIN / REGISTRAZIONE -->
+        <!-- SCHERMATA DI LOGIN E REGISTRAZIONE -->
         <div id="screen-login" class="screen active" style="z-index:200;">
             <div style="background: rgba(250, 241, 214, 0.9); padding: 20px; max-width: 450px; margin: 20px auto; border-radius: 10px; border: 3px double #8a6d3b; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
                 <h1 style="text-align:center;">I Custodi dell'Alba RPG</h1>
-                
                 <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
                     <h3>Accedi</h3>
                     <input type="email" id="login-email" placeholder="Tua Email">
                     <input type="password" id="login-password" placeholder="Password">
                     <button id="btn-login" class="btn-vintage" style="width:100%;">ENTRA A SCUOLA</button>
                 </div>
-                
                 <hr style="border: 1px dashed #8a6d3b; margin: 15px 0;">
-                
                 <div class="login-container" style="margin: 10px auto; border:none; box-shadow: none; background: transparent;">
                     <h3>Smistamento Nuovo Studente</h3>
                     <input type="text" id="reg-name" placeholder="Nome Personaggio">
                     <input type="text" id="reg-patronus" placeholder="Forma del Patronus">
-                    
                     <select id="reg-house">
                         <option value="Grifondoro">Grifondoro</option>
                         <option value="Serpeverde">Serpeverde</option>
                         <option value="Corvonero">Corvonero</option>
                         <option value="Tassorosso">Tassorosso</option>
                     </select>
-
+                    
+                    <!-- Nuovo Selettore Discendenza -->
                     <select id="reg-discendenza" onchange="updateRegStatsUI()">
                         <option value="umano">Umano Standard (+1 a due stat)</option>
                         <option value="veela">Discendente di Veela (+2 CAR, +1 DES)</option>
@@ -273,6 +273,58 @@
             </div>
         </div>
 
+        <!-- PANNELLO MASTER -->
+        <div id="screen-master" class="screen">
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <div class="hospital-box" style="max-width: 600px; margin-top: 50px;">
+                <h2 style="color:#5c4314; font-family:'Georgia', serif; margin-top:0;">Pannello Master</h2>
+                
+                <div style="text-align:left; margin-bottom:10px;">
+                    <label style="font-weight:bold; font-size:12px;">Studente:</label>
+                    <select id="dm-student-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;"></select>
+                </div>
+                
+                <div style="text-align:left; margin-bottom:10px;">
+                    <label style="font-weight:bold; font-size:12px;">Materia d'Esame:</label>
+                    <select id="dm-subject-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
+                        <option value="Incantesimi">Incantesimi</option>
+                        <option value="Trasfigurazione">Trasfigurazione</option>
+                        <option value="Storia della Magia">Storia della Magia</option>
+                        <option value="Erbologia">Erbologia</option>
+                        <option value="Pozioni & Alchimia">Pozioni & Alchimia</option>
+                        <option value="Investigazione">Investigazione</option>
+                        <option value="Cura Creature Magiche">Cura Creature Magiche</option>
+                        <option value="Divinazione">Divinazione</option>
+                        <option value="Difesa Contro le Arti Oscure">Difesa Contro le Arti Oscure</option>
+                        <option value="Percezione">Percezione</option>
+                        <option value="Volo & Orientamento">Volo & Orientamento</option>
+                        <option value="Furtività">Furtività</option>
+                        <option value="Rapidità di Mano">Rapidità di Mano</option>
+                        <option value="Acrobazia">Acrobazia</option>
+                        <option value="Inganno">Inganno</option>
+                        <option value="Persuasione">Persuasione</option>
+                        <option value="Intimidire">Intimidire</option>
+                        <option value="Intrattenere">Intrattenere</option>
+                        <option value="Atletica (Quidditch)">Atletica (Quidditch)</option>
+                    </select>
+                </div>
+                
+                <div style="text-align:left; margin-bottom:20px;">
+                    <label style="font-weight:bold; font-size:12px;">Voto:</label>
+                    <select id="dm-grade-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;">
+                        <option value="O">O (Oltre le Aspettative)</option>
+                        <option value="E">E (Eccellente)</option>
+                        <option value="A">A (Accettabile)</option>
+                        <option value="P">P (Scarso)</option>
+                        <option value="D">D (Desolante)</option>
+                        <option value="T">T (Troll)</option>
+                    </select>
+                </div>
+                
+                <button class="btn-vintage" style="width:100%; background:#b22222; color:white; padding:12px;" onclick="submitExam()">REGISTRA VOTO E FAI LIVELLARE</button>
+            </div>
+        </div>
+
         <!-- SCHERMATA MAPPA CHIUSA (LANDING PAGE) -->
         <div id="screen-landing" class="screen" onclick="openMarauderMap()">
             <div id="landing-overlay">Giuro solennemente di non avere buone intenzioni...</div>
@@ -281,7 +333,6 @@
         <!-- SCHERMATA MAPPA APERTA (MENU PRINCIPALE) -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <!-- ZONE CLICCABILI INVISIBILI -->
                 <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -346,6 +397,12 @@
                             <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
                             <tbody id="skills-tbody-list"></tbody>
                         </table>
+                        
+                        <!-- Box dei Tratti e Talenti Razziali/Di Classe -->
+                        <div style="margin-top: 15px; border-top: 1px dashed #8a6d3b; padding-top: 10px;">
+                            <div style="font-size:12px; font-weight:bold; border-bottom:1px dashed #8a6d3b; padding-bottom:3px; margin-bottom:5px; color:#5c4314;">Tratti & Talenti</div>
+                            <div id="prof-traits-list" style="font-size:11px; color:#3a2e1d; white-space: pre-wrap;">Nessun tratto speciale.</div>
+                        </div>
                     </div>
                 </div>
 
@@ -355,10 +412,10 @@
                 </div>
             </div>
 
-            <!-- NUOVE SEZIONI: INCANTESIMI E APPUNTI -->
+            <!-- NUOVE SEZIONI: INCANTESIMI, APPUNTI E LIBRETTO ESAMI -->
             <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
                 
-                <div id="profile-spells-box" style="flex: 2; min-width: 400px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <div id="profile-spells-box" style="flex: 2; min-width: 350px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
                     <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px;">
                         <!-- JS riempie le righe qui -->
@@ -369,10 +426,19 @@
                     </div>
                 </div>
 
-                <div id="profile-notes-box" style="flex: 1; min-width: 250px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div id="profile-notes-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
-                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti e consulta i tuoi tratti speciali..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
+                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
                     <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px;" onclick="syncNotes()">Salva Appunti</button>
+                </div>
+                
+                <div id="profile-exams-box" style="flex: 1; min-width: 200px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto degli Esami</h3>
+                    <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
+                    <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Caratteristica da assegnare!</div>
+                    <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; font-size:12px; overflow-y:auto; flex-grow:1;">
+                        <!-- JS riempie i voti qui -->
+                    </div>
                 </div>
 
             </div>
@@ -414,22 +480,15 @@
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             
             <div class="great-hall-container">
-                
-                <!-- LIVELLO 1: I liquidi che si riempiono da sotto (dietro l'immagine) -->
                 <div class="glass-container pos-grif"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div>
                 <div class="glass-container pos-tass"><div id="gem-fill-Tassorosso" class="gems-liquid-reservoir gems-Tassorosso"></div></div>
                 <div class="glass-container pos-corv"><div id="gem-fill-Corvonero" class="gems-liquid-reservoir gems-Corvonero"></div></div>
                 <div class="glass-container pos-serp"><div id="gem-fill-Serpeverde" class="gems-liquid-reservoir gems-Serpeverde"></div></div>
-
-                <!-- LIVELLO 2: L'immagine PNG della Sala Grande con le clessidre bucate -->
                 <img src="https://i.imgur.com/nR5WMtM.png" class="great-hall-foreground" alt="Sala Grande Coppa">
-
-                <!-- LIVELLO 3: Targhette dei punteggi (SOLO NUMERO E CENTRATO) -->
                 <div class="score-label lbl-grif" id="pts-Grifondoro">0</div>
                 <div class="score-label lbl-tass" id="pts-Tassorosso">0</div>
                 <div class="score-label lbl-corv" id="pts-Corvonero">0</div>
                 <div class="score-label lbl-serp" id="pts-Serpeverde">0</div>
-
             </div>
         </div>
 
@@ -507,7 +566,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, updateDoc, collection, query, orderBy, limit, onSnapshot, addDoc, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCZcpJJXtPRFxi_Lebe-m0YM-BVi4FdsN0",
@@ -603,7 +662,9 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO PER LA REGISTRAZIONE
+    // ==========================================
+    // FUNZIONI AGGIUNTIVE DI CALCOLO DINAMICO
+    // ==========================================
     window.updateRegStatsUI = function() {
         let val = document.getElementById('reg-discendenza').value;
         let box = document.getElementById('dynamic-stats-box');
@@ -619,7 +680,6 @@
         }
     };
     
-    // Inizializza interfaccia extra al caricamento
     setTimeout(() => { if(window.updateRegStatsUI) window.updateRegStatsUI(); }, 500);
 
     window.rpgDialog = function(type, title, message, defaultValue = "") {
@@ -676,6 +736,22 @@
         return "Negoziante";
     }
 
+    // CARICAMENTO STUDENTI PER IL PANNELLO MASTER
+    window.loadStudentsForDM = async function() {
+        let select = document.getElementById('dm-student-select');
+        select.innerHTML = '<option value="">-- Seleziona Studente --</option>';
+        try {
+            const snap = await getDocs(collection(db, "students"));
+            snap.forEach(doc => {
+                let d = doc.data();
+                select.innerHTML += `<option value="${d.uid}">${d.name} (${d.house})</option>`;
+            });
+        } catch (e) {
+            console.error("Errore caricamento studenti per DM", e);
+        }
+    };
+
+    // MOTORE CENTRALE DI CAMBIO SCHERMATE
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
@@ -692,13 +768,14 @@
             target.style.display = 'flex'; document.getElementById('top-bar-gold').style.display = 'flex';
         } else if (screenId === 'screen-landing' || screenId === 'screen-login') {
             target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'none';
-        } else if (screenId === 'screen-coppa' || screenId === 'screen-shop') {
+        } else if (screenId === 'screen-coppa' || screenId === 'screen-shop' || screenId === 'screen-master') {
             target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'flex';
         } else {
             target.style.display = 'block'; document.getElementById('top-bar-gold').style.display = 'flex';
         }
 
         if (screenId === 'screen-shop') closeStore();
+        if (screenId === 'screen-master') loadStudentsForDM();
     }
 
     window.openMarauderMap = function() {
@@ -866,12 +943,76 @@
         rpgAlert("Prof.ssa Minerva McGranitt", "Appunti salvati nel registro.");
     };
 
+    // FUNZIONE LEVEL UP DAL PANNELLO MASTER
+    window.submitExam = async function() {
+        let targetUid = document.getElementById('dm-student-select').value;
+        let subject = document.getElementById('dm-subject-select').value;
+        let grade = document.getElementById('dm-grade-select').value;
+        
+        if(!targetUid) return rpgAlert("Sistema", "Devi selezionare uno studente.");
+
+        try {
+            const studentRef = doc(db, "students", targetUid);
+            const snap = await getDoc(studentRef);
+            if(!snap.exists()) return rpgAlert("Sistema", "Studente non trovato nel database.");
+
+            let data = snap.data();
+            let newLevel = data.level || 1;
+            let newMaxHp = data.maxHp || 10;
+            let newMaxMp = data.maxMp || 10;
+            let exams = data.exams || [];
+            
+            // Aggiungi l'esame allo storico
+            exams.push({ subject: subject, grade: grade });
+
+            // Controlla se è Promosso (O, E, A)
+            if(["O", "E", "A"].includes(grade)) {
+                newLevel += 1;
+                
+                let conMod = getDndModifier(data.core_stats?.con || 10);
+                let house = (data.house || "").toLowerCase().trim();
+                let hpGain = 0;
+                
+                if(house === 'grifondoro' || house === 'tassorosso') hpGain = 5 + conMod;
+                if(house === 'serpeverde' || house === 'corvonero') hpGain = 4 + conMod;
+                if(hpGain < 1) hpGain = 1;
+
+                newMaxHp += hpGain;
+                newMaxMp += 2;
+            }
+
+            await updateDoc(studentRef, {
+                level: newLevel,
+                maxHp: newMaxHp,
+                maxMp: newMaxMp,
+                exams: exams
+            });
+
+            rpgAlert("Pannello Master", "Esame registrato con successo nel libretto dello studente!");
+
+        } catch(e) {
+            rpgAlert("Errore", "Si è verificato un errore: " + e.message);
+        }
+    };
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
+            
+            // Mostra il pulsante Master solo se l'email corrisponde
+            if (user.email.toLowerCase() === "ciropicozzi@gmail.com") {
+                document.getElementById('btn-master-panel').style.display = "block";
+            } else {
+                document.getElementById('btn-master-panel').style.display = "none";
+            }
+
             onSnapshot(doc(db, "students", user.uid), (snap) => { if (snap.exists()) { userData = snap.data(); renderUI(); } });
             changeScreen('screen-landing');
-        } else { currentUser = null; userData = null; changeScreen('screen-login'); }
+        } else { 
+            currentUser = null; userData = null; 
+            document.getElementById('btn-master-panel').style.display = "none";
+            changeScreen('screen-login'); 
+        }
     });
 
     function renderUI() {
@@ -963,10 +1104,15 @@
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
 
+        // Appunti Render
         if(document.activeElement !== document.getElementById('profile-notes')) {
             document.getElementById('profile-notes').value = userData.notes || "";
         }
+        
+        // Render Tratti e Talenti
+        document.getElementById('prof-traits-list').innerText = userData.traits || "Nessun tratto speciale.";
 
+        // Render Spells
         const spellsContainer = document.getElementById('spells-list');
         if (!spellsContainer.contains(document.activeElement)) {
             spellsContainer.innerHTML = "";
@@ -982,6 +1128,28 @@
                         <button class="btn-vintage spell-del" style="padding:4px 8px; font-size:12px; background:#c0392b; color:white; border-color:#800000;" onclick="removeSpell(${idx})">X</button>
                     </div>
                 `;
+            });
+        }
+        
+        // Render Exams & Level
+        let lvl = userData.level || 1;
+        document.getElementById('prof-magical-level').innerText = lvl;
+        
+        let alertEl = document.getElementById('prof-level-alert');
+        if ([4, 8, 12, 16].includes(lvl)) {
+            alertEl.style.display = "block";
+        } else {
+            alertEl.style.display = "none";
+        }
+        
+        const examsContainer = document.getElementById('exams-list');
+        examsContainer.innerHTML = "";
+        let currentExams = userData.exams || [];
+        if (currentExams.length === 0) {
+            examsContainer.innerHTML = "<p style='color:#666; font-style:italic;'>Nessun esame sostenuto finora.</p>";
+        } else {
+            currentExams.forEach(ex => {
+                examsContainer.innerHTML += `<div style="padding:4px; background:#fffdf7; border:1px solid #be9b64; border-radius:4px;"><b>${ex.subject}</b>: Voto ${ex.grade}</div>`;
             });
         }
 
@@ -1129,7 +1297,6 @@
         s.forEach(d => { let r=d.data(); b.innerHTML += `<div><b>${r.player}</b>: ${r.formula} -> <span style="color:red;font-weight:bold;">${r.result}</span></div>`; });
     });
 
-    // SISTEMA DI REGISTRAZIONE AGGIORNATO (Logica Razze e Classi D&D)
     document.getElementById('btn-register').addEventListener('click', async () => {
         try {
             const credential = await createUserWithEmailAndPassword(auth, document.getElementById('reg-email').value, document.getElementById('reg-password').value);
@@ -1139,14 +1306,13 @@
             let choice1 = document.getElementById('reg-stat-1').value;
             let choice2 = document.getElementById('reg-stat-2').value;
 
-            // 1. Calcolo Statistiche Base + Razza
             let stats = { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
             let traits = [];
             let startProfs = {};
 
             if (discendenza === "umano") {
                 stats[choice1] += 1;
-                stats[choice2] += 1; // Se sceglie due uguali prende +2
+                stats[choice2] += 1; 
                 traits.push("Tratto Umano: Competenza extra in 1 abilità a scelta.");
             } else if (discendenza === "veela") {
                 stats.cha += 2; stats.dex += 1;
@@ -1167,7 +1333,6 @@
             let maxHp = 0;
             let maxMp = 0;
 
-            // 2. Calcolo Casata (Classe D&D)
             if (house === "Grifondoro") {
                 maxHp = 8 + conMod; maxMp = 6;
                 startProfs['intrattenere'] = true; startProfs['persuasione'] = true; startProfs['atletica'] = true;
@@ -1186,18 +1351,15 @@
                 traits.push("Tratto Tassorosso: Tocco Curativo / Protezione della Natura.");
             }
 
-            // Bonus finale HP Gigante
             if (discendenza === "gigante") maxHp += 1;
-            if (maxHp < 1) maxHp = 1; // Previene HP zero in caso di penalità estreme
-
-            // Iniezione automatica Tratti negli appunti
-            let initialNotes = "== TRATTI INIZIALI ==\n" + traits.join("\n") + "\n\n== APPUNTI ==\n";
+            if (maxHp < 1) maxHp = 1;
 
             await setDoc(doc(db, "students", credential.user.uid), {
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
                 gold: 15, hp: maxHp, maxHp: maxHp, mp: maxMp, maxMp: maxMp, healCompleteTime: null,
-                core_stats: stats, proficiencies: startProfs,
-                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: [], notes: initialNotes
+                level: 1, exams: [],
+                core_stats: stats, proficiencies: startProfs, traits: traits.join('\n'), notes: "",
+                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: []
             });
         } catch (e) { rpgAlert("Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
     });
@@ -1208,7 +1370,7 @@
         try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
-    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN (Limite alzato a 1000)
+    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
             let dataCoppa = snapshot.data(); let caseList = ["Grifondoro", "Serpeverde", "Corvonero", "Tassorosso"]; 
