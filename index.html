@@ -98,11 +98,46 @@
         .mini-edit-row { display: flex; gap: 4px; align-items: center; margin-bottom: 2px; justify-content: space-between; flex-wrap: nowrap; white-space: nowrap; }
         .mini-edit-row input { border: 1px solid #8a6d3b; border-radius: 3px; text-align:center; padding:1px; }
 
-        .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
-        .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .dnd-stat-box-vert label { font-size: 11px; font-weight: bold; width: 30px; }
-        .dnd-stat-box-vert input { width: 50px; min-width: 50px; text-align: center; font-size: 14px; font-weight: bold; padding: 2px 4px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; pointer-events: none; }
-        .dnd-stat-box-vert .dnd-mod-label { font-size: 13px; font-weight: bold; color: #7f1d1d; min-width: 25px; text-align: right; }
+        /* CARATTERISTICHE BASE - CSS RIPRISTINATO */
+        .dnd-stats-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #f5ebd2;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #be9b64;
+        }
+        .dnd-stat-box-vert {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fffdec;
+            padding: 6px;
+            border: 1px solid #8a6d3b;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .dnd-stat-box-vert label {
+            font-size: 11px;
+            font-weight: bold;
+            width: 30px;
+        }
+        .dnd-stat-box-vert input {
+            width: 45px;
+            text-align: center;
+            font-size: 12px;
+            padding: 2px;
+            border: 1px solid #be9b64;
+            border-radius: 3px;
+        }
+        .dnd-stat-box-vert .dnd-mod-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #7f1d1d;
+            min-width: 20px;
+            text-align: right;
+        }
         
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .skills-inline-edit th { font-size: 11px; text-align: left; border-bottom: 1px solid #8a6d3b; padding: 8px 6px; background: #ebdca8; }
@@ -344,7 +379,7 @@
             
             <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
                 
-                <!-- COLONNA SINISTRA (Avatar Espanso + Rane Trasparenti + Logo Trasparente) -->
+                <!-- COLONNA SINISTRA (Avatar Espanso + Rane Trasparenti + Logo Centrato) -->
                 <div class="trauma-disabled-mask-target" style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
                     
                     <!-- Avatar -->
@@ -360,9 +395,9 @@
                         <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)" style="width:90px; height:90px; font-size:11px;">Rana 2</div>
                     </div>
 
-                    <!-- Logo Casata (Trasparente e Ingrandito) -->
-                    <div class="house-logo-box" id="slot-house-logo" style="width:160px; height:160px; align-self:center; background:transparent; border:none;">
-                        <img id="img-house-logo" src="" alt="Stemma">
+                    <!-- Logo Casata (Trasparente, Ingrandito e Centrato) -->
+                    <div class="house-logo-box" id="slot-house-logo" style="display: flex; justify-content: center; align-items: center; margin: 0 auto; width: 100%; height:160px; background:transparent; border:none;">
+                        <img id="img-house-logo" src="" alt="Stemma" style="max-width: 160px; max-height: 160px;">
                     </div>
 
                 </div>
@@ -388,7 +423,7 @@
                             </div>
                         </div>
 
-                        <!-- Colonna Risorse, Stats ed Equipaggiamento spostato su -->
+                        <!-- Colonna Risorse, Stats ed Incantesimi (Spells spostato su) -->
                         <div style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                             
                             <!-- Risorse e Difese -->
@@ -426,14 +461,14 @@
                                 </div>
                             </div>
 
-                            <!-- Statistiche Base ed Equipaggiamento Attivo (Invertito) -->
+                            <!-- Statistiche Base e Incantesimi & Trucchetti -->
                             <div style="display:flex; gap:20px; flex:1; align-items:stretch;">
                                 
-                                <!-- 6 Statistiche Base (Griglia Stile Originale) -->
-                                <div style="width:260px; flex-shrink:0; background:#fffdec; border:1px solid #8a6d3b; border-radius:6px; padding:15px; display:flex; flex-direction:column; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-                                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314; text-align:center;">Caratteristiche Base</h3>
+                                <!-- 6 Statistiche Base (Colonna Verticale Originale D&D) -->
+                                <div style="width:200px; flex-shrink:0; background:#fffdec; border:1px solid #8a6d3b; border-radius:6px; padding:15px; display:flex; flex-direction:column; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314; text-align:center;">Caratteristiche</h3>
                                     
-                                    <div class="dnd-stats-vertical" style="flex-grow:1; display:grid; grid-template-columns: 1fr 1fr; gap:10px; background:transparent; border:none; padding:0;">
+                                    <div class="dnd-stats-vertical">
                                         <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
                                         <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
                                         <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;justify-content:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
@@ -446,33 +481,33 @@
                                     <button class="btn-vintage" style="width:100%; font-size:12px; padding:8px; margin-top:10px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA AUMENTI</button>
                                 </div>
 
-                                <!-- Equipaggiamento Attivo (Senza cornice, box trasparenti) -->
-                                <div style="flex:1; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:10px; background:transparent; border:none; box-shadow:none; padding:10px;">
-                                    <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:100px; height:100px; font-size:11px;"><span>Bacchetta</span></div>
-                                    <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:100px; height:100px; font-size:11px;"><span>Toga</span></div>
-                                    <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:100px; height:100px; font-size:11px;"><span>Libro</span></div>
-                                    
-                                    <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;">
-                                        <span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div>
+                                <!-- Incantesimi & Trucchetti (Spostato in alto) -->
+                                <div id="profile-spells-box" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
+                                    <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px; flex-grow:1; overflow-y:auto; padding-right:5px; min-height:120px;"></div>
+                                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Riga</button>
+                                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px; flex-grow: 1;" onclick="syncSpells()">Salva Magie</button>
                                     </div>
-                                    <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
-
-                                    <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:100px; height:100px; font-size:11px;"><span>Compagno</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- FASCIA INTERMEDIA: INCANTESIMI E BAULE (Spostati in basso) -->
+                    <!-- FASCIA INTERMEDIA: EQUIPAGGIAMENTO E BAULE -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
-                        <!-- Incantesimi & Trucchetti -->
-                        <div id="profile-spells-box" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
-                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
-                            <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px; flex-grow:1; overflow-y:auto; padding-right:5px; min-height:120px;"></div>
-                            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                                <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Riga</button>
-                                <button class="btn-vintage" style="font-size:11px; padding:6px 12px; flex-grow: 1;" onclick="syncSpells()">Salva Magie</button>
+                        <!-- Equipaggiamento Attivo (Spostato in basso, senza cornice, box trasparenti) -->
+                        <div style="flex:1; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:10px; background:transparent; border:none; box-shadow:none; padding:10px;">
+                            <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:100px; height:100px; font-size:11px;"><span>Bacchetta</span></div>
+                            <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:100px; height:100px; font-size:11px;"><span>Toga</span></div>
+                            <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:100px; height:100px; font-size:11px;"><span>Libro</span></div>
+                            
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;">
+                                <span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div>
                             </div>
+                            <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
+
+                            <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:100px; height:100px; font-size:11px;"><span>Compagno</span></div>
                         </div>
 
                         <!-- Baule -->
