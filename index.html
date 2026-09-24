@@ -68,7 +68,7 @@
         .profile-layout-container { display: flex; gap: 15px; align-items: stretch; margin-top: 20px;}
         .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; padding-right: 5px; }
         .col-middle { display: flex; gap: 15px; flex-shrink: 0; padding-right: 5px; }
-        .col-equip-dnd { width: 120px; display: flex; flex-direction: column; gap: 15px; }
+        .col-equip-dnd { width: 160px; display: flex; flex-direction: column; gap: 15px; } /* Allargato a 160px per contenere i bottoni */
         .col-disciplines { width: 250px; display: flex; flex-direction: column; gap: 10px; }
         .col-inventory { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
 
@@ -109,8 +109,7 @@
         .dnd-stats-vertical { display: flex; flex-direction: column; gap: 6px; background: #f5ebd2; padding: 8px; border-radius: 6px; border: 1px solid #be9b64; }
         .dnd-stat-box-vert { display: flex; align-items: center; justify-content: space-between; background: #fffdec; padding: 6px; border: 1px solid #8a6d3b; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .dnd-stat-box-vert label { font-size: 10px; font-weight: bold; width: 30px; }
-        /* Input stat disabilitati in manuale, si alzano solo coi punti */
-        .dnd-stat-box-vert input { width: 30px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; }
+        .dnd-stat-box-vert input { width: 24px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; background-color: #f2e6c4; color: #5c4314; pointer-events: none; }
         .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: right; }
         
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -118,11 +117,13 @@
         .skills-inline-edit td { padding: 4px 6px; border-bottom: 1px dashed #ddd; }
         .skills-inline-edit input[type="checkbox"] { transform: scale(0.9); margin: 0; vertical-align: middle; float: right; }
 
-        /* NEGOZI DIAGON ALLEY */
+        /* NEGOZI DIAGON ALLEY (STRADA) */
         .diagon-street-container { position: relative; width: 100%; height: 100%; background-image: url('https://i.imgur.com/vaxStnF.jpeg'); background-size: cover; background-position: center; display: flex; overflow: hidden; }
         .shop-click-zone { flex: 1; height: 100%; cursor: pointer; position: relative; transition: all 0.2s; border-right: 1px dashed rgba(255,255,255,0.1); }
         .shop-click-zone:last-child { border-right: none; }
         .shop-click-zone:hover { background: rgba(255, 215, 0, 0.2); box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.5); }
+        
+        /* INTERNO DEI NEGOZI (NUOVO LAYOUT) */
         .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
         .shop-container { display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: left; margin-top: 15px; }
@@ -145,6 +146,7 @@
             object-fit: fill; z-index: 2; pointer-events: none;
         }
 
+        /* Contenitori dei liquidi dietro il vetro */
         .glass-container {
             position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
             width: 8.5%; 
@@ -152,11 +154,13 @@
             bottom: 45%;    
         }
         
+        /* Coordinate X calcolate col calibro sull'immagine PNG */
         .pos-grif { left: 16.8%; }
         .pos-tass { left: 36%; }
         .pos-corv { left: 55.7%; }
         .pos-serp { left: 75.8%; }
 
+        /* Il liquido che si riempie in altezza */
         .gems-liquid-reservoir {
             width: 100%; height: 0%; 
             transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -164,11 +168,13 @@
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
 
+        /* Texture a "Cristalli Magici" */
         .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
         .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
         .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
         .gems-Serpeverde { background: linear-gradient(135deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(225deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(315deg, #15803d 25%, transparent 25%), linear-gradient(45deg, #15803d 25%, transparent 25%); background-size: 10px 10px; background-color: #14532d; }
 
+        /* Le etichette dei punteggi posizionate CENTRATE sulle targhette in basso (Livello 3) */
         .score-label {
             position: absolute; z-index: 3; 
             top: 65.5%; 
@@ -186,7 +192,7 @@
         .lbl-corv { left: 55.2%; }
         .lbl-serp { left: 75%; }
 
-        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI */
+        /* EMPORIO CIOCCORANE E INFERMERIA E NEGOZI (HEADER E BOX) */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -384,14 +390,15 @@
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')"><span>Compagno</span></div>
                         </div>
                         <div class="dnd-stats-vertical" style="margin-top: 10px;">
-                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('str')">+</button><span class="dnd-mod-label" id="mod-str">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('dex')">+</button><span class="dnd-mod-label" id="mod-dex">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('con')">+</button><span class="dnd-mod-label" id="mod-con">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('int')">+</button><span class="dnd-mod-label" id="mod-int">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('wis')">+</button><span class="dnd-mod-label" id="mod-wis">+0</span></div>
-                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin:0 2px;" onclick="increaseStat('cha')">+</button><span class="dnd-mod-label" id="mod-cha">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Forza">FOR</label><div style="display:flex;align-items:center;"><button id="btn-minus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('str')">-</button><input type="number" id="dnd-str" readonly value="10"><button id="btn-plus-str" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('str')">+</button></div><span class="dnd-mod-label" id="mod-str">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Destrezza">DES</label><div style="display:flex;align-items:center;"><button id="btn-minus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('dex')">-</button><input type="number" id="dnd-dex" readonly value="10"><button id="btn-plus-dex" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('dex')">+</button></div><span class="dnd-mod-label" id="mod-dex">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Costituzione">COS</label><div style="display:flex;align-items:center;"><button id="btn-minus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('con')">-</button><input type="number" id="dnd-con" readonly value="10"><button id="btn-plus-con" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('con')">+</button></div><span class="dnd-mod-label" id="mod-con">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Intelligenza">INT</label><div style="display:flex;align-items:center;"><button id="btn-minus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('int')">-</button><input type="number" id="dnd-int" readonly value="10"><button id="btn-plus-int" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('int')">+</button></div><span class="dnd-mod-label" id="mod-int">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Saggezza">SAG</label><div style="display:flex;align-items:center;"><button id="btn-minus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('wis')">-</button><input type="number" id="dnd-wis" readonly value="10"><button id="btn-plus-wis" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('wis')">+</button></div><span class="dnd-mod-label" id="mod-wis">+0</span></div>
+                            <div class="dnd-stat-box-vert"><label title="Carisma">CAR</label><div style="display:flex;align-items:center;"><button id="btn-minus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-right:3px;" onclick="decreaseDraftStat('cha')">-</button><input type="number" id="dnd-cha" readonly value="10"><button id="btn-plus-cha" class="btn-vintage" style="display:none; padding:1px 5px; font-size:10px; margin-left:3px;" onclick="increaseDraftStat('cha')">+</button></div><span class="dnd-mod-label" id="mod-cha">+0</span></div>
                         </div>
                         <div id="prof-stat-points-container" style="font-size:11px; text-align:center; margin-top:5px; padding:4px; border-radius:4px; color:#5c4314;">Punti caratteristica disponibili: <span id="prof-stat-points" style="font-weight:bold;">0</span></div>
+                        <button class="btn-vintage" style="width:100%; font-size:10px; padding:6px; margin-top: 5px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA & SALVA</button>
                     </div>
 
                     <div class="col-disciplines">
@@ -583,6 +590,12 @@
     let currentUser = null; let userData = null; let isTraumaBlocked = false; let clinicInterval = null;
     let currentHousePointsData = { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 };
     const PROFICIENCY_BONUS = 2;
+    
+    // VARIABILI PER IL DRAFTING STATISTICHE
+    let draftingActive = false;
+    let baseStats = {};
+    let draftStats = {};
+    let availablePoints = 0;
 
     const HOUSE_LOGOS = { grifondoro: "https://imgur.com/AeIu16S.png", serpeverde: "https://imgur.com/eX3RZ2G.png", corvonero: "https://imgur.com/hedsChE.png", tassorosso: "https://imgur.com/3cFFSnZ.png" };
     
@@ -868,18 +881,50 @@
         await updateDoc(doc(db, "students", currentUser.uid), { mp: parseInt(document.getElementById('edit-curr-mp').value)||0, maxMp: parseInt(document.getElementById('edit-max-mp').value)||0 });
     });
 
-    window.increaseStat = async function(statKey) {
+    // ==========================================
+    // SISTEMA ASI (AUMENTO CARATTERISTICHE BOZZA)
+    // ==========================================
+    window.increaseDraftStat = function(statKey) {
         if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
-        let pts = userData.stat_points || 0;
-        if (pts <= 0) return;
+        if (availablePoints > 0) {
+            draftStats[statKey]++;
+            availablePoints--;
+            draftingActive = true;
+            renderUI();
+        }
+    };
+    
+    window.decreaseDraftStat = function(statKey) {
+        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        if (draftStats[statKey] > baseStats[statKey]) {
+            draftStats[statKey]--;
+            availablePoints++;
+            if (availablePoints === (userData.stat_points || 0)) {
+                draftingActive = false; 
+            }
+            renderUI();
+        }
+    };
+
+    window.saveDraftStats = async function() {
+        if(isTraumaBlocked) return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!");
         
-        let newStats = { ...userData.core_stats };
-        newStats[statKey] = (newStats[statKey] || 10) + 1;
+        let oldConMod = getDndModifier(baseStats.con);
+        let newConMod = getDndModifier(draftStats.con);
+        let diffMod = newConMod - oldConMod;
+        
+        let newMaxHp = userData.maxHp + (diffMod * (userData.level || 1));
+        let newHp = userData.hp + (diffMod * (userData.level || 1));
+        
+        draftingActive = false; 
         
         await updateDoc(doc(db, "students", currentUser.uid), {
-            core_stats: newStats,
-            stat_points: pts - 1
+            core_stats: draftStats,
+            stat_points: availablePoints,
+            maxHp: newMaxHp,
+            hp: newHp
         });
+        rpgAlert("Sistema", "Statistiche confermate! I tuoi progressi sono stati registrati.");
     };
 
     tbody.querySelectorAll('input[type="checkbox"]').forEach(chk => {
@@ -1066,6 +1111,12 @@
     });
 
     function renderUI() {
+        if (!draftingActive && userData) {
+            baseStats = { ...(userData.core_stats || { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }) };
+            draftStats = { ...baseStats };
+            availablePoints = userData.stat_points || 0;
+        }
+
         document.getElementById('header-galeoni').innerText = userData.gold + " Galeoni";
         document.getElementById('baule-dynamic-title').innerText = `Baule di ${userData.name}`;
         document.getElementById('img-house-logo').src = HOUSE_LOGOS[userData.house.toLowerCase().trim()] || "";
@@ -1081,15 +1132,13 @@
         if(document.activeElement !== document.getElementById('edit-curr-mp')) document.getElementById('edit-curr-mp').value = userData.mp;
         if(document.activeElement !== document.getElementById('edit-max-mp')) document.getElementById('edit-max-mp').value = userData.maxMp;
 
-        let core = userData.core_stats || { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 };
-        let mods = {};
+        let draftMods = {};
         
-        let statPoints = userData.stat_points || 0;
         let pointsContainer = document.getElementById('prof-stat-points-container');
         let pointsSpan = document.getElementById('prof-stat-points');
         
-        pointsSpan.innerText = statPoints;
-        if (statPoints > 0) {
+        pointsSpan.innerText = availablePoints;
+        if (availablePoints > 0 || draftingActive) {
             pointsContainer.style.background = "#fadbd8";
             pointsContainer.style.color = "#c0392b";
             pointsContainer.style.border = "1px dashed #c0392b";
@@ -1098,16 +1147,21 @@
             pointsContainer.style.color = "#5c4314";
             pointsContainer.style.border = "none";
         }
+
+        let saveBtn = document.getElementById('btn-save-stats');
+        if(saveBtn) saveBtn.style.display = draftingActive ? "block" : "none";
         
-        for(let statKey in core) {
-            mods[statKey] = getDndModifier(core[statKey] || 10);
+        for(let statKey in draftStats) {
+            draftMods[statKey] = getDndModifier(draftStats[statKey] || 10);
             let inputEl = document.getElementById('dnd-' + statKey);
-            if(inputEl && document.activeElement !== inputEl) inputEl.value = core[statKey];
-            document.getElementById('mod-' + statKey).innerText = formatMod(mods[statKey]);
+            if(inputEl) inputEl.value = draftStats[statKey];
+            document.getElementById('mod-' + statKey).innerText = formatMod(draftMods[statKey]);
             
             let plusBtn = document.getElementById('btn-plus-' + statKey);
-            if (plusBtn) {
-                plusBtn.style.display = statPoints > 0 ? "inline-block" : "none";
+            let minusBtn = document.getElementById('btn-minus-' + statKey);
+            if (plusBtn && minusBtn) {
+                plusBtn.style.display = availablePoints > 0 ? "inline-block" : "none";
+                minusBtn.style.display = draftStats[statKey] > baseStats[statKey] ? "inline-block" : "none";
             }
         }
 
@@ -1119,12 +1173,18 @@
         document.getElementById('profile-col-avatar').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-col-middle').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-spells-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-notes-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-exams-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
             document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask'); 
             document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask'); 
             document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-spells-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-notes-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-exams-box').classList.add('trauma-disabled-mask');
         } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
         } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
         } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
@@ -1160,11 +1220,11 @@
         document.getElementById('prof-atk-magico').innerText = formatMod(atkMagicoBonus);
 
         let baseCa = 10; if (userData.equipment && userData.equipment.toga) baseCa = parseInt(userData.equipment.toga.val || 10);
-        document.getElementById('prof-ca').innerText = baseCa + mods.dex;
+        document.getElementById('prof-ca').innerText = baseCa + draftMods.dex;
 
         let userProficiencies = userData.proficiencies || {};
         HOGWARTS_SKILLS_MAP.forEach(sk => {
-            let modBase = mods[sk.stat] || 0;
+            let modBase = draftMods[sk.stat] || 0;
             let haComp = userProficiencies[sk.id] || false;
             let bonusComp = haComp ? PROFICIENCY_BONUS : 0;
             document.getElementById('label-tot-' + sk.id).innerText = formatMod(modBase + bonusComp + (bonusOggettiAbilita[sk.id] || 0));
@@ -1197,6 +1257,13 @@
         
         let lvl = userData.level || 1;
         document.getElementById('prof-magical-level').innerText = lvl;
+        
+        let alertEl = document.getElementById('prof-level-alert');
+        if ([4, 8, 12, 16].includes(lvl)) {
+            alertEl.style.display = "block";
+        } else {
+            alertEl.style.display = "none";
+        }
         
         const examsContainer = document.getElementById('exams-list');
         examsContainer.innerHTML = "";
@@ -1426,6 +1493,7 @@
         try { await signInWithEmailAndPassword(auth, mailField, passField); } catch(e) { rpgAlert("Prof.ssa Minerva McGranitt", "Accesso negato. Hai inserito delle credenziali errate."); }
     });
 
+    // MAPPA I DATI DEL DB SULLE NUOVE CLESSIDRE FULLSCREEN
     onSnapshot(doc(db, "system", "coppa"), (snapshot) => {
         if (snapshot.exists()) {
             let dataCoppa = snapshot.data(); 
