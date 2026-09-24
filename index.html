@@ -71,15 +71,11 @@
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
         .trauma-disabled-mask { opacity: 0.5; pointer-events: none; cursor: not-allowed !important; }
 
-        .identity-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
-        .house-logo-box { display: flex; align-items: center; justify-content: center; }
-        .house-logo-box img { width: 100%; height: 100%; object-fit: contain; }
-        .frog-slots-mini { display: flex; gap: 8px; }
-        .frog-mini-slot { background: #fffdec; border: 1px dashed #7f8c8d; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
+        .frog-mini-slot { background: transparent; border: 1px dashed #8a6d3b; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
         .frog-mini-slot img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Box Equipaggiamento Quadrati Perfetti */
-        .gear-slot { background: #fffdec; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #8a6d3b;}
+        /* Box Equipaggiamento Trasparenti */
+        .gear-slot { background: transparent; border: 1px dashed #8a6d3b; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; text-align: center; cursor: pointer; padding: 4px; position: relative; overflow: hidden; }
         .gear-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; z-index: 1; }
         .gear-slot span { position: relative; z-index: 2; text-shadow: 1px 1px 2px white; }
         .gear-slot .avatar-overlay { opacity: 0; }
@@ -346,36 +342,38 @@
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
             
-            <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:stretch; margin-top:20px;">
+            <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
                 
-                <!-- COLONNA SINISTRA (Avatar + Loghi) ALLARGATA -->
-                <div class="trauma-disabled-mask-target" style="display:flex; flex-direction:column; gap:15px; width:360px; flex-shrink:0;">
+                <!-- COLONNA SINISTRA (Avatar Espanso + Rane Trasparenti + Logo Trasparente) -->
+                <div class="trauma-disabled-mask-target" style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
+                    
                     <!-- Avatar -->
-                    <div class="avatar-wrapper" style="flex-grow:1; display:flex; flex-direction:column; height:auto; min-height:450px;" onclick="triggerAvatarChange()">
+                    <div class="avatar-wrapper" style="height: 650px; width: 100%; display:flex; flex-direction:column;" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago" style="flex-grow:1; object-fit:cover; height:100%;">
                         <div class="avatar-overlay" id="avatar-overlay-text">CAMBIA FOTO</div>
                     </div>
                     <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;">
                     
-                    <!-- Loghi (Logo Casata e Rane) -->
-                    <div class="identity-row" style="display:flex; justify-content:space-between; align-items:center;">
-                        <div class="house-logo-box" id="slot-house-logo" style="width:100px; height:100px;">
-                            <img id="img-house-logo" src="" alt="Stemma">
-                        </div>
-                        <div class="frog-slots-mini" style="gap:10px;">
-                            <div class="frog-mini-slot" id="slot-frog-0" onclick="removeFrog(0)" style="width:85px; height:85px; font-size:11px;">Rana 1</div>
-                            <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)" style="width:85px; height:85px; font-size:11px;">Rana 2</div>
-                        </div>
+                    <!-- Cioccorane (Trasparenti) -->
+                    <div class="frog-slots-mini" style="display:flex; justify-content:center; gap:20px; background:transparent; border:none; box-shadow:none;">
+                        <div class="frog-mini-slot" id="slot-frog-0" onclick="removeFrog(0)" style="width:90px; height:90px; font-size:11px;">Rana 1</div>
+                        <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)" style="width:90px; height:90px; font-size:11px;">Rana 2</div>
                     </div>
+
+                    <!-- Logo Casata (Trasparente e Ingrandito) -->
+                    <div class="house-logo-box" id="slot-house-logo" style="width:160px; height:160px; align-self:center; background:transparent; border:none;">
+                        <img id="img-house-logo" src="" alt="Stemma">
+                    </div>
+
                 </div>
 
-                <!-- COLONNA DESTRA PRINCIPALE -->
+                <!-- COLONNA DESTRA (Resto dei contenuti) -->
                 <div class="trauma-disabled-mask-target right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                     
-                    <!-- FASCIA SUPERIORE DESTRA: Abilità (Sx) + Statistiche/Risorse/Equip (Dx) -->
+                    <!-- FASCIA SUPERIORE DESTRA: Abilità (Sx) + [Risorse, Stats, Incantesimi] (Dx) -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
                         
-                        <!-- 18 Abilità + Tratti -->
+                        <!-- Colonna Abilità + Tratti -->
                         <div class="col-disciplines" style="width:280px; flex-shrink:0;">
                             <table class="skills-inline-edit">
                                 <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
@@ -390,10 +388,10 @@
                             </div>
                         </div>
 
-                        <!-- Risorse, Stats, Equip (Impilati a destra delle abilità) -->
+                        <!-- Colonna Risorse, Stats ed Equipaggiamento spostato su -->
                         <div style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                             
-                            <!-- RISORSE E DIFESE -->
+                            <!-- Risorse e Difese -->
                             <div class="stats-block-box" style="display:flex; flex-direction:row; gap:15px; align-items:center; padding:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                                 <!-- HP -->
                                 <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
@@ -428,10 +426,10 @@
                                 </div>
                             </div>
 
-                            <!-- STATISTICHE E EQUIPAGGIAMENTO -->
+                            <!-- Statistiche Base ed Equipaggiamento Attivo (Invertito) -->
                             <div style="display:flex; gap:20px; flex:1; align-items:stretch;">
                                 
-                                <!-- 6 Statistiche Base -->
+                                <!-- 6 Statistiche Base (Griglia Stile Originale) -->
                                 <div style="width:260px; flex-shrink:0; background:#fffdec; border:1px solid #8a6d3b; border-radius:6px; padding:15px; display:flex; flex-direction:column; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
                                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314; text-align:center;">Caratteristiche Base</h3>
                                     
@@ -448,28 +446,26 @@
                                     <button class="btn-vintage" style="width:100%; font-size:12px; padding:8px; margin-top:10px; display:none; background:#27ae60; color:white; border-color:#1e8449;" id="btn-save-stats" onclick="saveDraftStats()">CONFERMA AUMENTI</button>
                                 </div>
 
-                                <!-- Equipaggiamento -->
-                                <div style="flex-grow:1; min-width:0; background:#fffdec; border:1px solid #8a6d3b; border-radius:6px; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
-                                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314; text-align:center;">Equipaggiamento Attivo</h3>
-                                    <div style="display:flex; justify-content:space-around; align-items:center; flex-grow:1; flex-wrap:wrap; gap:10px;">
-                                        <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:100px; height:100px; font-size:11px;"><span>Bacchetta</span></div>
-                                        <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:100px; height:100px; font-size:11px;"><span>Toga</span></div>
-                                        <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:100px; height:100px; font-size:11px;"><span>Libro</span></div>
-                                        <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;">
-                                            <span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div>
-                                        </div>
-                                        <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
-                                        <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:100px; height:100px; font-size:11px;"><span>Compagno</span></div>
+                                <!-- Equipaggiamento Attivo (Senza cornice, box trasparenti) -->
+                                <div style="flex:1; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:10px; background:transparent; border:none; box-shadow:none; padding:10px;">
+                                    <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:100px; height:100px; font-size:11px;"><span>Bacchetta</span></div>
+                                    <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:100px; height:100px; font-size:11px;"><span>Toga</span></div>
+                                    <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:100px; height:100px; font-size:11px;"><span>Libro</span></div>
+                                    
+                                    <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;">
+                                        <span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div>
                                     </div>
-                                </div>
+                                    <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
 
+                                    <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:100px; height:100px; font-size:11px;"><span>Compagno</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- FASCIA INTERMEDIA: INCANTESIMI E BAULE -->
+                    <!-- FASCIA INTERMEDIA: INCANTESIMI E BAULE (Spostati in basso) -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
-                        <!-- Incantesimi -->
+                        <!-- Incantesimi & Trucchetti -->
                         <div id="profile-spells-box" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
                             <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
                             <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px; flex-grow:1; overflow-y:auto; padding-right:5px; min-height:120px;"></div>
@@ -486,21 +482,21 @@
                         </div>
                     </div>
 
-                    <!-- FASCIA INFERIORE: APPUNTI (Espansi) E LIBRETTO (Fisso) -->
+                    <!-- FASCIA INFERIORE: APPUNTI E LIBRETTO (Libretto allargato) -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
-                        <!-- Appunti (Si espande per riempire lo spazio) -->
+                        <!-- Appunti Personali -->
                         <div id="profile-notes-box" style="flex:1; min-width:0; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                             <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
-                            <textarea id="profile-notes" placeholder="Scrivi qui ricette di pozioni, indizi, appunti sulle lezioni..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none; box-sizing:border-box;"></textarea>
+                            <textarea id="profile-notes" placeholder="Scrivi qui ricette di pozioni, indizi, appunti sulle lezioni..." style="flex-grow:1; width:100%; resize:vertical; min-height: 150px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none; box-sizing:border-box;"></textarea>
                             <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px; align-self:flex-start;" onclick="syncNotes()">Salva Appunti</button>
                         </div>
 
-                        <!-- Libretto Voti -->
-                        <div id="profile-exams-box" style="width:280px; flex-shrink:0; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto Voti</h3>
+                        <!-- Libretto Voti / Progressi (Molto più largo) -->
+                        <div id="profile-exams-box" style="width:480px; flex-shrink:0; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                            <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto Voti & Progressi</h3>
                             <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
                             <div id="prof-level-alert" style="display:none; color:#c0392b; font-size:11px; font-weight:bold; margin-bottom:10px; border:1px dashed #c0392b; padding:5px; background:#fadbd8;">+2 Punti Stat. disponibili!</div>
-                            <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y:auto; flex-grow:1; padding-right:5px;"></div>
+                            <div id="exams-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y:auto; flex-grow:1; padding-right:5px; min-height: 150px;"></div>
                         </div>
                     </div>
 
