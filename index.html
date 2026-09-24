@@ -65,9 +65,9 @@
         .login-container input, .login-container select { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #8a6d3b; background: #fffdf7; border-radius: 4px; }
 
         /* LAYOUT PROFILO */
-        .profile-layout-container { display: flex; gap: 15px; height: calc(100vh - 120px); align-items: stretch; margin-top: 20px;}
-        .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
-        .col-middle { display: flex; gap: 15px; flex-shrink: 0; overflow-y: auto; padding-right: 5px; }
+        .profile-layout-container { display: flex; gap: 15px; align-items: stretch; margin-top: 20px;}
+        .col-avatar { width: 280px; display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; padding-right: 5px; }
+        .col-middle { display: flex; gap: 15px; flex-shrink: 0; padding-right: 5px; }
         .col-equip-dnd { width: 120px; display: flex; flex-direction: column; gap: 15px; }
         .col-disciplines { width: 250px; display: flex; flex-direction: column; gap: 10px; }
         .col-inventory { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
@@ -93,7 +93,7 @@
 
         /* INVENTARIO */
         .inventory-header-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; margin: 0; }
-        .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; }
+        .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; min-height: 200px; }
         .inv-item-slot { width: 80px; height: 80px; background: #fffdec; border-radius: 6px; position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: transform 0.15s; }
         .inv-item-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
         .inv-item-title-tag { position: absolute; bottom: 2px; left: 0; width: 100%; font-size: 8px; background: rgba(255,255,255,0.9); text-align: center; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; z-index: 3; }
@@ -145,7 +145,7 @@
             object-fit: fill; z-index: 2; pointer-events: none;
         }
 
-        /* Contenitori dei liquidi dietro il vetro (Altezza estesa per riempire la clessidra) */
+        /* Contenitori dei liquidi dietro il vetro */
         .glass-container {
             position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
             width: 8.5%; 
@@ -317,6 +317,29 @@
                     <div class="inventory-items-flow" id="profile-inventory"></div>
                 </div>
             </div>
+
+            <!-- NUOVE SEZIONI: INCANTESIMI E APPUNTI -->
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+                
+                <div id="profile-spells-box" style="flex: 2; min-width: 400px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">incantesimi & trucchetti</h3>
+                    <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- JS riempie le righe qui -->
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px; background:#ebdca8;" onclick="addSpellRow()">+ Aggiungi Riga</button>
+                        <button class="btn-vintage" style="font-size:11px; padding:6px 12px;" onclick="syncSpells()">Salva Incantesimi</button>
+                    </div>
+                </div>
+
+                <div id="profile-notes-box" style="flex: 1; min-width: 250px; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
+                    <textarea id="profile-notes" placeholder="Scrivi qui i tuoi appunti..." style="flex-grow:1; width:100%; resize:vertical; min-height: 120px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none;"></textarea>
+                    <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px;" onclick="syncNotes()">Salva Appunti</button>
+                </div>
+
+            </div>
+
         </div>
 
         <!-- SCHERMATA SHOP DIAGON ALLEY -->
@@ -747,6 +770,56 @@
         });
     });
 
+    // FUNZIONI AGGIUNTIVE PER INCANTESIMI E APPUNTI
+    window.addSpellRow = async function() {
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let newSpells = [];
+        document.querySelectorAll('.spell-row').forEach(row => {
+            newSpells.push({
+                name: row.querySelector('.spell-name').value,
+                damage: row.querySelector('.spell-dmg').value,
+                effect: row.querySelector('.spell-eff').value
+            });
+        });
+        newSpells.push({name:"", damage:"", effect:""});
+        await updateDoc(doc(db, "students", currentUser.uid), { spells: newSpells });
+    };
+
+    window.removeSpell = async function(idx) {
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let newSpells = [];
+        document.querySelectorAll('.spell-row').forEach(row => {
+            newSpells.push({
+                name: row.querySelector('.spell-name').value,
+                damage: row.querySelector('.spell-dmg').value,
+                effect: row.querySelector('.spell-eff').value
+            });
+        });
+        newSpells.splice(idx, 1);
+        await updateDoc(doc(db, "students", currentUser.uid), { spells: newSpells });
+    };
+
+    window.syncSpells = async function() {
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let newSpells = [];
+        document.querySelectorAll('.spell-row').forEach(row => {
+            newSpells.push({
+                name: row.querySelector('.spell-name').value,
+                damage: row.querySelector('.spell-dmg').value,
+                effect: row.querySelector('.spell-eff').value
+            });
+        });
+        await updateDoc(doc(db, "students", currentUser.uid), { spells: newSpells });
+        rpgAlert("Prof.ssa Minerva McGranitt", "Il tuo grimorio personale è stato aggiornato.");
+    };
+
+    window.syncNotes = async function() {
+        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let notes = document.getElementById('profile-notes').value;
+        await updateDoc(doc(db, "students", currentUser.uid), { notes: notes });
+        rpgAlert("Prof.ssa Minerva McGranitt", "Appunti salvati nel registro.");
+    };
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -788,10 +861,16 @@
         document.getElementById('profile-col-avatar').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-col-middle').classList.remove('trauma-disabled-mask');
         document.getElementById('profile-right-inventory-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-spells-box').classList.remove('trauma-disabled-mask');
+        document.getElementById('profile-notes-box').classList.remove('trauma-disabled-mask');
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
-            document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask'); document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask'); document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-col-avatar').classList.add('trauma-disabled-mask'); 
+            document.getElementById('profile-col-middle').classList.add('trauma-disabled-mask'); 
+            document.getElementById('profile-right-inventory-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-spells-box').classList.add('trauma-disabled-mask');
+            document.getElementById('profile-notes-box').classList.add('trauma-disabled-mask');
         } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
         } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
         } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
@@ -837,6 +916,30 @@
             document.getElementById('label-tot-' + sk.id).innerText = formatMod(modBase + bonusComp + (bonusOggettiAbilita[sk.id] || 0));
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
+
+        // Appunti Render
+        if(document.activeElement !== document.getElementById('profile-notes')) {
+            document.getElementById('profile-notes').value = userData.notes || "";
+        }
+
+        // Spells Render
+        const spellsContainer = document.getElementById('spells-list');
+        if (!spellsContainer.contains(document.activeElement)) {
+            spellsContainer.innerHTML = "";
+            let currentSpells = userData.spells || [];
+            if(currentSpells.length === 0) currentSpells = [ {name:"", damage:"", effect:""} ];
+            
+            currentSpells.forEach((sp, idx) => {
+                spellsContainer.innerHTML += `
+                    <div class="spell-row" style="display:flex; gap:5px;" data-idx="${idx}">
+                        <input type="text" class="spell-name" placeholder="Nome Incantesimo" value="${sp.name}" style="flex:2; font-size:12px; padding:6px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7;">
+                        <input type="text" class="spell-dmg" placeholder="Danno" value="${sp.damage}" style="flex:1; font-size:12px; padding:6px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7;">
+                        <input type="text" class="spell-eff" placeholder="Gittata ed Effetto" value="${sp.effect}" style="flex:3; font-size:12px; padding:6px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7;">
+                        <button class="btn-vintage spell-del" style="padding:4px 8px; font-size:12px; background:#c0392b; color:white; border-color:#800000;" onclick="removeSpell(${idx})">X</button>
+                    </div>
+                `;
+            });
+        }
 
         clearInterval(clinicInterval);
         if (userData.healCompleteTime && userData.healCompleteTime > Date.now() && userData.hp < userData.maxHp) {
@@ -989,7 +1092,7 @@
                 uid: credential.user.uid, email: credential.user.email.toLowerCase(), name: document.getElementById('reg-name').value, house: document.getElementById('reg-house').value, patronus: document.getElementById('reg-patronus').value, avatarUrl: "",
                 gold: 15, hp: 40, maxHp: 40, mp: 20, maxMp: 20, healCompleteTime: null,
                 core_stats: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }, proficiencies: {},
-                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: []
+                equipment: { bacchetta: null, toga: null, libro: null, pet: null, patronus: null }, inventory: [], equippedFrogs: [], spells: [], notes: ""
             });
         } catch (e) { rpgAlert("Prof.ssa Minerva McGranitt", "Errore in fase di smistamento: " + e.message); }
     });
