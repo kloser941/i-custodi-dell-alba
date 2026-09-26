@@ -323,6 +323,7 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
+                <!-- Zone click mappa (Disabilitate in Trauma Critico) -->
                 <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -567,10 +568,10 @@
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
             <button id="btn-back-map-shop" class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
-                <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
-                <div class="shop-click-zone" onclick="openStore('toga')"></div>
-                <div class="shop-click-zone" onclick="openStore('libro')"></div>
-                <div class="shop-click-zone" onclick="openStore('pet')"></div>
+                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('bacchetta')"></div>
+                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('toga')"></div>
+                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('libro')"></div>
+                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('pet')"></div>
             </div>
             
             <div id="store-interior" class="store-interior">
@@ -1105,7 +1106,15 @@
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         
-        if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+        if (userData) {
+            let chp = Number(userData.hp) || 0;
+            let mhp = Number(userData.maxHp) || 1;
+            let isTrauma = (chp / mhp) <= 0.10;
+            if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+                return; 
+            }
+        } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
             rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
             return; 
         }
@@ -1137,7 +1146,10 @@
 
     let currentTargetDorm = "";
     window.tryEnterDorm = function(targetHouse) {
-        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+        if (!userData) return;
+        let isTrauma = (Number(userData.hp) / Number(userData.maxHp)) <= 0.10;
+        if (isTrauma) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+        
         let userHouse = userData.house.toLowerCase().trim(); let requestedHouse = targetHouse.toLowerCase().trim();
 
         if (userHouse !== requestedHouse) return rpgAlert("Prof.ssa Minerva McGranitt", "Non sei un membro di questa casa! Il quadro magico si rifiuta di farti passare.");
@@ -1312,7 +1324,7 @@
 
     document.getElementById('btn-sync-hp').addEventListener('click', async () => {
         let newHp = parseInt(document.getElementById('edit-curr-hp').value)||0;
-        let newMaxHp = parseInt(document.getElementById('edit-max-hp').value)||0;
+        let newMaxHp = parseInt(document.getElementById('edit-max-hp').value)||1;
         let updatePayload = { hp: newHp, maxHp: newMaxHp };
         
         if (newHp >= newMaxHp) {
@@ -1323,7 +1335,7 @@
     
     document.getElementById('btn-sync-mp').addEventListener('click', async () => {
         let newMp = parseInt(document.getElementById('edit-curr-mp').value)||0;
-        let newMaxMp = parseInt(document.getElementById('edit-max-mp').value)||0;
+        let newMaxMp = parseInt(document.getElementById('edit-max-mp').value)||1;
         await updateDoc(doc(db, "students", currentUser.uid), { mp: newMp, maxMp: newMaxMp });
     });
 
@@ -1371,11 +1383,11 @@
 
         let lvl = userData.level || 1;
 
-        let newMaxHp = (parseInt(userData.maxHp) || 1) + (diffMod * lvl);
-        let newHp = (parseInt(userData.hp) || 0) + (diffMod * lvl);
+        let newMaxHp = (Number(userData.maxHp) || 1) + (diffMod * lvl);
+        let newHp = (Number(userData.hp) || 0) + (diffMod * lvl);
         
-        let newMaxMp = (parseInt(userData.maxMp) || 1) + (diffMagicMod * lvl);
-        let newMp = (parseInt(userData.mp) || 0) + (diffMagicMod * lvl);
+        let newMaxMp = (Number(userData.maxMp) || 1) + (diffMagicMod * lvl);
+        let newMp = (Number(userData.mp) || 0) + (diffMagicMod * lvl);
         
         draftingActive = false; 
         
@@ -1460,8 +1472,8 @@
 
             let data = snap.data();
             let newLevel = data.level || 1;
-            let newMaxHp = parseInt(data.maxHp) || 10;
-            let newMaxMp = parseInt(data.maxMp) || 10;
+            let newMaxHp = Number(data.maxHp) || 10;
+            let newMaxMp = Number(data.maxMp) || 10;
             let storico = data.storicoProgressi || data.exams || [];
             let newStatPoints = data.stat_points || 0;
             
@@ -1560,8 +1572,8 @@
     // INFERMERIA - Eventi Click
     document.getElementById('btn-heal').addEventListener('click', async () => {
         if(!userData) return;
-        let cHp = parseInt(userData.hp)||0;
-        let mHp = parseInt(userData.maxHp)||1;
+        let cHp = Number(userData.hp) || 0;
+        let mHp = Number(userData.maxHp) || 1;
         if(cHp >= mHp) {
             return rpgAlert("Madama Chips", "Sei già in perfetta salute, caro! Lascia il letto a chi ne ha bisogno.");
         }
@@ -1619,8 +1631,8 @@
 
         let lvl = userData.level || 1;
         let profBonus = Math.floor((lvl - 1) / 4) + 2;
-        let currentHp = parseInt(userData.hp) || 0;
-        let maxHp = parseInt(userData.maxHp) || 1; // evita div per zero
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1; 
 
         document.getElementById('header-galeoni').innerText = userData.gold + " Galeoni";
         document.getElementById('baule-dynamic-title').innerText = `Baule di ${userData.name}`;
@@ -1724,7 +1736,7 @@
         // Dadi Vita
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
-        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE (Corretto)
+        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE (Corretto con Number)
         const hpRatio = currentHp / maxHp;
         const statusBadge = document.getElementById('inf-health-status');
         const alertBanner = document.getElementById('profile-trauma-alert');
@@ -1991,6 +2003,11 @@
                 document.getElementById('btn-heal').innerText = "SEI IN PERFETTA SALUTE";
                 document.getElementById('btn-heal').style.background = "green";
                 document.getElementById('btn-heal').style.boxShadow = "none";
+                
+                // Pulizia di sicurezza nel caso un timer bloccato impedisca le funzioni
+                if (userData.healStartTime) {
+                     updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
+                }
             } else {
                 document.getElementById('btn-heal').style.display = 'block';
                 document.getElementById('btn-heal').disabled = false;
