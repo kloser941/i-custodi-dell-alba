@@ -621,20 +621,14 @@
                 
                 <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
                     <p style="margin: 0 0 10px 0; font-weight: bold;">Stato Medico Attuale:</p>
-                    
-                    <div style="width: 100%; background: #ccc; border-radius: 4px; height: 25px; position: relative; border: 1px solid #333; overflow: hidden; margin-bottom: 5px;">
-                        <div id="inf-clinical-bar-fill" style="height: 100%; width: 0%; transition: width 0.3s; background: green;"></div>
-                    </div>
-
-                    <div id="inf-health-status" style="margin-top: 10px; font-weight:bold; font-size:18px; color:#27ae60;">In Perfetta Salute</div>
+                    <div id="inf-health-status" style="margin-top: 5px; font-weight:bold; font-size:18px; color:#27ae60; padding:8px 15px; border-radius:4px; display:inline-block;">In Perfetta Salute</div>
                 </div>
                 
                 <button id="btn-heal" class="btn-vintage" style="padding:15px; width:100%; font-size:16px;">CHIEDI CURE MAGICHE</button>
                 
                 <div id="healing-active-container" style="display:none; text-align:center; margin-top:15px; background:#fffdec; border:1px solid #be9b64; padding:15px; border-radius:6px;">
-                    <h3 style="color:#c0392b; margin-top:0;">Cure in corso...</h3>
-                    <div style="font-size:14px; margin-bottom:10px;">Prossimo recupero (+5% HP) tra: <span id="inf-next-tick" style="font-weight:bold; color:#1e3a8a;">--:--</span></div>
-                    <div style="font-size:12px; margin-bottom:15px;">Guarigione completa stimata in: <span id="inf-eta" style="font-weight:bold;">--:--</span></div>
+                    <h3 style="color:#c0392b; margin-top:0; margin-bottom:10px;">Cure in corso con Madama Chips...</h3>
+                    <div style="font-size:16px; margin-bottom:20px; font-weight:bold;">Tempo rimanente: <span id="inf-countdown" style="color:#1e3a8a;">--:--:--</span></div>
                     
                     <button id="btn-leave-infirmary" class="btn-vintage" style="background:#e67e22; color:white; width:100%; padding:10px; border-color:#d35400;">ABBANDONA CURE (ESCI)</button>
                 </div>
@@ -972,18 +966,12 @@
         oro: [ { name: "Godric Grifondoro", img: "https://vignette.wikia.nocookie.net/harrypotter/images/2/24/Godric_Gryffindor-41-chocFrogCard.png", skill: "atletica", desc: "+3 a Atletica." } ]
     };
 
-    function formatTimer(ms) {
-        let totalSec = Math.floor(ms / 1000);
-        let m = Math.floor(totalSec / 60);
-        let s = totalSec % 60;
-        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-
-    function formatTimerHour(ms) {
+    function formatTimerHHMMSS(ms) {
         let totalSec = Math.floor(ms / 1000);
         let h = Math.floor(totalSec / 3600);
         let m = Math.floor((totalSec % 3600) / 60);
-        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        let s = totalSec % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
     window.updateRegStatsUI = function() {
@@ -1098,9 +1086,8 @@
             }
 
             let updatePayload = { hp: newHp };
-            // Resetta il timer cure se la vita torna al max
             if (newHp >= maxHp) {
-                updatePayload.healStartTime = null;
+                updatePayload.healCompleteTime = null;
             }
 
             await updateDoc(ref, updatePayload);
@@ -1119,11 +1106,11 @@
             let mhp = Number(userData.maxHp) || 1;
             let isTrauma = (chp / mhp) <= 0.10;
             if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
                 return; 
             }
         } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
             return; 
         }
         
@@ -1156,7 +1143,7 @@
     window.tryEnterDorm = function(targetHouse) {
         if (!userData) return;
         let isTrauma = (Number(userData.hp) / Number(userData.maxHp)) <= 0.10;
-        if (isTrauma) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Vai subito in Infermeria.");
+        if (isTrauma) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
         
         let userHouse = userData.house.toLowerCase().trim(); let requestedHouse = targetHouse.toLowerCase().trim();
 
@@ -1336,7 +1323,7 @@
         let updatePayload = { hp: newHp, maxHp: newMaxHp };
         
         if (newHp >= newMaxHp) {
-            updatePayload.healStartTime = null; // reset cure se pieno
+            updatePayload.healCompleteTime = null;
         }
         await updateDoc(doc(db, "students", currentUser.uid), updatePayload);
     });
@@ -1409,7 +1396,7 @@
         };
         
         if(newHp >= newMaxHp) {
-            payload.healStartTime = null;
+            payload.healCompleteTime = null;
         }
 
         await updateDoc(doc(db, "students", currentUser.uid), payload);
@@ -1577,6 +1564,49 @@
         }
     };
 
+    // INFERMERIA - Eventi Click (Nuova logica lineare a 4 Ore)
+    document.getElementById('btn-heal').addEventListener('click', async () => {
+        if(!userData) return;
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        
+        if(currentHp >= maxHp) {
+            return; 
+        }
+        if(userData.healCompleteTime) {
+            return;
+        }
+
+        try {
+            let endTime = Date.now() + (4 * 60 * 60 * 1000); // 4 Ore da ora
+            await updateDoc(doc(db, "students", currentUser.uid), { 
+                healCompleteTime: endTime 
+            });
+            userData.healCompleteTime = endTime;
+            renderUI();
+            rpgAlert("Madama Chips", "Mettiti a letto e riposa! Sarai completamente guarito tra 4 ore.");
+        } catch(e) {
+            console.error(e);
+        }
+    });
+
+    document.getElementById('btn-leave-infirmary').addEventListener('click', async () => {
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        
+        if (currentHp <= maxHp * 0.5) {
+            return rpgAlert("Madama Chips", "Sei ancora troppo debole per lasciare l'infermeria! Devi avere almeno il 50% di salute per poterti alzare.");
+        }
+        
+        let confirm = await rpgConfirm("Madama Chips", "Vuoi interrompere le cure e uscire?");
+        if (confirm) {
+            await updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: null });
+            userData.healCompleteTime = null;
+            renderUI();
+            changeScreen('screen-map-nav');
+        }
+    });
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -1610,30 +1640,7 @@
         const currentHp = Number(userData.hp) || 0;
         const maxHp = Number(userData.maxHp) || 1; 
         const hpRatio = currentHp / maxHp;
-        const healStartTime = Number(userData.healStartTime) || null;
-
-        // -----------------------------------------------------
-        // REGOLA 4: LOGICA DI GUARIGIONE E TIMER RETROATTIVO
-        // -----------------------------------------------------
-        clearInterval(clinicInterval);
-        let healTickMs = 15 * 60 * 1000; 
-
-        if (healStartTime && currentHp < maxHp) {
-            let elapsed = Date.now() - healStartTime;
-            let ticks = Math.floor(elapsed / healTickMs);
-            
-            if (ticks > 0) {
-                let hpGain = ticks * Math.ceil(maxHp * 0.05);
-                let newHpValue = Math.min(maxHp, currentHp + hpGain);
-                let newStart = (newHpValue >= maxHp) ? null : (healStartTime + (ticks * healTickMs));
-                
-                updateDoc(doc(db, "students", currentUser.uid), {
-                    hp: newHpValue,
-                    healStartTime: newStart
-                });
-                return; // Ferma il render per permettere il refresh da Firebase
-            }
-        }
+        const healCompleteTime = Number(userData.healCompleteTime) || null;
 
         // -----------------------------------------------------
         // REGOLA 2: LOGICA TRAUMA CRITICO E MAPPA
@@ -1652,7 +1659,7 @@
         }
 
         // -----------------------------------------------------
-        // AGGIORNAMENTO UI GENERICA
+        // AGGIORNAMENTO UI GENERICA SCHEDA
         // -----------------------------------------------------
         document.getElementById('header-galeoni').innerText = userData.gold + " Galeoni";
         document.getElementById('baule-dynamic-title').innerText = `Baule di ${userData.name}`;
@@ -1749,79 +1756,48 @@
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
         // -----------------------------------------------------
-        // REGOLA 3: GRAFICA E REPARTO CLINICO INFERMERIA
+        // REGOLA 3 & 4: LOGICA CLINICA E TIMER 4 ORE
         // -----------------------------------------------------
         const statusBadge = document.getElementById('inf-health-status');
-        const clinicalBarFill = document.getElementById('inf-clinical-bar-fill');
-        
-        let infColor = "";
-        let infText = "";
         
         if (hpRatio <= 0.10) { 
-            infText = "Trauma Critico"; 
-            infColor = "#c0392b"; 
-        } else if (hpRatio <= 0.30) { 
-            infText = "Ferito Grave"; 
-            infColor = "#e67e22"; 
+            statusBadge.innerText = "Trauma Critico"; 
+            statusBadge.style.background = "#c0392b"; 
+            statusBadge.style.color = "white";
+        } else if (hpRatio <= 0.50) { 
+            statusBadge.innerText = "Ferito Grave"; 
+            statusBadge.style.background = "#e67e22";
+            statusBadge.style.color = "white";
         } else if (hpRatio < 1.0) { 
-            infText = "Ferito Lieve"; 
-            infColor = "#b45309"; 
-            clinicalBarFill.style.background = "#f1c40f"; // Requested: fill yellow, text yellow but dark (#b45309) 
+            statusBadge.innerText = "Ferito Lieve"; 
+            statusBadge.style.background = "#f1c40f";
+            statusBadge.style.color = "#3a2e1d";
         } else { 
-            infText = "In Perfetta Salute"; 
-            infColor = "#27ae60"; 
+            statusBadge.innerText = "In Perfetta Salute"; 
+            statusBadge.style.background = "green"; 
+            statusBadge.style.color = "white";
         }
 
-        statusBadge.innerText = infText;
-        statusBadge.style.color = infColor;
-        clinicalBarFill.style.width = Math.max(0, Math.min(100, hpRatio * 100)) + "%";
-        if (hpRatio < 1.0 && hpRatio > 0.30) {
-            clinicalBarFill.style.background = "#f1c40f"; // yellow fill
-        } else {
-            clinicalBarFill.style.background = infColor;
-        }
-
+        clearInterval(clinicInterval);
         let btnHeal = document.getElementById('btn-heal');
         let activeContainer = document.getElementById('healing-active-container');
 
-        if (healStartTime && currentHp < maxHp) {
+        if (healCompleteTime && healCompleteTime > Date.now()) {
             btnHeal.style.display = 'none';
             activeContainer.style.display = 'block';
 
             let updateTimer = () => {
-                let nowElapsed = Date.now() - healStartTime;
-                let timeToNext = Math.max(0, healTickMs - (nowElapsed % healTickMs));
-                
-                let missingHp = maxHp - currentHp;
-                let gainPerTick = Math.ceil(maxHp * 0.05);
-                let ticksNeeded = Math.ceil(missingHp / gainPerTick);
-                let etaMs = Math.max(0, ((ticksNeeded - 1) * healTickMs) + timeToNext);
-
-                document.getElementById('inf-next-tick').innerText = formatTimer(timeToNext);
-                document.getElementById('inf-eta').innerText = formatTimerHour(etaMs);
-                
-                let btnLeave = document.getElementById('btn-leave-infirmary');
-                let txtWarning = document.getElementById('inf-leave-warning');
-                
-                if (currentHp > maxHp * 0.5) {
-                    btnLeave.disabled = false;
-                    txtWarning.style.display = 'none';
+                let timeLeft = healCompleteTime - Date.now();
+                if (timeLeft <= 0) {
+                    clearInterval(clinicInterval);
+                    updateDoc(doc(db, "students", currentUser.uid), { hp: maxHp, healCompleteTime: null });
                 } else {
-                    btnLeave.disabled = true;
-                    txtWarning.style.display = 'block';
-                }
-                
-                if (Date.now() - healStartTime >= healTickMs) {
-                    let hpGain = Math.ceil(maxHp * 0.05);
-                    let newHp = Math.min(maxHp, currentHp + hpGain);
-                    let newStart = (newHp >= maxHp) ? null : healStartTime + healTickMs;
-                    updateDoc(doc(db, "students", currentUser.uid), { hp: newHp, healStartTime: newStart });
+                    document.getElementById('inf-countdown').innerText = formatTimerHHMMSS(timeLeft);
                 }
             };
             
             updateTimer();
             clinicInterval = setInterval(updateTimer, 1000);
-
         } else {
             activeContainer.style.display = 'none';
             btnHeal.style.display = 'block';
@@ -1832,19 +1808,24 @@
                 btnHeal.style.boxShadow = "none";
                 btnHeal.disabled = true;
                 
-                if (healStartTime) {
-                     updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
+                // Pulizia di sicurezza nel caso un timer bloccato impedisca le funzioni
+                if (healCompleteTime) {
+                     updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: null });
                 }
             } else {
                 btnHeal.innerText = "CHIEDI CURE MAGICHE";
                 btnHeal.style.background = "#b22222";
                 btnHeal.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";
                 btnHeal.disabled = false;
+                
+                // Se il timer è scaduto ma non si era ricaricata la pagina/non si è in full HP
+                if (healCompleteTime && healCompleteTime <= Date.now()) {
+                    updateDoc(doc(db, "students", currentUser.uid), { hp: maxHp, healCompleteTime: null });
+                }
             }
         }
 
         let bonusOggettiAbilita = {};
-        
         const tbodySkills = document.getElementById('skills-tbody-list');
         if (tbodySkills) {
             tbodySkills.innerHTML = "";
