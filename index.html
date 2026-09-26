@@ -70,7 +70,8 @@
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
         
-        .trauma-disabled-mask { opacity: 0.5 !important; pointer-events: none !important; cursor: not-allowed !important; user-select: none !important; }
+        /* Rimosso pointer-events: none per permettere il clic e mostrare l'alert! */
+        .trauma-disabled-mask { opacity: 0.5 !important; cursor: not-allowed !important; user-select: none !important; }
 
         .frog-mini-slot { background: transparent; border: 1px dashed #8a6d3b; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
         .frog-mini-slot img { width: 100%; height: 100%; object-fit: cover; }
@@ -1085,16 +1086,17 @@
     window.changeScreen = function(screenId) {
         if (!currentUser && screenId !== 'screen-login') return;
         
+        let isTrauma = false;
         if (userData) {
             let chp = Number(userData.hp) || 0;
             let mhp = Number(userData.maxHp) || 1;
-            let isTrauma = (chp / mhp) <= 0.10;
-            if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing', 'screen-master'].includes(screenId)) { 
-                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
-                return; 
-            }
-        } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing', 'screen-master'].includes(screenId)) { 
-            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
+            isTrauma = (chp / mhp) <= 0.10;
+        } else {
+            isTrauma = isTraumaBlocked;
+        }
+        
+        if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing', 'screen-master'].includes(screenId)) { 
+            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Le tue condizioni non ti permettono di camminare fino a questa zona. Raggiungi subito l'Infermeria.");
             return; 
         }
         
@@ -1129,7 +1131,8 @@
         let chp = Number(userData.hp) || 0;
         let mhp = Number(userData.maxHp) || 1;
         if ((chp / mhp) <= 0.10) {
-            return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
+            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Le tue condizioni non ti permettono di camminare fino a questa zona. Raggiungi subito l'Infermeria.");
+            return;
         }
         
         const userHouse = (userData?.house || "").toLowerCase().trim(); 
@@ -1613,6 +1616,7 @@
             isTraumaBlocked = true;
             traumaAlert.style.display = "block";
             graveAlert.style.display = "none";
+            // Blocca il resto del profilo in sola lettura (le zone mappa gestite in changeScreen/tryEnterDorm)
             document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
         } else if (hpRatio <= 0.25) {
             isTraumaBlocked = false;
@@ -1726,9 +1730,12 @@
         // -----------------------------------------------------
         // REGOLA 4: GRAFICA E REPARTO CLINICO INFERMERIA
         // -----------------------------------------------------
+        const infAvatar = document.getElementById('inf-avatar-img');
         const infTitle = document.getElementById('inf-status-title');
         const infSub = document.getElementById('inf-status-subtitle');
         
+        if (infAvatar) infAvatar.src = userData.avatarUrl || "https://placehold.co/120x120?text=Mago";
+
         if (hpRatio <= 0.10) { 
             infTitle.innerText = "Trauma Critico"; 
             infTitle.style.color = "#c0392b"; 
