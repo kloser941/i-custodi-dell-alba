@@ -70,7 +70,6 @@
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
         .avatar-wrapper:hover .avatar-overlay { opacity: 1; }
         
-        /* Rimosso pointer-events: none per permettere il clic e mostrare l'alert! */
         .trauma-disabled-mask { opacity: 0.5 !important; cursor: not-allowed !important; user-select: none !important; }
 
         .frog-mini-slot { background: transparent; border: 1px dashed #8a6d3b; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; text-align: center; cursor: pointer; padding: 2px; position: relative; overflow: hidden; }
@@ -324,14 +323,14 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
-                <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
+                <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
+                <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
-                <div class="map-click-zone zone-salagrande trauma-disabled-mask-target" onclick="changeScreen('screen-coppa')"></div>
-                <div class="map-click-zone zone-cioccorane trauma-disabled-mask-target" onclick="changeScreen('screen-ciccorane')"></div>
-                <div class="map-click-zone zone-serpeverde trauma-disabled-mask-target" onclick="tryEnterDorm('Serpeverde')"></div>
-                <div class="map-click-zone zone-tassorosso trauma-disabled-mask-target" onclick="tryEnterDorm('Tassorosso')"></div>
-                <div class="map-click-zone zone-diagon trauma-disabled-mask-target" onclick="changeScreen('screen-shop')"></div>
+                <div class="map-click-zone zone-salagrande" onclick="changeScreen('screen-coppa')"></div>
+                <div class="map-click-zone zone-cioccorane" onclick="changeScreen('screen-ciccorane')"></div>
+                <div class="map-click-zone zone-serpeverde" onclick="tryEnterDorm('Serpeverde')"></div>
+                <div class="map-click-zone zone-tassorosso" onclick="tryEnterDorm('Tassorosso')"></div>
+                <div class="map-click-zone zone-diagon" onclick="changeScreen('screen-shop')"></div>
             </div>
         </div>
 
@@ -570,10 +569,10 @@
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('bacchetta')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('toga')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('libro')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('pet')"></div>
+                <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
+                <div class="shop-click-zone" onclick="openStore('toga')"></div>
+                <div class="shop-click-zone" onclick="openStore('libro')"></div>
+                <div class="shop-click-zone" onclick="openStore('pet')"></div>
             </div>
             
             <div id="store-interior" class="store-interior">
@@ -1616,7 +1615,6 @@
             isTraumaBlocked = true;
             traumaAlert.style.display = "block";
             graveAlert.style.display = "none";
-            // Blocca il resto del profilo in sola lettura (le zone mappa gestite in changeScreen/tryEnterDorm)
             document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
         } else if (hpRatio <= 0.25) {
             isTraumaBlocked = false;
@@ -1739,11 +1737,11 @@
         if (hpRatio <= 0.10) { 
             infTitle.innerText = "Trauma Critico"; 
             infTitle.style.color = "#c0392b"; 
-            infSub.innerText = "Sei troppo debole per muoverti.";
+            infSub.innerText = "Hai bisogno delle cure di Madama Chips o del Master per tornare a muoverti.";
         } else if (hpRatio <= 0.25) { 
             infTitle.innerText = "Ferito Grave"; 
             infTitle.style.color = "#e67e22"; 
-            infSub.innerText = "ATTENZIONE: La tua velocità di movimento è dimezzata.";
+            infSub.innerText = "Velocità dimezzata: ti muovi più lentamente.";
         } else { 
             infTitle.innerText = "In Perfetta Salute"; 
             infTitle.style.color = "#27ae60"; 
@@ -1777,13 +1775,21 @@
             for (let slot in userData.equipment) {
                 let item = userData.equipment[slot];
                 if (item) {
-                    if (item.type === 'bacchetta') wandBonus += parseInt(item.val || 1);
+                    if (item.type === 'bacchetta') {
+                        let wBonus = parseInt(item.val || 1);
+                        wandBonus += wBonus;
+                        if(bonusOggettiAbilita['incantesimi'] !== undefined) {
+                            bonusOggettiAbilita['incantesimi'] += wBonus;
+                        }
+                    }
                     if (item.type === 'libro' && item.skill) {
                         if (item.is_used === true || item.name.toLowerCase().includes('usato')) { 
                             let gEl = document.getElementById(`gamble-${item.skill}`);
                             if (gEl) gEl.style.display = "block";
                         } else { 
-                            bonusOggettiAbilita[item.skill] += parseInt(item.val || 1); 
+                            if(bonusOggettiAbilita[item.skill] !== undefined) {
+                                bonusOggettiAbilita[item.skill] += parseInt(item.val || 1); 
+                            }
                         }
                     }
                 }
@@ -2214,11 +2220,35 @@
 
     const dt = document.getElementById('dice-trigger'); const dp = document.getElementById('dice-popup');
     dt.addEventListener('click', () => dp.style.display = dp.style.display === 'block' ? 'none' : 'block');
+    
     document.getElementById('btn-roll-dice').addEventListener('click', async () => {
-        let f = parseInt(document.getElementById('dice-type').value), c = parseInt(document.getElementById('dice-count').value)||1, t=0;
-        for(let i=0; i<c; i++) t += Math.floor(Math.random()*f)+1;
-        document.getElementById('dice-result-display').innerText = "Risultato: " + t;
-        if(userData) await addDoc(collection(db, "dice_logs"), { player: userData.name, result: t, formula: `${c}d${f}`, timestamp: Date.now() });
+        let f = parseInt(document.getElementById('dice-type').value);
+        let c = parseInt(document.getElementById('dice-count').value) || 1;
+        let t = 0;
+        let rolls = [];
+        
+        for(let i=0; i<c; i++) {
+            let r = Math.floor(Math.random() * f) + 1;
+            rolls.push(r);
+            t += r;
+        }
+        
+        let resStr = t.toString();
+        let formStr = `${c}d${f}`;
+        if(c > 1) {
+            resStr = `(${rolls.join(" + ")}) = ${t}`;
+            formStr = `${c}d${f} (${rolls.join(" + ")})`;
+        }
+        
+        document.getElementById('dice-result-display').innerText = "Risultato: " + resStr;
+        if(userData) {
+            await addDoc(collection(db, "dice_logs"), { 
+                player: userData.name, 
+                result: t, 
+                formula: formStr, 
+                timestamp: Date.now() 
+            });
+        }
     });
 
     onSnapshot(query(collection(db, "dice_logs"), orderBy("timestamp", "desc"), limit(10)), (s) => {
