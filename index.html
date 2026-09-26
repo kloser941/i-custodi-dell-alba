@@ -618,11 +618,9 @@
             <div class="gacha-header-banner" style="background-image: url('https://www.potterpedia.it/imagewatermark/immagini/5398-p1au7q0pv579ghqofr91jjm1e31r.jpg'); margin-top: 25px;"></div>
             
             <div class="hospital-box">
-                <img id="inf-avatar-img" src="" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #8a6d3b; margin:10px auto; display:block;">
+                <img src="https://pbs.twimg.com/profile_images/419055968731668480/5I1jC-mo_400x400.jpeg" style="width:130px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #8a6d3b; margin:10px auto; display:block;">
                 <h2 id="inf-status-title" style="margin-top:0; color:#27ae60; font-family:'Georgia', serif;">In Perfetta Salute</h2>
-                <p id="inf-status-subtitle" style="font-size:14px; margin-bottom: 25px; color:#5c4314; font-style:italic;">Sei in forma smagliante.</p>
-                
-                <button id="btn-heal" class="btn-vintage" style="padding:15px; width:100%; font-size:16px; background:#b22222; color:white;">RICHIEDI CURE MAGICHE</button>
+                <p id="inf-status-subtitle" style="font-size:14px; margin-bottom: 25px; color:#5c4314; font-style:italic;">Sei in forma smagliante e pronto all'azione.</p>
             </div>
         </div>
 
@@ -1083,11 +1081,11 @@
             let chp = Number(userData.hp) || 0;
             let mhp = Number(userData.maxHp) || 1;
             let isTrauma = (chp / mhp) <= 0.10;
-            if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+            if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing', 'screen-master'].includes(screenId)) { 
                 rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
                 return; 
             }
-        } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+        } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing', 'screen-master'].includes(screenId)) { 
             rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
             return; 
         }
@@ -1156,7 +1154,6 @@
     window.openStore = function(type) {
         currentShopType = type;
         document.getElementById('diagon-alley-street').style.display = 'none';
-        document.getElementById('btn-back-map-shop').style.display = 'none';
         document.getElementById('store-interior').style.display = 'block';
         document.getElementById('cat-bacchetta').style.display = 'none';
         document.getElementById('cat-toga').style.display = 'none';
@@ -1181,7 +1178,6 @@
         currentShopType = null;
         document.getElementById('store-interior').style.display = 'none';
         document.getElementById('diagon-alley-street').style.display = 'flex';
-        document.getElementById('btn-back-map-shop').style.display = 'block';
     };
 
     window.renderSellItems = function(type) {
@@ -1564,20 +1560,6 @@
         }
     };
 
-    // INFERMERIA - Eventi Click per cure manuali (Master-based)
-    document.getElementById('btn-heal').addEventListener('click', async () => {
-        if(!userData) return;
-        let currentHp = Number(userData.hp) || 0;
-        let maxHp = Number(userData.maxHp) || 1;
-        let hpRatio = currentHp / maxHp;
-        
-        if (hpRatio <= 0.10) {
-            rpgAlert("Madama Chips", "Mettiti a letto! Ho inviato una richiesta di assistenza al Master. Nel frattempo puoi consultare la tua scheda profilo.");
-        } else {
-            rpgAlert("Madama Chips", "Non hai bisogno di cure urgenti, caro! Lascia il letto a chi è stato ferito gravemente.");
-        }
-    });
-
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -1735,29 +1717,22 @@
         // -----------------------------------------------------
         // REGOLA 4: GRAFICA E REPARTO CLINICO INFERMERIA
         // -----------------------------------------------------
-        const infAvatar = document.getElementById('inf-avatar-img');
         const infTitle = document.getElementById('inf-status-title');
         const infSub = document.getElementById('inf-status-subtitle');
-        const btnHeal = document.getElementById('btn-heal');
         
-        if (infAvatar) infAvatar.src = userData.avatarUrl || "https://placehold.co/120x120?text=Mago";
-
         if (hpRatio <= 0.10) { 
             infTitle.innerText = "Trauma Critico"; 
             infTitle.style.color = "#c0392b"; 
-            infSub.innerText = "Hai bisogno delle cure di Madama Chips o del Master per tornare a muoverti.";
+            infSub.innerText = "Sei troppo debole per muoverti.";
         } else if (hpRatio <= 0.25) { 
             infTitle.innerText = "Ferito Grave"; 
             infTitle.style.color = "#e67e22"; 
-            infSub.innerText = "Velocità dimezzata: ti muovi più lentamente.";
+            infSub.innerText = "ATTENZIONE: La tua velocità di movimento è dimezzata.";
         } else { 
             infTitle.innerText = "In Perfetta Salute"; 
             infTitle.style.color = "#27ae60"; 
-            infSub.innerText = "Sei in forma smagliante.";
+            infSub.innerText = "Sei in forma smagliante e pronto all'azione.";
         }
-
-        // Il pulsante "Richiedi Cure Magiche" è sempre visibile e manuale
-        btnHeal.style.display = 'block';
 
         let bonusOggettiAbilita = {};
         const tbodySkills = document.getElementById('skills-tbody-list');
