@@ -240,7 +240,7 @@
 
         <!-- PANNELLO MASTER -->
         <div id="screen-master" class="screen">
-            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="hospital-box" style="max-width: 600px; margin-top: 50px; padding: 20px;">
                 <h2 style="color:#5c4314; font-family:'Georgia', serif; margin-top:0;">Pannello Master</h2>
                 
@@ -323,27 +323,29 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <!-- Zone click mappa bloccate in trauma ad eccezione dell'Infermeria -->
-                <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
-                <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
+                <!-- Zone click mappa (Logica Trauma gestita via JS) -->
+                <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
+                <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
-                <div class="map-click-zone zone-salagrande trauma-disabled-mask-target" onclick="changeScreen('screen-coppa')"></div>
-                <div class="map-click-zone zone-cioccorane trauma-disabled-mask-target" onclick="changeScreen('screen-ciccorane')"></div>
-                <div class="map-click-zone zone-serpeverde trauma-disabled-mask-target" onclick="tryEnterDorm('Serpeverde')"></div>
-                <div class="map-click-zone zone-tassorosso trauma-disabled-mask-target" onclick="tryEnterDorm('Tassorosso')"></div>
-                <div class="map-click-zone zone-diagon trauma-disabled-mask-target" onclick="changeScreen('screen-shop')"></div>
+                <div class="map-click-zone zone-salagrande" onclick="changeScreen('screen-coppa')"></div>
+                <div class="map-click-zone zone-cioccorane" onclick="changeScreen('screen-ciccorane')"></div>
+                <div class="map-click-zone zone-serpeverde" onclick="tryEnterDorm('Serpeverde')"></div>
+                <div class="map-click-zone zone-tassorosso" onclick="tryEnterDorm('Tassorosso')"></div>
+                <div class="map-click-zone zone-diagon" onclick="changeScreen('screen-shop')"></div>
             </div>
         </div>
 
         <!-- SCHERMATA PROFILO (DORMITORIO) -->
         <div id="screen-profile" class="screen">
-            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
-            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             
-            <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
+            <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">TRAUMA CRITICO: Sei troppo debole per muoverti! Raggiungi l'Infermeria.</div>
+            <div id="profile-grave-alert" style="display:none; background:#e67e22; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">ATTENZIONE: Ferito Grave. La tua velocità di movimento è dimezzata.</div>
+            
+            <div id="profile-main-grid-wrapper" class="trauma-disabled-mask-target" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
                 
                 <!-- COLONNA SINISTRA -->
-                <div class="trauma-disabled-mask-target" style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
+                <div style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
                     
                     <div class="avatar-wrapper" style="height: 650px; width: 100%; display:flex; flex-direction:column;" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago" style="flex-grow:1; object-fit:cover; height:100%;">
@@ -363,7 +365,7 @@
                 </div>
 
                 <!-- COLONNA DESTRA -->
-                <div class="trauma-disabled-mask-target right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
+                <div class="right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                     
                     <!-- FASCIA SUPERIORE DESTRA -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
@@ -566,12 +568,12 @@
 
         <!-- SCHERMATA SHOP DIAGON ALLEY -->
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
-            <button id="btn-back-map-shop" class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
+            <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('bacchetta')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('toga')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('libro')"></div>
-                <div class="shop-click-zone trauma-disabled-mask-target" onclick="openStore('pet')"></div>
+                <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
+                <div class="shop-click-zone" onclick="openStore('toga')"></div>
+                <div class="shop-click-zone" onclick="openStore('libro')"></div>
+                <div class="shop-click-zone" onclick="openStore('pet')"></div>
             </div>
             
             <div id="store-interior" class="store-interior">
@@ -595,7 +597,7 @@
 
         <!-- SCHERMATA COPPA DELLE CASE -->
         <div id="screen-coppa" class="screen">
-            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             
             <div class="great-hall-container">
                 <div class="glass-container pos-grif"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div>
@@ -616,17 +618,14 @@
             <div class="gacha-header-banner" style="background-image: url('https://www.potterpedia.it/imagewatermark/immagini/5398-p1au7q0pv579ghqofr91jjm1e31r.jpg'); margin-top: 25px;"></div>
             
             <div class="hospital-box">
-                <h2 style="margin-top:0; color:#b22222; font-family:'Georgia', serif;">Infermeria di Hogwarts</h2>
-                <p style="font-size:14px; margin-bottom: 20px;">Affidati alle cure di Madama Chips per rimetterti in sesto dopo i duelli o gli incidenti in volo.</p>
+                <img id="inf-avatar" src="" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #8a6d3b; margin-top: 10px; margin-bottom: 15px;">
                 
-                <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
-                    <p style="margin: 0 0 10px 0; font-weight: bold;">Stato Medico Attuale:</p>
-                    <div id="inf-health-status" style="margin-top: 5px; font-weight:bold; font-size:18px; color:#27ae60; padding:8px 15px; border-radius:4px; display:inline-block;">In Perfetta Salute</div>
-                </div>
+                <h2 id="inf-status-title" style="margin-top:0; color:#27ae60; font-family:'Georgia', serif;">In Perfetta Salute</h2>
+                <p id="inf-status-subtitle" style="font-size:14px; margin-bottom: 25px; color:#5c4314; font-style:italic;">Sei in forma smagliante.</p>
                 
-                <button id="btn-heal" class="btn-vintage" style="padding:15px; width:100%; font-size:16px;">CHIEDI CURE MAGICHE</button>
+                <button id="btn-heal" class="btn-vintage" style="padding:15px; width:100%; font-size:16px; background:#b22222; color:white; display:none;">CHIEDI CURE MAGICHE</button>
                 
-                <div id="healing-active-container" style="display:none; text-align:center; margin-top:15px; background:#fffdec; border:1px solid #be9b64; padding:15px; border-radius:6px;">
+                <div id="healing-active-container" style="display:none; text-align:center; background:#fffdec; border:1px solid #be9b64; padding:20px; border-radius:6px;">
                     <h3 style="color:#c0392b; margin-top:0; margin-bottom:10px;">Cure in corso con Madama Chips...</h3>
                     <div style="font-size:16px; margin-bottom:20px; font-weight:bold;">Tempo rimanente: <span id="inf-countdown" style="color:#1e3a8a;">--:--:--</span></div>
                     
@@ -637,7 +636,7 @@
 
         <!-- SCHERMATA CIOCCORANE -->
         <div id="screen-ciccorane" class="screen">
-            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150'); margin-top: 25px;"></div>
             <div class="gacha-box">
                 <h2 style="margin-top:0; color:#ffd700; font-family:'Georgia', serif;">Apri Cioccorana</h2>
@@ -870,7 +869,7 @@
         }
     }
 
-    let currentUser = null; let userData = null; let isTraumaBlocked = false; let clinicInterval = null;
+    let currentUser = null; let userData = null; let clinicInterval = null;
     let currentHousePointsData = { Grifondoro: 0, Serpeverde: 0, Corvonero: 0, Tassorosso: 0 };
     
     // VARIABILI PER IL DRAFTING STATISTICHE E MODALI SHOP
@@ -1104,14 +1103,10 @@
         if (userData) {
             let chp = Number(userData.hp) || 0;
             let mhp = Number(userData.maxHp) || 1;
-            let isTrauma = (chp / mhp) <= 0.10;
-            if (isTrauma && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
+            if ((chp / mhp) <= 0.05 && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
+                rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
                 return; 
             }
-        } else if (isTraumaBlocked && !['screen-infermeria', 'screen-profile', 'screen-login', 'screen-map-nav', 'screen-landing'].includes(screenId)) { 
-            rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
-            return; 
         }
         
         document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
@@ -1142,8 +1137,11 @@
     let currentTargetDorm = "";
     window.tryEnterDorm = function(targetHouse) {
         if (!userData) return;
-        let isTrauma = (Number(userData.hp) / Number(userData.maxHp)) <= 0.10;
-        if (isTrauma) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Raggiungi subito l'Infermeria.");
+        let chp = Number(userData.hp) || 0;
+        let mhp = Number(userData.maxHp) || 1;
+        if ((chp / mhp) <= 0.05) {
+            return rpgAlert("Prof.ssa Minerva McGranitt", "Sei in Trauma Critico! Puoi solo raggiungere l'Infermeria.");
+        }
         
         let userHouse = userData.house.toLowerCase().trim(); let requestedHouse = targetHouse.toLowerCase().trim();
 
@@ -1233,7 +1231,10 @@
     }
 
     window.sellItem = async function(index, loc, price) {
-        if(isTraumaBlocked) return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!");
+        
         let confirm = await rpgConfirm("Negoziante", `Vuoi vendere questo oggetto per ${price} Galeoni?`);
         if(!confirm) return;
         
@@ -1258,7 +1259,9 @@
     // UPLOAD CLOUDINARY AVATAR E PATRONUS
     // ==========================================
     window.triggerAvatarChange = function() {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
         document.getElementById('avatar-upload-input').click();
     };
 
@@ -1285,7 +1288,10 @@
     });
 
     window.triggerPatronusImgChange = async function() {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        
         let currentEquip = userData.equipment || {};
         if (currentEquip.patronus) { 
             let ans = await rpgConfirm("Prof.ssa Minerva McGranitt", "Vuoi disequipaggiare il tuo Patronus attuale?");
@@ -1338,7 +1344,10 @@
     // SISTEMA ASI E RETROATTIVITÀ (HP E MP)
     // ==========================================
     window.increaseDraftStat = function(statKey) {
-        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         if (availablePoints > 0) {
             draftStats[statKey]++;
             availablePoints--;
@@ -1348,7 +1357,10 @@
     };
     
     window.decreaseDraftStat = function(statKey) {
-        if (isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         if (draftStats[statKey] > baseStats[statKey]) {
             draftStats[statKey]--;
             availablePoints++;
@@ -1360,7 +1372,9 @@
     };
 
     window.saveDraftStats = async function() {
-        if(isTraumaBlocked) return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Sistema", "Azione bloccata in Trauma Critico!");
         
         let oldConMod = getDndModifier(baseStats.con);
         let newConMod = getDndModifier(draftStats.con);
@@ -1404,7 +1418,10 @@
     };
 
     window.addSpellRow = async function() {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         let newSpells = [];
         document.querySelectorAll('.spell-row').forEach(row => {
             newSpells.push({
@@ -1418,7 +1435,10 @@
     };
 
     window.removeSpell = async function(idx) {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         let newSpells = [];
         document.querySelectorAll('.spell-row').forEach(row => {
             newSpells.push({
@@ -1432,7 +1452,10 @@
     };
 
     window.syncSpells = async function() {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         let newSpells = [];
         document.querySelectorAll('.spell-row').forEach(row => {
             newSpells.push({
@@ -1446,7 +1469,10 @@
     };
 
     window.syncNotes = async function() {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
+        
         let notes = document.getElementById('profile-notes').value;
         await updateDoc(doc(db, "students", currentUser.uid), { notes: notes });
         rpgAlert("Prof.ssa Minerva McGranitt", "Appunti salvati nel registro.");
@@ -1570,11 +1596,11 @@
         let currentHp = Number(userData.hp) || 0;
         let maxHp = Number(userData.maxHp) || 1;
         
-        if(currentHp >= maxHp) {
-            return; 
-        }
-        if(userData.healCompleteTime) {
-            return;
+        if (currentHp >= maxHp) return;
+        
+        // Se in Trauma Critico, il tasto mostra solo un alert (cure solo via Master)
+        if ((currentHp / maxHp) <= 0.05) {
+            return rpgAlert("Madama Chips", "Hai richiesto assistenza. Attendi che un professore o il Master aggiorni il tuo stato medico. Nel frattempo puoi consultare la tua scheda profilo.");
         }
 
         try {
@@ -1582,8 +1608,6 @@
             await updateDoc(doc(db, "students", currentUser.uid), { 
                 healCompleteTime: endTime 
             });
-            userData.healCompleteTime = endTime;
-            renderUI();
             rpgAlert("Madama Chips", "Mettiti a letto e riposa! Sarai completamente guarito tra 4 ore.");
         } catch(e) {
             console.error(e);
@@ -1601,8 +1625,6 @@
         let confirm = await rpgConfirm("Madama Chips", "Vuoi interrompere le cure e uscire?");
         if (confirm) {
             await updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: null });
-            userData.healCompleteTime = null;
-            renderUI();
             changeScreen('screen-map-nav');
         }
     });
@@ -1643,19 +1665,23 @@
         const healCompleteTime = Number(userData.healCompleteTime) || null;
 
         // -----------------------------------------------------
-        // REGOLA 2: LOGICA TRAUMA CRITICO E MAPPA
+        // REGOLA 2: LOGICA TRAUMA CRITICO E PROFILO
         // -----------------------------------------------------
-        const alertBanner = document.getElementById('profile-trauma-alert');
+        const traumaAlert = document.getElementById('profile-trauma-alert');
+        const graveAlert = document.getElementById('profile-grave-alert');
         
-        if (hpRatio <= 0.10) {
-            isTraumaBlocked = true;
-            alertBanner.style.display = "block";
-            // Blocca tutte le zone mappa TRANNE infermeria e tutti i tasti 'torna alla mappa'
-            document.querySelectorAll('.map-click-zone:not(.zone-infermeria), .trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
+        if (hpRatio <= 0.05) {
+            traumaAlert.style.display = "block";
+            graveAlert.style.display = "none";
+            document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
+        } else if (hpRatio <= 0.25) {
+            traumaAlert.style.display = "none";
+            graveAlert.style.display = "block";
+            document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.remove('trauma-disabled-mask'));
         } else {
-            isTraumaBlocked = false;
-            alertBanner.style.display = "none";
-            document.querySelectorAll('.trauma-disabled-mask').forEach(el => el.classList.remove('trauma-disabled-mask'));
+            traumaAlert.style.display = "none";
+            graveAlert.style.display = "none";
+            document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.remove('trauma-disabled-mask'));
         }
 
         // -----------------------------------------------------
@@ -1756,33 +1782,37 @@
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
         // -----------------------------------------------------
-        // REGOLA 3 & 4: LOGICA CLINICA E TIMER 4 ORE
+        // REGOLA 4: GRAFICA E REPARTO CLINICO INFERMERIA
         // -----------------------------------------------------
-        const statusBadge = document.getElementById('inf-health-status');
+        const infAvatar = document.getElementById('inf-avatar');
+        const infTitle = document.getElementById('inf-status-title');
+        const infSub = document.getElementById('inf-status-subtitle');
+        const btnHeal = document.getElementById('btn-heal');
+        const activeContainer = document.getElementById('healing-active-container');
         
-        if (hpRatio <= 0.10) { 
-            statusBadge.innerText = "Trauma Critico"; 
-            statusBadge.style.background = "#c0392b"; 
-            statusBadge.style.color = "white";
-        } else if (hpRatio <= 0.50) { 
-            statusBadge.innerText = "Ferito Grave"; 
-            statusBadge.style.background = "#e67e22";
-            statusBadge.style.color = "white";
+        infAvatar.src = userData.avatarUrl || "https://placehold.co/120x120?text=Foto";
+
+        if (hpRatio <= 0.05) { 
+            infTitle.innerText = "Trauma Critico"; 
+            infTitle.style.color = "#c0392b"; 
+            infSub.innerText = "Hai bisogno delle cure di Madama Chips o del Master per poter tornare a camminare.";
+        } else if (hpRatio <= 0.25) { 
+            infTitle.innerText = "Ferito Grave"; 
+            infTitle.style.color = "#e67e22"; 
+            infSub.innerText = "Velocità dimezzata: ti muovi più lentamente.";
         } else if (hpRatio < 1.0) { 
-            statusBadge.innerText = "Ferito Lieve"; 
-            statusBadge.style.background = "#f1c40f";
-            statusBadge.style.color = "#3a2e1d";
+            infTitle.innerText = "Ferito Lieve"; 
+            infTitle.style.color = "#b45309"; 
+            infSub.innerText = "Poche escoriazioni. Hai solo bisogno di riposo.";
         } else { 
-            statusBadge.innerText = "In Perfetta Salute"; 
-            statusBadge.style.background = "green"; 
-            statusBadge.style.color = "white";
+            infTitle.innerText = "In Perfetta Salute"; 
+            infTitle.style.color = "#27ae60"; 
+            infSub.innerText = "Sei in forma smagliante.";
         }
 
         clearInterval(clinicInterval);
-        let btnHeal = document.getElementById('btn-heal');
-        let activeContainer = document.getElementById('healing-active-container');
 
-        if (healCompleteTime && healCompleteTime > Date.now()) {
+        if (healCompleteTime && healCompleteTime > Date.now() && currentHp < maxHp) {
             btnHeal.style.display = 'none';
             activeContainer.style.display = 'block';
 
@@ -1808,7 +1838,7 @@
                 btnHeal.style.boxShadow = "none";
                 btnHeal.disabled = true;
                 
-                // Pulizia di sicurezza nel caso un timer bloccato impedisca le funzioni
+                // Pulizia di sicurezza 
                 if (healCompleteTime) {
                      updateDoc(doc(db, "students", currentUser.uid), { healCompleteTime: null });
                 }
@@ -1818,7 +1848,7 @@
                 btnHeal.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";
                 btnHeal.disabled = false;
                 
-                // Se il timer è scaduto ma non si era ricaricata la pagina/non si è in full HP
+                // Se il timer è scaduto ma non si è in full HP
                 if (healCompleteTime && healCompleteTime <= Date.now()) {
                     updateDoc(doc(db, "students", currentUser.uid), { hp: maxHp, healCompleteTime: null });
                 }
@@ -1836,7 +1866,9 @@
             
             tbodySkills.querySelectorAll('input[type="checkbox"]').forEach(chk => {
                 chk.addEventListener('change', async (e) => {
-                    if(isTraumaBlocked) { e.preventDefault(); return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
+                    let cHp = Number(userData.hp) || 0;
+                    let mHp = Number(userData.maxHp) || 1;
+                    if((cHp / mHp) <= 0.05) { e.preventDefault(); return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!"); }
                     let skId = e.target.getAttribute('data-skill');
                     let currentProficiencies = userData.proficiencies || {};
                     currentProficiencies[skId] = e.target.checked;
@@ -2038,7 +2070,10 @@
     }
 
     async function equipItem(index) {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return rpgAlert("Prof.ssa Minerva McGranitt", "Sei bloccato a causa del trauma critico!");
+        
         let item = userData.inventory[index]; let currentInv = [...userData.inventory];
         let currentEquip = userData.equipment || {}; let currentEqFrogs = userData.equippedFrogs || [];
         currentInv.splice(index, 1);
@@ -2052,14 +2087,22 @@
     }
 
     window.removeEquip = async function(type) {
-        if(isTraumaBlocked || !userData.equipment || !userData.equipment[type]) return;
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return;
+        if(!userData.equipment || !userData.equipment[type]) return;
+        
         let currentInv = userData.inventory ? [...userData.inventory] : []; currentInv.push(userData.equipment[type]);
         let currentEquip = { ...userData.equipment }; currentEquip[type] = null;
         await updateDoc(doc(db, "students", currentUser.uid), { inventory: currentInv, equipment: currentEquip });
     }
 
     window.removeFrog = async function(idx) {
-        if(isTraumaBlocked || !(userData.equippedFrogs || [])[idx]) return;
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
+        if ((currentHp / maxHp) <= 0.05) return;
+        if(!(userData.equippedFrogs || [])[idx]) return;
+        
         let currentEqFrogs = userData.equippedFrogs; let frog = currentEqFrogs[idx]; currentEqFrogs.splice(idx, 1);
         let currentInv = userData.inventory ? [...userData.inventory] : []; currentInv.push(frog);
         await updateDoc(doc(db, "students", currentUser.uid), { inventory: currentInv, equippedFrogs: currentEqFrogs });
@@ -2249,8 +2292,11 @@
     };
 
     document.getElementById('btn-buy-gacha').addEventListener('click', async () => {
+        let currentHp = Number(userData.hp) || 0;
+        let maxHp = Number(userData.maxHp) || 1;
         let shopOwner = "Cassiera dell'Emporio";
-        if(isTraumaBlocked) return rpgAlert(shopOwner, "Vai a farti curare prima di mangiare dolci!");
+        
+        if((currentHp / maxHp) <= 0.05) return rpgAlert(shopOwner, "Vai a farti curare prima di mangiare dolci!");
         if(userData.gold < 3) return rpgAlert(shopOwner, "Non hai abbastanza Galeoni per una Cioccorana, mi spiace.");
 
         const c = document.getElementById('gacha-card'); c.style.display = "block"; c.innerHTML = "<div style='color:white; text-align:center; padding-top:75px; font-weight:bold;'>Scartando la confezione...</div>";
