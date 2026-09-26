@@ -374,7 +374,7 @@
             </div>
         </div>
 
-        <!-- SCHERMATA PROFILO (DORMITORIO) -->
+        <!-- SCHERMATA PROFILO (DORMITORIO) - LAYOUT TOTALMENTE RIORGANIZZATO -->
         <div id="screen-profile" class="screen">
             <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
@@ -397,7 +397,7 @@
                         <div class="frog-mini-slot" id="slot-frog-1" onclick="removeFrog(1)" style="width:90px; height:90px; font-size:11px;">Rana 2</div>
                     </div>
 
-                    <!-- Logo Casata -->
+                    <!-- Logo Casata (Trasparente, Ingrandito e Centrato) -->
                     <div class="house-logo-box" id="slot-house-logo" style="display: flex; justify-content: center; align-items: center; margin: 0 auto; width: 100%; background:transparent; border:none;">
                         <img id="img-house-logo" src="" alt="Stemma" style="width: 100%; height: auto; object-fit: contain; max-height: 280px;">
                     </div>
@@ -407,14 +407,15 @@
                 <!-- COLONNA DESTRA (Resto dei contenuti) -->
                 <div class="trauma-disabled-mask-target right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                     
-                    <!-- FASCIA SUPERIORE DESTRA -->
+                    <!-- FASCIA SUPERIORE DESTRA: Caratteristiche/Tratti (Sx) + [Risorse, Abilità, Incantesimi] (Dx) -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
                         
                         <!-- Colonna Caratteristiche Base + Tratti -->
                         <div class="col-disciplines" style="width:280px; flex-shrink:0;">
-                            <!-- 6 Statistiche Base e Tiri Salvezza -->
+                            <!-- 6 Statistiche Base e Tiri Salvezza (Ripristinato CSS D&D Verticale) -->
                             <div style="background:transparent; border:none; padding:0; display:flex; flex-direction:column; box-shadow:none; justify-content:flex-start;">
                                 <div class="dnd-stats-vertical">
+                                    <!-- FORZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Forza">FOR</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -428,6 +429,7 @@
                                             <span id="save-val-str" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
+                                    <!-- DESTREZZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Destrezza">DES</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -441,6 +443,7 @@
                                             <span id="save-val-dex" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
+                                    <!-- COSTITUZIONE -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Costituzione">COS</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -454,6 +457,7 @@
                                             <span id="save-val-con" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
+                                    <!-- INTELLIGENZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Intelligenza">INT</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -467,6 +471,7 @@
                                             <span id="save-val-int" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
+                                    <!-- SAGGEZZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Saggezza">SAG</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -480,6 +485,7 @@
                                             <span id="save-val-wis" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
+                                    <!-- CARISMA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Carisma">CAR</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -1541,6 +1547,29 @@
         }
     };
 
+    // Event Listener per il pulsante Cure dell'Infermeria
+    document.getElementById('btn-heal').addEventListener('click', async () => {
+        if(!userData) return;
+        if(userData.hp >= userData.maxHp) {
+            return rpgAlert("Madama Chips", "Sei già in perfetta salute, caro! Lascia il letto a chi ne ha bisogno.");
+        }
+        if(userData.healCompleteTime && userData.healCompleteTime > Date.now()) {
+            return rpgAlert("Madama Chips", "Sto già preparando le tue pozioni. Pazienta!");
+        }
+
+        // Imposta 5 minuti di timer per la cura (5 * 60 * 1000 ms)
+        let healTime = Date.now() + (5 * 60 * 1000);
+        
+        try {
+            await updateDoc(doc(db, "students", currentUser.uid), { 
+                healCompleteTime: healTime 
+            });
+            rpgAlert("Madama Chips", "Bevi questo intruglio e riposa. Sarai come nuovo in 5 minuti.");
+        } catch(e) {
+            console.error(e);
+        }
+    });
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -1836,14 +1865,33 @@
         }
 
         clearInterval(clinicInterval);
+        
         if (userData.healCompleteTime && userData.healCompleteTime > Date.now() && userData.hp < userData.maxHp) {
-            document.getElementById('btn-heal').disabled = true; document.getElementById('inf-timer-display').style.display = "block";
+            document.getElementById('btn-heal').disabled = true; 
+            document.getElementById('inf-timer-display').style.display = "block";
+            document.getElementById('inf-timer-display').style.color = "#c0392b";
             clinicInterval = setInterval(() => {
                 let timeLeft = userData.healCompleteTime - Date.now();
-                if (timeLeft <= 0) { clearInterval(clinicInterval); updateDoc(doc(db, "students", currentUser.uid), { hp: userData.maxHp, healCompleteTime: null }); } 
-                else { document.getElementById('inf-timer-display').innerText = `Cure in corso... ${Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((timeLeft % (1000 * 60)) / 1000)}s`; }
+                if (timeLeft <= 0) { 
+                    clearInterval(clinicInterval); 
+                    updateDoc(doc(db, "students", currentUser.uid), { hp: userData.maxHp, healCompleteTime: null }); 
+                } 
+                else { 
+                    document.getElementById('inf-timer-display').innerText = `Cure in corso... ${Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((timeLeft % (1000 * 60)) / 1000)}s`; 
+                }
             }, 1000);
-        } else { document.getElementById('btn-heal').disabled = false; document.getElementById('inf-timer-display').style.display = "none"; }
+        } else { 
+            if(userData.hp >= userData.maxHp) {
+                document.getElementById('btn-heal').disabled = true;
+                document.getElementById('inf-timer-display').style.display = "block";
+                document.getElementById('inf-timer-display').innerText = "Sei in perfetta salute.";
+                document.getElementById('inf-timer-display').style.color = "green";
+            } else {
+                document.getElementById('btn-heal').disabled = false; 
+                document.getElementById('inf-timer-display').style.display = "none"; 
+                document.getElementById('inf-timer-display').style.color = "#c0392b";
+            }
+        }
 
         renderEquipSlot('slot-bacchetta', userData.equipment?.bacchetta, "Bacchetta"); renderEquipSlot('slot-libro', userData.equipment?.libro, "Libro");
         renderEquipSlot('slot-toga', userData.equipment?.toga, "Toga"); renderEquipSlot('slot-pet', userData.equipment?.pet, "Compagno");
