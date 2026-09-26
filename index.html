@@ -156,7 +156,7 @@
         .score-label { position: absolute; z-index: 3; top: 65.5%; height: 4%; width: 10%; display: flex; align-items: center; justify-content: center; font-family: 'Georgia', serif; font-size: clamp(14px, 2.2vw, 30px); font-weight: 900; color: #3a2e1d; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
         .lbl-grif { left: 15.8%; } .lbl-tass { left: 35.5%; } .lbl-corv { left: 55.2%; } .lbl-serp { left: 75%; }
 
-        /* EMPORIO E INFERMERIA E DADI */
+        /* EMPORIO E DADI */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -240,7 +240,7 @@
 
         <!-- PANNELLO MASTER -->
         <div id="screen-master" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="hospital-box" style="max-width: 600px; margin-top: 50px; padding: 20px;">
                 <h2 style="color:#5c4314; font-family:'Georgia', serif; margin-top:0;">Pannello Master</h2>
                 
@@ -323,15 +323,15 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
-                <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
-                <!-- INFERMERIA NON PRENDE MAI LA MASCHERA DI BLOCCO TRAUMA -->
+                <!-- Zone click mappa bloccate in trauma ad eccezione dell'Infermeria -->
+                <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
+                <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
-                <div class="map-click-zone zone-salagrande" onclick="changeScreen('screen-coppa')"></div>
-                <div class="map-click-zone zone-cioccorane" onclick="changeScreen('screen-ciccorane')"></div>
-                <div class="map-click-zone zone-serpeverde" onclick="tryEnterDorm('Serpeverde')"></div>
-                <div class="map-click-zone zone-tassorosso" onclick="tryEnterDorm('Tassorosso')"></div>
-                <div class="map-click-zone zone-diagon" onclick="changeScreen('screen-shop')"></div>
+                <div class="map-click-zone zone-salagrande trauma-disabled-mask-target" onclick="changeScreen('screen-coppa')"></div>
+                <div class="map-click-zone zone-cioccorane trauma-disabled-mask-target" onclick="changeScreen('screen-ciccorane')"></div>
+                <div class="map-click-zone zone-serpeverde trauma-disabled-mask-target" onclick="tryEnterDorm('Serpeverde')"></div>
+                <div class="map-click-zone zone-tassorosso trauma-disabled-mask-target" onclick="tryEnterDorm('Tassorosso')"></div>
+                <div class="map-click-zone zone-diagon trauma-disabled-mask-target" onclick="changeScreen('screen-shop')"></div>
             </div>
         </div>
 
@@ -340,10 +340,10 @@
             <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
             
-            <div id="profile-main-grid-wrapper" class="trauma-disabled-mask-target" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
+            <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
                 
                 <!-- COLONNA SINISTRA -->
-                <div style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
+                <div class="trauma-disabled-mask-target" style="display:flex; flex-direction:column; gap:20px; width:340px; flex-shrink:0;">
                     
                     <div class="avatar-wrapper" style="height: 650px; width: 100%; display:flex; flex-direction:column;" onclick="triggerAvatarChange()">
                         <img id="img-avatar" src="https://placehold.co/320x440?text=Caricamento..." alt="Mago" style="flex-grow:1; object-fit:cover; height:100%;">
@@ -363,7 +363,7 @@
                 </div>
 
                 <!-- COLONNA DESTRA -->
-                <div class="right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
+                <div class="trauma-disabled-mask-target right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                     
                     <!-- FASCIA SUPERIORE DESTRA -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
@@ -621,9 +621,11 @@
                 
                 <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
                     <p style="margin: 0 0 10px 0; font-weight: bold;">Stato Medico Attuale:</p>
-                    <div style="width: 100%; background: #e0d0a0; border-radius: 4px; height: 18px; position: relative; border: 1px solid #5c4314; overflow: hidden; margin-bottom: 5px;">
-                        <div id="inf-clinical-bar-fill" style="height: 100%; width: 100%; background: #27ae60;"></div>
+                    
+                    <div style="width: 100%; background: #ccc; border-radius: 4px; height: 25px; position: relative; border: 1px solid #333; overflow: hidden; margin-bottom: 5px;">
+                        <div id="inf-clinical-bar-fill" style="height: 100%; width: 0%; transition: width 0.3s; background: green;"></div>
                     </div>
+
                     <div id="inf-health-status" style="margin-top: 10px; font-weight:bold; font-size:18px; color:#27ae60;">In Perfetta Salute</div>
                 </div>
                 
@@ -1096,6 +1098,7 @@
             }
 
             let updatePayload = { hp: newHp };
+            // Resetta il timer cure se la vita torna al max
             if (newHp >= maxHp) {
                 updatePayload.healStartTime = null;
             }
@@ -1333,7 +1336,7 @@
         let updatePayload = { hp: newHp, maxHp: newMaxHp };
         
         if (newHp >= newMaxHp) {
-            updatePayload.healStartTime = null;
+            updatePayload.healStartTime = null; // reset cure se pieno
         }
         await updateDoc(doc(db, "students", currentUser.uid), updatePayload);
     });
@@ -1574,62 +1577,6 @@
         }
     };
 
-    // ==========================================
-    // INFERMERIA - EVENTI CLICK
-    // ==========================================
-    document.getElementById('btn-heal').addEventListener('click', async () => {
-        if(!userData) return;
-        let currentHp = Number(userData.hp) || 0;
-        let maxHp = Number(userData.maxHp) || 1;
-        
-        if(currentHp >= maxHp) {
-            return; // Il bottone sarà disabilitato comunque
-        }
-        if(userData.healStartTime) {
-            return rpgAlert("Madama Chips", "Sto già curando le tue ferite. Pazienta!");
-        }
-
-        try {
-            let missingHp = maxHp - currentHp;
-            let gainPerTick = Math.ceil(maxHp * 0.05);
-            let ticksNeeded = Math.ceil(missingHp / gainPerTick);
-            let totalMs = ticksNeeded * (15 * 60 * 1000);
-            
-            let h = Math.floor(totalMs / 3600000);
-            let m = Math.floor((totalMs % 3600000) / 60000);
-            
-            let timeStr = "";
-            if (h > 0) timeStr += `${h} ore e `;
-            timeStr += `${m} minuti`;
-
-            await updateDoc(doc(db, "students", currentUser.uid), { 
-                healStartTime: Date.now() 
-            });
-            userData.healStartTime = Date.now();
-            renderUI();
-            rpgAlert("Madama Chips", `Bevi questo intruglio e mettiti a letto! Per guarire completamente ci vorranno circa ${timeStr}. Rilassati.`);
-        } catch(e) {
-            console.error(e);
-        }
-    });
-
-    document.getElementById('btn-leave-infirmary').addEventListener('click', async () => {
-        let currentHp = Number(userData.hp) || 0;
-        let maxHp = Number(userData.maxHp) || 1;
-        
-        if (currentHp <= maxHp * 0.5) {
-            return rpgAlert("Madama Chips", "Sei ancora troppo debole per lasciare l'infermeria! Devi raggiungere almeno il 50% di salute per poter camminare.");
-        }
-        
-        let confirm = await rpgConfirm("Madama Chips", "Sei sicuro di voler uscire? Le cure verranno interrotte.");
-        if (confirm) {
-            await updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
-            userData.healStartTime = null;
-            renderUI();
-            changeScreen('screen-map-nav');
-        }
-    });
-
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
@@ -1819,6 +1766,7 @@
         } else if (hpRatio < 1.0) { 
             infText = "Ferito Lieve"; 
             infColor = "#b45309"; 
+            clinicalBarFill.style.background = "#f1c40f"; // Requested: fill yellow, text yellow but dark (#b45309) 
         } else { 
             infText = "In Perfetta Salute"; 
             infColor = "#27ae60"; 
@@ -1827,11 +1775,14 @@
         statusBadge.innerText = infText;
         statusBadge.style.color = infColor;
         clinicalBarFill.style.width = Math.max(0, Math.min(100, hpRatio * 100)) + "%";
-        clinicalBarFill.style.background = infColor;
+        if (hpRatio < 1.0 && hpRatio > 0.30) {
+            clinicalBarFill.style.background = "#f1c40f"; // yellow fill
+        } else {
+            clinicalBarFill.style.background = infColor;
+        }
 
         let btnHeal = document.getElementById('btn-heal');
         let activeContainer = document.getElementById('healing-active-container');
-        let btnLeave = document.getElementById('btn-leave-infirmary');
 
         if (healStartTime && currentHp < maxHp) {
             btnHeal.style.display = 'none';
@@ -1848,6 +1799,17 @@
 
                 document.getElementById('inf-next-tick').innerText = formatTimer(timeToNext);
                 document.getElementById('inf-eta').innerText = formatTimerHour(etaMs);
+                
+                let btnLeave = document.getElementById('btn-leave-infirmary');
+                let txtWarning = document.getElementById('inf-leave-warning');
+                
+                if (currentHp > maxHp * 0.5) {
+                    btnLeave.disabled = false;
+                    txtWarning.style.display = 'none';
+                } else {
+                    btnLeave.disabled = true;
+                    txtWarning.style.display = 'block';
+                }
                 
                 if (Date.now() - healStartTime >= healTickMs) {
                     let hpGain = Math.ceil(maxHp * 0.05);
@@ -1943,7 +1905,7 @@
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
 
-        // Percezione Passiva
+        // Percezione Passiva = 10 + WIS Mod + Perc Prof + Perc Bonus Item
         let hasPercProf = (userProficiencies && userProficiencies['percezione']) ? profBonus : 0;
         let percItemBonus = bonusOggettiAbilita['percezione'] || 0;
         let passPerc = 10 + draftMods.wis + hasPercProf + percItemBonus;
