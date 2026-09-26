@@ -64,7 +64,7 @@
         .login-container { max-width: 400px; margin: 40px auto; background: #f2e6c4; border: 3px double #8a6d3b; padding: 25px; border-radius: 8px; text-align: center; position: relative; z-index: 10;}
         .login-container input, .login-container select { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #8a6d3b; background: #fffdf7; border-radius: 4px; }
 
-        /* LAYOUT PROFILO */
+        /* LAYOUT PROFILO E TRAUMA MASK */
         .avatar-wrapper { width: 100%; position: relative; background: #fffdec; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid #8a6d3b; display: flex; flex-direction: column; justify-content: center; }
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
@@ -84,7 +84,7 @@
         
         .stats-block-box { background: #fffdec; border-radius: 6px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #8a6d3b;}
 
-        /* INVENTARIO */
+        /* INVENTARIO E APPUNTI */
         .inventory-header-title { font-size: 24px; font-weight: bold; border-bottom: 2px solid #8a6d3b; padding-bottom: 5px; margin: 0; }
         .inventory-items-flow { flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 8px; padding: 15px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 12px; overflow-y: auto; position: relative; min-height: 200px; }
         .inv-item-slot { width: 80px; height: 80px; background: #fffdec; border-radius: 6px; position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: transform 0.15s; }
@@ -93,6 +93,7 @@
         .inv-item-slot:hover { transform: scale(1.04); background: #ebdca8; z-index: 99999; }
         .inv-item-slot::after { content: attr(data-tooltip); position: absolute; top: 85px; left: 50%; transform: translateX(-50%); background: #19093a; color: #ffd700; padding: 8px 12px; border: 2px solid #be9b64; border-radius: 6px; font-size: 11px; font-family: 'Georgia', serif; text-align: center; width: 180px; white-space: normal; box-shadow: 0 6px 16px rgba(0,0,0,0.6); z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.15s ease-in-out; }
         .inv-item-slot:hover::after { opacity: 1; }
+        
         .bar-container { width: 100%; background: #ccc; border-radius: 4px; position: relative; overflow: hidden; border: 1px solid #333; }
         .bar-fill { height: 100%; width: 100%; transition: width 0.2s; }
         .hp-fill { background: #c0392b; } .mp-fill { background: #2980b9; }
@@ -119,26 +120,9 @@
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .dnd-stat-box-vert label {
-            font-size: 11px;
-            font-weight: bold;
-            width: 30px;
-        }
-        .dnd-stat-box-vert input[type="number"] {
-            width: 45px;
-            text-align: center;
-            font-size: 12px;
-            padding: 2px;
-            border: 1px solid #be9b64;
-            border-radius: 3px;
-        }
-        .dnd-stat-box-vert .dnd-mod-label {
-            font-size: 12px;
-            font-weight: bold;
-            color: #7f1d1d;
-            min-width: 20px;
-            text-align: center;
-        }
+        .dnd-stat-box-vert label { font-size: 11px; font-weight: bold; width: 30px; }
+        .dnd-stat-box-vert input[type="number"] { width: 45px; text-align: center; font-size: 12px; padding: 2px; border: 1px solid #be9b64; border-radius: 3px; }
+        .dnd-stat-box-vert .dnd-mod-label { font-size: 12px; font-weight: bold; color: #7f1d1d; min-width: 20px; text-align: center; }
         
         .skills-inline-edit { font-size: 11px; width: 100%; border-collapse: collapse; background: #fffdec; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .skills-inline-edit th { font-size: 11px; text-align: left; border-bottom: 1px solid #8a6d3b; padding: 8px 6px; background: #ebdca8; }
@@ -153,69 +137,26 @@
         .store-interior { display: none; padding: 65px 20px 20px 20px; width: 100%; height: 100%; overflow-y: auto; }
         .shop-window-box { text-align: center; background: #fffdec; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto; }
         
-        /* Modifiche CSS Layout Griglia Negozi */
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; width: 100%; margin-top: 15px; }
         .shop-item { background: #fcf6e8; border: 1px solid #be9b64; padding: 15px; border-radius: 6px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         /* =========================================
-           SCHERMATA COPPA DELLE CASE
+           SCHERMATA COPPA DELLE CASE E MAPPA
            ========================================= */
         #screen-coppa { padding: 0; display: none; overflow: hidden; background-color: #0b0805; }
-        
-        .great-hall-container {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100vw; height: 56.25vw; 
-            min-height: 100vh; min-width: 177.77vh; 
-            background-color: #0b0805; overflow: hidden;
-        }
-
-        .great-hall-foreground {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: fill; z-index: 2; pointer-events: none;
-        }
-
-        .glass-container {
-            position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center;
-            width: 8.5%; 
-            height: 34%; 
-            bottom: 45%;    
-        }
-        
-        .pos-grif { left: 16.8%; }
-        .pos-tass { left: 36%; }
-        .pos-corv { left: 55.7%; }
-        .pos-serp { left: 75.8%; }
-
-        .gems-liquid-reservoir {
-            width: 100%; height: 0%; 
-            transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
-        }
-
+        .great-hall-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; background-color: #0b0805; overflow: hidden; }
+        .great-hall-foreground { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; z-index: 2; pointer-events: none; }
+        .glass-container { position: absolute; z-index: 1; display: flex; align-items: flex-end; justify-content: center; width: 8.5%; height: 34%; bottom: 45%; }
+        .pos-grif { left: 16.8%; } .pos-tass { left: 36%; } .pos-corv { left: 55.7%; } .pos-serp { left: 75.8%; }
+        .gems-liquid-reservoir { width: 100%; height: 0%; transition: height 1.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.6); }
         .gems-Grifondoro { background: linear-gradient(135deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(225deg, #b91c1c 25%, transparent 25%) -10px 0, linear-gradient(315deg, #b91c1c 25%, transparent 25%), linear-gradient(45deg, #b91c1c 25%, transparent 25%); background-size: 10px 10px; background-color: #7f1d1d; }
         .gems-Tassorosso { background: linear-gradient(135deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(225deg, #eab308 25%, transparent 25%) -10px 0, linear-gradient(315deg, #eab308 25%, transparent 25%), linear-gradient(45deg, #eab308 25%, transparent 25%); background-size: 10px 10px; background-color: #a16207; }
         .gems-Corvonero  { background: linear-gradient(135deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(225deg, #1d4ed8 25%, transparent 25%) -10px 0, linear-gradient(315deg, #1d4ed8 25%, transparent 25%), linear-gradient(45deg, #1d4ed8 25%, transparent 25%); background-size: 10px 10px; background-color: #1e3a8a; }
         .gems-Serpeverde { background: linear-gradient(135deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(225deg, #15803d 25%, transparent 25%) -10px 0, linear-gradient(315deg, #15803d 25%, transparent 25%), linear-gradient(45deg, #15803d 25%, transparent 25%); background-size: 10px 10px; background-color: #14532d; }
+        .score-label { position: absolute; z-index: 3; top: 65.5%; height: 4%; width: 10%; display: flex; align-items: center; justify-content: center; font-family: 'Georgia', serif; font-size: clamp(14px, 2.2vw, 30px); font-weight: 900; color: #3a2e1d; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
+        .lbl-grif { left: 15.8%; } .lbl-tass { left: 35.5%; } .lbl-corv { left: 55.2%; } .lbl-serp { left: 75%; }
 
-        .score-label {
-            position: absolute; z-index: 3; 
-            top: 65.5%; 
-            height: 4%; width: 10%;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Georgia', serif; 
-            font-size: clamp(14px, 2.2vw, 30px); 
-            font-weight: 900; 
-            color: #3a2e1d; 
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-        }
-        
-        .lbl-grif { left: 15.8%; }
-        .lbl-tass { left: 35.5%; }
-        .lbl-corv { left: 55.2%; }
-        .lbl-serp { left: 75%; }
-
-        /* EMPORIO E INFERMERIA E HEADER */
+        /* EMPORIO E INFERMERIA E DADI */
         .gacha-header-banner { width: 100%; height: 180px; background-size: cover; background-position: center; border: 3px double #8a6d3b; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 0; }
         .gacha-box, .hospital-box { text-align: center; color: #3a2e1d; padding: 30px; border-radius: 12px; border: 2px solid #be9b64; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 650px; margin: 0 auto; }
         .gacha-box { background: #2c1654; color: #ffd700; }
@@ -324,7 +265,7 @@
                 <div style="background:#fcf6e8; border:1px solid #be9b64; padding:15px; border-radius:8px; margin-bottom:20px;">
                     <h3 style="margin-top:0; border-bottom:1px dashed #8a6d3b; padding-bottom:5px; color:#5c4314;">Registra Progresso / Livellamento</h3>
                     <div style="text-align:left; margin-bottom:10px;">
-                        <label style="font-weight:bold; font-size:12px;">Studente:</label>
+                        <label style="font-weight:bold; font-size:12px;">Studente (Progresso):</label>
                         <select id="dm-student-select" style="width:100%; padding:8px; border-radius:4px; border:1px solid #8a6d3b;"></select>
                     </div>
                     
@@ -420,17 +361,16 @@
 
                 </div>
 
-                <!-- COLONNA DESTRA (Resto dei contenuti) -->
+                <!-- COLONNA DESTRA -->
                 <div class="trauma-disabled-mask-target right-panel" style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                     
                     <!-- FASCIA SUPERIORE DESTRA -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
                         
-                        <!-- Colonna Caratteristiche Base + Tratti -->
+                        <!-- Colonna Caratteristiche Base -->
                         <div class="col-disciplines" style="width:280px; flex-shrink:0;">
                             <div style="background:transparent; border:none; padding:0; display:flex; flex-direction:column; box-shadow:none; justify-content:flex-start;">
                                 <div class="dnd-stats-vertical">
-                                    <!-- FORZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Forza">FOR</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -444,7 +384,6 @@
                                             <span id="save-val-str" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
-                                    <!-- DESTREZZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Destrezza">DES</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -458,7 +397,6 @@
                                             <span id="save-val-dex" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
-                                    <!-- COSTITUZIONE -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Costituzione">COS</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -472,7 +410,6 @@
                                             <span id="save-val-con" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
-                                    <!-- INTELLIGENZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Intelligenza">INT</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -486,7 +423,6 @@
                                             <span id="save-val-int" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
-                                    <!-- SAGGEZZA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Saggezza">SAG</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -500,7 +436,6 @@
                                             <span id="save-val-wis" style="font-size:12px; font-weight:bold; color:#1e3a8a; min-width:20px; text-align:right;">+0</span>
                                         </div>
                                     </div>
-                                    <!-- CARISMA -->
                                     <div class="dnd-stat-box-vert">
                                         <label title="Carisma">CAR</label>
                                         <div style="display:flex;align-items:center;justify-content:center;">
@@ -531,7 +466,7 @@
                         <!-- Colonna Risorse, Abilità ed Incantesimi -->
                         <div style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                             
-                            <!-- Risorse e Difese Avanzate -->
+                            <!-- Risorse e Difese -->
                             <div class="stats-block-box" style="display:flex; flex-direction:row; gap:15px; align-items:center; padding:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                                 <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
                                     <div class="mini-edit-row" style="font-size:13px;">
@@ -570,9 +505,8 @@
                                 </div>
                             </div>
 
-                            <!-- Abilità Base e Incantesimi & Trucchetti -->
+                            <!-- Abilità e Incantesimi -->
                             <div style="display:flex; gap:20px; flex:1; align-items:stretch;">
-                                <!-- Abilità Base -->
                                 <div style="width:320px; flex-shrink:0;">
                                     <table class="skills-inline-edit" style="height:100%;">
                                         <thead><tr><th>Abilità</th><th style="text-align:right;">Comp/Tot</th></tr></thead>
@@ -580,7 +514,6 @@
                                     </table>
                                 </div>
 
-                                <!-- Incantesimi & Trucchetti -->
                                 <div id="profile-spells-box" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
                                     <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Incantesimi & Trucchetti</h3>
                                     <div id="spells-list" style="display: flex; flex-direction: column; gap: 8px; flex-grow:1; overflow-y:auto; padding-right:5px; min-height:120px;"></div>
@@ -595,21 +528,15 @@
 
                     <!-- FASCIA INTERMEDIA: EQUIPAGGIAMENTO E BAULE -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
-                        <!-- Equipaggiamento Attivo -->
                         <div style="flex:1; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:10px; background:transparent; border:none; box-shadow:none; padding:10px;">
                             <div class="gear-slot" id="slot-bacchetta" onclick="removeEquip('bacchetta')" style="width:100px; height:100px; font-size:11px;"><span>Bacchetta</span></div>
                             <div class="gear-slot" id="slot-toga" onclick="removeEquip('toga')" style="width:100px; height:100px; font-size:11px;"><span>Toga</span></div>
                             <div class="gear-slot" id="slot-libro" onclick="removeEquip('libro')" style="width:100px; height:100px; font-size:11px;"><span>Libro</span></div>
-                            
-                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;">
-                                <span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div>
-                            </div>
+                            <div class="gear-slot" id="slot-patronus" onclick="triggerPatronusImgChange()" style="width:100px; height:100px; font-size:11px;"><span>Patronus</span><div class="avatar-overlay" style="font-size:10px;">FOTO</div></div>
                             <input type="file" id="patronus-upload-input" accept="image/*" style="display: none;">
-
                             <div class="gear-slot" id="slot-pet" onclick="removeEquip('pet')" style="width:100px; height:100px; font-size:11px;"><span>Compagno</span></div>
                         </div>
 
-                        <!-- Baule -->
                         <div id="profile-right-inventory-box" style="flex:1; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                             <h2 class="inventory-header-title" id="baule-dynamic-title" style="font-size:16px; color:#5c4314; border-bottom:2px solid #8a6d3b; margin-top:0;">Baule Scolastico</h2>
                             <div class="inventory-items-flow" id="profile-inventory" style="background: rgba(0,0,0,0.03); border-radius: 4px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; flex-grow: 1; min-height:120px; align-content:flex-start;"></div>
@@ -618,14 +545,12 @@
 
                     <!-- FASCIA INFERIORE: APPUNTI E LIBRETTO -->
                     <div style="display:flex; gap:20px; align-items:stretch;">
-                        <!-- Appunti Personali -->
                         <div id="profile-notes-box" style="flex:1; min-width:0; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                             <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Appunti personali</h3>
                             <textarea id="profile-notes" placeholder="Scrivi qui ricette di pozioni, indizi, appunti sulle lezioni..." style="flex-grow:1; width:100%; resize:vertical; min-height: 150px; border:1px solid #be9b64; border-radius:4px; background:#fffdf7; padding:10px; font-family:'Georgia', serif; font-size:13px; outline:none; box-sizing:border-box;"></textarea>
                             <button class="btn-vintage" style="font-size:11px; padding:6px 12px; margin-top: 15px; align-self:flex-start;" onclick="syncNotes()">Salva Appunti</button>
                         </div>
 
-                        <!-- Libretto Voti / Progressi -->
                         <div id="profile-exams-box" style="width:480px; flex-shrink:0; background: #fffdec; border-radius: 6px; padding: 15px; border: 1px solid #8a6d3b; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                             <h3 style="margin-top:0; border-bottom:2px solid #8a6d3b; padding-bottom:5px; font-size:16px; color:#5c4314;">Libretto Voti & Progressi</h3>
                             <div style="font-size:14px; font-weight:bold; color:#1e3a8a; margin-bottom:10px;">Livello Magico: <span id="prof-magical-level">1</span></div>
@@ -1164,7 +1089,7 @@
             }
 
             let updatePayload = { hp: newHp };
-            if (newHp === maxHp && data.healStartTime) {
+            if (newHp >= maxHp && data.healStartTime) {
                 updatePayload.healStartTime = null;
             }
 
@@ -1631,6 +1556,9 @@
             await updateDoc(doc(db, "students", currentUser.uid), { 
                 healStartTime: Date.now() 
             });
+            // Aggiorna localmente per bypassare il ritardo del database
+            userData.healStartTime = Date.now();
+            renderUI();
             rpgAlert("Madama Chips", "Bevi questo intruglio e riposa. Ti sentirai meglio gradualmente.");
         } catch(e) {
             console.error(e);
@@ -1641,6 +1569,7 @@
         let confirm = await rpgConfirm("Madama Chips", "Sei sicuro di voler uscire? Le cure non sono ancora completate, ma la tua salute ti permette di camminare.");
         if (confirm) {
             await updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
+            userData.healStartTime = null;
             changeScreen('screen-map-nav');
         }
     });
@@ -1740,7 +1669,7 @@
             }
         }
 
-        // Tiri Salvezza Caratteristiche
+        // Tiri Salvezza Caratteristiche (Automatizzati per Casata)
         let houseST = (userData.house || "").toLowerCase().trim();
         let autoSavingThrows = { str: false, dex: false, con: false, int: false, wis: false, cha: false };
         
@@ -1777,19 +1706,35 @@
         // Dadi Vita
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
+        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE
         const hpRatio = userData.hp / userData.maxHp;
         const statusBadge = document.getElementById('inf-health-status');
         const alertBanner = document.getElementById('profile-trauma-alert');
         
-        isTraumaBlocked = false; alertBanner.style.display = "none";
+        isTraumaBlocked = false; 
+        alertBanner.style.display = "none";
         document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.remove('trauma-disabled-mask'));
 
         if (hpRatio <= 0.10) {
-            isTraumaBlocked = true; statusBadge.innerText = "Trauma Critico (Profilo Bloccato)"; statusBadge.style.background = "#c0392b"; alertBanner.style.display = "block";
+            isTraumaBlocked = true; 
+            statusBadge.innerText = "Trauma Critico"; 
+            statusBadge.style.background = "#c0392b"; 
+            statusBadge.style.color = "white";
+            alertBanner.style.display = "block";
             document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
-        } else if (hpRatio < 0.30) { statusBadge.innerText = "Ferito Grave"; statusBadge.style.background = "#e67e22";
-        } else if (hpRatio < 0.50) { statusBadge.innerText = "Ferito Lieve"; statusBadge.style.background = "#f1c40f";
-        } else { statusBadge.innerText = "In Perfetta Salute"; statusBadge.style.background = "green"; }
+        } else if (hpRatio <= 0.30) { 
+            statusBadge.innerText = "Ferito Grave"; 
+            statusBadge.style.background = "#e67e22";
+            statusBadge.style.color = "white";
+        } else if (hpRatio < 1.0) { 
+            statusBadge.innerText = "Ferito Lieve"; 
+            statusBadge.style.background = "#f1c40f";
+            statusBadge.style.color = "#3a2e1d";
+        } else { 
+            statusBadge.innerText = "In Perfetta Salute"; 
+            statusBadge.style.background = "green"; 
+            statusBadge.style.color = "white";
+        }
 
         let bonusOggettiAbilita = {};
         
@@ -1833,11 +1778,11 @@
         let eqFrogs = userData.equippedFrogs || [];
         eqFrogs.forEach(f => { if(f && f.skill && bonusOggettiAbilita[f.skill] !== undefined) { bonusOggettiAbilita[f.skill] += parseInt(f.val || 1); } });
 
-        // CD Magia
+        // CD Magia = 8 + Prof + Magic Mod
         let spellDc = 8 + profBonus + draftMods[magicStat];
         document.getElementById('prof-spell-dc').innerText = spellDc;
 
-        // Atk Magico
+        // Atk Magico = Prof + Magic Mod + Wand Bonus
         let spellAtk = profBonus + draftMods[magicStat] + wandBonus;
         document.getElementById('prof-atk-magico').innerText = formatMod(spellAtk);
 
@@ -1853,7 +1798,7 @@
             let checkEl = document.getElementById('chk-' + sk.id); if(checkEl) checkEl.checked = haComp;
         });
 
-        // Percezione Passiva
+        // Percezione Passiva = 10 + WIS Mod + Perc Prof + Perc Bonus Item
         let hasPercProf = (userProficiencies && userProficiencies['percezione']) ? profBonus : 0;
         let percItemBonus = bonusOggettiAbilita['percezione'] || 0;
         let passPerc = 10 + draftMods.wis + hasPercProf + percItemBonus;
@@ -1949,57 +1894,62 @@
             let elapsed = Date.now() - userData.healStartTime;
             let ticks = Math.floor(elapsed / healTickMs);
             
-            // Applica le cure calcolate retroattivamente
+            // Applica le cure calcolate retroattivamente (es. riaprendo l'app)
             if (ticks > 0) {
                 let hpGain = ticks * Math.ceil(userData.maxHp * 0.05);
-                let newHp = Math.min(userData.maxHp, userData.hp + hpGain);
-                let newStart = userData.healStartTime + (ticks * healTickMs);
+                userData.hp = Math.min(userData.maxHp, userData.hp + hpGain);
+                userData.healStartTime = (userData.hp >= userData.maxHp) ? null : (userData.healStartTime + (ticks * healTickMs));
                 
-                // Salva su Firestore e interrompi il render (ci pensa onSnapshot a rifarlo con i dati nuovi)
                 updateDoc(doc(db, "students", currentUser.uid), {
-                    hp: newHp,
-                    healStartTime: (newHp === userData.maxHp) ? null : newStart
+                    hp: userData.hp,
+                    healStartTime: userData.healStartTime
                 });
-                return;
             }
             
-            // Imposta e mostra l'UI dell'Infermeria durante le cure
-            document.getElementById('btn-heal').style.display = 'none';
-            document.getElementById('healing-active-container').style.display = 'block';
-            document.getElementById('btn-back-map-infirmary').style.display = 'none'; // Blocco uscita normale
+            if (userData.hp < userData.maxHp) {
+                document.getElementById('btn-heal').style.display = 'none';
+                document.getElementById('healing-active-container').style.display = 'block';
+                document.getElementById('btn-back-map-infirmary').style.display = 'none';
 
-            let updateTimer = () => {
-                let nowElapsed = Date.now() - userData.healStartTime;
-                let timeToNext = healTickMs - (nowElapsed % healTickMs);
-                
-                // Calcolo ETA (Estimated Time of Arrival) per cura completa
-                let missingHp = userData.maxHp - userData.hp;
-                let gainPerTick = Math.ceil(userData.maxHp * 0.05);
-                let ticksNeeded = Math.ceil(missingHp / gainPerTick);
-                let etaMs = ((ticksNeeded - 1) * healTickMs) + timeToNext;
+                let updateTimer = () => {
+                    let nowElapsed = Date.now() - userData.healStartTime;
+                    let timeToNext = healTickMs - (nowElapsed % healTickMs);
+                    
+                    let missingHp = userData.maxHp - userData.hp;
+                    let gainPerTick = Math.ceil(userData.maxHp * 0.05);
+                    let ticksNeeded = Math.ceil(missingHp / gainPerTick);
+                    let etaMs = ((ticksNeeded - 1) * healTickMs) + timeToNext;
 
-                document.getElementById('inf-next-tick').innerText = formatTime(timeToNext);
-                document.getElementById('inf-eta').innerText = formatTime(etaMs);
+                    document.getElementById('inf-next-tick').innerText = formatTime(timeToNext);
+                    document.getElementById('inf-eta').innerText = formatTime(etaMs);
+                    
+                    let btnLeave = document.getElementById('btn-leave-infirmary');
+                    let txtWarning = document.getElementById('inf-leave-warning');
+                    
+                    // Mostra pulsante di dimissione solo se l'HP è maggiore del 50%
+                    if (userData.hp > userData.maxHp * 0.5) {
+                        btnLeave.disabled = false;
+                        txtWarning.style.display = 'none';
+                    } else {
+                        btnLeave.disabled = true;
+                        txtWarning.style.display = 'block';
+                    }
+                    
+                    // Quando passa un tick, aggiorna fisicamente il database
+                    if (Date.now() - userData.healStartTime >= healTickMs) {
+                        let hpGain = Math.ceil(userData.maxHp * 0.05);
+                        let newHp = Math.min(userData.maxHp, userData.hp + hpGain);
+                        let newStart = userData.healStartTime + healTickMs;
+                        updateDoc(doc(db, "students", currentUser.uid), {
+                            hp: newHp,
+                            healStartTime: (newHp >= userData.maxHp) ? null : newStart
+                        });
+                    }
+                };
                 
-                // Controllo 50% HP per il tasto di Dimissione Volontaria
-                let btnLeave = document.getElementById('btn-leave-infirmary');
-                let txtWarning = document.getElementById('inf-leave-warning');
-                if (userData.hp > userData.maxHp * 0.5) {
-                    btnLeave.disabled = false;
-                    txtWarning.style.display = 'none';
-                } else {
-                    btnLeave.disabled = true;
-                    txtWarning.style.display = 'block';
-                }
-                
-                // Controllo di sicurezza se l'utente tiene la pagina aperta ma non scatta onSnapshot per lag
-                if (Date.now() - userData.healStartTime >= healTickMs) {
-                    renderUI(); 
-                }
-            };
-            
-            updateTimer();
-            clinicInterval = setInterval(updateTimer, 1000);
+                updateTimer();
+                clinicInterval = setInterval(updateTimer, 1000);
+            }
 
         } else {
             // Stato Infermeria a riposo (nessuna cura in corso)
@@ -2046,8 +1996,12 @@
             });
         }
 
-        if (currentShopType) renderSellItems(currentShopType);
+        // Render Sell items if a shop is currently open
+        if (currentShopType) {
+            renderSellItems(currentShopType);
+        }
 
+        // Render Frog Sell items in the Emporium
         let frogSellGrid = document.getElementById('frog-sell-grid');
         if(frogSellGrid) {
             frogSellGrid.innerHTML = "";
