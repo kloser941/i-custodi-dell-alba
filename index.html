@@ -323,7 +323,7 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <!-- Zone click mappa (Disabilitate in Trauma Critico) -->
+                <!-- Zone click mappa (Disabilitate in Trauma Critico tranne Infermeria) -->
                 <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
                 <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
@@ -621,14 +621,24 @@
                 
                 <div style="background:#f2e6c4; border:1px dashed #8a6d3b; padding:20px; border-radius:6px; margin-bottom: 20px;">
                     <p style="margin: 0 0 10px 0; font-weight: bold;">Stato Medico Attuale:</p>
-                    <div id="inf-health-status" class="health-status-badge" style="background:green; color:white; padding:8px 15px; border-radius:4px; display:inline-block; font-weight:bold; letter-spacing: 0.5px;">In Perfetta Salute</div>
+                    <!-- BARRA PROGRESSO CLINICA -->
+                    <div style="width: 100%; background: #ccc; border-radius: 4px; height: 25px; position: relative; border: 1px solid #333; overflow: hidden; margin-bottom: 5px;">
+                        <div id="inf-clinical-bar-fill" style="height: 100%; width: 0%; transition: width 0.3s; background: green;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; color: #5c4314; padding: 0 5px;">
+                        <span>| 10%</span>
+                        <span>| 30%</span>
+                        <span style="flex-grow:1; text-align:right;">| 100%</span>
+                    </div>
+                    <!-- BADGE TESTUALE -->
+                    <div id="inf-health-status" style="margin-top: 10px; font-weight:bold; letter-spacing: 0.5px; padding:6px 15px; border-radius:4px; display:inline-block; color:white;">In Perfetta Salute</div>
                 </div>
                 
                 <button id="btn-heal" class="btn-vintage" style="background:#b22222; color:white; padding:15px; width:100%; font-size:16px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">CHIEDI CURE MAGICHE</button>
                 
                 <div id="healing-active-container" style="display:none; text-align:center; margin-top:15px; background:#fffdec; border:1px solid #be9b64; padding:15px; border-radius:6px;">
                     <h3 style="color:#c0392b; margin-top:0;">Cure in corso...</h3>
-                    <div style="font-size:14px; margin-bottom:10px;">Prossima dose tra: <span id="inf-next-tick" style="font-weight:bold; color:#1e3a8a;">--:--</span> <span style="font-size:11px; color:#5c4314;">(+5% HP)</span></div>
+                    <div style="font-size:14px; margin-bottom:10px;">Prossimo recupero +5% HP tra: <span id="inf-next-tick" style="font-weight:bold; color:#1e3a8a;">--:--</span></div>
                     <div style="font-size:12px; margin-bottom:15px;">Guarigione completa stimata in: <span id="inf-eta" style="font-weight:bold;">--:--:--</span></div>
                     
                     <button id="btn-leave-infirmary" class="btn-vintage" style="background:#e67e22; color:white; width:100%; padding:10px; border-color:#d35400;">DIMISSIONI VOLONTARIE (ESCI)</button>
@@ -1090,7 +1100,6 @@
             }
 
             let updatePayload = { hp: newHp };
-            // Resetta il timer cure se la vita torna al max
             if (newHp >= maxHp) {
                 updatePayload.healStartTime = null;
             }
@@ -1328,7 +1337,7 @@
         let updatePayload = { hp: newHp, maxHp: newMaxHp };
         
         if (newHp >= newMaxHp) {
-            updatePayload.healStartTime = null; // reset cure se pieno
+            updatePayload.healStartTime = null;
         }
         await updateDoc(doc(db, "students", currentUser.uid), updatePayload);
     });
@@ -1736,35 +1745,44 @@
         // Dadi Vita
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
-        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE (Corretto con Number)
+        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE
         const hpRatio = currentHp / maxHp;
+        let percentHP = Math.max(0, Math.min(100, hpRatio * 100));
+        
         const statusBadge = document.getElementById('inf-health-status');
         const alertBanner = document.getElementById('profile-trauma-alert');
+        const clinicalBarFill = document.getElementById('inf-clinical-bar-fill');
         
+        clinicalBarFill.style.width = percentHP + "%";
         isTraumaBlocked = false; 
         alertBanner.style.display = "none";
+        
         document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.remove('trauma-disabled-mask'));
 
         if (hpRatio <= 0.10) {
             isTraumaBlocked = true; 
-            statusBadge.innerText = "Trauma Critico"; 
+            statusBadge.innerText = "Trauma Critico (0-10%)"; 
             statusBadge.style.background = "#c0392b"; 
             statusBadge.style.color = "white";
+            clinicalBarFill.style.background = "#c0392b";
             alertBanner.style.display = "block";
             // Disabilita Mappa e Schermate eccetto l'infermeria
             document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
         } else if (hpRatio <= 0.30) { 
-            statusBadge.innerText = "Ferito Grave"; 
+            statusBadge.innerText = "Ferito Grave (11-30%)"; 
             statusBadge.style.background = "#e67e22";
             statusBadge.style.color = "white";
+            clinicalBarFill.style.background = "#e67e22";
         } else if (hpRatio < 1.0) { 
-            statusBadge.innerText = "Ferito Lieve"; 
+            statusBadge.innerText = "Ferito Lieve (31-99%)"; 
             statusBadge.style.background = "#f1c40f";
             statusBadge.style.color = "#3a2e1d";
+            clinicalBarFill.style.background = "#f1c40f";
         } else { 
-            statusBadge.innerText = "In Perfetta Salute"; 
+            statusBadge.innerText = "In Perfetta Salute (100%)"; 
             statusBadge.style.background = "green"; 
             statusBadge.style.color = "white";
+            clinicalBarFill.style.background = "green";
         }
 
         let bonusOggettiAbilita = {};
@@ -1920,24 +1938,22 @@
         // -----------------------------------------------------
         clearInterval(clinicInterval);
         let healTickMs = 15 * 60 * 1000; 
+        let healStartTime = userData.healStartTime ? Number(userData.healStartTime) : null;
 
-        if (userData.healStartTime && currentHp < maxHp) {
-            let elapsed = Date.now() - userData.healStartTime;
+        if (healStartTime && currentHp < maxHp) {
+            let elapsed = Date.now() - healStartTime;
             let ticks = Math.floor(elapsed / healTickMs);
             
             // Applica le cure calcolate retroattivamente (es. riaprendo l'app)
             if (ticks > 0) {
                 let hpGain = ticks * Math.ceil(maxHp * 0.05);
                 let newHpValue = Math.min(maxHp, currentHp + hpGain);
+                let newStart = (newHpValue >= maxHp) ? null : healStartTime + (ticks * healTickMs);
                 
-                let updateData = { hp: newHpValue };
-                if (newHpValue >= maxHp) {
-                    updateData.healStartTime = null;
-                } else {
-                    updateData.healStartTime = userData.healStartTime + (ticks * healTickMs);
-                }
-                
-                updateDoc(doc(db, "students", currentUser.uid), updateData);
+                updateDoc(doc(db, "students", currentUser.uid), {
+                    hp: newHpValue,
+                    healStartTime: newStart
+                });
                 return; // Fermo il render qui, ci pensa l'onSnapshot al prossimo giro con i dati corretti
             }
             
@@ -1948,13 +1964,13 @@
                 document.getElementById('btn-back-map-infirmary').style.display = 'none';
 
                 let updateTimer = () => {
-                    let nowElapsed = Date.now() - userData.healStartTime;
-                    let timeToNext = healTickMs - (nowElapsed % healTickMs);
+                    let nowElapsed = Date.now() - healStartTime;
+                    let timeToNext = Math.max(0, healTickMs - (nowElapsed % healTickMs));
                     
                     let missingHp = maxHp - currentHp;
                     let gainPerTick = Math.ceil(maxHp * 0.05);
                     let ticksNeeded = Math.ceil(missingHp / gainPerTick);
-                    let etaMs = ((ticksNeeded - 1) * healTickMs) + timeToNext;
+                    let etaMs = Math.max(0, ((ticksNeeded - 1) * healTickMs) + timeToNext);
 
                     document.getElementById('inf-next-tick').innerText = formatTime(timeToNext);
                     document.getElementById('inf-eta').innerText = formatTime(etaMs);
@@ -1972,19 +1988,15 @@
                     }
                     
                     // Quando passa un tick, aggiorna fisicamente il database
-                    if (Date.now() - userData.healStartTime >= healTickMs) {
+                    if (Date.now() - healStartTime >= healTickMs) {
                         let hpGain = Math.ceil(maxHp * 0.05);
                         let newHp = Math.min(maxHp, currentHp + hpGain);
-                        let newStart = userData.healStartTime + healTickMs;
+                        let newStart = (newHp >= maxHp) ? null : healStartTime + healTickMs;
                         
-                        let updatePayload = { hp: newHp };
-                        if (newHp >= maxHp) {
-                            updatePayload.healStartTime = null;
-                        } else {
-                            updatePayload.healStartTime = newStart;
-                        }
-                        
-                        updateDoc(doc(db, "students", currentUser.uid), updatePayload);
+                        updateDoc(doc(db, "students", currentUser.uid), {
+                            hp: newHp,
+                            healStartTime: newStart
+                        });
                     }
                 };
                 
@@ -2005,7 +2017,7 @@
                 document.getElementById('btn-heal').style.boxShadow = "none";
                 
                 // Pulizia di sicurezza nel caso un timer bloccato impedisca le funzioni
-                if (userData.healStartTime) {
+                if (healStartTime) {
                      updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
                 }
             } else {
