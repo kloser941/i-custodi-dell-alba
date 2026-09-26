@@ -64,7 +64,7 @@
         .login-container { max-width: 400px; margin: 40px auto; background: #f2e6c4; border: 3px double #8a6d3b; padding: 25px; border-radius: 8px; text-align: center; position: relative; z-index: 10;}
         .login-container input, .login-container select { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #8a6d3b; background: #fffdf7; border-radius: 4px; }
 
-        /* LAYOUT PROFILO E TRAUMA MASK */
+        /* LAYOUT PROFILO */
         .avatar-wrapper { width: 100%; position: relative; background: #fffdec; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid #8a6d3b; display: flex; flex-direction: column; justify-content: center; }
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .avatar-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(138, 109, 59, 0.9); color: #faf1d6; text-align: center; padding: 8px 0; font-size: 12px; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; z-index: 5; }
@@ -240,7 +240,7 @@
 
         <!-- PANNELLO MASTER -->
         <div id="screen-master" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="hospital-box" style="max-width: 600px; margin-top: 50px; padding: 20px;">
                 <h2 style="color:#5c4314; font-family:'Georgia', serif; margin-top:0;">Pannello Master</h2>
                 
@@ -323,20 +323,20 @@
         <!-- SCHERMATA MAPPA APERTA -->
         <div id="screen-map-nav" class="screen">
             <div class="marauders-map-container">
-                <div class="map-click-zone zone-grifondoro" onclick="tryEnterDorm('Grifondoro')"></div>
-                <div class="map-click-zone zone-corvonero" onclick="tryEnterDorm('Corvonero')"></div>
+                <div class="map-click-zone zone-grifondoro trauma-disabled-mask-target" onclick="tryEnterDorm('Grifondoro')"></div>
+                <div class="map-click-zone zone-corvonero trauma-disabled-mask-target" onclick="tryEnterDorm('Corvonero')"></div>
                 <div class="map-click-zone zone-infermeria" onclick="changeScreen('screen-infermeria')"></div>
-                <div class="map-click-zone zone-salagrande" onclick="changeScreen('screen-coppa')"></div>
-                <div class="map-click-zone zone-cioccorane" onclick="changeScreen('screen-ciccorane')"></div>
-                <div class="map-click-zone zone-serpeverde" onclick="tryEnterDorm('Serpeverde')"></div>
-                <div class="map-click-zone zone-tassorosso" onclick="tryEnterDorm('Tassorosso')"></div>
-                <div class="map-click-zone zone-diagon" onclick="changeScreen('screen-shop')"></div>
+                <div class="map-click-zone zone-salagrande trauma-disabled-mask-target" onclick="changeScreen('screen-coppa')"></div>
+                <div class="map-click-zone zone-cioccorane trauma-disabled-mask-target" onclick="changeScreen('screen-ciccorane')"></div>
+                <div class="map-click-zone zone-serpeverde trauma-disabled-mask-target" onclick="tryEnterDorm('Serpeverde')"></div>
+                <div class="map-click-zone zone-tassorosso trauma-disabled-mask-target" onclick="tryEnterDorm('Tassorosso')"></div>
+                <div class="map-click-zone zone-diagon trauma-disabled-mask-target" onclick="changeScreen('screen-shop')"></div>
             </div>
         </div>
 
         <!-- SCHERMATA PROFILO (DORMITORIO) -->
         <div id="screen-profile" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div id="profile-trauma-alert" style="display:none; background:#c0392b; color:white; font-weight:bold; padding:10px; text-align:center; border-radius:6px; margin-bottom:15px; margin-top:20px;">PROFILO BLOCCATO PER TRAUMA CRITICO. Raggiungi l'Infermeria per farti curare!</div>
             
             <div id="profile-main-grid-wrapper" style="display:flex; gap:20px; align-items:flex-start; margin-top:20px;">
@@ -466,7 +466,7 @@
                         <!-- Colonna Risorse, Abilità ed Incantesimi -->
                         <div style="flex:1; display:flex; flex-direction:column; gap:20px; min-width:0;">
                             
-                            <!-- Risorse e Difese -->
+                            <!-- Risorse e Difese Avanzate -->
                             <div class="stats-block-box" style="display:flex; flex-direction:row; gap:15px; align-items:center; padding:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                                 <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
                                     <div class="mini-edit-row" style="font-size:13px;">
@@ -565,7 +565,7 @@
 
         <!-- SCHERMATA SHOP DIAGON ALLEY -->
         <div id="screen-shop" class="screen" style="padding: 0; overflow: hidden;">
-            <button id="btn-back-map-shop" class="btn-back-map" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
+            <button id="btn-back-map-shop" class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')" style="top: 20px; left: 20px;">Torna alla Mappa</button>
             <div id="diagon-alley-street" class="diagon-street-container">
                 <div class="shop-click-zone" onclick="openStore('bacchetta')"></div>
                 <div class="shop-click-zone" onclick="openStore('toga')"></div>
@@ -594,7 +594,7 @@
 
         <!-- SCHERMATA COPPA DELLE CASE -->
         <div id="screen-coppa" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             
             <div class="great-hall-container">
                 <div class="glass-container pos-grif"><div id="gem-fill-Grifondoro" class="gems-liquid-reservoir gems-Grifondoro"></div></div>
@@ -638,7 +638,7 @@
 
         <!-- SCHERMATA CIOCCORANE -->
         <div id="screen-ciccorane" class="screen">
-            <button class="btn-back-map" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
+            <button class="btn-back-map trauma-disabled-mask-target" onclick="changeScreen('screen-map-nav')">Torna alla Mappa</button>
             <div class="gacha-header-banner" style="background-image: url('https://harrypottershop.com/cdn/shop/files/1_0001_WBSTL_Evergreen_26.02.263865_8000.jpg?v=1773074150'); margin-top: 25px;"></div>
             <div class="gacha-box">
                 <h2 style="margin-top:0; color:#ffd700; font-family:'Georgia', serif;">Apri Cioccorana</h2>
@@ -1076,8 +1076,8 @@
             let snap = await getDoc(ref);
             if(!snap.exists()) return;
             let data = snap.data();
-            let maxHp = data.maxHp || 10;
-            let currentHp = data.hp || 0;
+            let maxHp = parseInt(data.maxHp) || 10;
+            let currentHp = parseInt(data.hp) || 0;
             
             let hpChange = Math.ceil((amount / 100) * maxHp);
             let newHp = currentHp;
@@ -1089,7 +1089,8 @@
             }
 
             let updatePayload = { hp: newHp };
-            if (newHp >= maxHp && data.healStartTime) {
+            // Resetta il timer cure se la vita torna al max
+            if (newHp >= maxHp) {
                 updatePayload.healStartTime = null;
             }
 
@@ -1310,12 +1311,20 @@
     });
 
     document.getElementById('btn-sync-hp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
-        await updateDoc(doc(db, "students", currentUser.uid), { hp: parseInt(document.getElementById('edit-curr-hp').value)||0, maxHp: parseInt(document.getElementById('edit-max-hp').value)||0 });
+        let newHp = parseInt(document.getElementById('edit-curr-hp').value)||0;
+        let newMaxHp = parseInt(document.getElementById('edit-max-hp').value)||0;
+        let updatePayload = { hp: newHp, maxHp: newMaxHp };
+        
+        if (newHp >= newMaxHp) {
+            updatePayload.healStartTime = null; // reset cure se pieno
+        }
+        await updateDoc(doc(db, "students", currentUser.uid), updatePayload);
     });
+    
     document.getElementById('btn-sync-mp').addEventListener('click', async () => {
-        if(isTraumaBlocked) return rpgAlert("Prof.ssa Minerva McGranitt", "Azione bloccata in Trauma Critico!");
-        await updateDoc(doc(db, "students", currentUser.uid), { mp: parseInt(document.getElementById('edit-curr-mp').value)||0, maxMp: parseInt(document.getElementById('edit-max-mp').value)||0 });
+        let newMp = parseInt(document.getElementById('edit-curr-mp').value)||0;
+        let newMaxMp = parseInt(document.getElementById('edit-max-mp').value)||0;
+        await updateDoc(doc(db, "students", currentUser.uid), { mp: newMp, maxMp: newMaxMp });
     });
 
     // ==========================================
@@ -1362,22 +1371,28 @@
 
         let lvl = userData.level || 1;
 
-        let newMaxHp = userData.maxHp + (diffMod * lvl);
-        let newHp = userData.hp + (diffMod * lvl);
+        let newMaxHp = (parseInt(userData.maxHp) || 1) + (diffMod * lvl);
+        let newHp = (parseInt(userData.hp) || 0) + (diffMod * lvl);
         
-        let newMaxMp = userData.maxMp + (diffMagicMod * lvl);
-        let newMp = userData.mp + (diffMagicMod * lvl);
+        let newMaxMp = (parseInt(userData.maxMp) || 1) + (diffMagicMod * lvl);
+        let newMp = (parseInt(userData.mp) || 0) + (diffMagicMod * lvl);
         
         draftingActive = false; 
         
-        await updateDoc(doc(db, "students", currentUser.uid), {
+        let payload = {
             core_stats: draftStats,
             stat_points: availablePoints,
             maxHp: newMaxHp,
             hp: newHp,
             maxMp: newMaxMp,
             mp: newMp
-        });
+        };
+        
+        if(newHp >= newMaxHp) {
+            payload.healStartTime = null;
+        }
+
+        await updateDoc(doc(db, "students", currentUser.uid), payload);
         rpgAlert("Sistema", "Statistiche confermate! I tuoi progressi sono stati registrati e le tue risorse ricalcolate retroattivamente.");
     };
 
@@ -1445,8 +1460,8 @@
 
             let data = snap.data();
             let newLevel = data.level || 1;
-            let newMaxHp = data.maxHp || 10;
-            let newMaxMp = data.maxMp || 10;
+            let newMaxHp = parseInt(data.maxHp) || 10;
+            let newMaxMp = parseInt(data.maxMp) || 10;
             let storico = data.storicoProgressi || data.exams || [];
             let newStatPoints = data.stat_points || 0;
             
@@ -1545,7 +1560,9 @@
     // INFERMERIA - Eventi Click
     document.getElementById('btn-heal').addEventListener('click', async () => {
         if(!userData) return;
-        if(userData.hp >= userData.maxHp) {
+        let cHp = parseInt(userData.hp)||0;
+        let mHp = parseInt(userData.maxHp)||1;
+        if(cHp >= mHp) {
             return rpgAlert("Madama Chips", "Sei già in perfetta salute, caro! Lascia il letto a chi ne ha bisogno.");
         }
         if(userData.healStartTime) {
@@ -1556,7 +1573,6 @@
             await updateDoc(doc(db, "students", currentUser.uid), { 
                 healStartTime: Date.now() 
             });
-            // Aggiorna localmente per bypassare il ritardo del database
             userData.healStartTime = Date.now();
             renderUI();
             rpgAlert("Madama Chips", "Bevi questo intruglio e riposa. Ti sentirai meglio gradualmente.");
@@ -1570,6 +1586,7 @@
         if (confirm) {
             await updateDoc(doc(db, "students", currentUser.uid), { healStartTime: null });
             userData.healStartTime = null;
+            renderUI();
             changeScreen('screen-map-nav');
         }
     });
@@ -1600,19 +1617,20 @@
             availablePoints = userData.stat_points || 0;
         }
 
-        // Calcolo base Bonus Competenza (D&D 5e: +2 fino al 4, poi sale)
         let lvl = userData.level || 1;
         let profBonus = Math.floor((lvl - 1) / 4) + 2;
+        let currentHp = parseInt(userData.hp) || 0;
+        let maxHp = parseInt(userData.maxHp) || 1; // evita div per zero
 
         document.getElementById('header-galeoni').innerText = userData.gold + " Galeoni";
         document.getElementById('baule-dynamic-title').innerText = `Baule di ${userData.name}`;
         document.getElementById('img-house-logo').src = HOUSE_LOGOS[userData.house.toLowerCase().trim()] || "";
         document.getElementById('img-avatar').src = userData.avatarUrl || "https://placehold.co/320x440?text=Foto";
 
-        document.getElementById('prof-hp-text').innerText = `${userData.hp}/${userData.maxHp}`;
-        document.getElementById('prof-hp-bar').style.width = Math.max(0, Math.min(100, (userData.hp / userData.maxHp)*100)) + "%";
-        if(document.activeElement !== document.getElementById('edit-curr-hp')) document.getElementById('edit-curr-hp').value = userData.hp;
-        if(document.activeElement !== document.getElementById('edit-max-hp')) document.getElementById('edit-max-hp').value = userData.maxHp;
+        document.getElementById('prof-hp-text').innerText = `${currentHp}/${maxHp}`;
+        document.getElementById('prof-hp-bar').style.width = Math.max(0, Math.min(100, (currentHp / maxHp)*100)) + "%";
+        if(document.activeElement !== document.getElementById('edit-curr-hp')) document.getElementById('edit-curr-hp').value = currentHp;
+        if(document.activeElement !== document.getElementById('edit-max-hp')) document.getElementById('edit-max-hp').value = maxHp;
 
         document.getElementById('prof-mp-text').innerText = `${userData.mp}/${userData.maxMp}`;
         document.getElementById('prof-mp-bar').style.width = Math.max(0, Math.min(100, (userData.mp / userData.maxMp)*100)) + "%";
@@ -1706,8 +1724,8 @@
         // Dadi Vita
         document.getElementById('prof-hit-dice').innerText = lvl + "d8";
 
-        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE
-        const hpRatio = userData.hp / userData.maxHp;
+        // CALCOLO TRAUMA CRITICO E STATO DI SALUTE (Corretto)
+        const hpRatio = currentHp / maxHp;
         const statusBadge = document.getElementById('inf-health-status');
         const alertBanner = document.getElementById('profile-trauma-alert');
         
@@ -1721,6 +1739,7 @@
             statusBadge.style.background = "#c0392b"; 
             statusBadge.style.color = "white";
             alertBanner.style.display = "block";
+            // Disabilita Mappa e Schermate eccetto l'infermeria
             document.querySelectorAll('.trauma-disabled-mask-target').forEach(el => el.classList.add('trauma-disabled-mask'));
         } else if (hpRatio <= 0.30) { 
             statusBadge.innerText = "Ferito Grave"; 
@@ -1890,23 +1909,28 @@
         clearInterval(clinicInterval);
         let healTickMs = 15 * 60 * 1000; 
 
-        if (userData.healStartTime && userData.hp < userData.maxHp) {
+        if (userData.healStartTime && currentHp < maxHp) {
             let elapsed = Date.now() - userData.healStartTime;
             let ticks = Math.floor(elapsed / healTickMs);
             
             // Applica le cure calcolate retroattivamente (es. riaprendo l'app)
             if (ticks > 0) {
-                let hpGain = ticks * Math.ceil(userData.maxHp * 0.05);
-                userData.hp = Math.min(userData.maxHp, userData.hp + hpGain);
-                userData.healStartTime = (userData.hp >= userData.maxHp) ? null : (userData.healStartTime + (ticks * healTickMs));
+                let hpGain = ticks * Math.ceil(maxHp * 0.05);
+                let newHpValue = Math.min(maxHp, currentHp + hpGain);
                 
-                updateDoc(doc(db, "students", currentUser.uid), {
-                    hp: userData.hp,
-                    healStartTime: userData.healStartTime
-                });
+                let updateData = { hp: newHpValue };
+                if (newHpValue >= maxHp) {
+                    updateData.healStartTime = null;
+                } else {
+                    updateData.healStartTime = userData.healStartTime + (ticks * healTickMs);
+                }
+                
+                updateDoc(doc(db, "students", currentUser.uid), updateData);
+                return; // Fermo il render qui, ci pensa l'onSnapshot al prossimo giro con i dati corretti
             }
             
-            if (userData.hp < userData.maxHp) {
+            // Render dell'interfaccia se le cure sono in corso
+            if (currentHp < maxHp) {
                 document.getElementById('btn-heal').style.display = 'none';
                 document.getElementById('healing-active-container').style.display = 'block';
                 document.getElementById('btn-back-map-infirmary').style.display = 'none';
@@ -1915,8 +1939,8 @@
                     let nowElapsed = Date.now() - userData.healStartTime;
                     let timeToNext = healTickMs - (nowElapsed % healTickMs);
                     
-                    let missingHp = userData.maxHp - userData.hp;
-                    let gainPerTick = Math.ceil(userData.maxHp * 0.05);
+                    let missingHp = maxHp - currentHp;
+                    let gainPerTick = Math.ceil(maxHp * 0.05);
                     let ticksNeeded = Math.ceil(missingHp / gainPerTick);
                     let etaMs = ((ticksNeeded - 1) * healTickMs) + timeToNext;
 
@@ -1927,7 +1951,7 @@
                     let txtWarning = document.getElementById('inf-leave-warning');
                     
                     // Mostra pulsante di dimissione solo se l'HP è maggiore del 50%
-                    if (userData.hp > userData.maxHp * 0.5) {
+                    if (currentHp > maxHp * 0.5) {
                         btnLeave.disabled = false;
                         txtWarning.style.display = 'none';
                     } else {
@@ -1937,13 +1961,18 @@
                     
                     // Quando passa un tick, aggiorna fisicamente il database
                     if (Date.now() - userData.healStartTime >= healTickMs) {
-                        let hpGain = Math.ceil(userData.maxHp * 0.05);
-                        let newHp = Math.min(userData.maxHp, userData.hp + hpGain);
+                        let hpGain = Math.ceil(maxHp * 0.05);
+                        let newHp = Math.min(maxHp, currentHp + hpGain);
                         let newStart = userData.healStartTime + healTickMs;
-                        updateDoc(doc(db, "students", currentUser.uid), {
-                            hp: newHp,
-                            healStartTime: (newHp >= userData.maxHp) ? null : newStart
-                        });
+                        
+                        let updatePayload = { hp: newHp };
+                        if (newHp >= maxHp) {
+                            updatePayload.healStartTime = null;
+                        } else {
+                            updatePayload.healStartTime = newStart;
+                        }
+                        
+                        updateDoc(doc(db, "students", currentUser.uid), updatePayload);
                     }
                 };
                 
@@ -1956,7 +1985,7 @@
             document.getElementById('healing-active-container').style.display = 'none';
             document.getElementById('btn-back-map-infirmary').style.display = 'block';
             
-            if(userData.hp >= userData.maxHp) {
+            if(currentHp >= maxHp) {
                 document.getElementById('btn-heal').style.display = 'block';
                 document.getElementById('btn-heal').disabled = true;
                 document.getElementById('btn-heal').innerText = "SEI IN PERFETTA SALUTE";
